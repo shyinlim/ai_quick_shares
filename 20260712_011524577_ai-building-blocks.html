@@ -1,0 +1,654 @@
+<style>
+  :root {
+    --bg: #FBFAF7;
+    --surface: #FFFFFF;
+    --surface-2: #F2EFE9;
+    --ink: #171B21;
+    --ink-soft: #4A5058;
+    --ink-faint: #7C838C;
+    --line: #E2DDD3;
+    --line-strong: #CFC8BA;
+    --amber: #C9821F;
+    --amber-bright: #E8A13A;
+    --teal: #1F7F79;
+    --teal-bright: #3AA6A0;
+    --red: #C24A38;
+    --violet: #6A5AA6;
+    --shadow: 0 1px 2px rgba(23,27,33,.05), 0 8px 30px rgba(23,27,33,.06);
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0F1319;
+      --surface: #171C24;
+      --surface-2: #1E242E;
+      --ink: #ECEEF1;
+      --ink-soft: #AEB6C0;
+      --ink-faint: #79828E;
+      --line: #262D38;
+      --line-strong: #333C49;
+      --amber: #E8A13A;
+      --amber-bright: #F4B858;
+      --teal: #3AA6A0;
+      --teal-bright: #55C4BD;
+      --red: #E0705B;
+      --violet: #9A8AD6;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 40px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #FBFAF7; --surface: #FFFFFF; --surface-2: #F2EFE9; --ink: #171B21;
+    --ink-soft: #4A5058; --ink-faint: #7C838C; --line: #E2DDD3; --line-strong: #CFC8BA;
+    --amber: #C9821F; --amber-bright: #E8A13A; --teal: #1F7F79; --teal-bright: #3AA6A0;
+    --red: #C24A38; --violet: #6A5AA6; --shadow: 0 1px 2px rgba(23,27,33,.05), 0 8px 30px rgba(23,27,33,.06);
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F1319; --surface: #171C24; --surface-2: #1E242E; --ink: #ECEEF1;
+    --ink-soft: #AEB6C0; --ink-faint: #79828E; --line: #262D38; --line-strong: #333C49;
+    --amber: #E8A13A; --amber-bright: #F4B858; --teal: #3AA6A0; --teal-bright: #55C4BD;
+    --red: #E0705B; --violet: #9A8AD6; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 40px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  .page {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "kern" 1;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---- schematic grid backdrop ---- */
+  .grid-bg {
+    position: relative;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: center;
+  }
+  .grid-bg::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, transparent 30%, var(--bg) 92%);
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 0 0 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--amber); }
+
+  /* ---- HERO ---- */
+  .hero { position: relative; z-index: 1; padding: 84px 0 64px; }
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 62px);
+    line-height: 1.02;
+    letter-spacing: -.025em;
+    font-weight: 800;
+    margin: 0 0 22px;
+    text-wrap: balance;
+    max-width: 15ch;
+  }
+  .hero h1 .accent { color: var(--amber); }
+  .hero .lede {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--ink-soft);
+    max-width: 54ch;
+    margin: 0;
+  }
+  .hero .lede b { color: var(--ink); font-weight: 600; }
+
+  /* ---- loop diagram ---- */
+  .loop-panel {
+    margin-top: 52px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+  @media (max-width: 720px) { .loop-panel { grid-template-columns: 1fr; text-align: center; } }
+  .loop-panel .cap { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); letter-spacing: .1em; text-transform: uppercase; }
+  .loop-panel h3 { margin: 8px 0 6px; font-size: 19px; letter-spacing: -.01em; }
+  .loop-panel p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+  .loop-svg { width: 210px; height: 210px; justify-self: center; }
+
+  .orbit { transform-origin: 105px 105px; animation: spin 9s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .dash { stroke-dasharray: 5 7; animation: dash 1.4s linear infinite; }
+  @keyframes dash { to { stroke-dashoffset: -24; } }
+  @media (prefers-reduced-motion: reduce) {
+    .orbit, .dash { animation: none; }
+  }
+
+  /* ---- SECTION ---- */
+  section { padding: 72px 0; border-top: 1px solid var(--line); }
+  .sec-head { margin-bottom: 40px; max-width: 60ch; }
+  .sec-head h2 { font-size: clamp(24px, 3.4vw, 36px); letter-spacing: -.02em; margin: 0 0 12px; font-weight: 800; text-wrap: balance; }
+  .sec-head p { margin: 0; color: var(--ink-soft); font-size: 16px; }
+
+  /* ---- building block cards ---- */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  @media (max-width: 680px) { .cards { grid-template-columns: 1fr; } }
+  .card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 24px 24px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .card::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--c, var(--amber));
+  }
+  .card .tag {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--c, var(--amber)); margin: 0 0 4px;
+  }
+  .card h3 { margin: 0 0 4px; font-size: 22px; letter-spacing: -.015em; }
+  .card .full { font-family: var(--mono); font-size: 12.5px; color: var(--ink-faint); margin: 0 0 16px; }
+  .card .role {
+    font-size: 15px; color: var(--ink); font-weight: 600; margin: 0 0 12px;
+    padding-bottom: 12px; border-bottom: 1px dashed var(--line-strong);
+  }
+  .card dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 14px; font-size: 14px; }
+  .card dt { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); padding-top: 2px; }
+  .card dd { margin: 0; color: var(--ink-soft); }
+  .card dd b { color: var(--ink); font-weight: 600; }
+
+  /* ---- layered composition ---- */
+  .layers { display: grid; gap: 14px; }
+  .layer {
+    display: grid; grid-template-columns: 56px 1fr; gap: 20px; align-items: stretch;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 20px 22px; box-shadow: var(--shadow); position: relative;
+  }
+  .layer .lvl {
+    font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--surface);
+    background: var(--c); border-radius: 8px; display: grid; place-items: center;
+    align-self: start; padding: 8px 0; letter-spacing: .05em;
+  }
+  .layer h4 { margin: 0 0 4px; font-size: 17px; letter-spacing: -.01em; }
+  .layer h4 span { font-family: var(--mono); font-size: 12px; color: var(--ink-faint); font-weight: 400; margin-left: 8px; letter-spacing: .04em; }
+  .layer p { margin: 0; color: var(--ink-soft); font-size: 14.5px; }
+  .layer .adds { margin-top: 8px; font-size: 13px; color: var(--c); font-family: var(--mono); }
+
+  /* ---- comparison table ---- */
+  .tbl-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14px; background: var(--surface); }
+  thead th {
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink-faint); text-align: left; padding: 16px 18px; background: var(--surface-2);
+    border-bottom: 1px solid var(--line-strong); font-weight: 600; white-space: nowrap;
+  }
+  thead th:first-child { color: var(--ink); }
+  tbody td { padding: 15px 18px; border-bottom: 1px solid var(--line); color: var(--ink-soft); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody th {
+    text-align: left; padding: 15px 18px; border-bottom: 1px solid var(--line);
+    font-size: 15px; color: var(--ink); white-space: nowrap;
+  }
+  tbody th small { display: block; font-family: var(--mono); font-size: 11px; color: var(--ink-faint); font-weight: 400; letter-spacing: .04em; margin-top: 2px; }
+  .yes { color: var(--teal); font-weight: 600; }
+  .no { color: var(--ink-faint); }
+  .partial { color: var(--amber); font-weight: 600; }
+  td.col-llm { color: var(--ink-soft); }
+
+  /* ---- decision guide ---- */
+  .decide { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+  @media (max-width: 680px){ .decide { grid-template-columns: 1fr; } }
+  .decide .q {
+    background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--c, var(--amber));
+    border-radius: 12px; padding: 22px 22px; box-shadow: var(--shadow);
+  }
+  .decide .q .want { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; color: var(--ink-faint); text-transform: uppercase; margin: 0 0 8px; }
+  .decide .q .want::before { content: "▸ "; color: var(--c, var(--amber)); }
+  .decide .q h4 { margin: 0 0 6px; font-size: 17px; }
+  .decide .q .pick { font-size: 15px; color: var(--c, var(--amber)); font-weight: 700; }
+  .decide .q p { margin: 6px 0 0; font-size: 14px; color: var(--ink-soft); }
+
+  /* ---- running example (stepper) ---- */
+  .flow { display: grid; gap: 0; }
+  .step {
+    position: relative; display: grid; grid-template-columns: 132px 1fr; gap: 22px;
+    padding: 0 0 26px 0;
+  }
+  @media (max-width: 620px){ .step { grid-template-columns: 1fr; gap: 8px; } }
+  .step .rail { position: relative; }
+  .step .badge {
+    font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--surface); background: var(--c);
+    border-radius: 20px; padding: 6px 12px; display: inline-block;
+  }
+  .step .stem {
+    position: absolute; left: 13px; top: 30px; bottom: -6px; width: 2px; background: var(--line-strong);
+  }
+  @media (max-width: 620px){ .step .stem { display: none; } }
+  .step:last-child .stem { display: none; }
+  .step .body {
+    background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--c);
+    border-radius: 12px; padding: 18px 20px; box-shadow: var(--shadow);
+  }
+  .step .body h4 { margin: 0 0 6px; font-size: 16px; letter-spacing: -.01em; }
+  .step .body h4 code { font-family: var(--mono); font-size: 12.5px; color: var(--c); background: var(--surface-2); padding: 1px 7px; border-radius: 5px; margin-left: 6px; }
+  .step .body p { margin: 0; font-size: 14.5px; color: var(--ink-soft); }
+  .step .body p b { color: var(--ink); font-weight: 600; }
+  .step .body .runloop {
+    margin-top: 12px; font-family: var(--mono); font-size: 12.5px; line-height: 1.9;
+    color: var(--ink); background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: 8px; padding: 12px 14px; overflow-x: auto; white-space: pre;
+  }
+
+  /* ---- confusion cards ---- */
+  .confuse { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 680px){ .confuse { grid-template-columns: 1fr; } }
+  .cf {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 22px 22px; box-shadow: var(--shadow);
+  }
+  .cf .pair { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 14px; }
+  .cf .pair b { color: var(--amber); }
+  .cf .row { display: grid; grid-template-columns: 84px 1fr; gap: 12px; font-size: 14px; padding: 9px 0; border-top: 1px dashed var(--line-strong); }
+  .cf .row:first-of-type { border-top: none; }
+  .cf .row .k { font-weight: 700; color: var(--ink); }
+  .cf .row .v { color: var(--ink-soft); }
+
+  /* ---- sources ---- */
+  .sources { display: grid; gap: 10px; margin-top: 8px; }
+  .sources a {
+    display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: baseline;
+    text-decoration: none; color: var(--ink-soft); font-size: 14px; padding: 12px 16px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .sources a:hover, .sources a:focus-visible { border-color: var(--amber); color: var(--ink); outline: none; }
+  .sources a .src { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); white-space: nowrap; }
+  .sources a .ttl b { color: var(--ink); font-weight: 600; }
+
+  /* ---- misc ---- */
+  .callout {
+    margin-top: 34px; background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: 12px; padding: 22px 24px; font-size: 15px; color: var(--ink-soft);
+  }
+  .callout b { color: var(--ink); }
+  .callout code { font-family: var(--mono); font-size: 13px; background: var(--surface); padding: 1px 6px; border-radius: 5px; border: 1px solid var(--line); color: var(--ink); }
+  footer { border-top: 1px solid var(--line); padding: 36px 0 60px; }
+  footer p { margin: 0; font-family: var(--mono); font-size: 12px; letter-spacing: .06em; color: var(--ink-faint); }
+</style>
+
+<div class="page">
+
+  <header class="grid-bg">
+    <div class="wrap hero">
+      <p class="eyebrow">LLM · RAG · Skill · Agent</p>
+      <h1>四個常被混用的詞，其實是<span class="accent">一層疊一層</span>的積木。</h1>
+      <p class="lede">它們不是彼此的競爭者，而是能力的堆疊。<b>LLM</b> 是會思考的大腦；<b>RAG</b> 給它可查的資料；<b>Skill</b> 給它按需載入的做事流程；<b>Agent</b> 給它手腳，加上一個「自己會重複」的工作循環。分清楚，才知道什麼問題該加哪一層。</p>
+
+      <div class="loop-panel">
+        <div>
+          <p class="cap">核心引擎</p>
+          <h3>LLM 單次問答</h3>
+          <p>輸入 prompt，輸出一段文字。沒有記憶、沒有動作、問完就結束。</p>
+        </div>
+        <svg class="loop-svg" viewBox="0 0 210 210" fill="none" aria-hidden="true">
+          <circle cx="105" cy="105" r="78" stroke="var(--line-strong)" stroke-width="1.5"/>
+          <g class="orbit">
+            <circle class="dash" cx="105" cy="105" r="78" stroke="var(--teal-bright)" stroke-width="2.5"/>
+            <circle cx="105" cy="27" r="7" fill="var(--amber-bright)"/>
+          </g>
+          <circle cx="105" cy="105" r="40" fill="var(--surface-2)" stroke="var(--line-strong)" stroke-width="1.5"/>
+          <text x="105" y="102" text-anchor="middle" font-family="var(--mono)" font-size="15" font-weight="700" fill="var(--ink)">LLM</text>
+          <text x="105" y="120" text-anchor="middle" font-family="var(--mono)" font-size="9" letter-spacing="1" fill="var(--ink-faint)">CORE</text>
+          <text x="105" y="150" text-anchor="middle" font-family="var(--mono)" font-size="8.5" letter-spacing="2" fill="var(--teal)">AGENT LOOP</text>
+        </svg>
+        <div>
+          <p class="cap">加上循環</p>
+          <h3>Agent 自主循環</h3>
+          <p>思考 → 用工具 → 看結果 → 再思考，反覆執行直到目標達成。這一圈就是 Agent 的本質。</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+
+    <!-- SECTION 1: four blocks -->
+    <section>
+      <div class="sec-head">
+        <p class="eyebrow">逐一拆解</p>
+        <h2>四塊積木，各自解決什麼？</h2>
+        <p>用「把 LLM 培養成一個能幹的知識工作者」來類比，每塊積木補上一項它天生缺的能力。</p>
+      </div>
+
+      <div class="cards">
+        <div class="card" style="--c: var(--violet);">
+          <p class="tag">The Brain</p>
+          <h3>LLM</h3>
+          <p class="full">Large Language Model</p>
+          <p class="role">會推理、會語言的大腦本體</p>
+          <dl>
+            <dt>是什麼</dt><dd>吃海量文字訓練出的模型，本質是<b>預測下一個字</b>，因而能對話、寫作、推理。</dd>
+            <dt>強</dt><dd>通用語言與推理能力，開箱即用。</dd>
+            <dt>天生缺</dt><dd>只知道訓練時的資料、會過期、<b>會編造</b>；沒有記憶、不能動手做事。</dd>
+            <dt>例子</dt><dd>Claude、GPT、Gemini。</dd>
+          </dl>
+        </div>
+
+        <div class="card" style="--c: var(--teal);">
+          <p class="tag">The Open Book</p>
+          <h3>RAG</h3>
+          <p class="full">Retrieval-Augmented Generation</p>
+          <p class="role">回答前先去查你的資料，再作答</p>
+          <dl>
+            <dt>是什麼</dt><dd>問題進來時，先從你的<b>知識庫 / 文件 / 資料庫</b>檢索相關片段，塞進 prompt 再讓 LLM 作答。</dd>
+            <dt>解決</dt><dd>模型不知道你家內部資料、資料過期、幻覺。等於從閉卷變<b>開卷考試</b>。</dd>
+            <dt>不改</dt><dd>不改模型本身，只是餵它更好的 context。</dd>
+            <dt>例子</dt><dd>問公司內規、查最新文件、客服知識庫。</dd>
+          </dl>
+        </div>
+
+        <div class="card" style="--c: var(--amber);">
+          <p class="tag">The Playbook</p>
+          <h3>Skill</h3>
+          <p class="full">可按需載入的能力包</p>
+          <p class="role">教它「這類任務照這套 SOP 做」</p>
+          <dl>
+            <dt>是什麼</dt><dd>把某個領域的<b>指令、流程、範本、腳本</b>打包，模型判斷相關時才載入，用完釋放。</dd>
+            <dt>解決</dt><dd>把「怎麼做這件事」的專業知識與規範，穩定注入模型行為。</dd>
+            <dt>關鍵</dt><dd><b>progressive disclosure</b>：平時只看一行描述，需要時才展開全文，省 context。</dd>
+            <dt>例子</dt><dd>Claude Code 的 skill：翻譯、code review、投影片。</dd>
+          </dl>
+        </div>
+
+        <div class="card" style="--c: var(--red);">
+          <p class="tag">The Worker</p>
+          <h3>AI Agent</h3>
+          <p class="full">會自主行動的執行體</p>
+          <p class="role">給大腦裝上手腳與工作循環</p>
+          <dl>
+            <dt>是什麼</dt><dd>LLM ＋ 工具（tools）＋ 一個<b>迴圈</b>：自己決定下一步、呼叫工具、看結果、修正，直到完成目標。</dd>
+            <dt>解決</dt><dd>不再只是回一段話，而是能<b>真的去做</b>多步驟任務。</dd>
+            <dt>常含</dt><dd>常會用到 RAG 與 Skill 當作它的工具與能力。</dd>
+            <dt>例子</dt><dd>Claude Code 自己讀檔、跑指令、改 code、驗證。</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: layered -->
+    <section>
+      <div class="sec-head">
+        <p class="eyebrow">組合關係</p>
+        <h2>它們怎麼疊起來</h2>
+        <p>由內而外，每一層都建立在前一層之上。越上層越自主，也越複雜。</p>
+      </div>
+
+      <div class="layers">
+        <div class="layer" style="--c: var(--violet);">
+          <div class="lvl">L0</div>
+          <div>
+            <h4>LLM <span>基底</span></h4>
+            <p>一切的核心。單次輸入輸出，靠內建知識回答。</p>
+            <p class="adds">提供：語言 + 推理</p>
+          </div>
+        </div>
+        <div class="layer" style="--c: var(--teal);">
+          <div class="lvl">L1</div>
+          <div>
+            <h4>LLM + RAG <span>加外部知識</span></h4>
+            <p>回答前先檢索你的資料。大腦沒變，但變成開卷、答得準、能引用來源。</p>
+            <p class="adds">＋ 即時 / 私有知識</p>
+          </div>
+        </div>
+        <div class="layer" style="--c: var(--amber);">
+          <div class="lvl">L1</div>
+          <div>
+            <h4>LLM + Skill <span>加做事流程</span></h4>
+            <p>需要時載入特定領域的 SOP 與範本，讓輸出穩定符合規範。與 RAG 同層、正交，可並存。</p>
+            <p class="adds">＋ 專業流程 / 一致性</p>
+          </div>
+        </div>
+        <div class="layer" style="--c: var(--red);">
+          <div class="lvl">L2</div>
+          <div>
+            <h4>AI Agent <span>加自主循環</span></h4>
+            <p>在上面全部之上，加一個「思考→行動→觀察」的迴圈與一組工具。RAG 是它的一個查資料工具，Skill 是它的一項能力，LLM 是它的大腦。</p>
+            <p class="adds">＋ 工具 + 迴圈 + 自主</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <b>一句話記住：</b> Agent 是「容器」，LLM / RAG / Skill 都可能被裝在裡面。所以它們不是四選一 —— <code>Agent = LLM + (RAG?) + (Skill?) + tools + loop</code>。
+      </div>
+    </section>
+
+    <!-- SECTION 2.5: running example -->
+    <section>
+      <div class="sec-head">
+        <p class="eyebrow">同一個例子 · 貫穿四層</p>
+        <h2>做一個「員工報帳助理」</h2>
+        <p>用同一個場景，看每加一層改變了什麼 —— 這是分辨差異最快的方法。</p>
+      </div>
+
+      <div class="flow">
+        <div class="step" style="--c: var(--violet);">
+          <div class="rail"><span class="badge">只有 LLM</span><span class="stem"></span></div>
+          <div class="body">
+            <h4>憑記憶答，會唬爛 <code>L0</code></h4>
+            <p>你問「餐費上限多少？」它憑訓練資料回答，很可能<b>編一個你公司根本沒有的數字</b>。它不知道你們家的規章。</p>
+          </div>
+        </div>
+        <div class="step" style="--c: var(--teal);">
+          <div class="rail"><span class="badge">+ RAG</span><span class="stem"></span></div>
+          <div class="body">
+            <h4>先查你的文件再答 <code>+知識</code></h4>
+            <p>接上公司報帳規章知識庫。問句進來時先<b>檢索</b>「餐費上限」條文，塞進 prompt 才作答，並能<b>引用真實條文</b>。治「不知道你的資料 + 幻覺」。但它還不會自己做事。</p>
+          </div>
+        </div>
+        <div class="step" style="--c: var(--amber);">
+          <div class="rail"><span class="badge">+ Skill</span><span class="stem"></span></div>
+          <div class="body">
+            <h4>每次都照同一套 SOP <code>+流程</code></h4>
+            <p>打包一個「報帳審核 SOP」skill：怎麼判科目、要哪些必填欄位、輸出成什麼格式。每次審單都<b>照同一套流程、同一種格式</b>。治「流程不穩、缺規範」。RAG 與 Skill 可並存 —— 一個給知識、一個給做法。</p>
+          </div>
+        </div>
+        <div class="step" style="--c: var(--red);">
+          <div class="rail"><span class="badge">= Agent</span><span class="stem"></span></div>
+          <div class="body">
+            <h4>自己把整件事做完 <code>+迴圈</code></h4>
+            <p>給它工具（收據 OCR、查 ERP、寫入報帳系統）＋一個迴圈。出錯自己重試、模糊自己判斷或問你。此時 <b>RAG 是它的查資料工具、Skill 是它的能力、LLM 是它的大腦</b> —— 四者合體，不是四選一。</p>
+            <div class="runloop">讀收據(OCR) → 查規則(RAG) → 按 SOP 分類(Skill)
+   → 填進報帳系統(tool) → 超標就退回 → 回報</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: table -->
+    <section>
+      <div class="sec-head">
+        <p class="eyebrow">一眼對照</p>
+        <h2>差異速查表</h2>
+        <p>同樣的維度橫著比，最容易看出誰負責什麼。</p>
+      </div>
+
+      <div class="tbl-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>維度</th>
+              <th>LLM</th>
+              <th>RAG</th>
+              <th>Skill</th>
+              <th>Agent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>本質 <small>what it is</small></th>
+              <td class="col-llm">模型</td>
+              <td>一種架構 / 技巧</td>
+              <td>能力包</td>
+              <td>系統 / 執行體</td>
+            </tr>
+            <tr>
+              <th>能動手做事 <small>takes actions</small></th>
+              <td class="no">否</td>
+              <td class="no">否</td>
+              <td class="partial">間接</td>
+              <td class="yes">是</td>
+            </tr>
+            <tr>
+              <th>有迴圈 <small>runs a loop</small></th>
+              <td class="no">否</td>
+              <td class="no">否</td>
+              <td class="no">否</td>
+              <td class="yes">是</td>
+            </tr>
+            <tr>
+              <th>知識來源 <small>knowledge</small></th>
+              <td>訓練資料（會過期）</td>
+              <td class="yes">外部即時檢索</td>
+              <td>打包的領域知識</td>
+              <td>以上皆可調用</td>
+            </tr>
+            <tr>
+              <th>解決的痛點 <small>solves</small></th>
+              <td>通用理解與生成</td>
+              <td>不知道 / 過期 / 幻覺</td>
+              <td>流程不穩、缺專業規範</td>
+              <td>多步驟任務要自動完成</td>
+            </tr>
+            <tr>
+              <th>彼此關係 <small>relation</small></th>
+              <td>被其他三者使用</td>
+              <td>可當 Agent 的工具</td>
+              <td>可當 Agent 的能力</td>
+              <td class="yes">把前三者組裝起來</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 4: decision -->
+    <section>
+      <div class="sec-head">
+        <p class="eyebrow">怎麼選</p>
+        <h2>我的問題該加哪一層？</h2>
+        <p>從「你缺的是什麼」倒推，通常一次只加一層，別一開始就上 Agent。</p>
+      </div>
+
+      <div class="decide">
+        <div class="q" style="--c: var(--violet);">
+          <p class="want">我只需要通用的理解與生成</p>
+          <h4>純 LLM 就夠</h4>
+          <p class="pick">→ 直接呼叫模型</p>
+          <p>寫作、翻譯、摘要、腦力激盪這類「一問一答」，不需要外部資料也不用動手，加更多層只是增加成本與複雜度。</p>
+        </div>
+        <div class="q" style="--c: var(--teal);">
+          <p class="want">模型不知道我的資料 / 答案會過期</p>
+          <h4>加 RAG</h4>
+          <p class="pick">→ 接上知識庫檢索</p>
+          <p>客服問內規、查最新文件、要能引用來源。想降低幻覺、又不想重訓模型時的首選。</p>
+        </div>
+        <div class="q" style="--c: var(--amber);">
+          <p class="want">同一類任務要每次照規範穩定做</p>
+          <h4>加 Skill</h4>
+          <p class="pick">→ 打包流程與範本</p>
+          <p>把「這種任務的正確做法」固化成能力包，需要時載入，讓輸出格式與品質一致、可重用。</p>
+        </div>
+        <div class="q" style="--c: var(--red);">
+          <p class="want">任務有很多步、要自己完成到底</p>
+          <h4>做成 Agent</h4>
+          <p class="pick">→ 給工具 + 迴圈</p>
+          <p>要它自己查、自己做、自己驗、出錯自己修。這時才需要迴圈與自主，並把 RAG / Skill 當成它手上的工具。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: commonly confused -->
+    <section>
+      <div class="sec-head">
+        <p class="eyebrow">別再搞混</p>
+        <h2>兩組最常被混淆的對照</h2>
+        <p>Skill 附近有兩個容易撞在一起的概念，講清楚界線。</p>
+      </div>
+
+      <div class="confuse">
+        <div class="cf">
+          <p class="pair"><b>Skill</b> vs Tools / MCP</p>
+          <div class="row"><span class="k">Skill</span><span class="v">教它「這類任務<b>怎麼做</b>」—— 指令、流程、範本。</span></div>
+          <div class="row"><span class="k">Tools / MCP</span><span class="v">給它「<b>動作的接口</b>」—— 讀寫系統、呼叫 API。MCP 是接外部工具的標準協定。</span></div>
+          <div class="row"><span class="k">關係</span><span class="v">一個是知識、一個是手；Agent 兩者都會用到。</span></div>
+        </div>
+        <div class="cf">
+          <p class="pair"><b>Skill</b> vs Fine-tuning</p>
+          <div class="row"><span class="k">Skill</span><span class="v"><b>不改模型</b>，隨插即用、隨時增修，需要時才載入。</span></div>
+          <div class="row"><span class="k">Fine-tuning</span><span class="v"><b>改模型權重</b>，成本高、要資料與訓練，改一次是永久內建。</span></div>
+          <div class="row"><span class="k">先用誰</span><span class="v">多數情況先用 Skill / RAG；非到「行為要內建」才 fine-tune。</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: sources -->
+    <section>
+      <div class="sec-head">
+        <p class="eyebrow">資料來源</p>
+        <h2>定義出處</h2>
+        <p>本頁對每個名詞的定義，取自下列官方 / 權威來源（2026 年 7 月查證）。</p>
+      </div>
+
+      <div class="sources">
+        <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">
+          <span class="src">Agent</span>
+          <span class="ttl"><b>Building Effective AI Agents</b> — Anthropic：agent = LLMs autonomously using tools in a loop。</span>
+        </a>
+        <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener">
+          <span class="src">Skill</span>
+          <span class="ttl"><b>Equipping agents for the real world with Agent Skills</b> — Anthropic：SKILL.md 資料夾 + progressive disclosure。</span>
+        </a>
+        <a href="https://www.anthropic.com/news/skills" target="_blank" rel="noopener">
+          <span class="src">Skill</span>
+          <span class="ttl"><b>Introducing Agent Skills</b> — Anthropic。</span>
+        </a>
+        <a href="https://www.ibm.com/think/topics/retrieval-augmented-generation" target="_blank" rel="noopener">
+          <span class="src">RAG</span>
+          <span class="ttl"><b>What is Retrieval-Augmented Generation?</b> — IBM。</span>
+        </a>
+        <a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/" target="_blank" rel="noopener">
+          <span class="src">RAG</span>
+          <span class="ttl"><b>What Is Retrieval-Augmented Generation aka RAG</b> — NVIDIA。</span>
+        </a>
+        <a href="https://www.cloudflare.com/learning/ai/what-is-large-language-model/" target="_blank" rel="noopener">
+          <span class="src">LLM</span>
+          <span class="ttl"><b>What is a large language model (LLM)?</b> — Cloudflare。</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <p>LLM = 大腦 · RAG = 開卷資料 · SKILL = 做事流程 · AGENT = 手腳 + 循環</p>
+    </div>
+  </footer>
+
+</div>
