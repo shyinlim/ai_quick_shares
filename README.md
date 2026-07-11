@@ -1,1 +1,1 @@
-# ai_quick_shares-
+# ai_quick_share
