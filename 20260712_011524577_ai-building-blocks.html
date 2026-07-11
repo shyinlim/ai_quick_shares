@@ -434,7 +434,7 @@
       </div>
 
       <div class="callout">
-        <b>一句話記住：</b> Agent 是「容器」，LLM / RAG / Skill 都可能被裝在裡面。所以它們不是四選一 —— <code>Agent = LLM + (RAG?) + (Skill?) + tools + loop</code>。
+        <b>一句話記住：</b> Agent 是「容器」，LLM / RAG / Skill 都可能被裝在裡面。所以它們不是四選一。<code>Agent = LLM + (RAG?) + (Skill?) + tools + loop</code>。
       </div>
     </section>
 
@@ -443,7 +443,7 @@
       <div class="sec-head">
         <p class="eyebrow">同一個例子 · 貫穿四層</p>
         <h2>做一個「員工報帳助理」</h2>
-        <p>用同一個場景，看每加一層改變了什麼 —— 這是分辨差異最快的方法。</p>
+        <p>用同一個場景，看每加一層改變了什麼。這是分辨差異最快的方法。</p>
       </div>
 
       <div class="flow">
@@ -465,14 +465,14 @@
           <div class="rail"><span class="badge">+ Skill</span><span class="stem"></span></div>
           <div class="body">
             <h4>每次都照同一套 SOP <code>+流程</code></h4>
-            <p>打包一個「報帳審核 SOP」skill：怎麼判科目、要哪些必填欄位、輸出成什麼格式。每次審單都<b>照同一套流程、同一種格式</b>。治「流程不穩、缺規範」。RAG 與 Skill 可並存 —— 一個給知識、一個給做法。</p>
+            <p>打包一個「報帳審核 SOP」skill：怎麼判科目、要哪些必填欄位、輸出成什麼格式。每次審單都<b>照同一套流程、同一種格式</b>。治「流程不穩、缺規範」。RAG 與 Skill 可以並存，一個給知識、一個給做法。</p>
           </div>
         </div>
         <div class="step" style="--c: var(--red);">
           <div class="rail"><span class="badge">= Agent</span><span class="stem"></span></div>
           <div class="body">
             <h4>自己把整件事做完 <code>+迴圈</code></h4>
-            <p>給它工具（收據 OCR、查 ERP、寫入報帳系統）＋一個迴圈。出錯自己重試、模糊自己判斷或問你。此時 <b>RAG 是它的查資料工具、Skill 是它的能力、LLM 是它的大腦</b> —— 四者合體，不是四選一。</p>
+            <p>給它工具（收據 OCR、查 ERP、寫入報帳系統）＋一個迴圈。出錯自己重試、模糊自己判斷或問你。此時 <b>RAG 是它的查資料工具、Skill 是它的能力、LLM 是它的大腦</b>，四者合體，不是四選一。</p>
             <div class="runloop">讀收據(OCR) → 查規則(RAG) → 按 SOP 分類(Skill)
    → 填進報帳系統(tool) → 超標就退回 → 回報</div>
           </div>
