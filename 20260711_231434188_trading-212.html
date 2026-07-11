@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading 212 英國股票投資視覺指南</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap');
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #0b0e14;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #151b26;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2a3649;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #3f516d;
+        }
+    </style>
+</head>
+<body class="text-slate-200 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
+
+    <!-- 頂部導航欄 -->
+    <header class="sticky top-0 z-40 bg-[#0b0e14]/90 backdrop-blur-md border-b border-slate-800 px-4 py-3 lg:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-600 p-2 rounded-xl text-white shadow-lg shadow-blue-500/20">
+                    <!-- Icon: Trending Up -->
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold text-white tracking-wide flex items-center gap-2">
+                        Trading 212 英國新手指南 <span class="bg-blue-500/10 text-blue-400 text-xs px-2 py-0.5 rounded-md border border-blue-500/20">ISA 專用版</span>
+                    </h1>
+                    <p class="text-xs text-slate-400">專為身在英國、第一次買股票的新手設計</p>
+                </div>
+            </div>
+            <!-- 導航分頁 -->
+            <nav class="flex items-center bg-[#151b26] p-1 rounded-xl border border-slate-800/80 overflow-x-auto max-w-full custom-scrollbar">
+                <button onclick="switchTab('guide')" id="btn-guide" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-blue-600 text-white shadow">
+                    起步與避坑
+                </button>
+                <button onclick="switchTab('assets')" id="btn-assets" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-400 hover:text-slate-200">
+                    資產與買賣
+                </button>
+                <button onclick="switchTab('stocks')" id="btn-stocks" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-400 hover:text-slate-200">
+                    30隻推薦股
+                </button>
+                <button onclick="switchTab('compound')" id="btn-compound" class="tab-btn px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-400 hover:text-slate-200">
+                    複利模擬器
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主體內容區 -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 lg:p-8">
+
+        <!-- TAB 1: 起步與避坑 -->
+        <section id="tab-guide" class="tab-content space-y-8">
+            <!-- 頂部橫幅：三大致命紅線 -->
+            <div class="relative bg-gradient-to-r from-red-950/40 via-slate-900 to-slate-900 border border-red-500/30 rounded-3xl p-6 lg:p-8 shadow-xl overflow-hidden">
+                <div class="absolute -right-10 -top-10 w-40 h-40 bg-red-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="flex items-start gap-4">
+                    <div class="bg-red-500/20 text-red-400 p-3 rounded-2xl border border-red-500/30 flex-shrink-0 mt-1">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-xl lg:text-2xl font-bold text-white mb-2">英國新手入市 3 大「致命紅線」！</h2>
+                        <p class="text-slate-400 text-sm max-w-3xl mb-6">許多人在還沒開始賺錢前，就因為選錯帳戶、用錯匯款方式而面臨 HMRC 課稅或資金凍結。請務必在交易前確認以下事項：</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- 紅線 1 -->
+                            <div class="bg-[#151b26]/60 backdrop-blur border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition">
+                                <div class="text-xs font-bold text-red-400 mb-2 uppercase tracking-wider">紅線 01 · 帳戶選擇</div>
+                                <h3 class="text-lg font-bold text-white mb-2">必須選 Stocks & Shares ISA</h3>
+                                <p class="text-slate-400 text-xs leading-relaxed">
+                                    英國每人每稅年（4/6 - 隔年 4/5）有 <strong class="text-white">£20,000</strong> 的免稅投資额度。
+                                    <span class="text-emerald-400 block mt-2 font-medium">✓ 在 ISA 帳戶內：賺再多價差、拿再多股息，通通免稅！</span>
+                                    <span class="text-red-400 block mt-1">✗ 在 Invest 帳戶：一旦獲利超出年度免稅額，會被課高額資本利得與股息稅。</span>
+                                </p>
+                            </div>
+                            <!-- 紅線 2 -->
+                            <div class="bg-[#151b26]/60 backdrop-blur border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition">
+                                <div class="text-xs font-bold text-red-400 mb-2 uppercase tracking-wider">紅線 02 · 資金轉入</div>
+                                <h3 class="text-lg font-bold text-white mb-2">入金帳戶姓名必須完全一致</h3>
+                                <p class="text-slate-400 text-xs leading-relaxed">
+                                    嚴格防範洗錢。你用來轉入英鎊的英國銀行帳戶，法定姓名必須與 Trading 212 註冊姓名一致。
+                                    <span class="text-amber-400 block mt-2 font-medium">⚠ 警告：千萬不要用親友、伴侶的銀行轉帳進去，否則資金會被卡死退款，帳戶甚至可能被封鎖。</span>
+                                </p>
+                            </div>
+                            <!-- 紅線 3 -->
+                            <div class="bg-[#151b26]/60 backdrop-blur border border-slate-800 rounded-2xl p-5 hover:border-slate-700 transition">
+                                <div class="text-xs font-bold text-red-400 mb-2 uppercase tracking-wider">紅線 03 · 隱藏耗損</div>
+                                <h3 class="text-lg font-bold text-white mb-2">美股交易有 0.15% 匯差</h3>
+                                <p class="text-slate-400 text-xs leading-relaxed">
+                                    當你用英鎊買美股（如 Tesla, Apple）時，Trading 212 會收取 <strong class="text-white">0.15% 的匯率兌換手續費 (FX Fee)</strong>。
+                                    <span class="text-slate-400 block mt-2">頻繁短線進出美股會累積高額成本。新手建議多利用「英鎊計價」的 ETF（如 VUSA, VUAG）布局美股。</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 互動式新手起步 Checklist -->
+            <div class="bg-[#151b26] border border-slate-800 rounded-3xl p-6 lg:p-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Trading 212 帳戶開立與安全設定檢核表</h3>
+                        <p class="text-xs text-slate-400">分享給朋友，讓他對照著完成，100% 確保帳戶安全</p>
+                    </div>
+                    <div class="bg-[#0b0e14] px-4 py-2 rounded-xl border border-slate-800 text-xs">
+                        已完成：<span id="completed-count" class="text-blue-400 font-bold">0</span> / 5
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <!-- 項目 1 -->
+                    <label class="flex items-start gap-4 p-4 rounded-2xl bg-[#0b0e14]/50 border border-slate-800/80 hover:bg-[#0b0e14] transition cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklist()" class="checklist-item w-5 h-5 mt-0.5 rounded border-slate-700 text-blue-600 bg-slate-900 focus:ring-blue-500/20 focus:ring-2">
+                        <div>
+                            <span class="text-sm font-semibold text-white block">開戶時選擇「Stocks & Shares ISA」帳戶</span>
+                            <span class="text-xs text-slate-400 block mt-0.5">享有每年 £20,000 的免稅額度，徹底避開所得稅與資本利得稅。</span>
+                        </div>
+                    </label>
+                    <!-- 項目 2 -->
+                    <label class="flex items-start gap-4 p-4 rounded-2xl bg-[#0b0e14]/50 border border-slate-800/80 hover:bg-[#0b0e14] transition cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklist()" class="checklist-item w-5 h-5 mt-0.5 rounded border-slate-700 text-blue-600 bg-slate-900 focus:ring-blue-500/20 focus:ring-2">
+                        <div>
+                            <span class="text-sm font-semibold text-white block">啟用兩步驟安全驗證 (2-Factor Authentication, 2FA)</span>
+                            <span class="text-xs text-slate-400 block mt-0.5">進入 App 設定 -> Security -> 2-Factor Authentication。保護資金不被盜刷或駭入。</span>
+                        </div>
+                    </label>
+                    <!-- 項目 3 -->
+                    <label class="flex items-start gap-4 p-4 rounded-2xl bg-[#0b0e14]/50 border border-slate-800/80 hover:bg-[#0b0e14] transition cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklist()" class="checklist-item w-5 h-5 mt-0.5 rounded border-slate-700 text-blue-600 bg-slate-900 focus:ring-blue-500/20 focus:ring-2">
+                        <div>
+                            <span class="text-sm font-semibold text-white block">使用 Open Banking 完成首次英鎊入金</span>
+                            <span class="text-xs text-slate-400 block mt-0.5">利用 Instant Bank Transfer 直接拉取你的 Barclays/Monzo/HSBC 等英國網銀 app 匯款，最安全防呆。</span>
+                        </div>
+                    </label>
+                    <!-- 項目 4 -->
+                    <label class="flex items-start gap-4 p-4 rounded-2xl bg-[#0b0e14]/50 border border-slate-800/80 hover:bg-[#0b0e14] transition cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklist()" class="checklist-item w-5 h-5 mt-0.5 rounded border-slate-700 text-blue-600 bg-slate-900 focus:ring-blue-500/20 focus:ring-2">
+                        <div>
+                            <span class="text-sm font-semibold text-white block">決定股息再投資 (DRIP) 設定</span>
+                            <span class="text-xs text-slate-400 block mt-0.5">在設定中可開啟/關閉 Dividend Reinvestment。開啟後，配發的股利會自動買入碎股，幫你自動複利成長。</span>
+                        </div>
+                    </label>
+                    <!-- 項目 5 -->
+                    <label class="flex items-start gap-4 p-4 rounded-2xl bg-[#0b0e14]/50 border border-slate-800/80 hover:bg-[#0b0e14] transition cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklist()" class="checklist-item w-5 h-5 mt-0.5 rounded border-slate-700 text-blue-600 bg-slate-900 focus:ring-blue-500/20 focus:ring-2">
+                        <div>
+                            <span class="text-sm font-semibold text-white block">填寫 W-8BEN 表單 (App 內會自動提示)</span>
+                            <span class="text-xs text-slate-400 block mt-0.5">若想交易美股（Tesla/Apple等），必須簽署此表單，可將美股股息扣稅（預扣稅）由 30% 降至 15%。</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TAB 2: 資產與買賣 -->
+        <section id="tab-assets" class="tab-content hidden space-y-8">
+            <!-- 資產類型差異 -->
+            <div>
+                <h3 class="text-xl font-bold text-white mb-2">ETF、銀行股、科技股，本質有何差異？</h3>
+                <p class="text-slate-400 text-sm mb-6">不同的投資工具代表不同的風險與報酬結構，新手應避免把雞蛋全部放進同一個籃子裡：</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- ETF -->
+                    <div class="bg-[#151b26] border border-slate-800 rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between">
+                        <div>
+                            <div class="bg-blue-500/10 text-blue-400 w-12 h-12 rounded-2xl flex items-center justify-center border border-blue-500/20 mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-1">1. 指數型基金 (ETF)</h4>
+                            <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded font-semibold">適合所有人 / 中低風險</span>
+                            <p class="text-slate-400 text-xs leading-relaxed mt-4">
+                                <strong>原理：</strong> 買入一檔 ETF，等於同時買進數百甚至數千家大公司的股份（例如 S&P 500 ETF 包含 Apple、Microsoft、Amazon 等前 500 大企業）。<br><br>
+                                <strong>優點：</strong> 完美分散單一公司倒閉的風險。不用花時間研究財報，極其省時省力。<br>
+                                <strong>缺點：</strong> 無法獲得像暴漲股那樣的一夜致富暴利。
+                            </p>
+                        </div>
+                        <div class="border-t border-slate-800/80 pt-4 mt-6">
+                            <span class="text-xs text-slate-400 block">在地人最愛：</span>
+                            <span class="text-xs font-semibold text-white">VUSA (S&P500), VWRP (全球)</span>
+                        </div>
+                    </div>
+
+                    <!-- 銀行股 -->
+                    <div class="bg-[#151b26] border border-slate-800 rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between">
+                        <div>
+                            <div class="bg-emerald-500/10 text-emerald-400 w-12 h-12 rounded-2xl flex items-center justify-center border border-emerald-500/20 mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-1">2. 傳統金融/價值股</h4>
+                            <span class="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-semibold">防禦型配置 / 中等風險</span>
+                            <p class="text-slate-400 text-xs leading-relaxed mt-4">
+                                <strong>原理：</strong> 投資業務極其成熟、民生不可或缺的大型老牌企業（如匯豐 HSBC、勞埃德 Lloyds 銀行，或能源股 Shell、消費股聯合利華 Unilever）。<br><br>
+                                <strong>優點：</strong> 通常會配發非常大方且穩健的股息，是「不賣股賺被動收入」的核心來源。<br>
+                                <strong>缺點：</strong> 公司業務沒什麼爆發性成長空間，股價往往經年累月在一定區間停滯。
+                            </p>
+                        </div>
+                        <div class="border-t border-slate-800/80 pt-4 mt-6">
+                            <span class="text-xs text-slate-400 block">在地人最愛：</span>
+                            <span class="text-xs font-semibold text-white">HSBC (匯豐), BARC (巴克萊)</span>
+                        </div>
+                    </div>
+
+                    <!-- 科技股 -->
+                    <div class="bg-[#151b26] border border-slate-800 rounded-3xl p-6 relative overflow-hidden flex flex-col justify-between">
+                        <div>
+                            <div class="bg-purple-500/10 text-purple-400 w-12 h-12 rounded-2xl flex items-center justify-center border border-purple-500/20 mb-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-1">3. 科技/高速成長股</h4>
+                            <span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded font-semibold">賺取價差 / 高風險高回報</span>
+                            <p class="text-slate-400 text-xs leading-relaxed mt-4">
+                                <strong>原理：</strong> 投資站在時代風口上的前沿科技巨頭（如 NVIDIA、Microsoft、Tesla 等美股巨頭，或是半導體產業鏈）。<br><br>
+                                <strong>優點：</strong> 股價上漲動能極為強勁，是資本翻倍、快速賺取價差（Capital Gains）的首選。<br>
+                                <strong>缺點：</strong> 通常極少配發股息（因為要把賺到的錢繼續投資研發），且股價波動巨大，跌起來毫不手軟。
+                            </p>
+                        </div>
+                        <div class="border-t border-slate-800/80 pt-4 mt-6">
+                            <span class="text-xs text-slate-400 block">在地人最愛：</span>
+                            <span class="text-xs font-semibold text-white">NVDA (輝達), AAPL (蘋果), MSFT (微軟)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 買、賣、賺、虧要看什麼？ -->
+            <div class="bg-[#151b26] border border-slate-800 rounded-3xl p-6 lg:p-8">
+                <h3 class="text-lg font-bold text-white mb-1">交易心法：買、賣、賺、虧究竟要看什麼數據？</h3>
+                <p class="text-xs text-slate-400 mb-6">告別盲目跟風，這 4 個維度是決定盈虧的底層邏輯</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-[#0b0e14] p-5 rounded-2xl border border-slate-800">
+                        <div class="flex items-center gap-2 text-blue-400 font-bold mb-3">
+                            <span class="bg-blue-400/10 px-2 py-1 rounded text-xs">買</span>
+                            <h4>買進時看什麼？</h4>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-400">
+                            <li>• <strong class="text-white">內扣管理費 (Expense Ratio)</strong>：買 ETF 時必看，越低越好（建議小於 0.15% ），這是每年扣除的隱藏成本。</li>
+                            <li>• <strong class="text-white">本益比 (P/E Ratio)</strong>：個股估值指標，評估股價是便宜還是昂貴。</li>
+                            <li>• <strong class="text-white">流動性 (Volume)</strong>：日均交易量是否足夠，避免想買買不到，想賣賣不出。</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-[#0b0e14] p-5 rounded-2xl border border-slate-800">
+                        <div class="flex items-center gap-2 text-purple-400 font-bold mb-3">
+                            <span class="bg-purple-400/10 px-2 py-1 rounded text-xs">賣</span>
+                            <h4>賣出時看什麼？</h4>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-400">
+                            <li>• <strong class="text-white">目標估值 (Target Price)</strong>：在買入前就應定好停利點（如 20% 獲利），到了就分批賣出，避免貪心。</li>
+                            <li>• <strong class="text-white">停損紀律 (Stop-Loss)</strong>：如果跌破關鍵支撐（如 15% 跌幅）且公司前景改變，必須果斷割肉，切忌凹單。</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-[#0b0e14] p-5 rounded-2xl border border-slate-800">
+                        <div class="flex items-center gap-2 text-emerald-400 font-bold mb-3">
+                            <span class="bg-emerald-400/10 px-2 py-1 rounded text-xs">賺</span>
+                            <h4>賺錢時看什麼？</h4>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-400">
+                            <li>• <strong class="text-white">總報酬 (Total Return)</strong>：不要只看股票漲跌。總回報 =「帳面價差獲利 + 已收到的股息」。</li>
+                            <li>• <strong class="text-white">已實現 vs 未實現</strong>：只有落袋為安賣出的才是「已實現獲利」，浮盈只是虛胖，要注意回檔。</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-[#0b0e14] p-5 rounded-2xl border border-slate-800">
+                        <div class="flex items-center gap-2 text-red-400 font-bold mb-3">
+                            <span class="bg-red-400/10 px-2 py-1 rounded text-xs">虧</span>
+                            <h4>虧錢時看什麼？</h4>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-400">
+                            <li>• <strong class="text-white">浮虧本質 (Paper Loss)</strong>：只是市場大環境在跌，還是這家公司競爭力壞掉了？若是前者，不賣就不算真虧（特別是 ETF ）。</li>
+                            <li>• <strong class="text-white">基本面變壞 (Fundamentals)</strong>：如果公司營收下滑、債務高企，則屬於壞虧損，應儘速停損。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TAB 3: 30 隻精選推薦股票 -->
+        <section id="tab-stocks" class="tab-content hidden space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h3 class="text-xl font-bold text-white">Trading 212 適合新手的 30 隻英美股精選</h3>
+                    <p class="text-sm text-slate-400">分為兩大流派，你可以根據理財目的自由篩選配置：</p>
+                </div>
+                <!-- 篩選器按鈕 -->
+                <div class="flex flex-wrap items-center gap-2 bg-[#151b26] p-1.5 rounded-2xl border border-slate-800">
+                    <button onclick="filterStocks('all')" id="filter-all" class="stock-filter-btn px-4 py-1.5 rounded-xl text-xs font-semibold transition bg-blue-600 text-white shadow">
+                        全部標的 (30)
+                    </button>
+                    <button onclick="filterStocks('dist')" id="filter-dist" class="stock-filter-btn px-4 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-slate-200">
+                        穩定配息 Dist (15)
+                    </button>
+                    <button onclick="filterStocks('acc')" id="filter-acc" class="stock-filter-btn px-4 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-slate-200">
+                        資產成長 Acc (15)
+                    </button>
+                </div>
+            </div>
+
+            <!-- 股票清單網格 -->
+            <div id="stocks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- 內容由 JS 動態生成 -->
+            </div>
+        </section>
+
+
+        <!-- TAB 4: 複利模擬器 -->
+        <section id="tab-compound" class="tab-content hidden space-y-8">
+            <div class="bg-[#151b26] border border-slate-800 rounded-3xl p-6 lg:p-8">
+                <div class="max-w-3xl mb-8">
+                    <h3 class="text-xl font-bold text-white mb-2">配息 (Dist) vs 累積 (Acc) 複利模擬計算器</h3>
+                    <p class="text-slate-400 text-sm">
+                        很多新手偏愛拿到現金股息（Distributing），但你知道如果選擇自動滾入複利（Accumulating），幾年後總資產會有多麼驚人的差距嗎？
+                        輸入你預計在 Trading 212 每月投入的資金，親自用數字對比吧！
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- 左側輸入面板 -->
+                    <div class="lg:col-span-5 bg-[#0b0e14] p-6 rounded-2xl border border-slate-800 space-y-6">
+                        <h4 class="text-white font-semibold text-sm border-b border-slate-800 pb-3">投資計畫設定</h4>
+                        
+                        <!-- 每月投入 -->
+                        <div>
+                            <div class="flex justify-between text-xs text-slate-400 mb-2">
+                                <span>每月定額投資額</span>
+                                <span class="text-white font-bold">£ <span id="val-monthly">250</span></span>
+                            </div>
+                            <input type="range" id="input-monthly" min="50" max="2000" step="50" value="250" oninput="calculateCompound()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                                <span>£50</span>
+                                <span>£1,000</span>
+                                <span>£2,000</span>
+                            </div>
+                        </div>
+
+                        <!-- 投資年限 -->
+                        <div>
+                            <div class="flex justify-between text-xs text-slate-400 mb-2">
+                                <span>預計投資年限 (長期持有)</span>
+                                <span class="text-white font-bold"><span id="val-years">15</span> 年</span>
+                            </div>
+                            <input type="range" id="input-years" min="2" max="30" step="1" value="15" oninput="calculateCompound()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                                <span>2 年</span>
+                                <span>15 年</span>
+                                <span>30 年</span>
+                            </div>
+                        </div>
+
+                        <!-- 年化報酬率 -->
+                        <div>
+                            <div class="flex justify-between text-xs text-slate-400 mb-2">
+                                <span>預期市場年化報酬率</span>
+                                <span class="text-white font-bold"><span id="val-rate">8.0</span> %</span>
+                            </div>
+                            <input type="range" id="input-rate" min="3" max="15" step="0.5" value="8" oninput="calculateCompound()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                                <span>3% (保守)</span>
+                                <span>8% (平均/S&P500)</span>
+                                <span>15% (高成長)</span>
+                            </div>
+                        </div>
+
+                        <!-- 殖利率/配息率 -->
+                        <div>
+                            <div class="flex justify-between text-xs text-slate-400 mb-2">
+                                <span>預估年配息率 (Dividend Yield)</span>
+                                <span class="text-white font-bold"><span id="val-div-yield">3.5</span> %</span>
+                            </div>
+                            <input type="range" id="input-div-yield" min="1" max="8" step="0.5" value="3.5" oninput="calculateCompound()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            <p class="text-[10px] text-slate-500 mt-2">
+                                *假設市場報酬率為 8.0%。選擇 Acc 的人會自動將 3.5% 股息再滾入，享受 8.0% 的完全複利；選擇 Dist 的人則拿走 3.5% 現金，僅剩餘 4.5% 進行資產本身增值。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 右側結果展示 -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <!-- 總金額視覺對比 -->
+                        <div class="bg-gradient-to-br from-[#1a2536] to-[#151b26] p-6 rounded-2xl border border-slate-700/80 shadow-inner">
+                            <h4 class="text-white font-semibold text-sm mb-4">預估終期總資產規模對比</h4>
+                            
+                            <div class="space-y-6">
+                                <!-- Accumulating 結果 -->
+                                <div>
+                                    <div class="flex justify-between items-end mb-1">
+                                        <div>
+                                            <span class="text-xs text-blue-400 font-bold uppercase tracking-wider">Accumulating (股息滾入再投資)</span>
+                                            <span class="block text-slate-400 text-[10px]">股息自動買進碎股，完全複利</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-2xl font-extrabold text-blue-400">£ <span id="res-acc-total">0</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full bg-slate-900 h-3 rounded-full overflow-hidden">
+                                        <div id="bar-acc" class="bg-blue-500 h-full transition-all duration-300" style="width: 100%"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Distributing 結果 -->
+                                <div>
+                                    <div class="flex justify-between items-end mb-1">
+                                        <div>
+                                            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider">Distributing (拿走現金股息)</span>
+                                            <span class="block text-slate-400 text-[10px]">資產僅靠股價上漲，股息領走不滾入</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-xl font-bold text-amber-400">£ <span id="res-dist-total">0</span></span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full bg-slate-900 h-3 rounded-full overflow-hidden">
+                                        <div id="bar-dist" class="bg-amber-500 h-full transition-all duration-300" style="width: 70%"></div>
+                                    </div>
+                                </div>
+
+                                <!-- 本金總和 -->
+                                <div class="pt-4 border-t border-slate-800 flex justify-between text-xs text-slate-400">
+                                    <span>累計投入本金總額：</span>
+                                    <span>£ <span id="res-principal" class="text-white font-semibold">0</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 指引解說 -->
+                        <div class="bg-slate-900/50 p-5 rounded-2xl border border-slate-800 space-y-3 text-xs leading-relaxed text-slate-400">
+                            <h5 class="text-white font-semibold">💡 模擬器給新手的啟示：</h5>
+                            <p>
+                                1. <strong class="text-blue-400">複利差距</strong>：在長期投資中，僅僅是將年配息率（如 3.5%）再次滾入投資，經過時間放大後，累積的總資產會顯著拉開。
+                            </p>
+                            <p>
+                                2. <strong class="text-amber-400">適合的人群</strong>：如果你還年輕（35歲以下），不需要靠每月股息過生活，<strong class="text-white">強烈建議優先買入名稱尾綴為 "Acc" 的 ETF</strong>（例如 VUAG），系統會自動為你複利，不留任何現金閒置。
+                            </p>
+                            <p>
+                                3. <strong class="text-white">免稅優勢</strong>：在 ISA 帳戶內，即便是 Acc 自動幫你滾入的股利，同樣享有完美的免稅優待，不需要申報！
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 底部資訊與免責聲明 -->
+    <footer class="bg-[#151b26]/50 border-t border-slate-800 py-8 px-4 text-center text-slate-500 text-xs">
+        <div class="max-w-7xl mx-auto space-y-4">
+            <p>本指南所載之所有資訊均為一般市場知識普及，不構成任何個人財務、投資、稅務或法律建議。股市投資有風險，投資人可能損失本金。</p>
+            <p class="flex justify-center items-center gap-2">
+                <span>資料來源參考：</span>
+                <a href="https://helpcentre.trading212.com" target="_blank" class="text-blue-500 hover:underline">Trading 212 Help Centre</a> | 
+                <a href="https://www.gov.uk/individual-savings-accounts" target="_blank" class="text-blue-500 hover:underline">Gov.uk ISA Guide</a> |
+                <a href="https://www.vanguardinvestor.co.uk" target="_blank" class="text-blue-500 hover:underline">Vanguard UK</a>
+            </p>
+            <p class="text-slate-600">© 2026 英國 Trading 212 新手全方位指南 · 點擊頂部分頁切換學習</p>
+        </div>
+    </footer>
+
+    <!-- 腳本部分 -->
+    <script>
+        // 30 隻股票資料庫
+        const STOCKS_DB = [
+            // Distributing (15)
+            { ticker: "VWRL", name: "Vanguard FTSE All-World (Dist)", type: "ETF", cat: "dist", desc: "全球大盤精選，一鍵買下全球幾千家頂級公司，配發穩定股息。", bg: "bg-blue-500/10 border-blue-500/20 text-blue-400" },
+            { ticker: "VUSA", name: "Vanguard S&P 500 (Dist)", type: "ETF", cat: "dist", desc: "追蹤美國前 500 大企業，英鎊計價直投美股大盤，定期發放股利。", bg: "bg-blue-500/10 border-blue-500/20 text-blue-400" },
+            { ticker: "IUKD", name: "iShares UK Dividend (Dist)", type: "ETF", cat: "dist", desc: "精選英國倫敦交易所股利率最高的前 50 家老牌企業，高配息首選。", bg: "bg-blue-500/10 border-blue-500/20 text-blue-400" },
+            { ticker: "HSBC", name: "HSBC Holdings plc (匯豐)", type: "金融", cat: "dist", desc: "全球最大銀行之一，倫敦交易所主力股，歷年來股利配發非常大方。", bg: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" },
+            { ticker: "BARC", name: "Barclays plc (巴克萊)", type: "金融", cat: "dist", desc: "英國四大零售與投行巨頭，業務成熟，提供不錯的防禦力與股息率。", bg: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" },
+            { ticker: "LLOY", name: "Lloyds Banking Group (勞埃德)", type: "金融", cat: "dist", desc: "英國本土最大的零售銀行，專注於英國房貸與儲蓄業務，獲利極穩定。", bg: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" },
+            { ticker: "JPM", name: "JPMorgan Chase (摩根大通)", type: "金融", cat: "dist", desc: "美股最大投資銀行。雖為美股但歷史配息優異且具有強大行業龍頭地位。", bg: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" },
+            { ticker: "ULVR", name: "Unilever plc (聯合利華)", type: "消費品", cat: "dist", desc: "多芬、康寶等民生必備品牌母公司。抗通膨首選，股利歷史幾十年不倒。", bg: "bg-amber-500/10 border-amber-500/20 text-amber-400" },
+            { ticker: "GSK", name: "GSK plc (葛蘭素史克)", type: "製藥", cat: "dist", desc: "英國本土百年製藥與生物技術巨頭，不受景氣影響的防禦型醫藥股。", bg: "bg-amber-500/10 border-amber-500/20 text-amber-400" },
+            { ticker: "PEP", name: "PepsiCo, Inc. (百事)", type: "消費品", cat: "dist", desc: "美股頂級民生零食與飲料公司，連續 50 年以上增加股利發放的「股利國王」。", bg: "bg-amber-500/10 border-amber-500/20 text-amber-400" },
+            { ticker: "KO", name: "Coca-Cola (可口可樂)", type: "消費品", cat: "dist", desc: "股神巴菲特最愛，強大品牌護城河，美股歷史最知名的穩定配息藍籌股。", bg: "bg-amber-500/10 border-amber-500/20 text-amber-400" },
+            { ticker: "PG", name: "Procter & Gamble (寶潔)", type: "消費品", cat: "dist", desc: "幫寶適、海倫仙度絲母公司。全球日常剛需用品之王，現金流和配息極其穩定。", bg: "bg-amber-500/10 border-amber-500/20 text-amber-400" },
+            { ticker: "BP", name: "BP plc (英國石油)", type: "能源", cat: "dist", desc: "全球石油與綠色轉型能源巨頭，高現金流，配息通常伴隨高殖利率。", bg: "bg-red-500/10 border-red-500/20 text-red-400" },
+            { ticker: "SHEL", name: "Shell plc (殼牌)", type: "能源", cat: "dist", desc: "歐洲最大石油與液化天然氣公司，獲利與大宗商品挂鉤，配息十分強勁。", bg: "bg-red-500/10 border-red-500/20 text-red-400" },
+            { ticker: "O", name: "Realty Income (房產信託)", type: "房地產", cat: "dist", desc: "美股知名零售地產 REITs，最大特點是「月月配息」，適合需要固定現金流的人。", bg: "bg-purple-500/10 border-purple-500/20 text-purple-400" },
+
+            // Accumulating (15)
+            { ticker: "VWRP", name: "Vanguard FTSE All-World (Acc)", type: "ETF", cat: "acc", desc: "全球大盤累積型，獲得的所有全球公司股息會自動在背後買進更多持股複利。", bg: "bg-blue-500/10 border-blue-500/20 text-blue-400" },
+            { ticker: "VUAG", name: "Vanguard S&P 500 (Acc)", type: "ETF", cat: "acc", desc: "美股 S&P 500 累積型。英鎊直接結算，是英國在地年輕人最愛的滾雪球核心標的。", bg: "bg-blue-500/10 border-blue-500/20 text-blue-400" },
+            { ticker: "IITU", name: "iShares S&P 500 Tech (Acc)", type: "ETF", cat: "acc", desc: "專注美國頂級科技行業（蘋果、輝達、微軟等），極具資產爆發成長力。", bg: "bg-blue-500/10 border-blue-500/20 text-blue-400" },
+            { ticker: "SMGB", name: "VanEck Semiconductor (Acc)", type: "ETF", cat: "acc", desc: "半導體產業 ETF。專注晶片代工與設計巨頭，是追求科技產業極致成長的選擇。", bg: "bg-blue-500/10 border-blue-500/20 text-blue-400" },
+            { ticker: "AAPL", name: "Apple Inc. (蘋果)", type: "科技", cat: "acc", desc: "消費電子帝國，超高用戶黏著性與強大服務業務，現金流全美第一。", bg: "bg-purple-500/10 border-purple-500/20 text-purple-400" },
+            { ticker: "MSFT", name: "Microsoft Corp (微軟)", type: "科技", cat: "acc", desc: "雲端服務與 OpenAI 最大投資者，企業軟體霸主，引領 AI 浪潮核心。", bg: "bg-purple-500/10 border-purple-500/20 text-purple-400" },
+            { ticker: "GOOGL", name: "Alphabet Inc. (谷歌)", type: "科技", cat: "acc", desc: "搜尋引擎與 Youtube 廣告霸主，在 AI 大模型與雲端領域具備底層技術壟斷力。", bg: "bg-purple-500/10 border-purple-500/20 text-purple-400" },
+            { ticker: "AMZN", name: "Amazon.com, Inc. (亞馬遜)", type: "科技", cat: "acc", desc: "全球最大的電商與 AWS 雲端運算龍頭，無配息，全部獲利投入主業高速成長。", bg: "bg-purple-500/10 border-purple-500/20 text-purple-400" },
+            { ticker: "NVDA", name: "NVIDIA Corp (輝達)", type: "科技", cat: "acc", desc: "AI 晶片與 GPU 無可爭議的絕對霸主，高成長性龍頭股，股價上漲動力極強。", bg: "bg-purple-500/10 border-purple-500/20 text-purple-400" },
+            { ticker: "META", name: "Meta Platforms (臉書)", type: "科技", cat: "acc", desc: "全球社群媒體霸主（FB, IG, Threads），近年也開始加大投入 AI 與硬件研發。", bg: "bg-purple-500/10 border-purple-500/20 text-purple-400" },
+            { ticker: "TSLA", name: "Tesla, Inc. (特斯拉)", type: "科技/新能源", cat: "acc", desc: "全球電動車、自動駕駛與儲能先驅。股價波動劇烈，成長潛力與爭議並存。", bg: "bg-purple-500/10 border-purple-500/20 text-purple-400" },
+            { ticker: "AMD", name: "Advanced Micro Devices (超微)", type: "科技", cat: "acc", desc: "高效能處理器與晶片研發商，為輝達之外最強的 AI/伺服器晶片替代方案。", bg: "bg-purple-500/10 border-purple-500/20 text-purple-400" },
+            { ticker: "AVGO", name: "Broadcom Inc. (博通)", type: "科技", cat: "acc", desc: "全球網通半導體龍頭與客製化晶片 (ASIC) 霸王，兼具成長性與大方的增長式股息。", bg: "bg-purple-500/10 border-purple-500/20 text-purple-400" },
+            { ticker: "ASML", name: "ASML Holding (艾司摩爾)", type: "科技", cat: "acc", desc: "獨家供應高階光刻機 (EUV) 的歐洲科技明珠，全球半導體發展的唯一守門人。", bg: "bg-purple-500/10 border-purple-500/20 text-purple-400" },
+            { ticker: "V", name: "Visa Inc. (金融科技)", type: "金融科技", cat: "acc", desc: "全球最大的信用卡與支付通路網絡。坐享每筆消費的抽成，擁有驚人的高毛利率。", bg: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" }
+        ];
+
+        // 切換主要分頁
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'shadow');
+                btn.classList.add('text-slate-400', 'hover:text-slate-200');
+            });
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            activeBtn.classList.remove('text-slate-400', 'hover:text-slate-200');
+            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow');
+
+            if (tabId === 'stocks') {
+                renderStocks('all');
+            } else if (tabId === 'compound') {
+                calculateCompound();
+            }
+        }
+
+        // 渲染股票清單
+        function renderStocks(filterType) {
+            const grid = document.getElementById('stocks-grid');
+            grid.innerHTML = '';
+
+            const filtered = STOCKS_DB.filter(s => {
+                if (filterType === 'all') return true;
+                return s.cat === filterType;
+            });
+
+            filtered.forEach((stock, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-[#151b26] border border-slate-800/80 rounded-2xl p-5 hover:border-slate-700 transition duration-300 flex flex-col justify-between hover:scale-[1.01]";
+                
+                // 配息與累積標籤色
+                const catTag = stock.cat === 'dist' 
+                    ? '<span class="bg-emerald-500/10 text-emerald-400 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">穩定配息 Dist</span>'
+                    : '<span class="bg-blue-500/10 text-blue-400 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider">資產成長 Acc</span>';
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <span class="text-xl font-black text-white tracking-wide">${stock.ticker}</span>
+                                <span class="block text-slate-400 text-xs mt-0.5">${stock.name}</span>
+                            </div>
+                            <div class="flex flex-col items-end gap-1">
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded ${stock.bg}">${stock.type}</span>
+                                ${catTag}
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed mt-4 mb-4 border-t border-slate-800/50 pt-3">${stock.desc}</p>
+                    </div>
+                    <div class="flex items-center justify-between text-[11px] bg-[#0b0e14] p-2.5 rounded-xl border border-slate-800">
+                        <span class="text-slate-400">Trading 212：</span>
+                        <span class="text-emerald-400 font-bold flex items-center gap-1">
+                            <span class="inline-block w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
+                            支援零碎股 (Fractional)
+                        </span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // 股票篩選按鈕樣式切換
+        function filterStocks(type) {
+            document.querySelectorAll('.stock-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'shadow');
+                btn.classList.add('text-slate-400', 'hover:text-slate-200');
+            });
+
+            const activeBtn = document.getElementById(`filter-${type}`);
+            activeBtn.classList.remove('text-slate-400', 'hover:text-slate-200');
+            activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow');
+
+            renderStocks(type);
+        }
+
+        // 更新檢核表計數
+        function updateChecklist() {
+            const checkboxes = document.querySelectorAll('.checklist-item');
+            let completed = 0;
+            checkboxes.forEach(box => {
+                if (box.checked) {
+                    completed++;
+                    box.closest('label').classList.remove('border-slate-800/80');
+                    box.closest('label').classList.add('border-blue-500/40', 'bg-blue-950/10');
+                } else {
+                    box.closest('label').classList.add('border-slate-800/80');
+                    box.closest('label').classList.remove('border-blue-500/40', 'bg-blue-950/10');
+                }
+            });
+            document.getElementById('completed-count').innerText = completed;
+        }
+
+        // 複利計算功能
+        function calculateCompound() {
+            const monthly = parseFloat(document.getElementById('input-monthly').value);
+            const years = parseInt(document.getElementById('input-years').value);
+            const ratePercent = parseFloat(document.getElementById('input-rate').value);
+            const divYieldPercent = parseFloat(document.getElementById('input-div-yield').value);
+
+            // 更新 UI 顯示的數值
+            document.getElementById('val-monthly').innerText = monthly;
+            document.getElementById('val-years').innerText = years;
+            document.getElementById('val-rate').innerText = ratePercent.toFixed(1);
+            document.getElementById('val-div-yield').innerText = divYieldPercent.toFixed(1);
+
+            // 本金總和
+            const principal = monthly * 12 * years;
+            document.getElementById('res-principal').innerText = principal.toLocaleString('en-GB');
+
+            // 1. Accumulating 複利計算法：完全以年化報酬率進行複利
+            const r_acc_monthly = (ratePercent / 100) / 12;
+            const n_months = years * 12;
+            let accTotal = 0;
+            for (let i = 0; i < n_months; i++) {
+                accTotal = (accTotal + monthly) * (1 + r_acc_monthly);
+            }
+
+            // 2. Distributing 計算法：
+            // 股息被直接領走，不加入本金再次投資。因此其資產本身複利率 = (年報酬率 - 股息殖利率)。
+            const growthRate = Math.max(0.5, ratePercent - divYieldPercent); // 最低確保有 0.5% 增長
+            const r_dist_monthly = (growthRate / 100) / 12;
+            let distAssetValue = 0;
+            let accumulatedDividends = 0;
+
+            for (let i = 0; i < n_months; i++) {
+                // 新加入本金
+                distAssetValue = (distAssetValue + monthly) * (1 + r_dist_monthly);
+                
+                // 每年配息一次，計算收到的股利 (簡化模擬：以當前資產規模乘以每月對應配息率)
+                accumulatedDividends += distAssetValue * ((divYieldPercent / 100) / 12);
+            }
+
+            // 最終拿回的資產 = 股票本身的帳面價值 (不含被領走花掉的股息)
+            const distTotal = distAssetValue; 
+
+            // 更新結果
+            document.getElementById('res-acc-total').innerText = Math.round(accTotal).toLocaleString('en-GB');
+            document.getElementById('res-dist-total').innerText = Math.round(distTotal).toLocaleString('en-GB');
+
+            // 更新進度條比例
+            const maxVal = Math.max(accTotal, distTotal);
+            const barAccPercent = (accTotal / maxVal) * 100;
+            const barDistPercent = (distTotal / maxVal) * 100;
+
+            document.getElementById('bar-acc').style.width = `${barAccPercent}%`;
+            document.getElementById('bar-dist').style.width = `${barDistPercent}%`;
+        }
+
+        // 初始化
+        window.onload = function() {
+            renderStocks('all');
+            calculateCompound();
+        };
+    </script>
+</body>
+</html>
