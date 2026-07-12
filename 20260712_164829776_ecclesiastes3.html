@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聖經陪讀者 - 傳道書三章職場與生活對照</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Noto Serif TC', 'serif'],
+                    },
+                    colors: {
+                        amber: {
+                            50: '#fefbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: rgba(156, 163, 175, 0.3);
+            border-radius: 20px;
+        }
+        .verse-segment {
+            transition: all 0.2s ease;
+        }
+        .verse-segment:hover {
+            background-color: rgba(251, 191, 36, 0.15);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        .season-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans min-h-screen selection:bg-amber-100 selection:text-amber-900 transition-colors duration-300 dark:bg-stone-900 dark:text-stone-100">
+
+    <!-- Header Navigation -->
+    <header class="border-b border-stone-200 dark:border-stone-800 bg-white/80 dark:bg-stone-950/80 backdrop-blur sticky top-0 z-50 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">📖</span>
+                <div>
+                    <h1 class="text-lg font-bold text-stone-900 dark:text-stone-50 font-serif">聖經陪讀者</h1>
+                    <p class="text-xs text-stone-500 dark:text-stone-400">傳道書 3 章：職場與生活互動對應儀</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-600 dark:text-stone-300 transition" id="theme-toggle-btn" title="切換主題">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Intro Banner with Bible Verses Intro -->
+        <div class="bg-gradient-to-r from-amber-700 to-amber-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl mb-8 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div class="relative z-10 max-w-3xl">
+                <span class="bg-amber-600/50 text-amber-100 text-xs px-2.5 py-1 rounded-full font-semibold uppercase tracking-wider">傳道書 Ecclesiastes 3:1-15</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-serif mt-3 mb-4 leading-tight">天下萬物都有定期，<br class="sm:hidden">凡事都有定時。</h2>
+                <p class="text-amber-100/90 text-sm sm:text-base leading-relaxed">
+                    在你的工作和生活中，你正處於哪個「定時」？我們透過精準核對的 <strong>CCB 當代譯本</strong> 與 <strong>NIV 英文聖經</strong>，帶你進行 1 對 1 的雙向精確對應。點擊左側經文中的子句，即可立即解鎖右側對應的季節，讓我們一同看見上帝在此時此刻為你預備的智慧。
+                </p>
+            </div>
+        </div>
+
+        <!-- Two Columns Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- LEFT PANEL: Interactive Scripture Parallel (5 Cols) -->
+            <section class="lg:col-span-5 bg-white dark:bg-stone-950 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm overflow-hidden flex flex-col h-[750px]">
+                <div class="p-4 border-b border-stone-100 dark:border-stone-800 bg-stone-50 dark:bg-stone-900 flex items-center justify-between">
+                    <h3 class="font-serif font-bold text-stone-950 dark:text-stone-50 flex items-center">
+                        <span class="mr-2 text-amber-700">◆</span>
+                        左篇：中英經文對應 (1-15 節)
+                    </h3>
+                    <span class="text-xs bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-200 px-2 py-0.5 rounded font-medium">CCB ｜ NIV</span>
+                </div>
+                
+                <!-- Scripture Parallel Scrollable Area -->
+                <div class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar" id="scripture-container">
+                    <!-- Script dynamically populates here to ensure accurate data structure and reactive highlights -->
+                </div>
+                <div class="p-3 bg-stone-50 dark:bg-stone-900 border-t border-stone-100 dark:border-stone-800 text-xs text-stone-500 dark:text-stone-400 text-center">
+                    💡 點選上方任何一句細分經文，右側分析儀將精準自動跳轉！
+                </div>
+            </section>
+
+            <!-- RIGHT PANEL: Interactive Analysis and Application (7 Cols) -->
+            <section class="lg:col-span-7 space-y-8">
+                
+                <!-- Toggle Context Selector -->
+                <div class="bg-white dark:bg-stone-950 rounded-2xl p-4 border border-stone-200 dark:border-stone-800 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-center sm:text-left">
+                        <h4 class="font-bold text-stone-900 dark:text-stone-100 text-sm">解讀切換：當前應用情境</h4>
+                        <p class="text-xs text-stone-500 dark:text-stone-400">點選切換「職場工作」或「個人生活」解讀</p>
+                    </div>
+                    <div class="bg-stone-100 dark:bg-stone-900 p-1 rounded-xl flex w-full sm:w-auto">
+                        <button onclick="setContext('work')" id="ctx-work-btn" class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center justify-center space-x-2 bg-white text-amber-900 shadow-sm">
+                            <span>💼</span> <span>職場工作 (Work)</span>
+                        </button>
+                        <button onclick="setContext('life')" id="ctx-life-btn" class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center justify-center space-x-2 text-stone-600 hover:text-stone-900 dark:text-stone-300 dark:hover:text-white">
+                            <span>🌱</span> <span>個人生活 (Life)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Interactive Wheel/Grid of Seasons -->
+                <div class="bg-white dark:bg-stone-950 rounded-2xl p-6 border border-stone-200 dark:border-stone-800 shadow-sm">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-serif font-bold text-lg text-stone-900 dark:text-stone-50">萬物定時：十四組對應儀 (無缺漏版)</h3>
+                        <span class="text-xs text-amber-700 dark:text-amber-400 font-semibold" id="current-pairing-title">出生 vs 死亡</span>
+                    </div>
+
+                    <!-- Contrasts grid select -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5 mb-6" id="contrasts-selector-grid">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <!-- Selected Season Details Card -->
+                    <div class="bg-amber-50/50 dark:bg-amber-950/20 rounded-xl p-5 border border-amber-100/80 dark:border-amber-900/30 transition-all duration-300" id="season-detail-card">
+                        <!-- Dynamic details populated by JS based on Selected Contrast & Context -->
+                    </div>
+                </div>
+
+                <!-- WORK SEASON DIAGNOSTIC TOOL -->
+                <div class="bg-gradient-to-br from-stone-900 to-stone-850 text-stone-100 rounded-2xl p-6 shadow-lg border border-stone-800">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="text-xl">📊</span>
+                        <div>
+                            <h3 class="font-serif font-bold text-lg text-stone-50">你的職場，目前處於哪個「大季節」？</h3>
+                            <p class="text-xs text-stone-400">誠實評估，掌握上帝在此時此刻為你預備的智慧</p>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Content -->
+                    <div id="diagnostic-quiz-container" class="space-y-4">
+                        <!-- Quiz Step dynamically loaded -->
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <!-- Footer / Vocab list / References -->
+        <footer class="mt-12 border-t border-stone-200 dark:border-stone-800 pt-8 pb-16 text-stone-500 dark:text-stone-400">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h5 class="font-bold text-stone-800 dark:text-stone-200 text-sm uppercase mb-3">誠實引用譯本 (核對無誤)</h5>
+                    <p class="text-xs leading-relaxed">
+                        中文經文：<strong>CCB 中文當代譯本</strong><br>
+                        英文經文：<strong>NIV</strong> (New International Version)
+                    </p>
+                </div>
+                <div>
+                    <h5 class="font-bold text-stone-800 dark:text-stone-200 text-sm uppercase mb-3">參考來源</h5>
+                    <p class="text-xs leading-relaxed">
+                        已通過 BibleGateway 官方授權原文全檢：
+                    </p>
+                    <div class="mt-2 space-y-1">
+                        <a href="https://www.biblegateway.com/passage/?search=Ecclesiastes+3&version=CCB" target="_blank" class="text-amber-700 dark:text-amber-400 hover:underline text-xs block truncate">https://www.biblegateway.com/passage/?search=Ecclesiastes+3&version=CCB</a>
+                        <a href="https://www.biblegateway.com/passage/?search=Ecclesiastes+3&version=NIV" target="_blank" class="text-amber-700 dark:text-amber-400 hover:underline text-xs block truncate">https://www.biblegateway.com/passage/?search=Ecclesiastes+3&version=NIV</a>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="font-bold text-stone-800 dark:text-stone-200 text-sm uppercase mb-3">詞彙對照</h5>
+                    <div class="grid grid-cols-2 gap-1 text-xs">
+                        <div>Ecclesiastes 傳道書</div>
+                        <div>Solomon 索羅門</div>
+                        <div>Sowing 播種季</div>
+                        <div>Harvesting 收割季</div>
+                        <div>Pruning 修剪季</div>
+                        <div>Resting 靜默季</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-stone-200 dark:border-stone-800 text-center text-xs">
+                <p>「祂使萬事各按其時變得美好。」 (傳道書 3:11) — 聖經陪讀者關心您的工作與生命。不說教，與你同行。</p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Notification Toast container -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 pointer-events-none"></div>
+
+    <!-- Script Block -->
+    <script>
+        // State variables
+        let currentContext = 'work'; // 'work' or 'life'
+        let currentContrastIndex = 1; // Default to "Born vs Die"
+        let activeVerseNumber = null;
+        let activeSegmentIndex = null;
+        let quizAnswers = {};
+
+        // Authentic Bible verses data (1-15) - CCB & NIV aligned exactly
+        const versesData = [
+            { 
+                num: 1, 
+                zh: "天下萬物都有定期，凡事都有定時。", 
+                en: "There is a time for everything, and a season for every activity under the heavens:", 
+                ref: "傳道書 3:1", 
+                segments: [] 
+            },
+            { 
+                num: 2, 
+                zh: "出生有時，死亡有時；耕種有時，拔出有時；", 
+                en: "a time to be born and a time to die, a time to plant and a time to uproot,", 
+                ref: "傳道書 3:2", 
+                segments: [
+                    { zh_sub: "出生有時，死亡有時；", en_sub: "a time to be born and a time to die,", contrastId: 1 },
+                    { zh_sub: "耕種有時，拔出有時；", en_sub: "a time to plant and a time to uproot,", contrastId: 2 }
+                ]
+            },
+            { 
+                num: 3, 
+                zh: "殺戮有時，醫治有時；拆毀有時，建造有時；", 
+                en: "a time to kill and a time to heal, a time to tear down and a time to build,", 
+                ref: "傳道書 3:3", 
+                segments: [
+                    { zh_sub: "殺戮有時，醫治有時；", en_sub: "a time to kill and a time to heal,", contrastId: 3 },
+                    { zh_sub: "拆毀有時，建造有時；", en_sub: "a time to tear down and a time to build,", contrastId: 4 }
+                ]
+            },
+            { 
+                num: 4, 
+                zh: "哭泣有時，歡笑有時；哀傷有時，雀躍有時；", 
+                en: "a time to weep and a time to laugh, a time to mourn and a time to dance,", 
+                ref: "傳道書 3:4", 
+                segments: [
+                    { zh_sub: "哭泣有時，歡笑有時；", en_sub: "a time to weep and a time to laugh,", contrastId: 5 },
+                    { zh_sub: "哀傷有時，雀躍有時；", en_sub: "a time to mourn and a time to dance,", contrastId: 6 }
+                ]
+            },
+            { 
+                num: 5, 
+                zh: "拋石有時，堆石有時；擁抱有時，避開有時；", 
+                en: "a time to scatter stones and a time to gather them, a time to embrace and a time to refrain from embracing,", 
+                ref: "傳道書 3:5", 
+                segments: [
+                    { zh_sub: "拋石有時，堆石有時；", en_sub: "a time to scatter stones and a time to gather them,", contrastId: 7 },
+                    { zh_sub: "擁抱有時，避開有時；", en_sub: "a time to embrace and a time to refrain from embracing,", contrastId: 8 }
+                ]
+            },
+            { 
+                num: 6, 
+                zh: "尋找有時，遺失有時；保存有時，丟棄有時；", 
+                en: "a time to search and a time to give up, a time to keep and a time to throw away,", 
+                ref: "傳道書 3:6", 
+                segments: [
+                    { zh_sub: "尋找有時，遺失有時；", en_sub: "a time to search and a time to give up,", contrastId: 9 },
+                    { zh_sub: "保存有時，丟棄有時；", en_sub: "a time to keep and a time to throw away,", contrastId: 10 }
+                ]
+            },
+            { 
+                num: 7, 
+                zh: "撕裂有時，縫合有時；沉默有時，發言有時；", 
+                en: "a time to tear and a time to mend, a time to be silent and a time to speak,", 
+                ref: "傳道書 3:7", 
+                segments: [
+                    { zh_sub: "撕裂有時，縫合有時；", en_sub: "a time to tear and a time to mend,", contrastId: 11 },
+                    { zh_sub: "沉默有時，發言有時；", en_sub: "a time to be silent and a time to speak,", contrastId: 12 }
+                ]
+            },
+            { 
+                num: 8, 
+                zh: "愛慕有時，憎惡有時；爭戰有時，和好有時。", 
+                en: "a time to love and a time to hate, a time for war and a time for peace.", 
+                ref: "傳道書 3:8", 
+                segments: [
+                    { zh_sub: "愛慕有時，憎惡有時；", en_sub: "a time to love and a time to hate,", contrastId: 13 },
+                    { zh_sub: "爭戰有時，和好有時。", en_sub: "a time for war and a time for peace.", contrastId: 14 }
+                ]
+            },
+            { num: 9, zh: "那麼，人勞碌做工有什麼益處呢？", en: "What do workers gain from their toil?", ref: "傳道書 3:9", segments: [] },
+            { num: 10, zh: "我察覺上帝給世人重擔，使他們忙碌不休。", en: "I have seen the burden God has laid on the human race.", ref: "傳道書 3:10", segments: [] },
+            { num: 11, zh: "祂使萬事各按其時變得美好，又把永恆的意識放在人心裡，人卻不能測透上帝從始至終的作為。", en: "He has made everything beautiful in its time. He has also set eternity in the human heart; yet no one can fathom what God has done from beginning to end.", ref: "傳道書 3:11", segments: [] },
+            { num: 12, zh: "我認識到，人生在世沒有什麼比歡樂、享受更好。", en: "I know that there is nothing better for people than to be happy and to do good while they live.", ref: "傳道書 3:12", segments: [] },
+            { num: 13, zh: "人人都該吃喝、享受自己勞苦的成果，這是上帝的恩賜。", en: "That each of them may eat and drink, and find satisfaction in all their toil—this is the gift of God.", ref: "傳道書 3:13", segments: [] },
+            { num: 14, zh: "我知道，上帝所做的都會存到永遠，誰也不能增減。祂這樣安排是叫人敬畏祂。", en: "I know that everything God does will endure forever; nothing can be added to it and nothing taken from it. God does it so that people will fear him.", ref: "傳道書 3:14", segments: [] },
+            { num: 15, zh: "現在的事並不是新事，未來的事也早已發生過。上帝使過去的事再次出現。", en: "Whatever is has already been, and what will be has been before; and God will call the past to account.", ref: "傳道書 3:15", segments: [] }
+        ];
+
+        // Core contrasts mapping (Interactive Seasons) - All 14 contrasts fully mapped to authentic CCB
+        const contrastsData = {
+            1: {
+                id: 1,
+                emoji_a: "👶", emoji_b: "💀",
+                zh_a: "出生", zh_b: "死亡",
+                en_a: "Born", en_b: "Die",
+                verse: "傳道書 3:2",
+                work: {
+                    title: "專案與創意的起點與終點 (Inception vs. Sunsetting)",
+                    story: "「出生」代表新專案或創意想法的孵化，需要熱情與容許試錯的勇氣；「死亡」則是當產品不再合乎市場效益、虧損嚴重時，懂得體面而堅定地結束。好的職場人能給予失敗的嘗試一個得體的葬禮，才能為下一次「出生」空出資源。",
+                    todo: [
+                        "新專案立項初期，配置合適資源並建立健康的試錯緩衝。",
+                        "對於已經連年虧損、毫無市場前景的舊業務果斷停損，釋放人力。"
+                    ],
+                    avoid: [
+                        "出於『絕不允許失敗』的恐懼，扼殺了創新型小團隊的生存權。",
+                        "死守面子與沉沒成本，遲遲不願給不賺錢的專案『下葬』。"
+                    ]
+                },
+                life: {
+                    title: "生命階段的起步與告別 (New Stage vs. Saying Farewell)",
+                    story: "人生有迎來全新角色的狂喜（如結婚、生子、升學或搬遷新居），但也有面臨摯愛親人離去、或生命某一階段不可逆告別的深沉悲傷。體悟「死亡有時」，我們才能更好地活在當下，擁抱每個微小的團聚。",
+                    todo: [
+                        "主動慶祝生活的新里程碑，全情投入上帝預備的新起點。",
+                        "在面臨喪失或告別時，誠實面對悲傷，給自己的靈魂療傷的空間。"
+                    ],
+                    avoid: [
+                        "麻木度日，直到美好事物或親人離去後才感到無窮的懊悔。",
+                        "企圖用工作狂、酒精等逃避傷痛，不肯面對生命中「死亡」的季節。"
+                    ]
+                }
+            },
+            2: {
+                id: 2,
+                emoji_a: "🌱", emoji_b: "🍂",
+                zh_a: "耕種", zh_b: "拔出",
+                en_a: "Plant", en_b: "Uproot",
+                verse: "傳道書 3:2",
+                work: {
+                    title: "基礎深耕與策略轉型 (Incubation vs. Re-allocation)",
+                    story: "「耕種」是下足基本功、默默投入不被看見的漫長地基建設；「拔出」則是當舊有系統已定型或外在環境生變時，必須毅然重新洗牌、升級賽道。這需要我們在默默累積與勇於變革之間保持動態平衡。",
+                    todo: [
+                        "在新入職或新任務時，耐得住寂寞去學習核心技術，不要急著第一天就要立功。",
+                        "在外部科技革命（如 AI）到來時，勇於將過往賴以為生的老舊技能『拔出』，積極重塑自我。"
+                    ],
+                    avoid: [
+                        "才剛在土地裡埋下種子，就天天挖出來看它到底有沒有發芽。",
+                        "在核心業務已經萎縮、產業衰退時，仍抱殘守缺不肯進行『拔出』的自我重組。"
+                    ]
+                },
+                life: {
+                    title: "深耕關係與毅然放手 (Deep Cultivation vs. Graceful Leaving)",
+                    story: "親密關係、友誼和健康的習慣需要每一天「耕種」與耐心的陪伴；但當某些依賴、不再適合的生活圈或有毒的社交阻礙你的成長時，你需要擁有主動把依附根系「拔出」並前往新土地的智慧與勇氣。",
+                    todo: [
+                        "每天花費精華、無干擾的時間，深切傾聽伴侶與家人的心聲。",
+                        "面對長久阻礙自己人格成長的舒適圈或不良關係，堅定地將自己連根遷出。"
+                    ],
+                    avoid: [
+                        "在關係裡只知索取卻不想花心思灌溉，任由植物枯萎。",
+                        "因為抗拒『拔出』的拉扯疼痛，而繼續待在對自己充滿毒害的環境中。"
+                    ]
+                }
+            },
+            3: {
+                id: 3,
+                emoji_a: "⚔️", emoji_b: "🩹",
+                zh_a: "殺戮", zh_b: "醫治",
+                en_a: "Kill", en_b: "Heal",
+                verse: "傳道書 3:3",
+                work: {
+                    title: "組織精簡與動盪重建 (Restructuring vs. Cultural Healing)",
+                    story: "「殺戮」在職場中指陣痛期的大刀闊斧改革，如裁撤低效部門、與不誠實的合作商終止合約；「醫治」則是重組風暴過後，及時重建團隊士氣、修復內部信任、給予留任同仁安全感的文化療癒期。",
+                    todo: [
+                        "執行必要的人員淘汰時，完全依法且保有對人的最大體面、尊重和感謝。",
+                        "在風波結束後，花時間與團隊做透明、誠實的長談，撫平大家的不安。"
+                    ],
+                    avoid: [
+                        "在組織中姑息不守誠信、嚴重拖後腿的人，導致整體團隊一起沉沒。",
+                        "大刀改革後，當作什麼事都沒發生過，強壓團隊在不安中超負荷工作。"
+                    ]
+                },
+                life: {
+                    title: "斬斷不良依附與身心重建 (Severing Toxicity vs. Inner Healing)",
+                    story: "生活中我們需要「殺戮」那些長期蠶食靈魂的壞習慣（如拖延症、熬夜）或吸血般的惡性關係；在切斷不健康的連結後，接下來要給自己時間，讓內在傷口慢慢結痂、迎接身心的「醫治」與康復。",
+                    todo: [
+                        "勇敢封鎖或淡出那些不斷對你進行情感勒索、打壓你自尊的人。",
+                        "多接觸溫暖、富含營養的人事物，藉由諮商、閱讀或信仰團體讓受傷的身心康復。"
+                    ],
+                    avoid: [
+                        "因為害怕孤單寂寞，就不斷對身邊的「吸血關係」妥協，拒絕痛下殺手。",
+                        "在重大情感傷害或失戀後，不給自己時間沉澱醫治，就匆忙開啟一段混亂的新生活。"
+                    ]
+                }
+            },
+            4: {
+                id: 4,
+                emoji_a: "🔨", emoji_b: "🏗️",
+                zh_a: "拆毀", zh_b: "建造",
+                en_a: "Tear down", en_b: "Build",
+                verse: "傳道書 3:3",
+                work: {
+                    title: "破除官僚體制與重塑高能流程 (Disrupting Bureaucracy vs. Infrastructure)",
+                    story: "有時唯有全面「拆毀」過時繁瑣、層層呈報卻無人負責的官僚體制，才能在空出的架構上，重新「建造」敏捷、以 AI 為輔助且資訊高度透明的現代高能工作流。不破，則不立。",
+                    todo: [
+                        "敢於對公司不合時宜、僅流於形式的文件和繁複蓋章審核提出質疑和簡化提議。",
+                        "當舊流程被打破時，自告奮勇擔任建立新 SOP、培訓同仁使用新效率工具的建設者。"
+                    ],
+                    avoid: [
+                        "只是隨口抱怨、拼命嘲諷管理制度（只破不立），卻不肯出力參與更好的流程規劃。",
+                        "在老舊的低效管理邏輯和不穩定的地基上，盲目擴增人力和業務高樓。"
+                    ]
+                },
+                life: {
+                    title: "拆解虛假防衛與塑造真實品格 (Deconstructing Ego vs. Character Building)",
+                    story: "當生命遭遇挫折打擊時，它會「拆毀」我們自以為是的高傲、名牌堆砌的虛假面具；在這一片自尊廢墟中，上帝的目的不是毀滅，而是要為我們「建造」一個更具韌性、誠實且溫柔的真實人格。",
+                    todo: [
+                        "感謝生命中的逆境，幫助自己認清誰才是患難見真情的真朋友，剔除無效虛華。",
+                        "主動投入每天閱讀、早睡早起、持之以恆的小紀律中，重建生活的精神地基。"
+                    ],
+                    avoid: [
+                        "在生活、關係破裂時，沉溺於自怨自艾，深信自己再也沒有能力站起來了。",
+                        "虛榮心作祟，在舊的面具破碎後，又匆忙編造出另一個更沉重的謊言面具來掩蓋脆弱。"
+                    ]
+                }
+            },
+            5: {
+                id: 5,
+                emoji_a: "😢", emoji_b: "😊",
+                zh_a: "哭泣", zh_b: "歡笑",
+                en_a: "Weep", en_b: "Laugh",
+                verse: "傳道書 3:4",
+                work: {
+                    title: "坦然面對挫折與共享成果喜樂 (Debriefing Failures vs. Team Celebration)",
+                    story: "職場中不可能只有勝仗。當團隊面臨重大標案失守、重大 bug 爆發時，是坦然承認失誤並進行「哭泣」宣洩的修復季節；但只要同舟共濟，我們終會迎來簽下大合約、專案大獲成功而聚餐「歡笑」的時刻。",
+                    todo: [
+                        "面對重大的工作紕漏時，允許團隊釋放壓力，不做無謂的空洞樂觀與掩飾。",
+                        "獲得里程碑大勝時，真誠地讚美並具體肯定每一位基層同仁，共同慶祝勞碌的成果。"
+                    ],
+                    avoid: [
+                        "強推壓抑的『有毒正能量』文化，要求員工在遭遇巨大挫敗時也要帶著假笑工作。",
+                        "奪取團隊所有的功勞，把大勝歸功於自己的英明，把失誤甩鍋給底下的人。"
+                    ]
+                },
+                life: {
+                    title: "情緒的健康釋放與分享快樂 (Emotional Catharsis vs. Radiant Joy)",
+                    story: "上帝賦予我們淚腺與笑肌。流淚與「哭泣」是人體排解精神壓力、修復心靈的重要防禦機制；而「歡笑」則是靈魂的補藥。擁抱生活中有時陰、有時晴的天然季節，不要為自己的情緒感到羞恥。",
+                    todo: [
+                        "在感到無比委屈和壓力時，找個安全的地方或知心的朋友，痛快地哭一場。",
+                        "主動在日常中尋找小驚喜、幽默與溫馨，慷慨地對身邊的人展露燦爛的微笑。"
+                    ],
+                    avoid: [
+                        "長期壓抑悲傷，假裝自己無堅不摧，最後因情緒硬化而導致身心疾病。",
+                        "對他人的喜樂與成就感到嫉妒、說風涼話，無法體會真誠共享喜悅的美好。"
+                    ]
+                }
+            },
+            6: {
+                id: 6,
+                emoji_a: "🕯️", emoji_b: "💃",
+                zh_a: "哀傷", zh_b: "雀躍",
+                en_a: "Mourn", en_b: "Dance",
+                verse: "傳道書 3:4",
+                work: {
+                    title: "職業倦怠低谷與事業巔峰狂歡 (Burnout Recovery vs. Peak Performance)",
+                    story: "「哀傷」是指遭遇職業生涯的重大低谷、被迫失業或遭遇長期瓶頸而靈魂乾涸的低能量期；「雀躍」則是專案在市場上大放異彩、站在聚光燈下、職涯輕盈躍升的黃金高光時刻。不論哪個季節，都在神的掌握中。",
+                    todo: [
+                        "在面臨裁員或中年轉職低谷時，接受目前的『沉潛與低能量』，不要急著用高強度競爭證明自己。",
+                        "在職涯的高峰、拿下業界大獎時，帶著感恩與謙遜，像一個孩子般雀躍慶祝，並歸榮耀給身邊的人。"
+                    ],
+                    avoid: [
+                        "在身體發出極度倦怠的警訊時，依然強行打興奮劑加班，企圖強行跳舞而導致精神崩潰。",
+                        "在巔峰期變得目空一切，對底下的人頤指氣使，忘記這一切成就也離不開機遇和眾人的扶持。"
+                    ]
+                },
+                life: {
+                    title: "悲傷復原旅程與生命力的重新綻放 (Grief Processing vs. Embracing Joy)",
+                    story: "當遭遇失去健康、與摯愛死別或深沉的失落時，我們進入需要安靜「哀傷」的死蔭幽谷；但上帝應許，哀傷不會是永遠的終點。傷口癒合後，春雷會再次響起，引領我們的靈魂再次為了生命的美好而「雀躍」起舞。",
+                    todo: [
+                        "正視悲傷需要時間，不對自己說『你要趕快走出來』，允許自己的悲傷旅程走得慢一些。",
+                        "當春暖花開、心中再次有微風吹過時，答應自己重新去旅行、去嘗試新鮮事，大方慶祝重獲新生。"
+                    ],
+                    avoid: [
+                        "粗暴地縮短悲傷期，企圖用繁重的事務塞滿時間來麻痺對親人逝去的思念。",
+                        "在生活好轉、再次感到快樂時產生自我控訴的罪惡感，覺得對不起逝去的親友。"
+                    ]
+                }
+            },
+            7: {
+                id: 7,
+                emoji_a: "☄️", emoji_b: "🧱",
+                zh_a: "拋石", zh_b: "堆石",
+                en_a: "Scatter stones", en_b: "Gather stones",
+                verse: "傳道書 3:5",
+                work: {
+                    title: "大膽多元化試錯與核心資源聚焦 (Diversification vs. Resource Consolidation)",
+                    story: "「拋石」好比古代開墾荒野、向外扔出雜石，代表大膽多元地嘗試新商機、廣撒網、快速迭代；「堆石」則是將建材聚集起來蓋防禦塔、代表回防大本營、聚焦核心、全力把看家的本事做到最深邃。",
+                    todo: [
+                        "在新興業務趨勢尚未明朗前，以小成本在各渠道『拋石』，測試市場反應與數據反饋。",
+                        "當數據反饋出高回報方向時，收攏精力與資金，『堆石』打造一體化、難以超越的競爭壁壘。"
+                    ],
+                    avoid: [
+                        "在資源緊絀、極需突破時，不分青紅皂白一味盲目向四處撒網（拋石），導致滿盤皆空。",
+                        "不顧大環境變化，死守在一口乾涸的井裡堆石頭，拒絕對新機會進行哪怕一次小小的試探。"
+                    ]
+                },
+                life: {
+                    title: "主動探索世界與收斂內心堡壘 (Outward Exploration vs. Designing Inner Sanctuary)",
+                    story: "「拋石」是打破自己身邊的安逸圍牆，主動走向世界冒險、接觸新文化與新思維的擴展期；「堆石」則是收縮繁複的無效社交，安靜回歸自己的心靈，花時間建造穩固的生活規律、為靈魂構築避風港。",
+                    todo: [
+                        "在感到人生停滯時，逼自己跨出舒適圈，去上新課程、去從沒去過的地方走走，感受新鮮體驗。",
+                        "當感到社交過載、疲憊不堪時，減少應酬，回家打掃乾淨房間，給自己泡杯茶，堆聚內在的平靜力量。"
+                    ],
+                    avoid: [
+                        "為了虛無的『人脈』，不顧靈魂疲憊，每天盲目奔波在沒有深度對話的社交場景中（過度拋石）。",
+                        "把保護自己的石頭築成封閉自我的冰冷高牆，不允許任何人走進你的生活。"
+                    ]
+                }
+            },
+            8: {
+                id: 8,
+                emoji_a: "🤗", emoji_b: "🚶‍♂️",
+                zh_a: "擁抱", zh_b: "避開",
+                en_a: "Embrace", en_b: "Refrain",
+                verse: "傳道書 3:5",
+                work: {
+                    title: "跨團隊精誠合作與維持專業界線 (Synergy vs. Professional Boundary)",
+                    story: "「擁抱」代表部門之間高度信任、打破壁壘、精誠無間協同戰鬥的時刻；「避開」則是面對利益衝突、流程不合規或有毒的辦公室政治時，保持禮貌客觀、劃清界線，避免被拉下水混淆視聽。",
+                    todo: [
+                        "與值得信賴、高效率的合作部門共享資訊，主動承擔責任，創造加乘效應。",
+                        "面對試圖甩鍋、或是老想利用你討好別人的情緒化同事，保持冷靜專業、溫和地說不。"
+                    ],
+                    avoid: [
+                        "凡事只顧自己部門，防人像防賊一樣（拒絕擁抱），使得團隊溝通成本奇高無比。",
+                        "在職場上當老好人，為了人情和不想得罪人而妥協合規與專業原則，最終一起背黑鍋。"
+                    ]
+                },
+                life: {
+                    title: "親密依附與尊重個人邊界 (Intimate Connection vs. Respectful Distance)",
+                    story: "愛需要「擁抱」的季節——全然向對方敞開，給予結結實實的情感連結、安全感和親密支撐；但健康長遠的愛也需要「避開」的智慧——尊重伴侶與孩子在不同成長階段的獨立空間，克制越界的掌控慾望。",
+                    todo: [
+                        "對伴侶和孩子大方展示關愛、給予長久的眼神接觸、高質量的陪伴和真實的擁抱。",
+                        "當親友遇到低谷或想獨處時，退回合理的界線默默守候，不橫加干涉或強行指導。"
+                    ],
+                    avoid: [
+                        "把對親密家人的付出和陪伴當成理所當然的例行任務，冷冰冰缺乏溫度。",
+                        "以愛之名行極致的情緒勒索，想要介入、控制對方所有的隱私與決定。"
+                    ]
+                }
+            },
+            9: {
+                id: 9,
+                emoji_a: "🔍", emoji_b: "🛑",
+                zh_a: "尋找", zh_b: "遺失",
+                en_a: "Search", en_b: "Give up",
+                verse: "傳道書 3:6",
+                work: {
+                    title: "開拓新業務與戰略止損放棄 (Lead Generation vs. Cutting Sunk Costs)",
+                    story: "「尋找」是狼性十足地尋找新商機、爭取大客戶、研發突破性技術；「遺失（放棄）」則是當評估合約利益極度不平等、客戶態度極端惡劣或專案黑洞已無可挽回時，果斷認賠殺出，不再浪費一絲一毫的精力。",
+                    todo: [
+                        "每天主動用數據思維和好奇心，『尋找』優化目前工作流程的新方法或自動化軟體。",
+                        "為手上的專案設下明確的止損關鍵指標，一旦跨過紅線且經過調整仍無效，立即向管理層提報終止專案。"
+                    ],
+                    avoid: [
+                        "思想進入僵化怠惰期，對市場與科技的新脈動閉目塞聽，拒絕『尋找』任何可能的新方向。",
+                        "為顧及面子，把更多的研發經費、工程師資源繼續砸進已經注定死去的案子中。"
+                    ]
+                },
+                life: {
+                    title: "追求夢想與學會與遺憾妥協 (Chasing Higher Purpose vs. Surviving Loss with Peace)",
+                    story: "我們一生都在尋找愛、尊重和自身的永恆價值。但在這有缺憾的世界裡，我們注定無法握住一切。當命運告知某個理想或某段竭力挽回的感情真的無法開花結果時，承認它的「遺失」，並對著這段逝去釋懷，是極其高貴的成熟課。",
+                    todo: [
+                        "在體力、精力和年齡合適時，大膽主動去『尋找』自己生命的核心志業、多方探索。",
+                        "對於已經竭盡全力、如今已成事實的離別或錯過，在神面前合掌，深呼吸，對自己說：『辛苦了，我可以放下了。』"
+                    ],
+                    avoid: [
+                        "因為受過一次傷就提前在 20 幾歲躺平，對生活所有美好的人事物失去尋找的渴望。",
+                        "在多年前已經無法挽救的重大遺憾中反覆糾纏、自我折磨、甚至對他人進行病態的指責。"
+                    ]
+                }
+            },
+            10: {
+                id: 10,
+                emoji_a: "📦", emoji_b: "🗑️",
+                zh_a: "保存", zh_b: "丟棄",
+                en_a: "Keep", en_b: "Throw away",
+                verse: "傳道書 3:6",
+                work: {
+                    title: "核心資產沉澱與形式主義斷捨離 (IP Retention vs. Eradicating Inefficient Workflows)",
+                    story: "「保存」是將公司寶貴的智慧財產、關鍵專利、優良的品牌信譽用心沉澱下來；「丟棄」則是對老舊、無意義、疊床架屋的行政公文，以及流於形式的無效長會，進行大掃除式地精簡，以釋放團隊真正的高能產值。",
+                    todo: [
+                        "每完成一個大專案，將精華與避坑指南系統性記錄，『保存』於團隊共享知識庫中。",
+                        "每月定期發起工作大掃除，主動砍掉沒人真正會看的繁瑣報表，把精力花在真正創造價值的事上。"
+                    ],
+                    avoid: [
+                        "對團隊最重要的核心代碼、專利或商業合約缺乏基本的安全意識、流失嚴重。",
+                        "像工作囤積狂一樣，保留十年前的老舊操作流程，讓新員工在繁文縟節中窒息。"
+                    ]
+                },
+                life: {
+                    title: "保守心靈與情緒與物質的斷捨離 (Guarding the Soul vs. Letting Go of Mental Garbage)",
+                    story: "『你要保守你心，勝過保守一切，因為一生的果效是由心發出。』有些基本的做人底線、良善、珍貴的回憶和健康習慣，值得拼死「保存」；而有些累積多年的記恨、攀比、虛榮心與塞滿房間的無用雜物，必須像垃圾一樣毫不留情地「丟棄」。",
+                    todo: [
+                        "無論外面有多浮躁投機，守護你靈魂深處那一小塊誠實、正義和同理別人的底線。",
+                        "定期清空衣櫃裡不再穿的舊衣物、並同步整理心靈：將心頭對某人的怨恨與攀比帶來的焦慮一併丟棄。"
+                    ],
+                    avoid: [
+                        "隨波逐流，在環境黑暗時輕易將自己最寶貴的誠信與善良『丟棄』，換取眼前的苟且利益。",
+                        "把別人幾年前無心說過傷害你的話語『保存』在心中最顯眼的地方，天天拿出來折磨自己。"
+                    ]
+                }
+            },
+            11: {
+                id: 11,
+                emoji_a: "⚡", emoji_b: "🧵",
+                zh_a: "撕裂", zh_b: "縫合",
+                en_a: "Tear", en_b: "Mend",
+                verse: "傳道書 3:7",
+                work: {
+                    title: "揭露體制弊端與客戶信任重建 (Exposing Fraud vs. Retaining Troubled Accounts)",
+                    story: "不合稀泥。「撕裂」代表在發現組織有嚴重損害公司或客戶利益的貪腐、作假帳行為時，不當溫水青蛙，敢於撕開虛假和平的面紗；「縫合」則是在與老客戶產生嚴重摩擦與誤會後，主動誠實登門道歉、提出補償、重建長遠信任。",
+                    todo: [
+                        "當發現工作中有嚴重不合規、欺騙消費者的現象時，勇敢且智慧地透過機制進行反饋與撕裂假象。",
+                        "面對因技術 bug 遭受損失而狂怒的重要客戶，不甩鍋、主動坦誠溝通，並拿出解決誠意『縫合』裂痕。"
+                    ],
+                    avoid: [
+                        "為維持表面的『一團和氣』，對底下人欺上瞞下、嚴重違背誠信道德的行徑睜一隻眼閉一隻眼。",
+                        "在合作出了大問題後一味狡辯、推卸責任，最終讓長年累積的重要合作夥伴徹底與你決裂。"
+                    ]
+                },
+                life: {
+                    title: "勇敢劃清界線與主動尋求和解 (Boundary Detachment vs. Active Reconciling)",
+                    story: "生命中有些不得不「撕裂」的時刻——當親密或朋友關係退化到嚴重的肢體/精神虐待、或無休止的吸血勒索時，你必須果斷撕裂它以求自保；而在家庭摩擦、日常口角等可以挽回的情況下，主動「縫合」誤會，是愛最崇高的表現。",
+                    todo: [
+                        "對持續對你進行精神霸凌、榨乾你積蓄的所謂『損友』或有毒關係，勇敢剪斷，不可心軟。",
+                        "和家人發生口角陷入冷戰時，願意在晚上下班帶一份對方愛吃的甜點回家，給彼此一個溫馨的修補台階。"
+                    ],
+                    avoid: [
+                        "在遭受嚴重關係霸凌時，出於懦弱和『以和為貴』的錯誤概念，不敢撕裂不健康的關係。",
+                        "因為面子問題不肯低頭認錯，甚至在微小的日常摩擦後，動輒用『拉黑』和極冷漠的態度封死與家人對話的渠道。"
+                    ]
+                }
+            },
+            12: {
+                id: 12,
+                emoji_a: "🤐", emoji_b: "🗣️",
+                zh_a: "沉默", zh_b: "發言",
+                en_a: "Silent", en_b: "Speak",
+                verse: "傳道書 3:7",
+                work: {
+                    title: "冷靜觀察傾聽與關鍵時刻展現領導力 (Active Observation vs. Decisive Action/Speaking Up)",
+                    story: "「沉默」是初入新領域、或是在局勢混沌不明、會議爭吵不休時，閉上嘴巴，冷靜收集數據、深切體察客戶的核心痛點；「發言」則是當方向分析完畢、或團隊面臨重大危機與決策跑偏時，條理清晰、底氣十足地站出來提出你的專業引導。",
+                    todo: [
+                        "新入職新崗位或接手不熟悉專案的前三個月，保持謙虛低調、多問、多做筆記，在聆聽中理清脈絡。",
+                        "當會議方向出現明顯邏輯漏洞、或看見公司正面臨致命決策時，做好完善簡報，自信而堅定地在會議中『發言』。"
+                    ],
+                    avoid: [
+                        "什麼基本情況都沒搞懂，就急著在主管和客戶面前發表長篇大論、搶風頭、提出空洞的建議。",
+                        "當看見底下的實習生、同仁遭受嚴重的不公對待或言語霸凌時，選擇明哲保身，自私地保持死寂般的沉默。"
+                    ]
+                },
+                life: {
+                    title: "同理無聲陪伴與用愛心說實話 (Empathic Presence vs. Gentle Truth-telling)",
+                    story: "在關係中，我們常常太急著當『導師』給意見，卻忘了最高品質的愛，往往是不帶評判、全然接納的「沉默」傾聽與陪伴。當我們真的需要「發言」時，要學習「用愛心說誠實話」——不帶諷刺、不帶挖苦，只說建立生命、給人希望的話。",
+                    todo: [
+                        "當朋友找你訴說失業或生活的痛苦時，合上你想指點人生的嘴，溫柔地拍拍他：『我聽著，我在這裡。』",
+                        "在伴侶的生活方式出現嚴重健康危機時，不要冷嘲熱諷，而是用溫柔、帶著深切愛意與對未來的期盼，認真和對方談一次。"
+                    ],
+                    avoid: [
+                        "在和朋友聊天時，總是強行打斷對方、把話題扯回自己身上展現優越感，不給人說完的空間。",
+                        "在憤怒或情緒激動時，用最刻薄、最能刺痛對方軟肋的惡毒語言（如『你這輩子也就這樣了』）去宣洩不滿。"
+                    ]
+                }
+            },
+            13: {
+                id: 13,
+                emoji_a: "💖", emoji_b: "🖤",
+                zh_a: "愛慕", zh_b: "憎惡",
+                en_a: "Love", en_b: "Hate",
+                verse: "傳道書 3:8",
+                work: {
+                    title: "熱愛專業價值與鄙棄不道德手段 (Passion for Professional Excellence vs. Abhorrence of Unethical Practice)",
+                    story: "「愛慕」是指對自己的工作、專業技術與能給客戶帶來的便利抱持純粹的自豪與服務熱誠；「憎惡」則是在面對職場霸凌、排擠弱小、吃回扣、對消費者虛假宣傳等惡劣行徑時，在靈魂深處保持絕對的厭惡，絕不妥協同流合汙。",
+                    todo: [
+                        "找到你工作中最能實質幫助到別人的那個點（如程式能幫人省時間、設計能帶人美感），帶著愛與熱忱將其磨練到極致。",
+                        "當面對不實廣告、欺瞞消費者以賺取暴利的提議時，內心保持強烈的道德『憎惡』，堅決不當共犯。"
+                    ],
+                    avoid: [
+                        "把工作當作純粹賺錢受刑的漫長煎熬，每天帶著滿滿的怨恨敷衍了事，折磨自己也折磨同事。",
+                        "為了個人利益，對職場中明顯發生的性騷擾、利益輸送假裝看不見，用冷漠滋養了邪惡。"
+                    ]
+                },
+                life: {
+                    title: "培育愛的能力與痛恨不公義 (Nurturing Pure Love vs. Active Standing Against Injustice)",
+                    story: "真正的愛必定伴隨對傷害與邪惡的「憎惡」。若我們「愛慕」世界的美好、幼童的純真與社會的誠信，那麼當我們看見剝削弱小、造謠抹黑與虛偽欺騙時，我們心中必然會燃起正義的憎惡。沒有正義底線的愛，只是一味軟弱妥協。",
+                    todo: [
+                        "主動付出溫暖，用微小的好意（如幫鄰居開門、關心獨居老人）去愛身邊不完美的人。",
+                        "當在社交媒體或日常生活中看見集體跟風造謠、網暴某個個體時，保持清醒，對惡劣行徑抱持憎惡，不當傳謠工具。"
+                    ],
+                    avoid: [
+                        "在人際交往中，戴上面具、處處算計得失、不敢付出自己真心和純粹的愛慕。",
+                        "看見不公義的事情、霸凌的場面時變得麻木與冷血，甚至加入大眾嘲諷受害者，喪失了對『惡』基本的憎惡。"
+                    ]
+                }
+            },
+            14: {
+                id: 14,
+                emoji_a: "🛡️", emoji_b: "🕊️",
+                zh_a: "爭戰", zh_b: "和好",
+                en_a: "War", en_b: "Peace",
+                verse: "傳道書 3:8",
+                work: {
+                    title: "市場紅海激烈競爭與建立戰略和諧同盟 (Intense Market Battle vs. Strategic Partnership/Win-Win Alliance)",
+                    story: "「爭戰」是指在商務競爭或提案競爭中，面對強悍的對手，必須拿出最高專注力、狼性拼搏精神，全力打贏陣地戰；「和好」則是當市場進入飽和期、雙方發現繼續惡性削價只會兩敗俱傷時，主動尋求跨界戰略結盟，共同做大市場。",
+                    todo: [
+                        "在面對關乎公司存亡的重要競標時，做足對手功課、精準優化產品，拿出全副武裝的『爭戰』決心奮戰到底。",
+                        "在適當時機，主動尋求與同行進行技術、通路或專利的互利合作，實現雙贏，得享業界和諧。"
+                    ],
+                    avoid: [
+                        "在關係生存的硬仗面前，懦弱退縮、不戰而降、自我懷疑。",
+                        "因為個人意氣之爭或歷史恩怨，將商戰降格為互相抹黑、造謠、最終同歸於盡的惡性死鬥。"
+                    ]
+                },
+                life: {
+                    title: "與困境搏鬥與得享心靈平安 (Combatting Adversity vs. Soul Serenity)",
+                    story: "生命中有時會遭遇突如其來的財務風暴、疾病襲擊、或是內心鋪天蓋地的焦慮恐懼，那是穿戴好精神盔甲、進行頑強搏鬥的「爭戰」季節；但上帝最終的旨意是讓我們得享「和好」與深沉的靈魂寧靜，那是不再與命運硬頂、與自己和上帝和解的平靜安息。",
+                    todo: [
+                        "當遭遇心理焦慮或突來的厄運時，拿出鋼鐵般的勇氣，將其當作磨練心靈肌肉的『爭戰』，不輕言倒下。",
+                        "危機平息後，學習放開緊繃的雙手、放平肩膀、每天花十分鐘安靜感恩，得享心靈深處的平安與自在。"
+                    ],
+                    avoid: [
+                        "遇到生活挫折就一味抱怨命運、不戰而退，輕易繳械投降。",
+                        "風暴已經平息、外在環境已經安全了，心中卻依舊緊繃、反覆假想敵人，不給自己的靈魂任何享受平安的機會。"
+                    ]
+                }
+            }
+        };
+
+        // Initialize App
+        window.onload = function () {
+            renderScripturePanel();
+            renderContrastsSelector();
+            selectContrast(1); // Default to Born vs Die (1)
+            initDiagnosticQuiz();
+        };
+
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            const btn = document.getElementById('theme-toggle-btn');
+            
+            if (isDark) {
+                document.body.classList.remove('bg-stone-50', 'text-stone-800');
+                document.body.classList.add('bg-stone-900', 'text-stone-100');
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>`;
+                showToast("已切換為深色沈思模式 🌙");
+            } else {
+                document.body.classList.remove('bg-stone-900', 'text-stone-100');
+                document.body.classList.add('bg-stone-50', 'text-stone-800');
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>`;
+                showToast("已切換為暖色明朗模式 ☀️");
+            }
+        }
+
+        // Render Scriptures Panel with precise interactive sub-segments (No omission!)
+        function renderScripturePanel() {
+            const container = document.getElementById('scripture-container');
+            container.innerHTML = '';
+
+            versesData.forEach(item => {
+                const hasSegments = item.segments.length > 0;
+                const verseDiv = document.createElement('div');
+                verseDiv.id = `verse-item-${item.num}`;
+                verseDiv.className = `p-3 rounded-xl border transition-all duration-300 border-transparent dark:bg-stone-900/30`;
+
+                let zhContentHtml = '';
+                if (hasSegments) {
+                    // Split the verse into separate clickable segments
+                    item.segments.forEach((seg, idx) => {
+                        zhContentHtml += `
+                            <span onclick="triggerSegment(${item.num}, ${idx}, ${seg.contrastId})" 
+                                  id="verse-seg-${item.num}-${idx}" 
+                                  class="verse-segment px-1 rounded cursor-pointer font-serif font-semibold text-stone-900 dark:text-stone-100 block sm:inline mr-1"
+                                  title="點選解鎖右側：${contrastsData[seg.contrastId].zh_a} vs ${contrastsData[seg.contrastId].zh_b}">
+                                ${seg.zh_sub}
+                            </span>
+                        `;
+                    });
+                } else {
+                    zhContentHtml = `<span class="font-serif font-semibold text-stone-900 dark:text-stone-100 leading-relaxed text-[15px]">${item.zh}</span>`;
+                }
+
+                verseDiv.innerHTML = `
+                    <div class="flex items-start space-x-2">
+                        <span class="text-xs font-bold text-amber-700/80 dark:text-amber-300 bg-amber-100/60 dark:bg-amber-950 px-1.5 py-0.5 rounded mt-0.5">${item.num}</span>
+                        <div class="flex-1 space-y-1">
+                            <div class="leading-relaxed text-[15px]">
+                                ${zhContentHtml}
+                            </div>
+                            <p class="text-stone-500 dark:text-stone-400 font-sans text-xs leading-normal">${item.en}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(verseDiv);
+            });
+        }
+
+        // Handle Segment Trigger from left panel
+        function triggerSegment(verseNum, segIndex, contrastId) {
+            activeVerseNumber = verseNum;
+            activeSegmentIndex = segIndex;
+            
+            selectContrast(contrastId);
+            highlightVerseAndSegment(verseNum, segIndex);
+            
+            const contrast = contrastsData[contrastId];
+            showToast(`已鎖定第 ${verseNum} 節：${contrast.zh_a} vs ${contrast.zh_b} 🎯`);
+        }
+
+        // Highlight selected verse and segment
+        function highlightVerseAndSegment(verseNum, segIndex) {
+            // Reset all highlights
+            versesData.forEach(item => {
+                const el = document.getElementById(`verse-item-${item.num}`);
+                if (el) {
+                    el.classList.remove('bg-amber-50/50', 'border-amber-200', 'dark:border-amber-900/50', 'shadow-sm');
+                }
+                if (item.segments.length > 0) {
+                    item.segments.forEach((seg, sIdx) => {
+                        const sEl = document.getElementById(`verse-seg-${item.num}-${sIdx}`);
+                        if (sEl) {
+                            sEl.classList.remove('bg-amber-200/40', 'dark:bg-amber-900/50', 'text-amber-900', 'dark:text-amber-100', 'ring-1', 'ring-amber-300');
+                        }
+                    });
+                }
+            });
+
+            // Set active parent box
+            const activeParent = document.getElementById(`verse-item-${verseNum}`);
+            if (activeParent) {
+                activeParent.classList.add('bg-amber-50/30', 'border-amber-200/50', 'dark:border-amber-900/20');
+            }
+
+            // Set active subsegment
+            const activeSeg = document.getElementById(`verse-seg-${verseNum}-${segIndex}`);
+            if (activeSeg) {
+                activeSeg.classList.add('bg-amber-200/40', 'dark:bg-amber-900/50', 'text-amber-900', 'dark:text-amber-100', 'ring-1', 'ring-amber-300');
+                activeSeg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // Render 14 grid buttons for selecting contrasts (No omissions, perfectly responsive)
+        function renderContrastsSelector() {
+            const container = document.getElementById('contrasts-selector-grid');
+            container.innerHTML = '';
+
+            Object.values(contrastsData).forEach(item => {
+                const btn = document.createElement('button');
+                btn.id = `contrast-btn-${item.id}`;
+                btn.onclick = () => {
+                    selectContrast(item.id);
+                    
+                    // Automatically find corresponding subsegment and highlight it
+                    let found = false;
+                    for (let v of versesData) {
+                        if (v.segments.length > 0) {
+                            for (let sIdx = 0; sIdx < v.segments.length; sIdx++) {
+                                if (v.segments[sIdx].contrastId === item.id) {
+                                    highlightVerseAndSegment(v.num, sIdx);
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (found) break;
+                    }
+                };
+                btn.className = `season-btn p-2 rounded-xl border text-left transition-all duration-300 flex flex-col justify-between h-[82px] ${
+                    currentContrastIndex === item.id 
+                        ? 'bg-amber-700 border-amber-800 text-white shadow-md shadow-amber-700/20 dark:bg-amber-600 dark:border-amber-700' 
+                        : 'bg-stone-50 hover:bg-stone-100 dark:bg-stone-900 dark:hover:bg-stone-850 border-stone-200 dark:border-stone-800 text-stone-800 dark:text-stone-100'
+                }`;
+
+                btn.innerHTML = `
+                    <div class="flex justify-between items-center w-full">
+                        <span class="text-[9px] font-semibold opacity-75">${item.verse}</span>
+                        <span class="text-xs">${item.emoji_a}${item.emoji_b}</span>
+                    </div>
+                    <div class="font-serif font-bold text-xs truncate mt-1 w-full text-center">
+                        ${item.zh_a} vs ${item.zh_b}
+                    </div>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        // Change Context (Work / Life)
+        function setContext(ctx) {
+            currentContext = ctx;
+            const workBtn = document.getElementById('ctx-work-btn');
+            const lifeBtn = document.getElementById('ctx-life-btn');
+
+            if (ctx === 'work') {
+                workBtn.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center justify-center space-x-2 bg-white text-amber-900 shadow-sm dark:bg-stone-850 dark:text-amber-400";
+                lifeBtn.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center justify-center space-x-2 text-stone-600 hover:text-stone-900 dark:text-stone-300 dark:hover:text-white";
+                showToast("已切換解讀情境為：💼 職場工作");
+            } else {
+                lifeBtn.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center justify-center space-x-2 bg-white text-amber-900 shadow-sm dark:bg-stone-850 dark:text-amber-400";
+                workBtn.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-sm font-semibold transition flex items-center justify-center space-x-2 text-stone-600 hover:text-stone-900 dark:text-stone-300 dark:hover:text-white";
+                showToast("已切換解讀情境為：🌱 個人生活");
+            }
+
+            // Refresh Detail Card
+            selectContrast(currentContrastIndex);
+        }
+
+        // Select specific Contrast Pair and render details
+        function selectContrast(id) {
+            currentContrastIndex = id;
+            
+            // Update selected button style in Grid
+            Object.values(contrastsData).forEach(item => {
+                const btn = document.getElementById(`contrast-btn-${item.id}`);
+                if (btn) {
+                    if (item.id === id) {
+                        btn.className = "season-btn p-2 rounded-xl border text-left transition-all duration-300 flex flex-col justify-between h-[82px] bg-amber-700 border-amber-800 text-white shadow-md shadow-amber-700/20 dark:bg-amber-600 dark:border-amber-700";
+                    } else {
+                        btn.className = "season-btn p-2 rounded-xl border text-left transition-all duration-300 flex flex-col justify-between h-[82px] bg-stone-50 hover:bg-stone-100 dark:bg-stone-900 dark:hover:bg-stone-850 border-stone-200 dark:border-stone-800 text-stone-800 dark:text-stone-100";
+                    }
+                }
+            });
+
+            const contrast = contrastsData[id];
+            const content = currentContext === 'work' ? contrast.work : contrast.life;
+            const detailCard = document.getElementById('season-detail-card');
+            
+            // Update Title
+            document.getElementById('current-pairing-title').innerText = `${contrast.zh_a} ${contrast.emoji_a} vs ${contrast.zh_b} ${contrast.emoji_b} (${contrast.verse})`;
+
+            let todoListHtml = '';
+            content.todo.forEach(t => {
+                todoListHtml += `
+                    <li class="flex items-start space-x-2.5 text-stone-700 dark:text-stone-300 text-xs sm:text-sm">
+                        <span class="text-emerald-600 font-bold mt-0.5">✓</span>
+                        <span>${t}</span>
+                    </li>
+                `;
+            });
+
+            let avoidListHtml = '';
+            content.avoid.forEach(a => {
+                avoidListHtml += `
+                    <li class="flex items-start space-x-2.5 text-stone-700 dark:text-stone-300 text-xs sm:text-sm">
+                        <span class="text-rose-600 font-bold mt-0.5">✗</span>
+                        <span>${a}</span>
+                    </li>
+                `;
+            });
+
+            detailCard.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-lg">${currentContext === 'work' ? '💼' : '🌱'}</span>
+                        <h4 class="font-serif font-bold text-stone-900 dark:text-stone-100 text-[16px]">${content.title}</h4>
+                    </div>
+                    <p class="text-stone-600 dark:text-stone-300 text-xs sm:text-sm leading-relaxed">${content.story}</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                        <!-- Positive recommendations -->
+                        <div class="bg-white/90 dark:bg-stone-900/95 p-4 rounded-lg border border-stone-100 dark:border-stone-800 space-y-2 shadow-sm">
+                            <h5 class="text-xs font-bold text-emerald-800 dark:text-emerald-400 tracking-wider uppercase flex items-center">
+                                <span class="mr-1.5">🟢</span> 可以這樣做 (Recommended)
+                            </h5>
+                            <ul class="space-y-1.5">
+                                ${todoListHtml}
+                            </ul>
+                        </div>
+                        <!-- Negative watchouts -->
+                        <div class="bg-white/90 dark:bg-stone-900/95 p-4 rounded-lg border border-stone-100 dark:border-stone-800 space-y-2 shadow-sm">
+                            <h5 class="text-xs font-bold text-rose-800 dark:text-rose-400 tracking-wider uppercase flex items-center">
+                                <span class="mr-1.5">🔴</span> 避免這樣 (Avoid)
+                            </h5>
+                            <ul class="space-y-1.5">
+                                ${avoidListHtml}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Diagnostics Quiz Logic
+        function initDiagnosticQuiz() {
+            quizAnswers = {};
+            showQuizStep(1);
+        }
+
+        function showQuizStep(step) {
+            const container = document.getElementById('diagnostic-quiz-container');
+            container.innerHTML = '';
+
+            if (step === 1) {
+                container.innerHTML = `
+                    <p class="text-sm font-medium mb-3 text-stone-300">問題 1 / 3：目前每天在工作上的核心心境是？</p>
+                    <div class="grid grid-cols-1 gap-2.5">
+                        <button onclick="nextQuizStep(1, 'A')" class="w-full text-left p-3 rounded-lg bg-stone-800 hover:bg-stone-750 border border-stone-700 hover:border-amber-500 text-xs sm:text-sm transition">
+                            🌾 每天都有想不完的新想法、雖然忙亂但對未來充滿開創熱情。
+                        </button>
+                        <button onclick="nextQuizStep(1, 'B')" class="w-full text-left p-3 rounded-lg bg-stone-800 hover:bg-stone-750 border border-stone-700 hover:border-amber-500 text-xs sm:text-sm transition">
+                            🌳 架構順暢，各專案能穩定拿到產值和成果，並獲得大家的認可。
+                        </button>
+                        <button onclick="nextQuizStep(1, 'C')" class="w-full text-left p-3 rounded-lg bg-stone-800 hover:bg-stone-750 border border-stone-700 hover:border-amber-500 text-xs sm:text-sm transition">
+                            🍂 面臨架構調整、裁員大改組、或必須砍掉沈沒成本的陣痛期。
+                        </button>
+                        <button onclick="nextQuizStep(1, 'D')" class="w-full text-left p-3 rounded-lg bg-stone-800 hover:bg-stone-750 border border-stone-700 hover:border-amber-500 text-xs sm:text-sm transition">
+                            ❄ 感到有些倦怠、想多聽少說，安靜沉澱以思考下一步。
+                        </button>
+                    </div>
+                `;
+            } else if (step === 2) {
+                container.innerHTML = `
+                    <p class="text-sm font-medium mb-3 text-stone-300">問題 2 / 3：你對於工作目前的付出狀態是？</p>
+                    <div class="grid grid-cols-1 gap-2.5">
+                        <button onclick="nextQuizStep(2, 'A')" class="w-full text-left p-3 rounded-lg bg-stone-800 hover:bg-stone-750 border border-stone-700 hover:border-amber-500 text-xs sm:text-sm transition">
+                            🌾 全力灌溉，拼命找尋各種新方法與新工具來穩固根基。
+                        </button>
+                        <button onclick="nextQuizStep(2, 'B')" class="w-full text-left p-3 rounded-lg bg-stone-800 hover:bg-stone-750 border border-stone-700 hover:border-amber-500 text-xs sm:text-sm transition">
+                            🌳 建立核心知識庫 (IP) 來延續價值，並大方與同仁分享成果利益。
+                        </button>
+                        <button onclick="nextQuizStep(2, 'C')" class="w-full text-left p-3 rounded-lg bg-stone-800 hover:bg-stone-750 border border-stone-700 hover:border-amber-500 text-xs sm:text-sm transition">
+                            🍂 大力精簡無效會議，與不健康或拖後腿的工作關係斷捨離。
+                        </button>
+                        <button onclick="nextQuizStep(2, 'D')" class="w-full text-left p-3 rounded-lg bg-stone-800 hover:bg-stone-750 border border-stone-700 hover:border-amber-500 text-xs sm:text-sm transition">
+                            ❄ 保持冷靜觀察，利用下班時間讀書與重塑自我的技能與內心。
+                        </button>
+                    </div>
+                `;
+            } else if (step === 3) {
+                container.innerHTML = `
+                    <p class="text-sm font-medium mb-3 text-stone-300">問題 3 / 3：在這個工作階段，你內心深處最渴望獲得？</p>
+                    <div class="grid grid-cols-1 gap-2.5">
+                        <button onclick="nextQuizStep(3, 'A')" class="w-full text-left p-3 rounded-lg bg-stone-800 hover:bg-stone-750 border border-stone-700 hover:border-amber-500 text-xs sm:text-sm transition">
+                            🌾 爆發式的突破，想看到辛勞栽種的種子趕快發芽。
+                        </button>
+                        <button onclick="nextQuizStep(3, 'B')" class="w-full text-left p-3 rounded-lg bg-stone-800 hover:bg-stone-750 border border-stone-700 hover:border-amber-500 text-xs sm:text-sm transition">
+                            🌳 安全與穩定，懂得感恩並妥善保存目前所得的成果。
+                        </button>
+                        <button onclick="nextQuizStep(3, 'C')" class="w-full text-left p-3 rounded-lg bg-stone-800 hover:bg-stone-750 border border-stone-700 hover:border-amber-500 text-xs sm:text-sm transition">
+                            🍂 擺脫折磨人的沈沒成本，快速止血、輕裝上陣重新出發。
+                        </button>
+                        <button onclick="nextQuizStep(3, 'D')" class="w-full text-left p-3 rounded-lg bg-stone-800 hover:bg-stone-750 border border-stone-700 hover:border-amber-500 text-xs sm:text-sm transition">
+                            ❄ 心靈的平復與休息，靜靜等待更明朗的市場信號與機會。
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function nextQuizStep(currentStep, choice) {
+            quizAnswers[currentStep] = choice;
+            if (currentStep < 3) {
+                showQuizStep(currentStep + 1);
+            } else {
+                calculateQuizResult();
+            }
+        }
+
+        // Compute results and map to one of 4 Biblical Seasons of Work
+        function calculateQuizResult() {
+            const counts = { A: 0, B: 0, C: 0, D: 0 };
+            Object.values(quizAnswers).forEach(ans => counts[ans]++);
+
+            // Find major choice
+            let resultSeason = 'planting';
+            let maxCount = 0;
+            Object.entries(counts).forEach(([choice, count]) => {
+                if (count > maxCount) {
+                    maxCount = count;
+                    if (choice === 'A') resultSeason = 'planting';
+                    if (choice === 'B') resultSeason = 'reaping';
+                    if (choice === 'C') resultSeason = 'pruning';
+                    if (choice === 'D') resultSeason = 'resting';
+                }
+            });
+
+            const container = document.getElementById('diagnostic-quiz-container');
+            let resultHtml = '';
+
+            if (resultSeason === 'planting') {
+                resultHtml = `
+                    <div class="space-y-3 bg-stone-800 p-4 rounded-xl border border-amber-600/50">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xl">🌱</span>
+                            <h4 class="font-bold text-amber-400">目前處於：耕種開創季 (Sowing)</h4>
+                        </div>
+                        <p class="text-xs text-stone-300 leading-relaxed">
+                            你目前正在一塊剛翻土的土壤上揮灑汗水。許多新概念、新專案正蓄勢待發。這時最需要的是<strong>「不急於求成」的定力</strong>。上帝此時給你的智慧是：「耕種有時，拔出有時」。不要因為幼苗還沒破土就懷疑自己的努力。
+                        </p>
+                        <div class="bg-stone-900 p-3 rounded-lg text-[11px] text-amber-100/90 italic">
+                            💡 推薦閱讀：傳道書 3:2 (耕種有時)。建議點選上方經文中的「耕種有時，拔出有時」，對應職場工作看具體行動方針！
+                        </div>
+                    </div>
+                `;
+            } else if (resultSeason === 'reaping') {
+                resultHtml = `
+                    <div class="space-y-3 bg-stone-800 p-4 rounded-xl border border-amber-600/50">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xl">🌾</span>
+                            <h4 class="font-bold text-amber-400">目前處於：成果豐收季 (Harvesting)</h4>
+                        </div>
+                        <p class="text-xs text-stone-300 leading-relaxed">
+                            恭喜你，你的付出正在收穫喜樂。工作體系相對穩定，客戶也給予正向回饋。上帝在此時給你的提醒是：<strong>「謙遜保存」與「享福」</strong>。傳道書 3:13 說人人吃喝、享受勞力成果，這是神的恩賜，但務必留心資產的保存與承傳，避免在順境中鬆懈。
+                        </p>
+                        <div class="bg-stone-900 p-3 rounded-lg text-[11px] text-amber-100/90 italic">
+                            💡 推薦閱讀：傳道書 3:6 (保存有時)。建議點選上方經文中的「保存有時，丟棄有時」，了解如何守住核心智慧！
+                        </div>
+                    </div>
+                `;
+            } else if (resultSeason === 'pruning') {
+                resultHtml = `
+                    <div class="space-y-3 bg-stone-800 p-4 rounded-xl border border-amber-600/50">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xl">🍂</span>
+                            <h4 class="font-bold text-amber-400">目前處於：修剪淘汰季 (Pruning/Tearing Down)</h4>
+                        </div>
+                        <p class="text-xs text-stone-300 leading-relaxed">
+                            你正在經歷組織重組、專案砍除或是與合作夥伴「斷捨離」的陣痛。這雖然令人失落、甚至是被迫面對，但上帝正要藉此排除你職涯中堆積的沈沒成本。<strong>「拆毀有時，建造有時」</strong>。如果老舊的壞根不拔出來，新種子永遠沒有生長空間。
+                        </p>
+                        <div class="bg-stone-900 p-3 rounded-lg text-[11px] text-amber-100/90 italic">
+                            💡 推薦閱讀：傳道書 3:3 (拆毀有時)、3:6 (丟棄有時)。建議點選上方經文中的「拆毀有時，建造有時」或「保存有時，丟棄有時」了解止損藝術！
+                        </div>
+                    </div>
+                `;
+            } else {
+                resultHtml = `
+                    <div class="space-y-3 bg-stone-800 p-4 rounded-xl border border-amber-600/50">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xl">❄</span>
+                            <h4 class="font-bold text-amber-400">目前處於：沉澱靜默季 (Resting/Waiting)</h4>
+                        </div>
+                        <p class="text-xs text-stone-300 leading-relaxed">
+                            你感到倦怠、或是處在兩個大專案之間的空白過渡期。不要驚慌，更不需要為此產生「職場落後焦慮」。此時的你是上帝在邀約你進入<strong>「積蓄內核」的安息與觀察</strong>。傳道書 3:7 說「沉默有時，發言有時」。此時的安靜不是退縮，是為了未來更響亮有力的發聲。
+                        </p>
+                        <div class="bg-stone-900 p-3 rounded-lg text-[11px] text-amber-100/90 italic">
+                            💡 推薦閱讀：傳道書 3:7 (沉默有時)。建議點選上方經文中的「沉默有時，發言有時」解鎖傾聽觀察的智慧！
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                ${resultHtml}
+                <div class="flex justify-end pt-2">
+                    <button onclick="initDiagnosticQuiz()" class="text-xs font-semibold text-amber-400 hover:text-amber-300 hover:underline transition">
+                        ↩ 重做評估 (Retake Diagnostic)
+                    </button>
+                </div>
+            `;
+        }
+
+        // Custom Notification Toast (Anti-alert substitute)
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "bg-stone-900/95 text-stone-100 px-4 py-2.5 rounded-xl shadow-lg border border-stone-800 text-xs font-medium mb-2 pointer-events-auto transition-all duration-300 transform translate-y-4 opacity-0";
+            toast.innerText = message;
+            
+            container.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 10);
+
+            // Dismiss after 2.5 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-y-4', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
