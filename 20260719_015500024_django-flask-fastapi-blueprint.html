@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Django vs Flask vs FastAPI — Blueprint</title>
+<style>
+  :root, [data-theme="dark"] {
+    --bg:#0a1420; --grid:rgba(79,216,224,.08); --grid-major:rgba(79,216,224,.16);
+    --panel:rgba(16,28,42,.92); --panel-border:rgba(79,216,224,.32); --panel-border-dim:rgba(79,216,224,.14);
+    --ink:#e8f4f5; --ink-dim:#9fb4bc; --ink-faint:#5c7480;
+    --accent:#4fd8e0; --accent-2:#e8a23c; --link:#7fe3ea;
+    --scrim:rgba(6,12,20,.55);
+    --dj:#5fb88a; --fl:#93a2b0; --fa:#e8a23c;
+    --corner:var(--accent);
+  }
+  [data-theme="light"] {
+    --bg:#f2eee2; --grid:rgba(24,50,64,.09); --grid-major:rgba(24,50,64,.18);
+    --panel:rgba(255,253,247,.92); --panel-border:rgba(24,60,74,.34); --panel-border-dim:rgba(24,60,74,.16);
+    --ink:#152531; --ink-dim:#4a5d68; --ink-faint:#7c8b93;
+    --accent:#1c6b78; --accent-2:#b5651d; --link:#0f5b68;
+    --scrim:rgba(255,253,247,.5);
+    --dj:#2f7a53; --fl:#5a6773; --fa:#b5651d;
+    --corner:var(--accent);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:-apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:
+      repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 40px),
+      repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 40px),
+      repeating-linear-gradient(90deg, var(--grid-major) 0 1px, transparent 1px 200px),
+      repeating-linear-gradient(0deg, var(--grid-major) 0 1px, transparent 1px 200px),
+      var(--bg);
+    color:var(--ink); min-height:100vh; line-height:1.7; transition:background .3s;
+  }
+  .mono { font-family:"SF Mono","Consolas","Menlo",monospace; letter-spacing:.02em; }
+  .icon { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+
+  .sheet { position:relative; background:var(--panel); border:1px solid var(--panel-border-dim); }
+  .sheet::before, .sheet::after,
+  .sheet .c2::before, .sheet .c2::after { content:""; position:absolute; width:14px; height:14px; pointer-events:none; }
+  .sheet::before { top:-1px; left:-1px; border-top:2px solid var(--corner); border-left:2px solid var(--corner); }
+  .sheet::after { top:-1px; right:-1px; border-top:2px solid var(--corner); border-right:2px solid var(--corner); }
+  .sheet .c2 { position:absolute; inset:0; pointer-events:none; }
+  .sheet .c2::before { bottom:-1px; left:-1px; border-bottom:2px solid var(--corner); border-left:2px solid var(--corner); }
+  .sheet .c2::after { bottom:-1px; right:-1px; border-bottom:2px solid var(--corner); border-right:2px solid var(--corner); }
+  .sheet > .inner { position:relative; z-index:1; padding:20px; }
+
+  .page { max-width:1200px; margin:0 auto; padding:24px 16px; display:flex; gap:16px; }
+  .rail { display:none; }
+  .content { flex:1; min-width:0; }
+  .topbar .inner { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:12px 16px; }
+  .topbar { margin-bottom:16px; }
+  .topbar h1 { font-size:15px; font-weight:700; display:flex; align-items:center; gap:8px; line-height:1.3; }
+  .tag-badge { display:inline-flex; height:32px; width:32px; align-items:center; justify-content:center;
+    color:var(--bg); background:var(--accent); flex:none; }
+  .tbtn { height:44px; width:44px; border:1px solid var(--panel-border-dim); background:transparent; color:var(--ink);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; }
+  .tbtn:hover { background:var(--panel-border-dim); }
+
+  .layout { display:grid; grid-template-columns:1fr; gap:16px; align-items:start; }
+
+  .viz-panel { margin-bottom:0; }
+  .viz-title { font-weight:700; font-size:17px; margin-bottom:12px; display:flex; align-items:center; gap:10px; line-height:1.3; }
+  .viz-title .mono { font-size:12px; color:var(--accent); font-weight:600; }
+  .viz-wrap { position:relative; background:var(--scrim); border:1px solid var(--panel-border-dim); }
+  .viz-wrap svg { display:block; width:100%; height:auto; max-height:52vh; }
+  .infostrip { margin-top:10px; min-height:52px; padding:8px 12px;
+    background:var(--panel-border-dim); font-size:13px; color:var(--ink-dim); overflow-wrap:break-word; }
+  .infostrip b { color:var(--ink); }
+
+  .node { cursor:pointer; }
+  .node .box { transition:filter .2s, stroke-width .2s; }
+  .node:hover .box, .node.hot .box { filter:drop-shadow(0 0 7px currentColor); stroke-width:2.2; }
+  .colhead { cursor:pointer; }
+  .colhead:hover text { filter:drop-shadow(0 0 6px currentColor); }
+
+  .cards { display:grid; grid-template-columns:1fr; gap:16px; }
+  .fw-card { scroll-margin-top:16px; }
+  .fw-card.flash .inner { animation:flash 1.2s ease; }
+  @keyframes flash { 0%,60% { outline:2px solid var(--accent-2); outline-offset:2px; } 100% { outline:2px solid transparent; } }
+  .fw-card h2 { font-size:18px; font-weight:700; display:flex; align-items:center; gap:10px; margin-bottom:2px; line-height:1.3; }
+  .dot { width:10px; height:10px; flex:none; }
+  .fw-card .tag { font-size:11px; color:var(--ink-faint); margin-bottom:12px; }
+  .kv { display:grid; grid-template-columns:64px 1fr; gap:6px 12px; font-size:14px; }
+  .kv dt { color:var(--ink-faint); font-weight:600; }
+  .kv dt.mono { font-size:11px; text-transform:uppercase; }
+  .kv dd { color:var(--ink-dim); overflow-wrap:break-word; }
+  .kv dd b { color:var(--ink); font-weight:600; }
+  .note { margin-top:12px; padding:10px 12px; background:var(--panel-border-dim);
+    font-size:13px; color:var(--ink-dim); display:flex; gap:8px; align-items:flex-start; border-left:2px solid var(--accent-2); }
+  .note .icon { width:15px; height:15px; margin-top:4px; flex:none; }
+
+  .pick h2 { font-size:16px; font-weight:700; margin-bottom:12px; display:flex; align-items:center; gap:8px; line-height:1.3; }
+  .pick-row { display:flex; gap:12px; align-items:center; padding:10px 12px;
+    border:1px solid var(--panel-border-dim); background:var(--panel-border-dim); margin-bottom:8px;
+    font-size:14px; color:var(--ink-dim); flex-wrap:wrap; }
+  .pick-row b { color:var(--ink); }
+  .pick-row .ans { margin-left:auto; font-weight:700; font-size:12px; color:var(--bg); padding:3px 12px;
+    background:var(--accent-2); }
+
+  .srcs .inner { padding:16px 20px; font-size:12px; color:var(--ink-faint); }
+  .srcs a { color:var(--link); text-decoration:none; word-break:break-all; }
+  .srcs a:hover { text-decoration:underline; }
+  .srcs li { margin:4px 0 4px 16px; }
+
+  @media (min-width:640px) {
+    .rail { display:flex; flex-direction:column; align-items:center; gap:8px;
+      padding:16px 8px; height:fit-content; position:sticky; top:24px; }
+    .rail .sep { width:24px; height:1px; background:var(--panel-border-dim); margin:4px 0; }
+    .topbar { display:none; }
+  }
+  @media (max-width:639px) {
+    .viz-wrap svg { max-height:48vh; }
+  }
+  @media (min-width:1024px) {
+    .layout { grid-template-columns:minmax(0,11fr) minmax(0,9fr); }
+    .viz-panel { position:sticky; top:24px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior:auto; }
+    .fw-card.flash .inner { animation:none; outline:2px solid var(--accent-2); }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7L12.5 18.5"/></symbol>
+  </defs>
+</svg>
+
+<div class="page">
+
+  <aside class="rail sheet"><div class="c2"></div><div class="inner" style="display:flex; flex-direction:column; align-items:center; gap:8px; padding:16px 8px;">
+    <button class="tbtn" onclick="goTo('viz')" aria-label="架構圖"><svg class="icon"><use href="#i-chip"/></svg></button>
+    <button class="tbtn" onclick="goTo('pick')" aria-label="選型"><svg class="icon"><use href="#i-target"/></svg></button>
+    <div class="sep"></div>
+    <button class="tbtn" onclick="toggleTheme()" aria-label="切換主題"><svg class="icon"><use href="#i-moon"/></svg></button>
+  </div></aside>
+
+  <div class="content">
+
+    <div class="topbar sheet"><div class="c2"></div><div class="inner">
+      <h1><span class="tag-badge"><svg class="icon" style="stroke:var(--bg)"><use href="#i-chip"/></svg></span>Django vs Flask vs FastAPI</h1>
+      <button class="tbtn" onclick="toggleTheme()" aria-label="切換主題"><svg class="icon"><use href="#i-moon"/></svg></button>
+    </div></div>
+
+    <div class="layout">
+
+      <!-- ===== 視覺化區：schematic 架構圖 ===== -->
+      <section id="viz" class="viz-panel sheet"><div class="c2"></div><div class="inner">
+        <div class="viz-title">
+          <span class="tag-badge"><svg class="icon" style="stroke:var(--bg)"><use href="#i-chip"/></svg></span>
+          Django vs Flask vs FastAPI <span class="mono">// SCHEMATIC</span>
+        </div>
+        <div class="viz-wrap">
+          <svg id="stack" viewBox="0 0 720 470" role="img" aria-label="三框架架構與效能比較圖">
+            <line x1="130" y1="70" x2="130" y2="330" stroke="var(--dj)" stroke-opacity=".4" stroke-width="1.5" stroke-dasharray="3 4"/>
+            <line x1="360" y1="70" x2="360" y2="330" stroke="var(--fl)" stroke-opacity=".4" stroke-width="1.5" stroke-dasharray="3 4"/>
+            <line x1="590" y1="70" x2="590" y2="330" stroke="var(--fa)" stroke-opacity=".4" stroke-width="1.5" stroke-dasharray="3 4"/>
+
+            <circle id="d-dj" r="4.5" cx="130" cy="80" fill="var(--dj)"/>
+            <circle id="d-fl" r="4.5" cx="360" cy="80" fill="var(--fl)"/>
+            <circle id="d-fa1" r="4.5" cx="590" cy="80" fill="var(--fa)"/>
+            <circle id="d-fa2" r="4.5" cx="590" cy="80" fill="var(--fa)"/>
+            <circle id="d-fa3" r="4.5" cx="590" cy="80" fill="var(--fa)"/>
+
+            <g class="colhead" data-card="card-django" style="color:var(--dj)">
+              <rect x="58" y="20" width="144" height="44" fill="transparent"/>
+              <text x="130" y="48" text-anchor="middle" font-size="19" font-weight="800" fill="var(--dj)" font-family="SF Mono,Consolas,Menlo,monospace">DJANGO</text>
+            </g>
+            <g class="colhead" data-card="card-flask" style="color:var(--fl)">
+              <rect x="288" y="20" width="144" height="44" fill="transparent"/>
+              <text x="360" y="48" text-anchor="middle" font-size="19" font-weight="800" fill="var(--fl)" font-family="SF Mono,Consolas,Menlo,monospace">FLASK</text>
+            </g>
+            <g class="colhead" data-card="card-fastapi" style="color:var(--fa)">
+              <rect x="518" y="20" width="144" height="44" fill="transparent"/>
+              <text x="590" y="48" text-anchor="middle" font-size="19" font-weight="800" fill="var(--fa)" font-family="SF Mono,Consolas,Menlo,monospace">FASTAPI</text>
+            </g>
+
+            <text x="14" y="120" font-size="11" fill="var(--ink-faint)" font-family="SF Mono,Consolas,Menlo,monospace">IFACE</text>
+            <text x="14" y="205" font-size="11" fill="var(--ink-faint)" font-family="SF Mono,Consolas,Menlo,monospace">CORE</text>
+            <text x="14" y="290" font-size="11" fill="var(--ink-faint)" font-family="SF Mono,Consolas,Menlo,monospace">BUILT-IN</text>
+            <text x="14" y="418" font-size="11" fill="var(--ink-faint)" font-family="SF Mono,Consolas,Menlo,monospace">PERF</text>
+
+            <!-- Django -->
+            <g class="node" data-info="<b>Django — WSGI</b>：傳統同步介面，3.x 起支援 ASGI" data-card="card-django" style="color:var(--dj)">
+              <rect class="box" x="72" y="96" width="116" height="40" fill="var(--scrim)" stroke="var(--dj)" stroke-width="1.5"/>
+              <text x="130" y="121" text-anchor="middle" font-size="13" fill="var(--ink)">WSGI</text>
+              <rect x="66" y="90" width="128" height="52" fill="transparent"/>
+            </g>
+            <g class="node" data-info="<b>Django 核心</b>：全功能 full-stack framework，定位是「全家桶」" data-card="card-django" style="color:var(--dj)">
+              <rect class="box" x="72" y="182" width="116" height="40" fill="var(--scrim)" stroke="var(--dj)" stroke-width="1.5"/>
+              <text x="130" y="207" text-anchor="middle" font-size="13" fill="var(--ink)">Django</text>
+              <rect x="66" y="176" width="128" height="52" fill="transparent"/>
+            </g>
+            <g class="node" data-info="<b>Django 內建</b>：ORM、admin、auth、migration 全包" data-card="card-django" style="color:var(--dj)">
+              <rect class="box" x="42" y="268" width="176" height="40" fill="var(--scrim)" stroke="var(--dj)" stroke-width="1.5"/>
+              <text x="130" y="293" text-anchor="middle" font-size="12" fill="var(--ink)">ORM·admin·auth·migration</text>
+              <rect x="36" y="262" width="188" height="52" fill="transparent"/>
+            </g>
+
+            <!-- Flask -->
+            <g class="node" data-info="<b>Flask — WSGI</b>：同步架構" data-card="card-flask" style="color:var(--fl)">
+              <rect class="box" x="302" y="96" width="116" height="40" fill="var(--scrim)" stroke="var(--fl)" stroke-width="1.5"/>
+              <text x="360" y="121" text-anchor="middle" font-size="13" fill="var(--ink)">WSGI</text>
+              <rect x="296" y="90" width="128" height="52" fill="transparent"/>
+            </g>
+            <g class="node" data-info="<b>Flask 核心</b>：極簡 micro-framework，什麼都自己挑" data-card="card-flask" style="color:var(--fl)">
+              <rect class="box" x="302" y="182" width="116" height="40" fill="var(--scrim)" stroke="var(--fl)" stroke-width="1.5"/>
+              <text x="360" y="207" text-anchor="middle" font-size="13" fill="var(--ink)">Flask</text>
+              <rect x="296" y="176" width="128" height="52" fill="transparent"/>
+            </g>
+            <g class="node" data-info="<b>Flask 內建</b>：幾乎沒有，功能靠 extension 自己組" data-card="card-flask" style="color:var(--fl)">
+              <rect class="box" x="292" y="268" width="136" height="40" fill="none" stroke="var(--fl)" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <text x="360" y="293" text-anchor="middle" font-size="12" fill="var(--ink-dim)">extension 自選</text>
+              <rect x="286" y="262" width="148" height="52" fill="transparent"/>
+            </g>
+
+            <!-- FastAPI -->
+            <g class="node" data-info="<b>FastAPI — ASGI</b>：原生 async/await" data-card="card-fastapi" style="color:var(--fa)">
+              <rect class="box" x="532" y="96" width="116" height="40" fill="var(--scrim)" stroke="var(--fa)" stroke-width="1.5"/>
+              <text x="590" y="121" text-anchor="middle" font-size="13" fill="var(--ink)">ASGI</text>
+              <rect x="526" y="90" width="128" height="52" fill="transparent"/>
+            </g>
+            <g class="node" data-info="<b>FastAPI 核心</b>：API-first，建於 Starlette + Pydantic" data-card="card-fastapi" style="color:var(--fa)">
+              <rect class="box" x="532" y="182" width="116" height="40" fill="var(--scrim)" stroke="var(--fa)" stroke-width="1.5"/>
+              <text x="590" y="207" text-anchor="middle" font-size="13" fill="var(--ink)">FastAPI</text>
+              <rect x="526" y="176" width="128" height="52" fill="transparent"/>
+            </g>
+            <g class="node" data-info="<b>FastAPI 內建</b>：Pydantic validation ＋ OpenAPI/Swagger 自動文件" data-card="card-fastapi" style="color:var(--fa)">
+              <rect class="box" x="502" y="268" width="176" height="40" fill="var(--scrim)" stroke="var(--fa)" stroke-width="1.5"/>
+              <text x="590" y="293" text-anchor="middle" font-size="12" fill="var(--ink)">Pydantic·OpenAPI 文件</text>
+              <rect x="496" y="262" width="188" height="52" fill="transparent"/>
+            </g>
+
+            <!-- 效能列 -->
+            <line x1="60" y1="376" x2="660" y2="376" stroke="var(--panel-border-dim)" stroke-width="1"/>
+            <g class="node" data-info="<b>Django 效能</b>：中等" data-card="card-django" style="color:var(--dj)">
+              <rect class="box" x="80" y="398" width="100" height="24" fill="var(--dj)" fill-opacity=".22" stroke="var(--dj)" stroke-width="1.4"/>
+              <text x="130" y="450" text-anchor="middle" font-size="12" fill="var(--ink-dim)" font-family="SF Mono,Consolas,Menlo,monospace">中等</text>
+              <rect x="60" y="390" width="140" height="70" fill="transparent"/>
+            </g>
+            <g class="node" data-info="<b>Flask 效能</b>：約 2–3k RPS" data-card="card-flask" style="color:var(--fl)">
+              <rect class="box" x="340" y="398" width="40" height="24" fill="var(--fl)" fill-opacity=".22" stroke="var(--fl)" stroke-width="1.4"/>
+              <text x="360" y="450" text-anchor="middle" font-size="12" fill="var(--ink-dim)" font-family="SF Mono,Consolas,Menlo,monospace">~2–3k RPS</text>
+              <rect x="310" y="390" width="100" height="70" fill="transparent"/>
+            </g>
+            <g class="node" data-info="<b>FastAPI 效能</b>：約 15–20k RPS (Uvicorn)，高併發 / IO-bound 最強" data-card="card-fastapi" style="color:var(--fa)">
+              <rect class="box" x="470" y="398" width="240" height="24" fill="var(--fa)" fill-opacity=".22" stroke="var(--fa)" stroke-width="1.4"/>
+              <text x="590" y="450" text-anchor="middle" font-size="12" fill="var(--ink-dim)" font-family="SF Mono,Consolas,Menlo,monospace">~15–20k RPS (Uvicorn)</text>
+              <rect x="460" y="390" width="260" height="70" fill="transparent"/>
+            </g>
+          </svg>
+        </div>
+        <div id="infostrip" class="infostrip">點節點看說明；點框架名稱跳到詳細卡片。訊號脈衝＝request 流：FastAPI 三顆並行快速 (async)，Django / Flask 單顆依序 (sync)。</div>
+      </div></section>
+
+      <!-- ===== 內容區 ===== -->
+      <div class="cards">
+
+        <section id="card-django" class="fw-card sheet"><div class="c2"></div><div class="inner">
+          <h2><span class="dot" style="background:var(--dj)"></span>Django</h2>
+          <p class="tag mono">FULL-STACK FRAMEWORK</p>
+          <dl class="kv">
+            <dt class="mono">定位</dt><dd><b>全功能 full-stack</b>，ORM / admin / auth 內建</dd>
+            <dt class="mono">架構</dt><dd>WSGI，3.x 起支援 ASGI</dd>
+            <dt class="mono">內建</dt><dd>ORM、admin、auth、migration 全包</dd>
+            <dt class="mono">效能</dt><dd>中等</dd>
+            <dt class="mono">適用</dt><dd>完整網站、後台、regulated 行業</dd>
+          </dl>
+          <div class="note"><svg class="icon"><use href="#i-info"/></svg><span>有 DRF (Django REST Framework) 可做 API，但比 FastAPI 重很多，除非已在 Django 生態才考慮。</span></div>
+        </div></section>
+
+        <section id="card-flask" class="fw-card sheet"><div class="c2"></div><div class="inner">
+          <h2><span class="dot" style="background:var(--fl)"></span>Flask</h2>
+          <p class="tag mono">MICRO-FRAMEWORK</p>
+          <dl class="kv">
+            <dt class="mono">定位</dt><dd><b>極簡 micro-framework</b>，什麼都自己挑</dd>
+            <dt class="mono">架構</dt><dd>WSGI、同步</dd>
+            <dt class="mono">內建</dt><dd>幾乎沒有，靠 extension</dd>
+            <dt class="mono">效能</dt><dd>~2–3k RPS</dd>
+            <dt class="mono">適用</dt><dd>小服務、MVP、教學</dd>
+          </dl>
+          <div class="note"><svg class="icon"><use href="#i-info"/></svg><span>Flask 3.x 其實也能掛 async view，但底層仍 WSGI，效能不會變 FastAPI。</span></div>
+        </div></section>
+
+        <section id="card-fastapi" class="fw-card sheet"><div class="c2"></div><div class="inner">
+          <h2><span class="dot" style="background:var(--fa)"></span>FastAPI</h2>
+          <p class="tag mono">ASYNC-FIRST API FRAMEWORK</p>
+          <dl class="kv">
+            <dt class="mono">定位</dt><dd><b>API-first、高效能</b>，自動生 OpenAPI docs</dd>
+            <dt class="mono">架構</dt><dd>ASGI、原生 async/await</dd>
+            <dt class="mono">內建</dt><dd>validation (Pydantic)、OpenAPI/Swagger 自動文件</dd>
+            <dt class="mono">效能</dt><dd>~15–20k RPS (Uvicorn)，高併發 / IO-bound 最強</dd>
+            <dt class="mono">適用</dt><dd>純 API、microservice、AI/LLM 整合</dd>
+          </dl>
+          <div class="note"><svg class="icon"><use href="#i-info"/></svg><span>以 SDET 背景寫測試工具 / mock server，FastAPI 幾乎是最佳解：Pydantic schema 驗證 + 自帶 Swagger UI 方便同事調試。</span></div>
+        </div></section>
+
+        <section id="pick" class="pick sheet"><div class="c2"></div><div class="inner">
+          <h2><svg class="icon"><use href="#i-target"/></svg>選型一句話</h2>
+          <div class="pick-row"><span>要做<b>完整網站</b>（含後台管理）</span><span class="ans">DJANGO</span></div>
+          <div class="pick-row"><span>只是<b>小工具</b>或想完全掌控</span><span class="ans">FLASK</span></div>
+          <div class="pick-row"><span><b>新的純 API 專案</b>（尤其 AI 相關）</span><span class="ans">FASTAPI</span></div>
+          <p style="font-size:13px; color:var(--ink-faint); margin-top:8px;">FastAPI 在 2026 已是新 API 專案的預設選擇。</p>
+        </div></section>
+
+        <section class="srcs sheet"><div class="c2"></div><div class="inner">
+          <div style="display:flex; align-items:center; gap:6px; font-weight:700; color:var(--ink-dim); margin-bottom:6px;">
+            <svg class="icon" style="width:14px;height:14px"><use href="#i-link"/></svg>來源
+          </div>
+          <ul>
+            <li><a href="https://blog.jetbrains.com/pycharm/2025/02/django-flask-fastapi/" target="_blank" rel="noopener">Which Is the Best Python Web Framework: Django, Flask, or FastAPI? — JetBrains Blog</a></li>
+            <li><a href="https://developersvoice.com/blog/python/fastapi_django_flask_architecture_guide/" target="_blank" rel="noopener">FastAPI vs Django vs Flask in 2026 — DevelopersVoice</a></li>
+            <li><a href="https://dasroot.net/posts/2026/02/python-flask-fastapi-django-framework-comparison-2026/" target="_blank" rel="noopener">Python Flask vs FastAPI vs Django: Framework Comparison 2026 — dasroot.net</a></li>
+          </ul>
+        </div></section>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  document.querySelectorAll('.tbtn use').forEach(u => {
+    const h = u.getAttribute('href');
+    if (h === '#i-moon' || h === '#i-sun') u.setAttribute('href', next === 'dark' ? '#i-moon' : '#i-sun');
+  });
+}
+function goTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+function flashCard(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior:'smooth', block:'center' });
+  el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+}
+
+const strip = document.getElementById('infostrip');
+const defaultStrip = strip.innerHTML;
+document.querySelectorAll('#stack .node').forEach(n => {
+  n.addEventListener('mouseenter', () => { strip.innerHTML = n.dataset.info; });
+  n.addEventListener('mouseleave', () => { strip.innerHTML = defaultStrip; });
+  n.addEventListener('click', () => {
+    strip.innerHTML = n.dataset.info;
+    document.querySelectorAll('#stack .node.hot').forEach(x => x.classList.remove('hot'));
+    n.classList.add('hot');
+    flashCard(n.dataset.card);
+  });
+});
+document.querySelectorAll('#stack .colhead').forEach(h => {
+  h.addEventListener('click', () => flashCard(h.dataset.card));
+});
+
+/* 訊號脈衝：FastAPI 三顆並行且快 (async, 高 RPS)，Django / Flask 單顆 (sync)，Flask 最慢 */
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const Y0 = 82, Y1 = 330;
+const dots = [
+  { el: document.getElementById('d-dj'),  period: 3200, offset: 0 },
+  { el: document.getElementById('d-fl'),  period: 4200, offset: 0 },
+  { el: document.getElementById('d-fa1'), period: 1400, offset: 0 },
+  { el: document.getElementById('d-fa2'), period: 1400, offset: 467 },
+  { el: document.getElementById('d-fa3'), period: 1400, offset: 933 },
+];
+if (reduced) {
+  dots.forEach((d, i) => d.el.setAttribute('cy', Y0 + ((i * 61) % (Y1 - Y0))));
+} else {
+  let start = null;
+  function tick(ts) {
+    if (start === null) start = ts;
+    const t = ts - start;
+    dots.forEach(d => {
+      const p = ((t + d.offset) % d.period) / d.period;
+      d.el.setAttribute('cy', Y0 + p * (Y1 - Y0));
+      d.el.setAttribute('opacity', p < 0.06 ? p / 0.06 : (p > 0.94 ? (1 - p) / 0.06 : 1));
+    });
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+</script>
+
+</body>
+</html>
