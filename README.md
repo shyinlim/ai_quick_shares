@@ -1,6 +1,5 @@
 # ai_quick_share
 
-- https://shyinlim.github.io/ai_quick_shares/20260719_014604982_django-flask-fastapi.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260719_014604982_django-flask-fastapi.html)
 - https://shyinlim.github.io/ai_quick_shares/20260719_004501_ui_design_v14.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260719_004501_ui_design_v14.html)
 - https://github.com/shyinlim/ai_quick_shares/blob/master/20260714_223000000_markdown-demo.md | md
 - https://shyinlim.github.io/ai_quick_shares/20260712_164829776_ecclesiastes3.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260712_164829776_ecclesiastes3.html)
