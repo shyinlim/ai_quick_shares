@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>保羅的宣教旅程與團隊同行 · 復古航程版</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          darkBg: '#091d26',
+          cardBg: '#0e2d3b',
+          accent: '#d85a2b',
+          accentHover: '#c14b1f',
+          peach: '#fae1cc',
+          lightText: '#f4ece1',
+          mutedText: '#8fa0a6'
+        }
+      }
+    }
+  }
+}
+</script>
+<style>
+  body {
+    font-family: 'Inter', -apple-system, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: #091d26;
+    color: #f4ece1;
+    line-height: 1.75;
+  }
+  h1, h2, h3, h4 { line-height: 1.35; }
+  .retro-title {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+  .retro-script { font-family: 'Playfair Display', "Noto Serif TC", serif; font-style: italic; font-weight: 400; }
+  .font-mono2 { font-family: 'Share Tech Mono', monospace; }
+
+  .icon { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: #091d26; }
+  ::-webkit-scrollbar-thumb { background: #d85a2b; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #fae1cc; }
+
+  .panel-hover { transition: border-color .3s, box-shadow .3s; }
+  .panel-hover.active-section { border-color: #d85a2b !important; box-shadow: 0 0 0 1px rgba(216,90,43,.5), 0 24px 60px -20px rgba(0,0,0,.6); }
+
+  .nav-pill {
+    flex-shrink: 0; min-width: 32px; height: 32px; border-radius: 9999px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #0e2d3b;
+    background: rgba(9,29,38,.08); border: 1px solid rgba(9,29,38,.25);
+    transition: background .2s, color .2s, border-color .2s;
+    cursor: pointer;
+  }
+  .nav-pill:hover { border-color: #d85a2b; color: #d85a2b; }
+  .nav-pill.active { background: linear-gradient(135deg, #c14b1f, #d85a2b); color: #fae1cc; border-color: transparent; }
+  .nav-pill:focus-visible { outline: 2px solid #d85a2b; outline-offset: 2px; }
+
+  .badge-hit { cursor: pointer; transition: transform .25s; }
+  .badge-hit:hover, .badge-hit.active { transform: translateY(-4px); }
+  .badge-hit:focus-visible { outline: 2px solid #fae1cc; outline-offset: 3px; border-radius: 12px; }
+  .badge-circle {
+    width: 52px; height: 52px; border-radius: 9999px;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid rgba(250,225,204,.25);
+    box-shadow: 0 12px 26px -8px rgba(0,0,0,.55);
+    transition: box-shadow .25s, border-color .25s;
+    background: linear-gradient(135deg, #c14b1f, #d85a2b);
+  }
+  @media (min-width: 640px) { .badge-circle { width: 64px; height: 64px; } .badge-circle .icon { width: 24px; height: 24px; } }
+  .badge-hit:hover .badge-circle, .badge-hit.active .badge-circle { border-color: #fae1cc; box-shadow: 0 0 0 3px #d85a2b, 0 12px 26px -8px rgba(0,0,0,.6); }
+  .badge-circle .icon { stroke: #fae1cc; width: 20px; height: 20px; }
+  .badge-cap { font-size: .65rem; color: #8fa0a6; text-align: center; margin-top: 6px; font-weight: 700; }
+
+  .stat-tile {
+    background: rgba(250,225,204,.05); border: 1px solid rgba(216,90,43,.3);
+    border-radius: 1rem; padding: .85rem 1.1rem;
+  }
+  .stat-num { font-size: 1.5rem; font-weight: 900; color: #fae1cc; letter-spacing: -.01em; }
+  .stat-label { font-size: .65rem; color: #8fa0a6; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+
+  .city-btn {
+    transition: border-color .25s, background .25s, transform .25s;
+  }
+  .city-btn:hover { border-color: #d85a2b; transform: translateY(-2px); }
+  .city-btn:focus-visible { outline: 2px solid #d85a2b; outline-offset: 2px; }
+  .city-btn.active { background: linear-gradient(135deg, #c14b1f, #d85a2b); color: #fae1cc; border-color: transparent; }
+
+  .team-card { transition: transform .3s, background .3s, border-color .3s; cursor: pointer; }
+  .team-card:hover { transform: translateY(-6px); border-color: rgba(250,225,204,.4); background: #d85a2b; }
+  .team-card:hover .tc-title, .team-card:hover .tc-desc { color: #fae1cc; }
+  .team-card:hover .tc-home { color: #091d26; }
+  .team-card:focus-visible { outline: 2px solid #fae1cc; outline-offset: 3px; }
+
+  .step-num {
+    flex-shrink: 0; width: 28px; height: 28px; border-radius: 9999px;
+    background: rgba(250,225,204,.06); border: 1px solid rgba(216,90,43,.35);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #d85a2b;
+  }
+  .verse-tag { font-size: .7rem; color: #8fa0a6; }
+  .chip { background: rgba(250,225,204,.05); border: 1px solid rgba(216,90,43,.25); color: #8fa0a6; }
+
+  .map-wrap { position: relative; width: 100%; aspect-ratio: 4 / 3; max-height: 55vh; }
+  @media (min-width: 1024px) { .map-wrap { max-height: 560px; } }
+  #mapCanvas { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 12px; }
+
+  .legend-swatch { width: 18px; height: 3px; border-radius: 2px; display: inline-block; }
+
+  .toast {
+    position: fixed; bottom: 16px; right: 16px; z-index: 60;
+    background: #fae1cc; color: #091d26; border-left: 4px solid #d85a2b;
+    padding: .7rem 1rem; border-radius: .8rem; font-weight: 700; font-size: .75rem;
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,.6);
+    animation: toast-in .3s ease;
+  }
+  @keyframes toast-in { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+  .spin-slow { animation: spin 10s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spin-slow { animation: none; }
+    .toast { animation: none; }
+    .team-card, .badge-hit, .city-btn { transition: none; }
+  }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<svg width="0" height="0" class="absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.8 9.2l-1.6 4.4-4.4 1.6 1.6-4.4z"/></symbol>
+    <symbol id="i-cross" viewBox="0 0 24 24"><path d="M12 3v18M6 8h12"/></symbol>
+    <symbol id="i-door" viewBox="0 0 24 24"><path d="M6 3h9a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6" transform="rotate(-8 12 12)"/><path d="M6 3v18"/><circle cx="14" cy="12" r=".6" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="8.5" cy="8" r="3"/><path d="M2.5 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M15 20c.3-2.5 2-4.6 4-5.4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 0 4 22.5z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9-9-9z"/><circle cx="7.5" cy="7.5" r="1.3" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-anchor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.2"/><path d="M12 7.2V21M6 14a6 6 0 0 0 12 0M4 14h4M16 14h4"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="i-id" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M6 16c.5-1.6 1.8-2.4 2.5-2.4S11 14.4 11 16M14 9h5M14 13h5"/></symbol>
+    <symbol id="i-ship" viewBox="0 0 24 24"><path d="M2 12 L20 6.5 L22 12 L20 17.5 Z"/><path d="M12 12 V3"/></symbol>
+    <symbol id="i-compass-rose" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><path d="M12 5 L14.2 12 L12 19 L9.8 12 Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></symbol>
+    <symbol id="i-heart-crack" viewBox="0 0 24 24"><path d="M12 20.5C6.5 16.5 3 13 3 9.3 3 6.4 5.2 4.5 7.6 4.5c1.8 0 3.3 1 4.4 2.5 1.1-1.5 2.6-2.5 4.4-2.5 2.4 0 4.6 1.9 4.6 4.8 0 3.7-3.5 7.2-9 11.2z"/><path d="M12 7l-1.5 3 2.5 2-1.5 3"/></symbol>
+    <symbol id="i-pointer" viewBox="0 0 24 24"><path d="M5 3l7 17 2.2-6.8L21 11z"/></symbol>
+  </defs>
+</svg>
+
+<!-- 頂部復古導覽列 (sticky + scrollspy pills) -->
+<header id="topbar" class="bg-brand-peach text-brand-darkBg px-4 sm:px-6 py-3 border-b-4 border-brand-accent shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <span class="font-mono2 tracking-widest text-[10px] hidden md:inline-block">ACTS 20 · LUKE 18 · 2 COR 2</span>
+      <div class="flex items-center gap-1.5 overflow-x-auto">
+        <button onclick="jumpTo('sec-map')" class="nav-pill" data-target="sec-map" aria-label="互動地圖">
+          <svg class="icon" style="width:14px;height:14px"><use href="#i-compass-rose"/></svg>
+        </button>
+        <button onclick="jumpTo('sec-1')" class="nav-pill" data-target="sec-1">①</button>
+        <button onclick="jumpTo('sec-2')" class="nav-pill" data-target="sec-2">②</button>
+        <button onclick="jumpTo('sec-3')" class="nav-pill" data-target="sec-3">③</button>
+        <button onclick="jumpTo('sec-4')" class="nav-pill" data-target="sec-4">④</button>
+        <button onclick="jumpTo('sec-5')" class="nav-pill" data-target="sec-5">⑤</button>
+      </div>
+    </div>
+    <div class="text-center shrink-0">
+      <p class="text-xl sm:text-2xl font-black tracking-tighter text-brand-accent uppercase" style="transform: scaleY(1.15);">PAUL &amp; TEAM</p>
+      <p class="text-[8px] tracking-[0.25em] font-bold text-brand-darkBg/80 -mt-1">THE MISSIONARY JOURNEY</p>
+    </div>
+    <div class="hidden sm:flex items-center gap-3 shrink-0">
+      <button onclick="resetTour()" class="bg-brand-accent text-brand-peach px-3 py-1.5 rounded-full text-xs font-bold hover:bg-brand-darkBg transition-colors duration-300 shadow flex items-center gap-1.5">
+        <svg class="icon" style="width:13px;height:13px"><use href="#i-rotate"/></svg> 重啟旅程
+      </button>
+      <div class="w-8 h-8 rounded-full border border-brand-darkBg/30 flex items-center justify-center">
+        <svg class="icon spin-slow" style="width:16px;height:16px"><use href="#i-compass"/></svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="relative bg-gradient-to-b from-brand-darkBg to-brand-cardBg overflow-hidden border-b border-brand-accent/20">
+  <div class="max-w-7xl mx-auto px-6 py-12 lg:py-20 flex flex-col lg:flex-row items-center justify-between gap-12">
+    <div class="w-full lg:w-6/12 space-y-6 text-center lg:text-left">
+      <span class="retro-script text-brand-peach text-2xl lg:text-3xl block">Made for true fellowship</span>
+      <h1 class="retro-title text-5xl sm:text-7xl lg:text-8xl text-brand-lightText">
+        PRESS ON<br><span class="text-brand-accent">TOGETHER</span>
+      </h1>
+      <p class="text-2xl font-black text-brand-peach">保羅的宣教旅程<span class="text-brand-accent">與團隊同行</span></p>
+      <p class="text-brand-mutedText text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0">
+        四段經文，四段旅程：以弗所的告別、耶穌走向耶路撒冷的預言、特羅亞焦急尋找提多，到最終在特羅亞的團隊會合。
+      </p>
+      <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
+        <a href="#sec-map" onclick="event.preventDefault();jumpTo('sec-map')" class="bg-brand-accent hover:bg-brand-accentHover text-brand-lightText px-8 py-4 rounded-xl font-bold tracking-wider transition-all duration-300 transform hover:-translate-y-1 shadow-lg flex items-center gap-2">
+          開始互動導覽 <svg class="icon"><use href="#i-arrow-right"/></svg>
+        </a>
+        <button onclick="jumpTo('sec-5')" class="bg-transparent hover:bg-brand-peach/10 text-brand-peach border border-brand-peach/30 px-6 py-4 rounded-xl font-bold transition-all duration-300">
+          隨行同工名冊
+        </button>
+      </div>
+
+      <!-- stat tiles -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+        <div class="stat-tile"><p class="stat-num">4</p><p class="stat-label">段經文研讀</p></div>
+        <div class="stat-tile"><p class="stat-num">7</p><p class="stat-label">位同工同行</p></div>
+        <div class="stat-tile"><p class="stat-num">5</p><p class="stat-label">天航程 · 特羅亞</p></div>
+        <div class="stat-tile"><p class="stat-num">7</p><p class="stat-label">天停留 · 特羅亞</p></div>
+      </div>
+    </div>
+
+    <!-- 快速跳轉 badges + 旋轉徽章 -->
+    <div class="w-full lg:w-5/12 flex flex-col items-center gap-8">
+      <div class="flex flex-wrap gap-4 sm:gap-6 justify-center">
+        <div class="badge-hit" data-target="sec-1" tabindex="0" role="button" aria-label="研讀一：使徒行傳 20:1-6" onclick="jumpTo('sec-1')" onkeydown="if(event.key==='Enter')jumpTo('sec-1')">
+          <div class="badge-circle"><svg class="icon"><use href="#i-compass"/></svg></div>
+          <p class="badge-cap">使徒 20:1-6</p>
+        </div>
+        <div class="badge-hit" data-target="sec-2" tabindex="0" role="button" aria-label="研讀二：路加福音 18:31-34" onclick="jumpTo('sec-2')" onkeydown="if(event.key==='Enter')jumpTo('sec-2')">
+          <div class="badge-circle"><svg class="icon"><use href="#i-cross"/></svg></div>
+          <p class="badge-cap">路加 18:31</p>
+        </div>
+        <div class="badge-hit" data-target="sec-3" tabindex="0" role="button" aria-label="研讀三：哥林多後書 2:12-13" onclick="jumpTo('sec-3')" onkeydown="if(event.key==='Enter')jumpTo('sec-3')">
+          <div class="badge-circle"><svg class="icon"><use href="#i-door"/></svg></div>
+          <p class="badge-cap">林後 2:12</p>
+        </div>
+        <div class="badge-hit" data-target="sec-4" tabindex="0" role="button" aria-label="研讀四：使徒行傳 20:5-6" onclick="jumpTo('sec-4')" onkeydown="if(event.key==='Enter')jumpTo('sec-4')">
+          <div class="badge-circle"><svg class="icon"><use href="#i-users"/></svg></div>
+          <p class="badge-cap">使徒 20:5-6</p>
+        </div>
+        <div class="badge-hit" data-target="sec-5" tabindex="0" role="button" aria-label="隨行同工名冊" onclick="jumpTo('sec-5')" onkeydown="if(event.key==='Enter')jumpTo('sec-5')">
+          <div class="badge-circle"><svg class="icon"><use href="#i-id"/></svg></div>
+          <p class="badge-cap">同工名冊</p>
+        </div>
+      </div>
+
+      <!-- 復古圓形徽章 -->
+      <div class="relative w-56 h-32">
+        <div class="absolute inset-0 rounded-2xl bg-brand-darkBg border-2 border-brand-accent/30 flex items-center justify-center overflow-hidden">
+          <div class="absolute inset-0 opacity-10" style="background-image:linear-gradient(to right,#8fa0a6 1px,transparent 1px),linear-gradient(to bottom,#8fa0a6 1px,transparent 1px);background-size:14px 24px;"></div>
+          <p class="font-mono2 text-brand-accent text-xs tracking-widest z-10 pr-16">ACTS 20:1-6<br>ROADMAP</p>
+        </div>
+        <div class="absolute -bottom-6 -right-6 w-28 h-28 rounded-full bg-brand-accent border-4 border-brand-darkBg flex items-center justify-center shadow-2xl transform rotate-12 hover:rotate-45 transition-transform duration-700">
+          <div class="text-center text-brand-peach select-none">
+            <svg class="icon mx-auto mb-1" style="width:20px;height:20px"><use href="#i-anchor"/></svg>
+            <span class="font-mono2 text-[9px] block tracking-tight uppercase font-bold">TROAS BOUND</span>
+            <span class="text-[8px] opacity-80 block">特羅亞大會合</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 核心互動區：Canvas 地圖 + 站點面板 -->
+<section id="sec-map" class="max-w-7xl mx-auto px-4 sm:px-6 py-12 lg:py-16 scroll-mt-20">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+
+    <!-- 左：Canvas 地圖 -->
+    <div class="lg:col-span-7 bg-brand-cardBg rounded-2xl border-2 border-brand-accent/20 p-4 shadow-xl">
+      <div class="flex justify-between items-center mb-4 pb-3 border-b border-brand-accent/10 gap-2 flex-wrap">
+        <span class="text-[10px] font-mono2 tracking-widest text-brand-mutedText uppercase">Interactive Canvas Map</span>
+        <div class="flex gap-2 text-xs">
+          <button onclick="prevStep()" class="city-btn bg-brand-darkBg px-3 py-1.5 rounded-lg border border-brand-accent/30 text-brand-peach font-semibold flex items-center gap-1.5">
+            <svg class="icon" style="width:13px;height:13px"><use href="#i-arrow-left"/></svg> 上一站
+          </button>
+          <button onclick="nextStep()" class="bg-brand-accent hover:bg-brand-accentHover px-3 py-1.5 rounded-lg transition font-bold flex items-center gap-1.5">
+            下一站 <svg class="icon" style="width:13px;height:13px"><use href="#i-arrow-right"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="map-wrap bg-brand-darkBg rounded-xl overflow-hidden border border-brand-accent/10">
+        <canvas id="mapCanvas" role="img" aria-label="愛琴海宣教地圖：以弗所、馬其頓、希臘、腓立比、特羅亞五個站點，含同工原鄉與取消的敘利亞航線"></canvas>
+        <div class="absolute top-3 right-3 pointer-events-none bg-brand-accent/10 text-brand-accent border border-brand-accent/30 rounded px-2 py-1 text-[10px] uppercase tracking-widest font-mono2 flex items-center gap-1.5">
+          <svg class="icon" style="width:11px;height:11px"><use href="#i-pointer"/></svg> 點擊站點
+        </div>
+      </div>
+
+      <!-- 圖例 -->
+      <div class="flex flex-wrap gap-x-5 gap-y-2 mt-3 pt-3 border-t border-brand-accent/10 text-[11px] text-brand-mutedText">
+        <span class="flex items-center gap-1.5"><span class="legend-swatch" style="background:linear-gradient(90deg,#d85a2b,#fae1cc)"></span>使徒 20 主路線</span>
+        <span class="flex items-center gap-1.5"><span class="legend-swatch" style="background-image:repeating-linear-gradient(90deg,#fb7185 0 3px,transparent 3px 6px)"></span>取消的 Syria 航線</span>
+        <span class="flex items-center gap-1.5"><span class="legend-swatch" style="background-image:repeating-linear-gradient(90deg,#8fa0a6 0 2px,transparent 2px 5px)"></span>同工匯合路線</span>
+        <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full inline-block" style="background:#fae1cc"></span>當前站點</span>
+      </div>
+
+      <!-- 站點按鈕 (鍵盤等價操作) -->
+      <div class="mt-4 flex flex-wrap justify-center gap-2">
+        <button onclick="selectStage(0)" class="city-btn px-3 py-1.5 rounded-lg bg-brand-darkBg border border-brand-accent/30 text-xs font-semibold">1. 以弗所</button>
+        <button onclick="selectStage(1)" class="city-btn px-3 py-1.5 rounded-lg bg-brand-darkBg border border-brand-accent/30 text-xs font-semibold">2. 馬其頓</button>
+        <button onclick="selectStage(2)" class="city-btn px-3 py-1.5 rounded-lg bg-brand-darkBg border border-brand-accent/30 text-xs font-semibold">3. 希臘</button>
+        <button onclick="selectStage(3)" class="city-btn px-3 py-1.5 rounded-lg bg-brand-darkBg border border-brand-accent/30 text-xs font-semibold">4. 腓立比</button>
+        <button onclick="selectStage(4)" class="city-btn px-3 py-1.5 rounded-lg bg-brand-darkBg border border-brand-accent/30 text-xs font-semibold">5. 特羅亞</button>
+      </div>
+    </div>
+
+    <!-- 右：站點面板 -->
+    <div class="lg:col-span-5 space-y-5">
+      <div class="bg-brand-cardBg rounded-2xl border-2 border-brand-accent/20 p-6 shadow-xl relative overflow-hidden">
+        <div class="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-brand-accent/5 border border-brand-accent/10 pointer-events-none"></div>
+
+        <div class="flex items-center justify-between gap-2">
+          <span id="stageNum" class="font-mono2 text-brand-accent text-xs font-bold tracking-widest uppercase">STAGE 01</span>
+          <span id="stageScripture" class="text-xs bg-brand-accent/10 text-brand-peach border border-brand-accent/30 px-2 py-1 rounded">使徒行傳 20:1</span>
+        </div>
+
+        <h2 id="stageTitle" class="text-2xl sm:text-3xl font-extrabold text-brand-peach mt-2">動盪後的告別與鼓勵</h2>
+        <p id="stageLocation" class="text-brand-mutedText text-xs font-bold uppercase mt-1">地點：Ephesus 以弗所</p>
+
+        <hr class="border-brand-accent/10 my-4">
+
+        <p id="stageContent" class="text-sm text-brand-lightText leading-relaxed"></p>
+
+        <div id="stageCanDoWrap" class="mt-4 bg-brand-darkBg/60 border-l-4 border-emerald-500 p-3 rounded-r-xl">
+          <span class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1"><svg class="icon" style="width:12px;height:12px"><use href="#i-check"/></svg>可以這樣做</span>
+          <p id="stageCanDo" class="text-xs text-brand-lightText/90 mt-1"></p>
+        </div>
+        <div id="stageAvoidWrap" class="mt-3 bg-brand-darkBg/60 border-l-4 border-rose-500 p-3 rounded-r-xl">
+          <span class="text-[10px] font-bold text-rose-400 uppercase tracking-wider flex items-center gap-1"><svg class="icon" style="width:12px;height:12px"><use href="#i-x"/></svg>避免這樣</span>
+          <p id="stageAvoid" class="text-xs text-brand-lightText/90 mt-1"></p>
+        </div>
+
+        <button id="stageMore" onclick="jumpTo('sec-1')" class="mt-4 text-xs font-bold text-brand-accent hover:text-brand-peach transition flex items-center gap-1.5">
+          閱讀完整研讀 <svg class="icon" style="width:13px;height:13px"><use href="#i-arrow-right"/></svg>
+        </button>
+      </div>
+
+      <!-- 提多插曲 (林後 2:12-13) -->
+      <div id="titusPanel" class="bg-gradient-to-r from-brand-cardBg to-brand-darkBg border border-brand-accent/30 p-5 rounded-2xl shadow-lg relative hidden">
+        <span class="absolute -top-3 left-4 bg-brand-accent text-brand-peach text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded shadow">同期插曲</span>
+        <h3 class="font-bold text-sm text-brand-peach flex items-center gap-1.5 mt-1">
+          <svg class="icon text-brand-accent" style="width:15px;height:15px"><use href="#i-heart-crack"/></svg>
+          特羅亞的不安 · 哥林多後書 2:12-13
+        </h3>
+        <p class="text-xs text-brand-mutedText leading-relaxed mt-2">
+          Paul 在 Troas 宣教，福音的大門開了，工作也很順利，但他心裡卻放不下 Titus，最後還是決定前往 Macedonia 找他。連 Paul 這樣的使徒，也會為朋友焦慮。
+        </p>
+        <button onclick="jumpTo('sec-3')" class="mt-3 text-xs font-bold text-brand-accent hover:text-brand-peach transition flex items-center gap-1.5">
+          閱讀研讀三 <svg class="icon" style="width:13px;height:13px"><use href="#i-arrow-right"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 神隊友圖鑑 (7 位，點擊定位老家) -->
+<section id="sec-team" class="bg-brand-cardBg py-14 px-4 sm:px-6 border-y border-brand-accent/20 scroll-mt-20">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <span class="retro-script text-brand-accent text-xl">The Missionary Fellowship</span>
+      <h2 class="text-3xl font-black text-brand-peach uppercase tracking-widest mt-1">隨行同工 · 使徒行傳 20:4</h2>
+      <p class="text-brand-mutedText text-sm mt-2">七位同工來自不同城市，與 Paul 一起走完這段旅程。點擊隊友卡片，地圖會標出他的老家在哪裡。</p>
+    </div>
+
+    <div id="teamGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5"></div>
+
+    <div class="mt-6 rounded-2xl bg-brand-darkBg/60 border border-dashed border-brand-accent/30 p-4 text-sm text-brand-mutedText max-w-4xl mx-auto">
+      <span class="font-bold text-brand-peach">名單之外的兩位：</span>
+      Titus 提多雖不在使徒行傳 20:4 名單中，但同一時期 Paul 在哥林多後書提到他，稱他「同伴和幫手」(哥林多後書 8:23)，曾帶著為耶路撒冷教會募款的書信前往哥林多。使徒行傳 20:5-6 的敘述由「他們」轉為「我們」，一般認為是 Luke 本人在 Philippi 重新加入同行。
+    </div>
+  </div>
+</section>
+
+<!-- 研讀內容 -->
+<div class="max-w-3xl mx-auto px-4 sm:px-6 py-12 space-y-6 sm:space-y-8">
+
+  <!-- SEC 1 -->
+  <section id="sec-1" class="panel-hover bg-brand-cardBg rounded-2xl border-2 border-brand-accent/20 p-6 sm:p-9 scroll-mt-20">
+    <div class="flex items-center gap-2 mb-1 text-xs font-bold uppercase tracking-wider text-brand-accent">
+      <svg class="icon" style="width:14px;height:14px"><use href="#i-compass"/></svg>研讀一
+    </div>
+    <h2 class="text-2xl font-bold mb-1 text-brand-peach">使徒行傳 20:1-6</h2>
+    <p class="verse-tag mb-5">動盪後的告別與鼓勵 · 危險中的改變行程 · 宣教團隊的特羅亞會合</p>
+
+    <p class="text-brand-mutedText mb-6 text-sm">Ephesus 的騷亂平息後，Paul 啟程前往 Macedonia 和 Greece 繼續宣教，帶著各教會的同工一起前往 Troas。一路上有人陪、有人鼓勵，這是他撐過危險的方式。</p>
+
+    <div class="space-y-4 mb-6">
+      <div class="flex gap-3">
+        <span class="step-num">1</span>
+        <div><p class="font-bold text-sm mb-1 text-brand-lightText">動盪後的告別與鼓勵</p><p class="text-sm text-brand-mutedText">在 Ephesus 的大混亂平息之後，Paul 召集了當地的門徒，給予他們溫暖的勉勵 (20:1)。隨後他向大家辭別，動身前往 Macedonia，一路上用了很多話語安慰鼓勵當地信徒 (20:1-2)。</p></div>
+      </div>
+      <div class="flex gap-3">
+        <span class="step-num">2</span>
+        <div><p class="font-bold text-sm mb-1 text-brand-lightText">危險中的改變行程</p><p class="text-sm text-brand-mutedText">Paul 來到 Greece 居留 3 個月 (20:2-3)。他原本計劃直接搭船前往 Syria，卻在出發前得知有猶太人正密謀陷害他，於是臨時改變路線，繞道折返 Macedonia 走陸路 (20:3)。</p></div>
+      </div>
+      <div class="flex gap-3">
+        <span class="step-num">3</span>
+        <div><p class="font-bold text-sm mb-1 text-brand-lightText">宣教團隊的特羅亞會合</p><p class="text-sm text-brand-mutedText">同行的同工來自 Berea 的 Sopater、Thessalonica 的 Aristarchus 和 Secundus、Derbe 的 Gaius、Lystra 的 Timothy，以及 Asia 的 Tychicus 和 Trophimus (20:4)。這七位同工先走一步，前往 Troas 等候 (20:5)。除酵節後，Paul 一行從 Philippi 搭船，5 天後在 Troas 會合，停留 7 天 (20:6)。</p></div>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4 mb-6">
+      <div class="rounded-2xl bg-brand-darkBg/60 border-l-4 border-emerald-500 p-4">
+        <p class="flex items-center gap-2 text-sm font-bold mb-2 text-emerald-400"><svg class="icon" style="width:16px;height:16px"><use href="#i-check"/></svg>可以這樣做</p>
+        <ul class="text-sm text-brand-mutedText space-y-1.5 list-disc pl-4">
+          <li>在團隊或家庭面臨重大挑戰或混亂過後，主動去向身邊的人表達關心，給予實質的安慰。</li>
+          <li>當原定的計劃遇到突發的危機或危險時，保持靈活彈性，願意為了安全和長遠的益處調整腳步。</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl bg-brand-darkBg/60 border-l-4 border-rose-500 p-4">
+        <p class="flex items-center gap-2 text-sm font-bold mb-2 text-rose-400"><svg class="icon" style="width:16px;height:16px"><use href="#i-x"/></svg>避免這樣</p>
+        <ul class="text-sm text-brand-mutedText space-y-1.5 list-disc pl-4">
+          <li>面對別人的危機或低潮時冷眼旁觀，只顧自己的進度而忘記給予同伴適時的鼓勵。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-brand-accent/10 pt-4 mb-4">
+      <p class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-mutedText mb-2"><svg class="icon" style="width:14px;height:14px"><use href="#i-book"/></svg>章節對照與來源</p>
+      <p class="text-sm font-semibold mb-1 text-brand-lightText">Acts 20:1-6 (NIV)｜使徒行傳 20:1-6</p>
+      <ul class="text-sm space-y-0.5">
+        <li><a class="hover:underline text-brand-accent" href="https://www.biblegateway.com/passage/?search=Acts+20&version=CCB" target="_blank" rel="noopener">使徒行傳 20 | CCB 聖經</a></li>
+        <li><a class="hover:underline text-brand-accent" href="https://www.biblegateway.com/passage/?search=Acts+20&version=NIV" target="_blank" rel="noopener">Acts 20:1-20 NIV — Through Macedonia and Greece — Bible Gateway</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-mutedText mb-2"><svg class="icon" style="width:14px;height:14px"><use href="#i-tag"/></svg>詞彙對照</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="chip rounded-full px-3 py-1 text-xs">Paul 保羅</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Ephesus 以弗所</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Macedonia 馬其頓</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Greece 希臘</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Syria 敘利亞</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Berea 庇哩亞</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Sopater 所巴特</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Thessalonica 帖撒羅尼迦</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Aristarchus 亞里達古</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Secundus 西公都</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Derbe 特庇</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Gaius 該猶</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Timothy 提摩太</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Asia 亞細亞</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Tychicus 推基古</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Trophimus 特羅非摩</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Troas 特羅亞</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Philippi 腓立比</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEC 2 -->
+  <section id="sec-2" class="panel-hover bg-brand-cardBg rounded-2xl border-2 border-brand-accent/20 p-6 sm:p-9 scroll-mt-20">
+    <div class="flex items-center gap-2 mb-1 text-xs font-bold uppercase tracking-wider text-brand-accent">
+      <svg class="icon" style="width:14px;height:14px"><use href="#i-cross"/></svg>研讀二
+    </div>
+    <h2 class="text-2xl font-bold mb-1 text-brand-peach">路加福音 18:31-34</h2>
+    <p class="verse-tag mb-5">前往耶路撒冷的宣告 · 即將面臨的羞辱 · 受死與第三天復活 · 門徒的不明白</p>
+
+    <p class="text-brand-mutedText mb-6 text-sm">這是 Jesus 第三次向門徒預言自己即將受難與復活。他很清楚接下來會發生什麼事，但仍然決定走向 Jerusalem。</p>
+
+    <div class="space-y-4 mb-6">
+      <div class="flex gap-3">
+        <span class="step-num">1</span>
+        <div><p class="font-bold text-sm mb-1 text-brand-lightText">前往耶路撒冷的宣告</p><p class="text-sm text-brand-mutedText">Jesus 帶著 12 個門徒走到一邊，宣告他們正一起前往 Jerusalem，並強調先知所寫關於人子的一切預言都必須在這趟旅程中完全實現 (18:31)。</p></div>
+      </div>
+      <div class="flex gap-3">
+        <span class="step-num">2</span>
+        <div><p class="font-bold text-sm mb-1 text-brand-lightText">即將面臨的羞辱</p><p class="text-sm text-brand-mutedText">Jesus 具體描述接下來會發生的事：他將被交給 Roman 官員與士兵，受到殘忍的戲弄、侮辱，甚至被吐唾沫在臉上 (18:32)。</p></div>
+      </div>
+      <div class="flex gap-3">
+        <span class="step-num">3</span>
+        <div><p class="font-bold text-sm mb-1 text-brand-lightText">受死與第三天復活</p><p class="text-sm text-brand-mutedText">那些人會用鞭子抽打 Jesus，並殘忍地殺害他。但第三天，他就要復活 (18:33)。</p></div>
+      </div>
+      <div class="flex gap-3">
+        <span class="step-num">4</span>
+        <div><p class="font-bold text-sm mb-1 text-brand-lightText">門徒的不明白</p><p class="text-sm text-brand-mutedText">門徒對這些話一點也不明白，這話的意思對他們是隱藏的，他們不知道 Jesus 在說什麼 (18:34)。</p></div>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4 mb-6">
+      <div class="rounded-2xl bg-brand-darkBg/60 border-l-4 border-emerald-500 p-4">
+        <p class="flex items-center gap-2 text-sm font-bold mb-2 text-emerald-400"><svg class="icon" style="width:16px;height:16px"><use href="#i-check"/></svg>可以這樣做</p>
+        <ul class="text-sm text-brand-mutedText space-y-1.5 list-disc pl-4">
+          <li>面對生活中不可避免的困難或挑戰時，學習 Jesus 的勇氣，清楚知道自己的目標，不因害怕而逃避。</li>
+          <li>在經歷人生低谷或看似失敗的時刻，堅信上帝有反敗為勝的計劃，就像 Jesus 預言受死之後必定會復活一樣。</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl bg-brand-darkBg/60 border-l-4 border-rose-500 p-4">
+        <p class="flex items-center gap-2 text-sm font-bold mb-2 text-rose-400"><svg class="icon" style="width:16px;height:16px"><use href="#i-x"/></svg>避免這樣</p>
+        <ul class="text-sm text-brand-mutedText space-y-1.5 list-disc pl-4">
+          <li>只想要得到信仰帶來的祝福和好處，卻不願意面對跟隨 Jesus 過程中可能要付出的代價。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-brand-accent/10 pt-4 mb-4">
+      <p class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-mutedText mb-2"><svg class="icon" style="width:14px;height:14px"><use href="#i-book"/></svg>章節對照與來源</p>
+      <p class="text-sm font-semibold mb-1 text-brand-lightText">Luke 18:31-34 (NIV)｜路加福音 18:31-34</p>
+      <ul class="text-sm space-y-0.5">
+        <li><a class="hover:underline text-brand-accent" href="https://www.biblegateway.com/passage/?search=Luke+18&version=NIV" target="_blank" rel="noopener">Luke 18 (NIV) — Bible Gateway</a></li>
+        <li><a class="hover:underline text-brand-accent" href="https://www.biblegateway.com/passage/?search=Luke+18&version=CCB" target="_blank" rel="noopener">路加福音 18 | CCB 聖經</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-mutedText mb-2"><svg class="icon" style="width:14px;height:14px"><use href="#i-tag"/></svg>詞彙對照</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="chip rounded-full px-3 py-1 text-xs">Jesus 耶穌</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Jerusalem 耶路撒冷</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Roman 羅馬人</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEC 3 -->
+  <section id="sec-3" class="panel-hover bg-brand-cardBg rounded-2xl border-2 border-brand-accent/20 p-6 sm:p-9 scroll-mt-20">
+    <div class="flex items-center gap-2 mb-1 text-xs font-bold uppercase tracking-wider text-brand-accent">
+      <svg class="icon" style="width:14px;height:14px"><use href="#i-door"/></svg>研讀三
+    </div>
+    <h2 class="text-2xl font-bold mb-1 text-brand-peach">哥林多後書 2:12-13</h2>
+    <p class="verse-tag mb-5">特羅亞的福音大門 · 尋不著同工的心中不安 · 告別並前往馬其頓</p>
+
+    <p class="text-brand-mutedText mb-6 text-sm">Paul 在 Troas 宣教，福音的大門開了，工作也很順利，但他心裡卻放不下 Titus，最後還是決定前往 Macedonia 找他。連 Paul 這樣的使徒，也會為朋友焦慮。</p>
+
+    <div class="space-y-4 mb-6">
+      <div class="flex gap-3">
+        <span class="step-num">1</span>
+        <div><p class="font-bold text-sm mb-1 text-brand-lightText">特羅亞的福音大門</p><p class="text-sm text-brand-mutedText">Paul 為了傳揚 Christ 的福音來到 Troas，Lord 在那裡為他開啟傳福音的大門，傳道工作非常有長進 (2:12)。</p></div>
+      </div>
+      <div class="flex gap-3">
+        <span class="step-num">2</span>
+        <div><p class="font-bold text-sm mb-1 text-brand-lightText">尋不著同工的心中不安</p><p class="text-sm text-brand-mutedText">雖然福音工作順利，Paul 心中卻感到非常焦慮不安，因為他沒有在那裡遇見他所掛念的弟兄 Titus (2:13)。</p></div>
+      </div>
+      <div class="flex gap-3">
+        <span class="step-num">3</span>
+        <div><p class="font-bold text-sm mb-1 text-brand-lightText">告別並前往馬其頓</p><p class="text-sm text-brand-mutedText">由於內心一直放不下，Paul 無法繼續留在當地開拓，於是向 Troas 的信徒辭別，動身前往 Macedonia 去尋找 Titus (2:13)。</p></div>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4 mb-6">
+      <div class="rounded-2xl bg-brand-darkBg/60 border-l-4 border-emerald-500 p-4">
+        <p class="flex items-center gap-2 text-sm font-bold mb-2 text-emerald-400"><svg class="icon" style="width:16px;height:16px"><use href="#i-check"/></svg>可以這樣做</p>
+        <ul class="text-sm text-brand-mutedText space-y-1.5 list-disc pl-4">
+          <li>在職場或服事中取得巨大成就時，依然看重團隊同工之間的情感與身心狀態，不把人當成單純的工作工具。</li>
+          <li>當我們在生活中感到焦慮、不安或軟弱時，坦然接納自己的情緒，不需要刻意假裝堅強。</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl bg-brand-darkBg/60 border-l-4 border-rose-500 p-4">
+        <p class="flex items-center gap-2 text-sm font-bold mb-2 text-rose-400"><svg class="icon" style="width:16px;height:16px"><use href="#i-x"/></svg>避免這樣</p>
+        <ul class="text-sm text-brand-mutedText space-y-1.5 list-disc pl-4">
+          <li>只一味追求工作績效或事工的進度，卻冷落、忽略了身邊夥伴或家人的心理需求。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-brand-accent/10 pt-4 mb-4">
+      <p class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-mutedText mb-2"><svg class="icon" style="width:14px;height:14px"><use href="#i-book"/></svg>章節對照與來源</p>
+      <p class="text-sm font-semibold mb-1 text-brand-lightText">2 Corinthians 2:12-13 (NIV)｜哥林多後書 2:12-13</p>
+      <ul class="text-sm space-y-0.5">
+        <li><a class="hover:underline text-brand-accent" href="https://www.biblegateway.com/passage/?search=2+Corinthians+2&version=NIV" target="_blank" rel="noopener">2 Corinthians 2 (NIV) — Bible Gateway</a></li>
+        <li><a class="hover:underline text-brand-accent" href="https://www.biblegateway.com/passage/?search=2+Corinthians+2&version=CCB" target="_blank" rel="noopener">哥林多後書 2 | CCB 聖經</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-mutedText mb-2"><svg class="icon" style="width:14px;height:14px"><use href="#i-tag"/></svg>詞彙對照</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="chip rounded-full px-3 py-1 text-xs">Paul 保羅</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Christ 基督</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Troas 特羅亞</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Lord 主</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Titus 提多</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Macedonia 馬其頓</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEC 4 -->
+  <section id="sec-4" class="panel-hover bg-brand-cardBg rounded-2xl border-2 border-brand-accent/20 p-6 sm:p-9 scroll-mt-20">
+    <div class="flex items-center gap-2 mb-1 text-xs font-bold uppercase tracking-wider text-brand-accent">
+      <svg class="icon" style="width:14px;height:14px"><use href="#i-users"/></svg>研讀四
+    </div>
+    <h2 class="text-2xl font-bold mb-1 text-brand-peach">使徒行傳 20:5-6</h2>
+    <p class="verse-tag mb-5">宣教團隊在特羅亞的會合</p>
+
+    <p class="text-brand-mutedText mb-6 text-sm">這段經文記錄了 Paul 的宣教團隊在 Troas 會合的過程。同工們分別從幾個不同的城市出發，計劃好在同一個地方碰頭，即使中間隔著遙遠的距離。</p>
+
+    <p class="text-sm text-brand-mutedText mb-6 leading-relaxed">
+      在 Ephesus 的大混亂平息之後，Paul 啟程前往 Macedonia 和 Greece 繼續宣教 (20:1-2)。當他準備搭船前往 Syria 時，得知有猶太人正密謀陷害他，於是決定改變路線，繞道折返 Macedonia 走陸路 (20:3)。同行的同工來自 Berea 的 Sopater、Thessalonica 的 Aristarchus 和 Secundus、Derbe 的 Gaius、Lystra 的 Timothy，以及 Asia 的 Tychicus 和 Trophimus (20:4)。這群同工先走一步，前往 Troas 等候 Paul 和隨行的路加等人 (20:5)。除酵節後，Paul 一行才從 Philippi 搭船出發，5 天後在 Troas 與大家會合，所有人一起停留了 7 天 (20:6)。
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-4 mb-6">
+      <div class="rounded-2xl bg-brand-darkBg/60 border-l-4 border-emerald-500 p-4">
+        <p class="flex items-center gap-2 text-sm font-bold mb-2 text-emerald-400"><svg class="icon" style="width:16px;height:16px"><use href="#i-check"/></svg>可以這樣做</p>
+        <ul class="text-sm text-brand-mutedText space-y-1.5 list-disc pl-4">
+          <li>在團隊共同執行一項長期的任務或面對挑戰時，主動與夥伴協調分工，有人先出發預備、有人隨後跟上，彼此信任。</li>
+          <li>珍惜身邊一起奮鬥的夥伴，不論是職場同事還是教會同工，在特定的定點聚集時，把握機會彼此關心、陪伴。</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl bg-brand-darkBg/60 border-l-4 border-rose-500 p-4">
+        <p class="flex items-center gap-2 text-sm font-bold mb-2 text-rose-400"><svg class="icon" style="width:16px;height:16px"><use href="#i-x"/></svg>避免這樣</p>
+        <ul class="text-sm text-brand-mutedText space-y-1.5 list-disc pl-4">
+          <li>在團隊前進時堅持特立獨行，不願意配合整體的行程調整，或是與其他夥伴失去聯繫。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-brand-accent/10 pt-4 mb-4">
+      <p class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-mutedText mb-2"><svg class="icon" style="width:14px;height:14px"><use href="#i-book"/></svg>章節對照與來源</p>
+      <p class="text-sm font-semibold mb-1 text-brand-lightText">Acts 20:1-6 (NIV)｜使徒行傳 20:1-6</p>
+      <ul class="text-sm space-y-0.5">
+        <li><a class="hover:underline text-brand-accent" href="https://www.biblegateway.com/passage/?search=Acts+20&version=NIV" target="_blank" rel="noopener">Acts 20 (NIV) — Bible Gateway</a></li>
+        <li><a class="hover:underline text-brand-accent" href="https://www.biblegateway.com/passage/?search=Acts+20&version=CCB" target="_blank" rel="noopener">使徒行傳 20 | CCB 聖經</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-mutedText mb-2"><svg class="icon" style="width:14px;height:14px"><use href="#i-tag"/></svg>詞彙對照</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="chip rounded-full px-3 py-1 text-xs">Paul 保羅</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Ephesus 以弗所</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Macedonia 馬其頓</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Greece 希臘</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Syria 敘利亞</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Berea 庇哩亞</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Sopater 所巴特</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Thessalonica 帖撒羅尼迦</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Aristarchus 亞里達古</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Secundus 西公都</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Derbe 特庇</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Gaius 該猶</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Timothy 提摩太</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Asia 亞細亞</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Tychicus 推基古</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Trophimus 特羅非摩</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Troas 特羅亞</span>
+        <span class="chip rounded-full px-3 py-1 text-xs">Philippi 腓立比</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEC 5: Companions roster -->
+  <section id="sec-5" class="panel-hover bg-brand-cardBg rounded-2xl border-2 border-brand-accent/20 p-6 sm:p-9 scroll-mt-20">
+    <div class="flex items-center gap-2 mb-1 text-xs font-bold uppercase tracking-wider text-brand-accent">
+      <svg class="icon" style="width:14px;height:14px"><use href="#i-id"/></svg>隨行同工名冊
+    </div>
+    <h2 class="text-2xl font-bold mb-1 text-brand-peach">Companions · 使徒行傳 20:4 名單</h2>
+    <p class="verse-tag mb-6">七位同工來自不同城市，與 Paul 一起走完這段旅程</p>
+
+    <div class="grid sm:grid-cols-2 gap-4 mb-6">
+      <div class="rounded-2xl bg-brand-darkBg/60 border border-brand-accent/20 p-4 flex gap-3">
+        <span class="step-num" style="width:40px;height:40px;font-size:13px">所</span>
+        <div><p class="font-bold text-sm text-brand-lightText">Sopater 所巴特</p><p class="text-xs text-brand-mutedText mb-1">Berea 庇哩亞 · Pyrrhus 之子</p><p class="text-sm text-brand-mutedText">可能與羅馬書 16:21 中保羅稱為「親屬」的 Sosipater 為同一人。</p></div>
+      </div>
+      <div class="rounded-2xl bg-brand-darkBg/60 border border-brand-accent/20 p-4 flex gap-3">
+        <span class="step-num" style="width:40px;height:40px;font-size:13px">亞</span>
+        <div><p class="font-bold text-sm text-brand-lightText">Aristarchus 亞里達古</p><p class="text-xs text-brand-mutedText mb-1">Thessalonica 帖撒羅尼迦 · 馬其頓人</p><p class="text-sm text-brand-mutedText">後來與 Paul 一同被囚，Paul 稱他「同被囚的」(歌羅西書 4:10)。</p></div>
+      </div>
+      <div class="rounded-2xl bg-brand-darkBg/60 border border-brand-accent/20 p-4 flex gap-3">
+        <span class="step-num" style="width:40px;height:40px;font-size:13px">西</span>
+        <div><p class="font-bold text-sm text-brand-lightText">Secundus 西公都</p><p class="text-xs text-brand-mutedText mb-1">Thessalonica 帖撒羅尼迦</p><p class="text-sm text-brand-mutedText">新約僅在此處提及，生平細節不詳。</p></div>
+      </div>
+      <div class="rounded-2xl bg-brand-darkBg/60 border border-brand-accent/20 p-4 flex gap-3">
+        <span class="step-num" style="width:40px;height:40px;font-size:13px">該</span>
+        <div><p class="font-bold text-sm text-brand-lightText">Gaius 該猶</p><p class="text-xs text-brand-mutedText mb-1">Derbe 特庇</p><p class="text-sm text-brand-mutedText">路加特別標明「特庇的該猶」，以區別使徒行傳 19:29 那位「馬其頓的該猶」——新約中同名者不只一位。</p></div>
+      </div>
+      <div class="rounded-2xl bg-brand-darkBg/60 border border-brand-accent/20 p-4 flex gap-3">
+        <span class="step-num" style="width:40px;height:40px;font-size:13px">提</span>
+        <div><p class="font-bold text-sm text-brand-lightText">Timothy 提摩太</p><p class="text-xs text-brand-mutedText mb-1">Lystra 路司得</p><p class="text-sm text-brand-mutedText">Paul 最親密的同工之一，母親 Eunice、祖母 Lois 皆是信徒 (提摩太後書 1:5)；後來 Paul 寫了提摩太前書、提摩太後書給他。</p></div>
+      </div>
+      <div class="rounded-2xl bg-brand-darkBg/60 border border-brand-accent/20 p-4 flex gap-3">
+        <span class="step-num" style="width:40px;height:40px;font-size:13px">推</span>
+        <div><p class="font-bold text-sm text-brand-lightText">Tychicus 推基古</p><p class="text-xs text-brand-mutedText mb-1">Asia 亞細亞</p><p class="text-sm text-brand-mutedText">新約提到五次，Paul 稱他「親愛的兄弟、忠心的執事」(以弗所書 6:21、歌羅西書 4:7)。</p></div>
+      </div>
+      <div class="rounded-2xl bg-brand-darkBg/60 border border-brand-accent/20 p-4 flex gap-3 sm:col-span-2">
+        <span class="step-num" style="width:40px;height:40px;font-size:13px">特</span>
+        <div><p class="font-bold text-sm text-brand-lightText">Trophimus 特羅非摩</p><p class="text-xs text-brand-mutedText mb-1">Asia 亞細亞 · 以弗所人</p><p class="text-sm text-brand-mutedText">後來在耶路撒冷，猶太人誤以為 Paul 帶他這外邦人進聖殿，引發暴動導致 Paul 被捕 (使徒行傳 21:29)；Paul 最後一次旅程中，他在米利都因病被留下 (提摩太後書 4:20)。</p></div>
+      </div>
+    </div>
+
+    <div class="rounded-2xl bg-brand-darkBg/60 border border-dashed border-brand-accent/30 p-4 mb-6 text-sm text-brand-mutedText">
+      <span class="font-bold text-brand-peach">名單之外的兩位：</span>
+      Titus 提多雖不在使徒行傳 20:4 名單中，但同一時期 Paul 在哥林多後書提到他，稱他「同伴和幫手」(哥林多後書 8:23)，曾帶著為耶路撒冷教會募款的書信前往哥林多。使徒行傳 20:5-6 的敘述由「他們」轉為「我們」，一般認為是 Luke 本人在 Philippi 重新加入同行。
+    </div>
+
+    <div class="border-t border-brand-accent/10 pt-4">
+      <p class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-mutedText mb-2"><svg class="icon" style="width:14px;height:14px"><use href="#i-book"/></svg>研究來源</p>
+      <ul class="text-sm space-y-0.5">
+        <li><a class="hover:underline text-brand-accent" href="https://biblehub.com/acts/20-4.htm" target="_blank" rel="noopener">Acts 20:4 — BibleHub</a></li>
+        <li><a class="hover:underline text-brand-accent" href="https://en.wikipedia.org/wiki/Trophimus" target="_blank" rel="noopener">Trophimus — Wikipedia</a></li>
+        <li><a class="hover:underline text-brand-accent" href="https://www.gotquestions.org/Gaius-in-the-Bible.html" target="_blank" rel="noopener">Who was Gaius in the Bible? — GotQuestions.org</a></li>
+        <li><a class="hover:underline text-brand-accent" href="https://www.gotquestions.org/life-Titus.html" target="_blank" rel="noopener">Who was Titus in the Bible? — GotQuestions.org</a></li>
+        <li><a class="hover:underline text-brand-accent" href="https://www.esv.org/verses/2+Timothy+4:20/" target="_blank" rel="noopener">2 Timothy 4:20 — ESV.org</a></li>
+        <li><a class="hover:underline text-brand-accent" href="https://www.gotquestions.org/Lois-and-Eunice.html" target="_blank" rel="noopener">Who were Lois and Eunice in the Bible? — GotQuestions.org</a></li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<footer class="bg-brand-darkBg text-brand-mutedText border-t-2 border-brand-accent/20 py-10 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="text-center md:text-left">
+      <p class="font-extrabold text-brand-peach text-lg tracking-wider">保羅的宣教旅程與團隊同行</p>
+      <p class="text-xs">使徒行傳 20:1-6 · 路加福音 18:31-34 · 哥林多後書 2:12-13</p>
+    </div>
+    <span class="text-xs font-mono2">PAUL &amp; TEAM · RETRO CANVAS</span>
+  </div>
+</footer>
+
+<script>
+/* ===== 站點資料 (內容取自定案研讀資料) ===== */
+const stages = [
+  {
+    num: "STAGE 01", scripture: "使徒行傳 20:1", title: "動盪後的告別與鼓勵",
+    location: "Ephesus 以弗所", coords: { x: 625, y: 400 }, section: "sec-1",
+    content: "在 Ephesus 的大混亂平息之後，Paul 召集了當地的門徒，給予他們溫暖的勉勵 (20:1)。隨後他向大家辭別，動身前往 Macedonia。",
+    canDo: "在團隊或家庭面臨重大挑戰或混亂過後，主動去向身邊的人表達關心，給予實質的安慰。",
+    avoid: "面對別人的危機或低潮時冷眼旁觀，只顧自己的進度而忘記給予同伴適時的鼓勵。",
+    showTitus: false
+  },
+  {
+    num: "STAGE 02", scripture: "使徒行傳 20:1-2", title: "一路安慰鼓勵",
+    location: "Macedonia 馬其頓", coords: { x: 250, y: 130 }, section: "sec-1",
+    content: "Paul 動身前往 Macedonia，一路上用了很多話語安慰鼓勵當地信徒 (20:1-2)。",
+    canDo: null, avoid: null, showTitus: false
+  },
+  {
+    num: "STAGE 03", scripture: "使徒行傳 20:2-3", title: "危險中的改變行程",
+    location: "Greece 希臘 (Achaia)", coords: { x: 215, y: 420 }, section: "sec-1",
+    content: "Paul 來到 Greece 居留 3 個月 (20:2-3)。他原本計劃直接搭船前往 Syria，卻在出發前得知有猶太人正密謀陷害他，於是臨時改變路線，繞道折返 Macedonia 走陸路 (20:3)。",
+    canDo: "當原定的計劃遇到突發的危機或危險時，保持靈活彈性，願意為了安全和長遠的益處調整腳步。",
+    avoid: null, showTitus: false
+  },
+  {
+    num: "STAGE 04", scripture: "使徒行傳 20:6", title: "腓立比啟航",
+    location: "Philippi 腓立比", coords: { x: 300, y: 90 }, section: "sec-4",
+    content: "除酵節後，Paul 一行從 Philippi 搭船出發，5 天後抵達 Troas (20:6)。使徒行傳 20:5-6 的敘述由「他們」轉為「我們」，一般認為是 Luke 本人在 Philippi 重新加入同行。",
+    canDo: null, avoid: null, showTitus: false
+  },
+  {
+    num: "STAGE 05", scripture: "使徒行傳 20:5-6", title: "宣教團隊的特羅亞會合",
+    location: "Troas 特羅亞", coords: { x: 560, y: 175 }, section: "sec-4",
+    content: "同工們先走一步，前往 Troas 等候 Paul 和隨行的路加等人 (20:5)。除酵節後，Paul 一行才從 Philippi 搭船出發，5 天後在 Troas 與大家會合，所有人一起停留了 7 天 (20:6)。",
+    canDo: "在團隊共同執行一項長期的任務或面對挑戰時，主動與夥伴協調分工，有人先出發預備、有人隨後跟上，彼此信任。",
+    avoid: "在團隊前進時堅持特立獨行，不願意配合整體的行程調整，或是與其他夥伴失去聯繫。",
+    showTitus: true
+  }
+];
+
+/* 背景城市 (同工原鄉 + 地標) */
+const mapCities = [
+  { key: "Berea",        name: "Berea 庇哩亞",        x: 165, y: 215, side: 'right', dy: 3 },
+  { key: "Thessalonica", name: "Thessalonica 帖撒羅尼迦", x: 235, y: 180, side: 'right', dy: -8 },
+  { key: "Derbe",        name: "Derbe 特庇",          x: 720, y: 470, side: 'left', dy: 3 },
+  { key: "Lystra",       name: "Lystra 路司得",    x: 660, y: 442, side: 'right', dy: 3 },
+  { key: "Asia",         name: "Asia 亞細亞",          x: 690, y: 330, side: 'left', dy: 3 },
+  { key: "Syria",        name: "Syria 敘利亞 (原定目的地)", x: 748, y: 528, side: 'right', dy: -10 },
+  { key: "Jerusalem",    name: "Jerusalem 耶路撒冷 (路加 18)", x: 700, y: 578, side: 'right', dy: 3 }
+];
+
+/* 七位同工 → 原鄉對應 */
+const companions = [
+  { name: "Sopater 所巴特",     tag: "所", home: "Berea",        homeLabel: "Berea 庇哩亞",        desc: "Pyrrhus 之子，可能與羅馬書 16:21 的 Sosipater 為同一人。" },
+  { name: "Aristarchus 亞里達古", tag: "亞", home: "Thessalonica", homeLabel: "Thessalonica 帖撒羅尼迦", desc: "後來與 Paul 一同被囚，Paul 稱他「同被囚的」(歌羅西書 4:10)。" },
+  { name: "Secundus 西公都",    tag: "西", home: "Thessalonica", homeLabel: "Thessalonica 帖撒羅尼迦", desc: "新約僅在此處提及，生平細節不詳。" },
+  { name: "Gaius 該猶",         tag: "該", home: "Derbe",        homeLabel: "Derbe 特庇",          desc: "路加特別標明「特庇的該猶」，以區別使徒行傳 19:29 那位「馬其頓的該猶」。" },
+  { name: "Timothy 提摩太",     tag: "提", home: "Lystra",       homeLabel: "Lystra 路司得",    desc: "Paul 最親密的同工之一，母親 Eunice、祖母 Lois 皆是信徒 (提摩太後書 1:5)。" },
+  { name: "Tychicus 推基古",    tag: "推", home: "Asia",         homeLabel: "Asia 亞細亞",          desc: "Paul 稱他「親愛的兄弟、忠心的執事」(以弗所書 6:21)。" },
+  { name: "Trophimus 特羅非摩", tag: "特", home: "Asia",         homeLabel: "Asia 亞細亞 · 以弗所人", desc: "後來在耶路撒冷因他引發暴動導致 Paul 被捕 (使徒行傳 21:29)。" }
+];
+
+const VW = 800, VH = 600;
+let currentStage = 0;
+let canvas, ctx, dpr = 1;
+let shipX = stages[0].coords.x, shipY = stages[0].coords.y;
+let shipTX = shipX, shipTY = shipY;
+let highlight = null; // { x, y, label, until }
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ===== 初始化 ===== */
+window.addEventListener('DOMContentLoaded', () => {
+  canvas = document.getElementById('mapCanvas');
+  ctx = canvas.getContext('2d');
+
+  const ro = new ResizeObserver(resizeCanvas);
+  ro.observe(canvas.parentElement);
+  resizeCanvas();
+
+  canvas.addEventListener('click', handleClick);
+  canvas.addEventListener('mousemove', handleMove);
+
+  buildTeamGrid();
+  selectStage(0, false);
+
+  if (reducedMotion) { drawMap(); } else { requestAnimationFrame(animate); }
+});
+
+function resizeCanvas() {
+  const box = canvas.parentElement;
+  dpr = window.devicePixelRatio || 1;
+  canvas.width = Math.max(1, box.clientWidth * dpr);
+  canvas.height = Math.max(1, box.clientHeight * dpr);
+  if (reducedMotion && ctx) drawMap();
+}
+
+/* 點擊：鄰近吸附最近站點 (44px 螢幕距離內) */
+function handleClick(e) {
+  const rect = canvas.getBoundingClientRect();
+  const mx = ((e.clientX - rect.left) / rect.width) * VW;
+  const my = ((e.clientY - rect.top) / rect.height) * VH;
+  const tol = 44 * (VW / rect.width); // 螢幕 44px 換算回 viewBox 座標
+  let best = -1, bestD = tol;
+  stages.forEach((s, i) => {
+    const d = Math.hypot(mx - s.coords.x, my - s.coords.y);
+    if (d < bestD) { bestD = d; best = i; }
+  });
+  if (best >= 0) selectStage(best);
+}
+
+function handleMove(e) {
+  const rect = canvas.getBoundingClientRect();
+  const mx = ((e.clientX - rect.left) / rect.width) * VW;
+  const my = ((e.clientY - rect.top) / rect.height) * VH;
+  const tol = 30 * (VW / rect.width);
+  const hover = stages.some(s => Math.hypot(mx - s.coords.x, my - s.coords.y) < tol);
+  canvas.style.cursor = hover ? 'pointer' : 'default';
+}
+
+/* ===== 站點切換 ===== */
+function selectStage(i, scroll) {
+  currentStage = i;
+  const s = stages[i];
+  shipTX = s.coords.x; shipTY = s.coords.y;
+  if (reducedMotion) { shipX = shipTX; shipY = shipTY; }
+
+  document.getElementById('stageNum').textContent = s.num;
+  document.getElementById('stageScripture').textContent = s.scripture;
+  document.getElementById('stageTitle').textContent = s.title;
+  document.getElementById('stageLocation').textContent = '地點：' + s.location;
+  document.getElementById('stageContent').textContent = s.content;
+
+  const cd = document.getElementById('stageCanDoWrap');
+  const av = document.getElementById('stageAvoidWrap');
+  cd.classList.toggle('hidden', !s.canDo);
+  av.classList.toggle('hidden', !s.avoid);
+  if (s.canDo) document.getElementById('stageCanDo').textContent = s.canDo;
+  if (s.avoid) document.getElementById('stageAvoid').textContent = s.avoid;
+
+  document.getElementById('titusPanel').classList.toggle('hidden', !s.showTitus);
+  document.getElementById('stageMore').setAttribute('onclick', "jumpTo('" + s.section + "')");
+
+  document.querySelectorAll('.city-btn').forEach((btn, idx) => {
+    // 前兩顆是上一站/下一站以外的 city-btn 也用同 class；只針對 5 顆站點鈕比對文字序號
+    const m = btn.textContent.trim().match(/^(\d)\./);
+    if (m) btn.classList.toggle('active', parseInt(m[1], 10) - 1 === i);
+  });
+
+  if (reducedMotion) drawMap();
+}
+
+function nextStep() { selectStage((currentStage + 1) % stages.length); }
+function prevStep() { selectStage((currentStage - 1 + stages.length) % stages.length); }
+function resetTour() { selectStage(0); jumpTo('sec-map'); }
+
+/* ===== 隊友卡片 ===== */
+function buildTeamGrid() {
+  const grid = document.getElementById('teamGrid');
+  companions.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'team-card bg-brand-darkBg border border-brand-accent/20 p-4 sm:p-5 rounded-2xl text-center shadow-lg';
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', c.name + '，來自 ' + c.homeLabel + '，點擊在地圖上定位');
+    card.innerHTML =
+      '<div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto rounded-full bg-brand-cardBg border-2 border-brand-accent flex items-center justify-center text-brand-accent text-lg font-black mb-3 shadow">' + c.tag + '</div>' +
+      '<p class="tc-title font-extrabold text-sm text-brand-peach transition">' + c.name + '</p>' +
+      '<p class="tc-home text-[10px] text-brand-accent font-mono2 mt-0.5 transition">來自：' + c.homeLabel + '</p>' +
+      '<p class="tc-desc text-xs text-brand-mutedText mt-2 transition">' + c.desc + '</p>';
+    const act = () => locateHome(c);
+    card.addEventListener('click', act);
+    card.addEventListener('keydown', e => { if (e.key === 'Enter') act(); });
+    grid.appendChild(card);
+  });
+}
+
+function locateHome(c) {
+  const city = mapCities.find(m => m.key === c.home);
+  if (!city) return;
+  highlight = { x: city.x, y: city.y, label: c.name, until: Date.now() + 6000 };
+  showToast('已在地圖上定位 ' + c.name + ' 的原鄉：' + c.homeLabel);
+  jumpTo('sec-map');
+  if (reducedMotion) drawMap();
+}
+
+function showToast(msg) {
+  document.querySelectorAll('.toast').forEach(t => t.remove());
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.setAttribute('role', 'status');
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 4000);
+}
+
+/* ===== 導覽 ===== */
+function jumpTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function setActive(id) {
+  document.querySelectorAll('.nav-pill').forEach(p => p.classList.toggle('active', p.dataset.target === id));
+  document.querySelectorAll('.badge-hit').forEach(b => b.classList.toggle('active', b.dataset.target === id));
+  document.querySelectorAll('section[id^="sec-"]').forEach(s => s.classList.toggle('active-section', s.id === id && s.classList.contains('panel-hover')));
+}
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+}, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+document.querySelectorAll('#sec-map, #sec-1, #sec-2, #sec-3, #sec-4, #sec-5').forEach(s => io.observe(s));
+
+/* ===== Canvas 繪製 ===== */
+function drawMap() {
+  const w = canvas.width, h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+  ctx.save();
+  ctx.scale(w / VW, h / VH);
+
+  // 海洋
+  ctx.fillStyle = '#091d26';
+  ctx.fillRect(0, 0, VW, VH);
+
+  // 經緯格
+  ctx.strokeStyle = 'rgba(216,90,43,0.06)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x <= VW; x += 80) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, VH); ctx.stroke(); }
+  for (let y = 0; y <= VH; y += 80) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(VW, y); ctx.stroke(); }
+
+  // 陸地：西 (Macedonia / Greece)
+  ctx.fillStyle = '#12333f';
+  ctx.strokeStyle = 'rgba(250,225,204,0.15)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(0, 0); ctx.lineTo(315, 0);
+  ctx.bezierCurveTo(335, 80, 290, 140, 310, 200);
+  ctx.bezierCurveTo(322, 260, 268, 300, 285, 350);
+  ctx.bezierCurveTo(298, 420, 248, 470, 265, 530);
+  ctx.bezierCurveTo(272, 560, 250, 585, 255, 600);
+  ctx.lineTo(0, 600); ctx.closePath(); ctx.fill(); ctx.stroke();
+
+  // 陸地：東 (Asia Minor)
+  ctx.beginPath();
+  ctx.moveTo(800, 0); ctx.lineTo(545, 0);
+  ctx.bezierCurveTo(530, 80, 545, 140, 570, 190);
+  ctx.bezierCurveTo(595, 260, 585, 330, 615, 390);
+  ctx.bezierCurveTo(635, 460, 620, 520, 680, 600);
+  ctx.lineTo(800, 600); ctx.closePath(); ctx.fill(); ctx.stroke();
+
+  // 海域標籤
+  ctx.fillStyle = 'rgba(143,160,166,0.45)';
+  ctx.font = '600 13px Inter, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('AEGEAN SEA 愛琴海', 435, 355);
+  ctx.font = '700 12px Inter, sans-serif';
+  ctx.fillStyle = 'rgba(250,225,204,0.4)';
+  ctx.fillText('MACEDONIA 馬其頓', 150, 55);
+  ctx.fillText('ACHAIA 亞該亞 / 希臘', 130, 505);
+  ctx.fillText('ASIA 亞細亞', 700, 120);
+
+  // 取消的 Syria 航線 (warn dashed)
+  ctx.strokeStyle = '#fb7185';
+  ctx.lineWidth = 1.6;
+  ctx.setLineDash([4, 5]);
+  if (!reducedMotion) ctx.lineDashOffset = -(Date.now() / 90) % 9;
+  ctx.beginPath();
+  ctx.moveTo(222, 428);
+  ctx.quadraticCurveTo(480, 585, 738, 532);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.lineDashOffset = 0;
+  drawArrowHead(718, 537, 740, 532, '#fb7185');
+  ctx.fillStyle = 'rgba(251,113,133,0.85)';
+  ctx.font = '600 10px Inter, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('原定直航 Syria，因猶太人密謀而取消', 430, 588);
+
+  // 同工匯合路線 (faint dashed → Troas)
+  ctx.strokeStyle = 'rgba(143,160,166,0.5)';
+  ctx.lineWidth = 1.2;
+  ctx.setLineDash([2, 4]);
+  ['Berea', 'Thessalonica', 'Derbe', 'Lystra'].forEach(k => {
+    const c = mapCities.find(m => m.key === k);
+    const west = c.x < 400;
+    ctx.beginPath();
+    ctx.moveTo(c.x, c.y);
+    if (west) ctx.quadraticCurveTo((c.x + 560) / 2, 120, 555, 172);
+    else ctx.quadraticCurveTo((c.x + 560) / 2 + 30, (c.y + 175) / 2, 565, 182);
+    ctx.stroke();
+  });
+  ctx.setLineDash([]);
+
+  // 主路線 (漸層實線)：Ephesus → Macedonia → Greece → 折返 → Philippi → Troas
+  const grad = ctx.createLinearGradient(625, 400, 560, 175);
+  grad.addColorStop(0, '#d85a2b');
+  grad.addColorStop(1, '#fae1cc');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = 3;
+  ctx.lineCap = 'round';
+  ctx.setLineDash([9, 6]);
+  ctx.beginPath();
+  ctx.moveTo(625, 400);
+  ctx.bezierCurveTo(500, 330, 400, 190, 250, 130);   // 海路 → Macedonia
+  ctx.bezierCurveTo(205, 220, 185, 330, 215, 420);   // 陸路南下 → Greece
+  ctx.bezierCurveTo(255, 340, 272, 190, 300, 90);    // 陸路折返 → Philippi
+  ctx.quadraticCurveTo(430, 75, 560, 175);           // 搭船 → Troas
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // 路線註記
+  ctx.fillStyle = 'rgba(143,160,166,0.85)';
+  ctx.font = '600 10px Inter, sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('居留 3 個月', 95, 340);
+  ctx.fillText('繞道折返，走陸路', 300, 260);
+  ctx.fillText('5 天航程', 430, 135);
+
+  // 背景城市
+  ctx.textAlign = 'left';
+  mapCities.forEach(c => {
+    ctx.fillStyle = '#8fa0a6';
+    ctx.beginPath(); ctx.arc(c.x, c.y, 4, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(143,160,166,0.75)';
+    ctx.font = '600 9.5px Inter, sans-serif';
+    const right = c.side === 'right';
+    ctx.textAlign = right ? 'right' : 'left';
+    ctx.fillText(c.name, c.x + (right ? -9 : 9), c.y + (c.dy || 3));
+  });
+
+  // 定位高亮 (隊友原鄉)
+  if (highlight && Date.now() < highlight.until) {
+    const pulse = reducedMotion ? 0 : Math.sin(Date.now() / 180) * 5;
+    ctx.fillStyle = 'rgba(216,90,43,0.3)';
+    ctx.beginPath(); ctx.arc(highlight.x, highlight.y, 26 + pulse, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = '#d85a2b';
+    ctx.lineWidth = 2.5;
+    ctx.fillStyle = '#fae1cc';
+    ctx.beginPath(); ctx.arc(highlight.x, highlight.y, 8, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+  } else if (highlight && Date.now() >= highlight.until) {
+    highlight = null;
+  }
+
+  // 五個站點節點
+  stages.forEach((s, i) => {
+    const cur = i === currentStage;
+    const { x, y } = s.coords;
+    if (cur) {
+      const glow = reducedMotion ? 0 : Math.sin(Date.now() / 200) * 4;
+      ctx.fillStyle = 'rgba(250,225,204,0.18)';
+      ctx.beginPath(); ctx.arc(x, y, 22 + glow, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.fillStyle = cur ? '#fae1cc' : '#d85a2b';
+    ctx.strokeStyle = '#091d26';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(x, y, cur ? 13 : 10, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = cur ? '#091d26' : '#fae1cc';
+    ctx.font = '800 11px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(String(i + 1), x, y + 4);
+
+    // 站名標籤 (錯位避開路線)
+    ctx.fillStyle = cur ? '#fae1cc' : 'rgba(143,160,166,0.9)';
+    ctx.font = (cur ? '800 11.5px ' : '600 10.5px ') + 'Inter, sans-serif';
+    const off = stageLabelOffset(i);
+    ctx.textAlign = off.align;
+    ctx.fillText(s.location, x + off.dx, y + off.dy);
+  });
+
+  drawShip();
+  ctx.restore();
+}
+
+function stageLabelOffset(i) {
+  // 0 Ephesus, 1 Macedonia, 2 Greece, 3 Philippi, 4 Troas
+  switch (i) {
+    case 0: return { dx: 18, dy: 5, align: 'left' };
+    case 1: return { dx: -16, dy: 5, align: 'right' };
+    case 2: return { dx: 0, dy: 30, align: 'center' };
+    case 3: return { dx: 0, dy: -18, align: 'center' };
+    case 4: return { dx: 18, dy: 5, align: 'left' };
+    default: return { dx: 14, dy: 4, align: 'left' };
+  }
+}
+
+function drawArrowHead(fromX, fromY, toX, toY, color) {
+  const ang = Math.atan2(toY - fromY, toX - fromX);
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.moveTo(toX, toY);
+  ctx.lineTo(toX - 9 * Math.cos(ang - 0.4), toY - 9 * Math.sin(ang - 0.4));
+  ctx.lineTo(toX - 9 * Math.cos(ang + 0.4), toY - 9 * Math.sin(ang + 0.4));
+  ctx.closePath(); ctx.fill();
+}
+
+/* 宣教小船 (往目標站點平滑移動 + 波浪漂浮) */
+function drawShip() {
+  shipX += (shipTX - shipX) * 0.05;
+  shipY += (shipTY - shipY) * 0.05;
+  ctx.save();
+  ctx.translate(shipX, shipY - 26);
+  if (!reducedMotion) ctx.translate(0, Math.sin(Date.now() / 150) * 3);
+
+  // 船身
+  ctx.fillStyle = '#fae1cc';
+  ctx.beginPath();
+  ctx.moveTo(-13, 4); ctx.lineTo(13, 4); ctx.lineTo(9, 11); ctx.lineTo(-9, 11);
+  ctx.closePath(); ctx.fill();
+  // 桅杆
+  ctx.strokeStyle = '#fae1cc';
+  ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(0, 4); ctx.lineTo(0, -11); ctx.stroke();
+  // 主帆
+  ctx.fillStyle = '#d85a2b';
+  ctx.beginPath();
+  ctx.moveTo(0, -11);
+  ctx.quadraticCurveTo(-10, -4, 0, 2);
+  ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+function animate() {
+  drawMap();
+  requestAnimationFrame(animate);
+}
+</script>
+
+</body>
+</html>
