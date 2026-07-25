@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRESS ON TOGETHER | 保羅宣教動態故事網頁</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Nunito & Fredoka for cute, storybook feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        paper: '#FAF6EF',
+                        terracotta: { DEFAULT: '#E06A3B', light: '#FF8A65', dark: '#C45225' },
+                        teal: { DEFAULT: '#3A9D93', light: '#62C2B7', dark: '#246D66' },
+                        amber: { DEFAULT: '#F2A93B', light: '#FFE082', dark: '#C68015' },
+                        ink: '#2D3748',
+                        ocean: '#E4F1F5'
+                    },
+                    boxShadow: {
+                        '3d-sm': '0 4px 0 rgba(0,0,0,0.12)',
+                        '3d-md': '0 6px 0 rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.05)',
+                        '3d-lg': '0 10px 0 #2D3748, 0 16px 25px rgba(0,0,0,0.1)',
+                        '3d-pop': '0 8px 0 #E06A3B',
+                        '3d-teal': '0 8px 0 #3A9D93',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar & interactive story utilities */
+        html { background-color: #FAF6EF; color: #2D3748; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #FAF6EF; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 8px; border: 2px solid #FAF6EF; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+        /* Tactile Card Styles */
+        .story-card {
+            background: #FFFFFF;
+            border: 3px solid #2D3748;
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 0 #2D3748, 0 12px 20px rgba(0,0,0,0.06);
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .story-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0 #2D3748, 0 18px 28px rgba(0,0,0,0.08);
+        }
+
+        .btn-3d {
+            border: 2px solid #2D3748;
+            border-radius: 9999px;
+            box-shadow: 0 4px 0 #2D3748;
+            transition: all 0.15s ease;
+        }
+        .btn-3d:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #2D3748;
+        }
+
+        /* Active navigation station indicator pulse */
+        .pulse-ring {
+            animation: ringPulse 2s infinite;
+        }
+        @keyframes ringPulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(224, 106, 59, 0.7); }
+            70% { transform: scale(1.15); box-shadow: 0 0 0 12px rgba(224, 106, 59, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(224, 106, 59, 0); }
+        }
+
+        /* Hide scrollbars for sliders */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-amber-light selection:text-ink">
+
+    <!-- Top Progress Bar HUD -->
+    <div id="hud-bar" class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b-2 border-ink py-2 px-3 sm:px-4 flex items-center justify-between transition-transform duration-300">
+        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+            <span class="font-display font-bold text-base sm:text-lg text-terracotta flex items-center gap-1">
+                <i class="ph-bold ph-compass text-xl sm:text-2xl animate-spin-slow"></i>
+                <span class="hidden xs:inline">PRESS ON TOGETHER</span>
+            </span>
+            <span id="current-stage-badge" class="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-black bg-amber-light text-ink border border-ink">
+                01 以弗所
+            </span>
+        </div>
+
+        <!-- Mini station dots for direct jump (Touch Scrollable on Mobile) -->
+        <div class="flex items-center gap-1 md:gap-2 overflow-x-auto no-scrollbar max-w-[42vw] sm:max-w-none py-1 px-1">
+            <button onclick="scrollToStage(0)" class="stage-nav-btn whitespace-nowrap px-2 py-1 text-[11px] sm:text-xs font-bold rounded-lg border border-transparent hover:border-ink hover:bg-amber-light transition-all">01 以弗所</button>
+            <i class="ph-bold ph-caret-right text-xs text-gray-400 flex-shrink-0"></i>
+            <button onclick="scrollToStage(1)" class="stage-nav-btn whitespace-nowrap px-2 py-1 text-[11px] sm:text-xs font-bold rounded-lg border border-transparent hover:border-ink hover:bg-amber-light transition-all">02 馬其頓</button>
+            <i class="ph-bold ph-caret-right text-xs text-gray-400 flex-shrink-0"></i>
+            <button onclick="scrollToStage(2)" class="stage-nav-btn whitespace-nowrap px-2 py-1 text-[11px] sm:text-xs font-bold rounded-lg border border-transparent hover:border-ink hover:bg-amber-light transition-all">03 希臘</button>
+            <i class="ph-bold ph-caret-right text-xs text-gray-400 flex-shrink-0"></i>
+            <button onclick="scrollToStage(3)" class="stage-nav-btn whitespace-nowrap px-2 py-1 text-[11px] sm:text-xs font-bold rounded-lg border border-transparent hover:border-ink hover:bg-amber-light transition-all">04 腓立比</button>
+            <i class="ph-bold ph-caret-right text-xs text-gray-400 flex-shrink-0"></i>
+            <button onclick="scrollToStage(4)" class="stage-nav-btn whitespace-nowrap px-2 py-1 text-[11px] sm:text-xs font-bold rounded-lg border border-transparent hover:border-ink hover:bg-amber-light transition-all">05 特羅亞</button>
+        </div>
+
+        <!-- Overall Scroll Progress % Bar -->
+        <div class="w-14 sm:w-20 md:w-32 bg-gray-200 h-2.5 sm:h-3 rounded-full overflow-hidden border border-ink flex-shrink-0 ml-1">
+            <div id="scroll-progress-fill" class="bg-terracotta h-full w-0 transition-all duration-150"></div>
+        </div>
+    </div>
+
+    <!-- Hero Intro Section -->
+    <section class="min-h-screen pt-20 sm:pt-24 pb-12 sm:pb-16 px-4 flex flex-col justify-center items-center text-center relative overflow-hidden bg-gradient-to-b from-paper via-ocean/40 to-paper">
+        <div class="max-w-4xl mx-auto z-10">
+            <div class="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-white rounded-full font-bold text-teal text-xs sm:text-sm border-2 border-ink shadow-3d-sm mb-4 sm:mb-6">
+                <i class="ph-fill ph-book-bookmark text-amber text-base sm:text-lg"></i>
+                使徒行傳 20 · 路加福音 18 · 哥林多後書 2
+            </div>
+
+            <h1 class="font-display text-3xl sm:text-6xl md:text-8xl font-black tracking-tight text-ink mb-4 sm:mb-6 leading-tight">
+                保羅的宣教旅程<br>
+                <span class="text-terracotta relative inline-block mt-1 sm:mt-0">
+                    與團隊同行
+                    <svg class="absolute -bottom-2 left-0 w-full h-3 sm:h-4 text-amber" viewBox="0 0 100 20" preserveAspectRatio="none">
+                        <path d="M0,10 Q50,20 100,10" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+                    </svg>
+                </span>
+            </h1>
+
+            <p class="text-base sm:text-xl md:text-2xl font-bold text-gray-700 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2">
+                向下滾動頁面，跟隨動態航行地圖，體驗保羅與同工們在危機與同心之間的信仰冒險！
+            </p>
+
+            <!-- Quick Stats Chips -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto mb-8 sm:mb-12">
+                <div class="bg-white border-2 border-ink p-3 sm:p-4 rounded-2xl shadow-3d-sm flex flex-col items-center">
+                    <span class="font-display font-black text-2xl sm:text-3xl text-terracotta">4</span>
+                    <span class="text-[11px] sm:text-xs font-bold text-gray-600">段經文研讀</span>
+                </div>
+                <div class="bg-white border-2 border-ink p-3 sm:p-4 rounded-2xl shadow-3d-sm flex flex-col items-center">
+                    <span class="font-display font-black text-2xl sm:text-3xl text-teal">7</span>
+                    <span class="text-[11px] sm:text-xs font-bold text-gray-600">位隨行同工</span>
+                </div>
+                <div class="bg-white border-2 border-ink p-3 sm:p-4 rounded-2xl shadow-3d-sm flex flex-col items-center">
+                    <span class="font-display font-black text-2xl sm:text-3xl text-amber-dark">5 天</span>
+                    <span class="text-[11px] sm:text-xs font-bold text-gray-600">腓立比航程</span>
+                </div>
+                <div class="bg-white border-2 border-ink p-3 sm:p-4 rounded-2xl shadow-3d-sm flex flex-col items-center">
+                    <span class="font-display font-black text-2xl sm:text-3xl text-indigo-600">7 天</span>
+                    <span class="text-[11px] sm:text-xs font-bold text-gray-600">特羅亞聚會</span>
+                </div>
+            </div>
+
+            <!-- Scroll CTA Button -->
+            <a href="#scrolly-map-section" class="btn-3d inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-terracotta text-white font-display font-extrabold text-lg sm:text-xl hover:bg-terracotta-dark transition-all">
+                <span>開啟滾動地圖</span>
+                <i class="ph-bold ph-arrow-down text-xl sm:text-2xl animate-bounce"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- SCROLLYTELLING MAP SECTION -->
+    <section id="scrolly-map-section" class="relative w-full">
+        <!-- Sticky Canvas Viewport container -->
+        <div class="sticky top-10 sm:top-12 h-[calc(100vh-2.5rem)] sm:h-[calc(100vh-3rem)] w-full overflow-hidden bg-ocean border-y-4 border-ink shadow-inner">
+            
+            <!-- Canvas Overlay UI Controls -->
+            <div class="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 bg-white/95 backdrop-blur border-2 border-ink rounded-2xl p-2.5 sm:p-4 shadow-3d-sm max-w-[220px] sm:max-w-xs pointer-events-auto">
+                <div class="flex items-center gap-1.5 sm:gap-2 mb-0.5 sm:mb-1">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
+                    <h3 class="font-display font-bold text-xs sm:text-sm text-ink">互動地圖航線</h3>
+                </div>
+                <p id="canvas-status-text" class="text-[11px] sm:text-xs font-semibold text-gray-600 leading-tight">
+                    請繼續滾動頁面，跟隨保羅的船隻移動...
+                </p>
+            </div>
+
+            <!-- Canvas for Interactive Map -->
+            <canvas id="map-canvas" class="w-full h-full block cursor-pointer"></canvas>
+
+            <!-- Floating Stage Details Popup inside Canvas Sticky view (Responsive Mobile Adaptive) -->
+            <div id="stage-floating-card" class="absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 w-[92%] max-w-xl bg-white/95 backdrop-blur border-2 sm:border-3 border-ink rounded-2xl p-3 sm:p-5 shadow-3d-lg transition-all duration-300 transform translate-y-0 opacity-100">
+                <div class="flex items-center justify-between mb-1 sm:mb-2">
+                    <span id="floating-stage-number" class="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-terracotta text-white font-display font-bold rounded-full text-[10px] sm:text-xs">
+                        STAGE 01
+                    </span>
+                    <span id="floating-stage-verse" class="text-[10px] sm:text-xs font-black text-teal">使徒行傳 20:1</span>
+                </div>
+                <h3 id="floating-stage-title" class="font-display font-black text-lg sm:text-2xl text-ink mb-0.5 sm:mb-1">以弗所 (Ephesus)</h3>
+                <p id="floating-stage-desc" class="text-xs sm:text-sm font-bold text-gray-700 leading-snug sm:leading-relaxed mb-2 sm:mb-3">
+                    動盪後的告別與鼓勵：在 Ephesus 的大混亂平息之後，Paul 召集了當地的門徒，給予他們溫暖的勉勵。
+                </p>
+                <div id="floating-stage-action" class="bg-amber-light/40 border border-amber p-2 sm:p-3 rounded-xl text-[11px] sm:text-xs font-extrabold text-ink flex items-start gap-1.5 sm:gap-2">
+                    <i class="ph-fill ph-lightbulb text-amber-dark text-sm sm:text-base flex-shrink-0 mt-0.5"></i>
+                    <span id="floating-stage-tip">主動去向身邊的人表達關心，給予實質的安慰。</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Triggers Track -->
+        <div id="scroll-track" class="relative z-10 -mt-[100vh]">
+            <!-- Trigger Step 1 -->
+            <div class="stage-trigger h-[120vh] flex items-center justify-center md:justify-end px-4 md:px-16" data-stage="0">
+                <div class="bg-white/95 backdrop-blur border-2 border-ink rounded-2xl p-4 sm:p-6 shadow-3d-md w-full max-w-sm sm:max-w-md opacity-0 transition-all duration-500 trigger-card">
+                    <div class="text-terracotta font-black text-xs sm:text-sm">第 1 站 · STAGE 01</div>
+                    <h4 class="font-display text-xl sm:text-2xl font-black text-ink mb-1 sm:mb-2">以弗所 Ephesus</h4>
+                    <p class="text-xs sm:text-sm text-gray-700 font-semibold mb-3">在 Ephesus 的大混亂平息之後，Paul 召集了當地的門徒，給予他們溫暖的勉勵，隨後動身前往 Macedonia。</p>
+                    <button onclick="openScriptureModal(1)" class="btn-3d px-3 py-1.5 sm:px-4 sm:py-2 bg-amber-light text-ink font-bold text-xs">閱讀研讀經文 <i class="ph-bold ph-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Trigger Step 2 -->
+            <div class="stage-trigger h-[120vh] flex items-center justify-center md:justify-start px-4 md:px-16" data-stage="1">
+                <div class="bg-white/95 backdrop-blur border-2 border-ink rounded-2xl p-4 sm:p-6 shadow-3d-md w-full max-w-sm sm:max-w-md opacity-0 transition-all duration-500 trigger-card">
+                    <div class="text-teal font-black text-xs sm:text-sm">第 2 站 · STAGE 02</div>
+                    <h4 class="font-display text-xl sm:text-2xl font-black text-ink mb-1 sm:mb-2">馬其頓 Macedonia</h4>
+                    <p class="text-xs sm:text-sm text-gray-700 font-semibold mb-3">Paul 動身前往 Macedonia，一路上用了很多話語安慰鼓勵當地信徒。</p>
+                    <button onclick="openScriptureModal(1)" class="btn-3d px-3 py-1.5 sm:px-4 sm:py-2 bg-amber-light text-ink font-bold text-xs">閱讀研讀經文 <i class="ph-bold ph-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Trigger Step 3 -->
+            <div class="stage-trigger h-[120vh] flex items-center justify-center md:justify-end px-4 md:px-16" data-stage="2">
+                <div class="bg-white/95 backdrop-blur border-2 border-ink rounded-2xl p-4 sm:p-6 shadow-3d-md w-full max-w-sm sm:max-w-md opacity-0 transition-all duration-500 trigger-card">
+                    <div class="text-purple-600 font-black text-xs sm:text-sm">第 3 站 · STAGE 03</div>
+                    <h4 class="font-display text-xl sm:text-2xl font-black text-ink mb-1 sm:mb-2">希臘 Greece / Achaia</h4>
+                    <p class="text-xs sm:text-sm text-gray-700 font-semibold mb-3">Paul 居留 3 個月。原計劃搭船至 Syria，因得知猶太人密謀陷害，靈活決定折返繞道走陸路。</p>
+                    <button onclick="openScriptureModal(1)" class="btn-3d px-3 py-1.5 sm:px-4 sm:py-2 bg-amber-light text-ink font-bold text-xs">閱讀研讀經文 <i class="ph-bold ph-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Trigger Step 4 -->
+            <div class="stage-trigger h-[120vh] flex items-center justify-center md:justify-start px-4 md:px-16" data-stage="3">
+                <div class="bg-white/95 backdrop-blur border-2 border-ink rounded-2xl p-4 sm:p-6 shadow-3d-md w-full max-w-sm sm:max-w-md opacity-0 transition-all duration-500 trigger-card">
+                    <div class="text-blue-600 font-black text-xs sm:text-sm">第 4 站 · STAGE 04</div>
+                    <h4 class="font-display text-xl sm:text-2xl font-black text-ink mb-1 sm:mb-2">腓立比 Philippi</h4>
+                    <p class="text-xs sm:text-sm text-gray-700 font-semibold mb-3">除酵節後，Paul 一行搭船出發，5 天抵達 Troas。經文轉為「我們」，作者路加在此處重新加入團隊。</p>
+                    <button onclick="openScriptureModal(1)" class="btn-3d px-3 py-1.5 sm:px-4 sm:py-2 bg-amber-light text-ink font-bold text-xs">閱讀研讀經文 <i class="ph-bold ph-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Trigger Step 5 -->
+            <div class="stage-trigger h-[120vh] flex items-center justify-center md:justify-end px-4 md:px-16" data-stage="4">
+                <div class="bg-white/95 backdrop-blur border-2 border-ink rounded-2xl p-4 sm:p-6 shadow-3d-md w-full max-w-sm sm:max-w-md opacity-0 transition-all duration-500 trigger-card">
+                    <div class="text-terracotta-dark font-black text-xs sm:text-sm">第 5 站 · STAGE 05</div>
+                    <h4 class="font-display text-xl sm:text-2xl font-black text-ink mb-1 sm:mb-2">特羅亞 Troas</h4>
+                    <p class="text-xs sm:text-sm text-gray-700 font-semibold mb-3">七位同工先行抵達等候，Paul 與路加會合，全團隊在 Troas 同心聚會交流 7 天。</p>
+                    <button onclick="openScriptureModal(4)" class="btn-3d px-3 py-1.5 sm:px-4 sm:py-2 bg-amber-light text-ink font-bold text-xs">閱讀研讀經文 <i class="ph-bold ph-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE COMPANIONS SHOWCASE (Trading Cards Style) -->
+    <section class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <div class="inline-block px-4 py-1.5 bg-teal/20 text-teal-dark border border-teal font-extrabold rounded-full text-xs mb-3">
+                使徒行傳 20:4 · 同工名冊
+            </div>
+            <h2 class="font-display text-4xl sm:text-5xl font-black text-ink mb-4">
+                隨行同工角色卡片
+            </h2>
+            <p class="text-gray-600 font-bold max-w-xl mx-auto">
+                點擊卡片解鎖每位同工的家鄉背景、信仰故事與聖經出處！
+            </p>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mt-6" id="companion-filters">
+                <button onclick="filterCompanions('all')" class="filter-btn active btn-3d px-4 py-1.5 bg-ink text-white font-bold text-xs">全部顯示</button>
+                <button onclick="filterCompanions('Macedonia')" class="filter-btn btn-3d px-4 py-1.5 bg-white text-ink font-bold text-xs">馬其頓團隊</button>
+                <button onclick="filterCompanions('Asia')" class="filter-btn btn-3d px-4 py-1.5 bg-white text-ink font-bold text-xs">亞細亞團隊</button>
+                <button onclick="filterCompanions('Galatia')" class="filter-btn btn-3d px-4 py-1.5 bg-white text-ink font-bold text-xs">加拉太團隊</button>
+            </div>
+        </div>
+
+        <!-- Companion Cards Grid -->
+        <div id="companion-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Cards rendered dynamically via JS -->
+        </div>
+
+        <!-- Interlude Note Card -->
+        <div class="mt-12 story-card p-6 bg-amber-light/30 border-amber relative overflow-hidden flex flex-col md:flex-row items-center gap-6">
+            <div class="w-16 h-16 rounded-2xl bg-amber border-2 border-ink flex items-center justify-center text-3xl text-ink flex-shrink-0 shadow-3d-sm">
+                <i class="ph-fill ph-heart-break"></i>
+            </div>
+            <div>
+                <div class="text-xs font-extrabold text-amber-dark tracking-wider">同期插曲 · 哥林多後書 2:12-13</div>
+                <h3 class="font-display font-black text-xl text-ink mb-1">特羅亞的不安 · 焦急尋找提多 (Titus)</h3>
+                <p class="text-sm font-semibold text-gray-700 leading-relaxed">
+                    雖然 Troas 的福音大門已經敞開，但 Paul 內心卻因為沒有見到掛念的同工提多而極度焦慮，最後決定動身前往馬其頓。這展現了保羅極為重情重義、體恤夥伴的真性情。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE SCRIPTURE STUDY EXPLORER -->
+    <section class="py-20 bg-white border-t-4 border-ink">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="px-4 py-1.5 bg-terracotta/20 text-terracotta-dark font-extrabold rounded-full text-xs">
+                    4 大重點經文
+                </span>
+                <h2 class="font-display text-4xl sm:text-5xl font-black text-ink mt-3 mb-4">
+                    深度研讀與生活應用
+                </h2>
+                <p class="text-gray-600 font-bold">點擊下方切換不同章節研讀重點與 Practical Action</p>
+            </div>
+
+            <!-- Study Navigation Tabs -->
+            <div class="flex border-b-2 border-ink mb-8 overflow-x-auto no-scrollbar gap-2 pb-2">
+                <button onclick="switchStudyTab(1)" id="tab-btn-1" class="study-tab-btn flex-1 min-w-[180px] p-4 text-center font-display font-bold text-base rounded-t-2xl border-2 border-b-0 border-ink bg-terracotta text-white shadow-3d-sm">
+                    研讀一：使徒行傳 20
+                </button>
+                <button onclick="switchStudyTab(2)" id="tab-btn-2" class="study-tab-btn flex-1 min-w-[180px] p-4 text-center font-display font-bold text-base rounded-t-2xl border-2 border-b-0 border-ink bg-gray-100 text-gray-600 hover:bg-amber-light">
+                    研讀二：路加福音 18
+                </button>
+                <button onclick="switchStudyTab(3)" id="tab-btn-3" class="study-tab-btn flex-1 min-w-[180px] p-4 text-center font-display font-bold text-base rounded-t-2xl border-2 border-b-0 border-ink bg-gray-100 text-gray-600 hover:bg-amber-light">
+                    研讀三：哥林多後書 2
+                </button>
+                <button onclick="switchStudyTab(4)" id="tab-btn-4" class="study-tab-btn flex-1 min-w-[180px] p-4 text-center font-display font-bold text-base rounded-t-2xl border-2 border-b-0 border-ink bg-gray-100 text-gray-600 hover:bg-amber-light">
+                    研讀四：團隊會合細節
+                </button>
+            </div>
+
+            <!-- Tab Contents Containers -->
+            <div id="study-tab-content" class="story-card p-6 sm:p-10">
+                <!-- Content will be swapped dynamically by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Dialog for Deep Scripture Detail -->
+    <div id="scripture-modal" class="fixed inset-0 z-50 bg-ink/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white border-4 border-ink rounded-3xl p-6 sm:p-8 max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-3d-lg relative animate-pop">
+            <button onclick="closeScriptureModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-200 border-2 border-ink flex items-center justify-center font-bold text-xl hover:bg-terracotta hover:text-white transition-colors">
+                ✕
+            </button>
+            <div id="modal-body-content">
+                <!-- Modal content dynamically injected -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Reflection & Footer -->
+    <footer class="bg-ink text-white py-16 px-4 border-t-4 border-ink relative">
+        <div class="max-w-4xl mx-auto text-center space-y-6">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-terracotta rounded-full font-display font-bold text-sm">
+                <i class="ph-bold ph-sparkle"></i>
+                TOGETHER WE PRESS ON
+            </div>
+            
+            <h2 class="font-display text-3xl sm:text-4xl font-black">
+                同行、互信、同心合意
+            </h2>
+            <p class="text-gray-300 font-semibold max-w-xl mx-auto">
+                保羅的宣教不是孤膽英雄的史詩，而是一群平凡門徒在動盪中緊緊靠在一起的奇蹟旅程。
+            </p>
+
+            <div class="pt-6 border-t border-gray-700 flex flex-wrap justify-center gap-4 text-xs font-bold text-gray-400">
+                <span>使徒行傳 20:1-6</span> •
+                <span>路加福音 18:31-34</span> •
+                <span>哥林多後書 2:12-13</span>
+            </div>
+
+            <p class="text-xs text-gray-500 pt-4">Designed with interactive canvas storytelling inspired by OJI Brandbook style.</p>
+        </div>
+    </footer>
+
+    <script>
+        /* -------------------------------------------------------------
+           DATA DEFINITIONS
+        ------------------------------------------------------------- */
+        const STAGES = [
+            {
+                id: "01",
+                name: "以弗所",
+                en: "Ephesus",
+                verse: "使徒行傳 20:1",
+                x: 0.8, y: 0.65, // Map relative coordinates (0 to 1)
+                desc: "在 Ephesus 的大混亂平息之後，Paul 召集了當地的門徒，給予他們溫暖的勉勵，隨後辭別前往 Macedonia。",
+                tip: "可以這樣做：當團隊遭遇重大挑戰過後，主動向身邊的人表達關心與實質安慰。",
+                avoid: "避免這樣：面對危機時冷眼旁觀，只顧個人進度。"
+            },
+            {
+                id: "02",
+                name: "馬其頓",
+                en: "Macedonia",
+                verse: "使徒行傳 20:1-2",
+                x: 0.35, y: 0.25,
+                desc: "Paul 動身前往 Macedonia，沿途走訪各個教會，用許多美好的話語安慰鼓勵當地信徒。",
+                tip: "可以這樣做：用真誠的話語給予同行夥伴肯定的力量。",
+                avoid: "避免這樣：習慣批評批評，缺乏正向言語建立他人。"
+            },
+            {
+                id: "03",
+                name: "希臘",
+                en: "Greece / Achaia",
+                verse: "使徒行傳 20:2-3",
+                x: 0.25, y: 0.70,
+                desc: "居留 3 個月。原打算搭船前往 Syria，得知猶太人密謀陷害，果斷決定變更計畫折返繞道走陸路。",
+                tip: "可以這樣做：面臨突發危險或障礙時，保持靈活彈性，願意為安全性調整步伐。",
+                avoid: "避免這樣：固執己見，明知危險卻盲目蠻幹。"
+            },
+            {
+                id: "04",
+                name: "腓立比",
+                en: "Philippi",
+                verse: "使徒行傳 20:6",
+                x: 0.48, y: 0.28,
+                desc: "除酵節後從 Philippi 搭船啟航，航行 5 天抵達 Troas。敘述轉為「我們」，路加在此處歸隊。",
+                tip: "可以這樣做：在團隊需要的時刻重新歸隊加入，承接職責。",
+                avoid: "避免這樣：無視團隊召喚，置身事外。"
+            },
+            {
+                id: "05",
+                name: "特羅亞",
+                en: "Troas",
+                verse: "使徒行傳 20:5-6",
+                x: 0.72, y: 0.40,
+                desc: "七位同工先行抵達 Troas 等候，Paul 一行 5 天航航程後順利會合，所有人在一起同心聚集停留 7 天。",
+                tip: "可以這樣做：主動與夥伴協調分工（有人先行預備、有人隨後跟進），建立信任。",
+                avoid: "避免這樣：特立獨行，不願配合團隊行程與溝通。"
+            }
+        ];
+
+        const COMPANIONS = [
+            {
+                name: "Sopater",
+                zh: "所巴特",
+                city: "庇哩亞 Berea",
+                region: "Macedonia",
+                tag: "Pyrrhus 之子",
+                desc: "庇哩亞人，極可能與羅馬書 16:21 中保羅稱為「親屬」的 Sosipater 為同一人。",
+                color: "bg-terracotta"
+            },
+            {
+                name: "Aristarchus",
+                zh: "亞里達古",
+                city: "帖撒羅尼迦",
+                region: "Macedonia",
+                tag: "忠心獄友",
+                desc: "馬其頓人。後來在羅馬與保羅一同被囚，保羅親切稱他為「同被囚的」。",
+                color: "bg-teal"
+            },
+            {
+                name: "Secundus",
+                zh: "西公都",
+                city: "帖撒羅尼迦",
+                region: "Macedonia",
+                tag: "默默奉獻",
+                desc: "帖撒羅尼迦信徒，新約僅在此處提及，是默默忠心同行的無名英雄。",
+                color: "bg-amber-dark"
+            },
+            {
+                name: "Gaius",
+                zh: "該猶",
+                city: "特庇 Derbe",
+                region: "Galatia",
+                tag: "特庇門徒",
+                desc: "路加特別標明「特庇的該猶」，以區別使徒行傳 19 章中那位馬其頓該猶。",
+                color: "bg-indigo-600"
+            },
+            {
+                name: "Timothy",
+                zh: "提摩太",
+                city: "路司得 Lystra",
+                region: "Galatia",
+                tag: "屬靈屬子",
+                desc: "保羅最親密的年輕同工，母親 Eunice 與祖母 Lois 均為敬虔信徒。",
+                color: "bg-purple-600"
+            },
+            {
+                name: "Tychicus",
+                zh: "推基古",
+                city: "亞細亞 Asia",
+                region: "Asia",
+                tag: "忠心執事",
+                desc: "新約提及 5 次，保羅稱讚他為「親愛的兄弟、忠心的執事」。",
+                color: "bg-pink-600"
+            },
+            {
+                name: "Trophimus",
+                zh: "特羅非摩",
+                city: "亞細亞 (以弗所)",
+                region: "Asia",
+                tag: "以弗所夥伴",
+                desc: "以弗所外邦信徒，後來隨保羅至耶路撒冷，晚年因病留在米利都。",
+                color: "bg-emerald-600"
+            },
+            {
+                name: "Luke",
+                zh: "路加",
+                city: "腓立比 Philippi",
+                region: "Macedonia",
+                tag: "醫生與作者",
+                desc: "使徒行傳作者，在腓立比重新加入保羅隊伍（經文轉為『我們』）。",
+                color: "bg-blue-600"
+            }
+        ];
+
+        const STUDIES = {
+            1: {
+                title: "使徒行傳 20:1-6",
+                subtitle: "動盪後的告別、靈活變更路線與特羅亞會合",
+                desc: "Ephesus 的騷亂平息後，Paul 啟程前往 Macedonia 和 Greece 繼續宣教，帶著各教會的同工一起前往 Troas。一路上有人陪、有人鼓勵，這是他撐過危險的方式。",
+                points: [
+                    "<strong>動盪後的告別與鼓勵：</strong>在大混亂後召集門徒，給予溫暖勉勵。",
+                    "<strong>危險中的靈活彈性：</strong>得知猶太人密謀，果斷改走陸路折返。",
+                    "<strong>團隊同心分工：</strong>七位同工先行前往特羅亞預備等候。"
+                ],
+                do: "在團隊遇到挑戰過後，主動表達關心與實質安慰；遇到突發危機時保持彈性。",
+                dont: "面對同伴低潮時冷眼旁觀，或堅持特立獨行不願配合團體調整。"
+            },
+            2: {
+                title: "路加福音 18:31-34",
+                subtitle: "前往耶路撒冷的宣告與走向受難的勇氣",
+                desc: "耶穌第三次向十二門徒預言自己即將在耶路撒冷受難與第三天復活。他清楚知道前方的苦難，但依然選擇勇敢前行。",
+                points: [
+                    "<strong>預言完全實現：</strong>先知所寫關於人子的一切事都要成全。",
+                    "<strong>殘忍羞辱與復活：</strong>描述將被交給外邦人受戲弄、鞭打與死，但第三天復活。",
+                    "<strong>門徒暫時不明白：</strong>這話的意思對他們是隱藏的。"
+                ],
+                do: "面對不可避免的困難時，清楚目標與使命，不因害怕而逃避。",
+                dont: "只想要信仰帶來的祝福，卻不願意付出代價與承擔責任。"
+            },
+            3: {
+                title: "哥林多後書 2:12-13",
+                subtitle: "特羅亞的福音大門與焦急尋找提多",
+                desc: "保羅在特羅亞時，雖然主為他開了傳福音的大門，但他因為沒有遇到所掛念的同工提多，心裡極度不安，最後選擇前往馬其頓找他。",
+                points: [
+                    "<strong>敞開的福音大門：</strong>特羅亞事工充滿果效與機會。",
+                    "<strong>同工之情的牽掛：</strong>無法見到提多而心不平安。",
+                    "<strong>看重夥伴勝於績效：</strong>向眾人告別，動身前往馬其頓。"
+                ],
+                do: "在工作取得成功時，依然看重團隊同工的情感與身心健康。",
+                dont: "只一味追求績效指標，卻忽略身邊夥伴的感受與需求。"
+            },
+            4: {
+                title: "團隊會合與深層靈修",
+                subtitle: "使徒行傳 20:5-6 特羅亞的 7 天同行",
+                desc: "同工們分別從不同城市出發，約定在特羅亞碰頭。即使隔著汪洋大海，大家依然彼此信任，在目的地順利會合，享受了 7 天美好的團聚與肢體交通。",
+                points: [
+                    "<strong>遠距離的信任配合：</strong>同工先行，保羅與路加隨後搭船 5 天趕赴。",
+                    "<strong>珍惜聚集時光：</strong>全團隊停留 7 天，彼此堅固。"
+                ],
+                do: "珍惜身邊一起奮鬥的夥伴，在特定時刻聚集時好好陪伴彼此。",
+                dont: "失聯或缺乏協調，讓同工懸心。"
+            }
+        };
+
+        /* -------------------------------------------------------------
+           CANVAS INTERACTIVE MAP RENDERING (Scroll-driven)
+        ------------------------------------------------------------- */
+        const canvas = document.getElementById('map-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let canvasWidth = 0;
+        let canvasHeight = 0;
+        let currentScrollStageProgress = 0; // 0.0 to 4.0 continuous float
+        let currentActiveStageIndex = 0;
+
+        function drawRoundedRect(x, y, w, h, r) {
+            ctx.beginPath();
+            if (typeof ctx.roundRect === 'function') {
+                ctx.roundRect(x, y, w, h, r);
+            } else {
+                ctx.rect(x, y, w, h);
+            }
+        }
+
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            if (!container) return;
+            canvasWidth = container.clientWidth;
+            canvasHeight = container.clientHeight;
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
+            drawMap();
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        // Map drawing engine with Dynamic Mobile Scaling (RWD)
+        function drawMap() {
+            if (!ctx || canvasWidth === 0) return;
+
+            // Compute dynamic RWD scale factor relative to standard viewport
+            const scale = Math.min(Math.max(canvasWidth / 750, 0.65), 1.3);
+
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+            // 1. Draw Ocean Background & Soft Grids
+            ctx.fillStyle = '#E4F1F5';
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+            // Draw decorative ocean waves
+            ctx.strokeStyle = '#D0E5EC';
+            ctx.lineWidth = Math.max(1.5, 2 * scale);
+            for (let y = 30; y < canvasHeight; y += 50 * scale) {
+                ctx.beginPath();
+                for (let x = 0; x < canvasWidth; x += 35 * scale) {
+                    ctx.quadraticCurveTo(x + 10 * scale, y - 5 * scale, x + 20 * scale, y);
+                    ctx.quadraticCurveTo(x + 30 * scale, y + 5 * scale, x + 40 * scale, y);
+                }
+                ctx.stroke();
+            }
+
+            // 2. Draw Landmasses (Stylized Greece & Asia Minor outline)
+            ctx.fillStyle = '#F4EAD3';
+            ctx.strokeStyle = '#2D3748';
+            ctx.lineWidth = Math.max(2, 3 * scale);
+
+            // Greece / Macedonia (Left side)
+            drawRoundedRect(canvasWidth * 0.08, canvasHeight * 0.1, canvasWidth * 0.38, canvasHeight * 0.75, 30 * scale);
+            ctx.fill();
+            ctx.stroke();
+
+            // Asia Minor (Right side)
+            drawRoundedRect(canvasWidth * 0.58, canvasHeight * 0.18, canvasWidth * 0.38, canvasHeight * 0.68, 30 * scale);
+            ctx.fill();
+            ctx.stroke();
+
+            // Label Regions (Dynamic font scaling for RWD)
+            ctx.fillStyle = '#A0AEC0';
+            ctx.font = `bold ${Math.round(14 * scale)}px Fredoka`;
+            ctx.textAlign = 'left';
+            ctx.fillText('MACEDONIA & GREECE', canvasWidth * 0.11, canvasHeight * 0.16);
+            ctx.fillText('ASIA MINOR', canvasWidth * 0.62, canvasHeight * 0.25);
+
+            // 3. Draw Connecting Route Line
+            ctx.beginPath();
+            ctx.strokeStyle = '#E06A3B';
+            ctx.lineWidth = Math.max(2.5, 4 * scale);
+            ctx.setLineDash([6 * scale, 6 * scale]);
+
+            for (let i = 0; i < STAGES.length; i++) {
+                const sx = STAGES[i].x * canvasWidth;
+                const sy = STAGES[i].y * canvasHeight;
+                if (i === 0) ctx.moveTo(sx, sy);
+                else ctx.lineTo(sx, sy);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // 4. Draw Travel Progress Path
+            ctx.beginPath();
+            ctx.strokeStyle = '#E06A3B';
+            ctx.lineWidth = Math.max(3.5, 6 * scale);
+
+            const totalSegments = STAGES.length - 1;
+            const floatStage = Math.max(0, Math.min(totalSegments, currentScrollStageProgress));
+            const currentSegIndex = Math.floor(floatStage);
+            const segPercent = floatStage - currentSegIndex;
+
+            for (let i = 0; i <= currentSegIndex; i++) {
+                const sx = STAGES[i].x * canvasWidth;
+                const sy = STAGES[i].y * canvasHeight;
+                if (i === 0) ctx.moveTo(sx, sy);
+                else ctx.lineTo(sx, sy);
+            }
+
+            let currentX = STAGES[0].x * canvasWidth;
+            let currentY = STAGES[0].y * canvasHeight;
+
+            if (currentSegIndex < totalSegments) {
+                const p1 = STAGES[currentSegIndex];
+                const p2 = STAGES[currentSegIndex + 1];
+                currentX = (p1.x + (p2.x - p1.x) * segPercent) * canvasWidth;
+                currentY = (p1.y + (p2.y - p1.y) * segPercent) * canvasHeight;
+                ctx.lineTo(currentX, currentY);
+            } else {
+                currentX = STAGES[totalSegments].x * canvasWidth;
+                currentY = STAGES[totalSegments].y * canvasHeight;
+            }
+            ctx.stroke();
+
+            // 5. Draw Station Pins
+            STAGES.forEach((stg, idx) => {
+                const px = stg.x * canvasWidth;
+                const py = stg.y * canvasHeight;
+                const isActive = idx === currentActiveStageIndex;
+
+                const outerRadius = (isActive ? 18 : 12) * scale;
+                const innerRadius = (isActive ? 7 : 4) * scale;
+
+                // Pin circle background
+                ctx.beginPath();
+                ctx.arc(px, py, outerRadius, 0, Math.PI * 2);
+                ctx.fillStyle = isActive ? '#E06A3B' : '#FFFFFF';
+                ctx.fill();
+                ctx.lineWidth = Math.max(2, 3 * scale);
+                ctx.strokeStyle = '#2D3748';
+                ctx.stroke();
+
+                // Pin inner dot
+                ctx.beginPath();
+                ctx.arc(px, py, innerRadius, 0, Math.PI * 2);
+                ctx.fillStyle = isActive ? '#FFFFFF' : '#2D3748';
+                ctx.fill();
+
+                // Station Label Badge
+                const fontSize = Math.round((isActive ? 15 : 12) * scale);
+                ctx.font = `${isActive ? '800' : '700'} ${fontSize}px Nunito`;
+                ctx.fillStyle = '#2D3748';
+                ctx.textAlign = 'center';
+                ctx.fillText(stg.name, px, py - (outerRadius + 8 * scale));
+            });
+
+            // 6. Draw Moving Cute Boat Avatar
+            ctx.save();
+            ctx.translate(currentX, currentY);
+
+            const avatarRadius = 20 * scale;
+            ctx.beginPath();
+            ctx.arc(0, 0, avatarRadius, 0, Math.PI * 2);
+            ctx.fillStyle = '#FFE082';
+            ctx.fill();
+            ctx.lineWidth = Math.max(2, 3 * scale);
+            ctx.strokeStyle = '#2D3748';
+            ctx.stroke();
+
+            ctx.font = `${Math.round(18 * scale)}px serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('⛵', 0, 0);
+
+            ctx.restore();
+        }
+
+        /* -------------------------------------------------------------
+           SCROLL INTERACTION LISTENER
+        ------------------------------------------------------------- */
+        function handleScroll() {
+            const track = document.getElementById('scroll-track');
+            const rect = track.getBoundingClientRect();
+            const windowH = window.innerHeight;
+
+            // Calculate overall progress across the track
+            const totalScrollableDistance = rect.height - windowH;
+            const scrolledDistance = -rect.top;
+            let progress = scrolledDistance / totalScrollableDistance;
+            progress = Math.max(0, Math.min(1, progress));
+
+            // Update HUD progress bar fill
+            document.getElementById('scroll-progress-fill').style.width = (progress * 100) + '%';
+
+            // Continuous float index for 5 stages (0 to 4)
+            currentScrollStageProgress = progress * (STAGES.length - 1);
+
+            // Determine active discrete stage index
+            let activeIdx = Math.round(currentScrollStageProgress);
+            activeIdx = Math.max(0, Math.min(STAGES.length - 1, activeIdx));
+
+            if (activeIdx !== currentActiveStageIndex) {
+                currentActiveStageIndex = activeIdx;
+                updateFloatingStageCard(activeIdx);
+            }
+
+            // Trigger card visibility toggle
+            const triggerCards = document.querySelectorAll('.trigger-card');
+            const triggers = document.querySelectorAll('.stage-trigger');
+            triggers.forEach((trig, i) => {
+                const trigRect = trig.getBoundingClientRect();
+                const card = trig.querySelector('.trigger-card');
+                if (trigRect.top < windowH * 0.6 && trigRect.bottom > windowH * 0.2) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                }
+            });
+
+            // Redraw Canvas
+            drawMap();
+        }
+
+        window.addEventListener('scroll', handleScroll);
+
+        function updateFloatingStageCard(idx) {
+            const stg = STAGES[idx];
+            document.getElementById('floating-stage-number').innerText = `STAGE ${stg.id}`;
+            document.getElementById('floating-stage-verse').innerText = stg.verse;
+            document.getElementById('floating-stage-title').innerText = `${stg.name} (${stg.en})`;
+            document.getElementById('floating-stage-desc').innerText = stg.desc;
+            document.getElementById('floating-stage-tip').innerText = stg.tip;
+            document.getElementById('current-stage-badge').innerText = `第 ${stg.id} 站 · ${stg.name}`;
+
+            // Highlight corresponding HUD button
+            document.querySelectorAll('.stage-nav-btn').forEach((btn, i) => {
+                if (i === idx) {
+                    btn.classList.add('bg-terracotta', 'text-white');
+                    btn.classList.remove('bg-amber-light');
+                } else {
+                    btn.classList.remove('bg-terracotta', 'text-white');
+                }
+            });
+        }
+
+        function scrollToStage(stageIndex) {
+            const track = document.getElementById('scroll-track');
+            const trackRect = track.getBoundingClientRect();
+            const trackTop = window.scrollY + trackRect.top;
+            const windowH = window.innerHeight;
+            const totalDistance = trackRect.height - windowH;
+
+            const targetProgress = stageIndex / (STAGES.length - 1);
+            const targetScrollY = trackTop + (targetProgress * totalDistance);
+
+            window.scrollTo({
+                top: targetScrollY,
+                behavior: 'smooth'
+            });
+        }
+
+        /* -------------------------------------------------------------
+           COMPANION CARDS RENDER & FILTERING
+        ------------------------------------------------------------- */
+        function renderCompanions(filter = 'all') {
+            const grid = document.getElementById('companion-grid');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' 
+                ? COMPANIONS 
+                : COMPANIONS.filter(c => c.region === filter);
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'story-card p-5 flex flex-col justify-between hover:scale-[1.02] cursor-pointer';
+                card.onclick = () => showCompanionModal(item);
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-10 h-10 rounded-full ${item.color} text-white border-2 border-ink font-display font-black flex items-center justify-center text-lg shadow-3d-sm">
+                                ${item.zh[0]}
+                            </span>
+                            <span class="px-2.5 py-1 bg-gray-100 border border-ink text-ink font-extrabold rounded-full text-xs">
+                                ${item.tag}
+                            </span>
+                        </div>
+                        <h3 class="font-display font-black text-xl text-ink">${item.name}</h3>
+                        <div class="text-xs font-bold text-terracotta mb-2">${item.zh} · ${item.city}</div>
+                        <p class="text-xs text-gray-600 font-semibold leading-relaxed">${item.desc}</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-gray-100 text-right">
+                        <span class="text-xs font-black text-teal inline-flex items-center gap-1">
+                            查看詳情 <i class="ph-bold ph-arrow-right"></i>
+                        </span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCompanions(region) {
+            document.querySelectorAll('#companion-filters .filter-btn').forEach(btn => {
+                btn.classList.remove('bg-ink', 'text-white');
+                btn.classList.add('bg-white', 'text-ink');
+            });
+            event.target.classList.remove('bg-white', 'text-ink');
+            event.target.classList.add('bg-ink', 'text-white');
+
+            renderCompanions(region);
+        }
+
+        function showCompanionModal(comp) {
+            const modalBody = document.getElementById('modal-body-content');
+            modalBody.innerHTML = `
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 rounded-2xl ${comp.color} text-white border-3 border-ink flex items-center justify-center font-display font-black text-3xl shadow-3d-sm">
+                        ${comp.zh[0]}
+                    </div>
+                    <div>
+                        <span class="px-3 py-1 bg-amber-light border border-ink text-ink font-extrabold rounded-full text-xs">
+                            ${comp.tag}
+                        </span>
+                        <h3 class="font-display font-black text-3xl text-ink mt-1">${comp.name} (${comp.zh})</h3>
+                        <p class="text-xs font-bold text-gray-500">${comp.city} · ${comp.region}</p>
+                    </div>
+                </div>
+                <div class="bg-paper p-4 border-2 border-ink rounded-2xl mb-4 text-sm font-semibold text-ink leading-relaxed">
+                    ${comp.desc}
+                </div>
+                <div class="text-right">
+                    <button onclick="closeScriptureModal()" class="btn-3d px-6 py-2 bg-terracotta text-white font-bold text-sm">關閉</button>
+                </div>
+            `;
+            document.getElementById('scripture-modal').classList.remove('hidden');
+        }
+
+        /* -------------------------------------------------------------
+           SCRIPTURE TAB SWITCHING & MODALS
+        ------------------------------------------------------------- */
+        function switchStudyTab(tabNum) {
+            const data = STUDIES[tabNum];
+            if (!data) return;
+
+            // Update Tab styles
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`tab-btn-${i}`);
+                if (i === tabNum) {
+                    btn.className = "study-tab-btn flex-1 min-w-[180px] p-4 text-center font-display font-bold text-base rounded-t-2xl border-2 border-b-0 border-ink bg-terracotta text-white shadow-3d-sm";
+                } else {
+                    btn.className = "study-tab-btn flex-1 min-w-[180px] p-4 text-center font-display font-bold text-base rounded-t-2xl border-2 border-b-0 border-ink bg-gray-100 text-gray-600 hover:bg-amber-light";
+                }
+            }
+
+            // Render content
+            const contentContainer = document.getElementById('study-tab-content');
+            contentContainer.innerHTML = `
+                <div class="mb-6">
+                    <span class="px-3 py-1 bg-amber-light border border-ink text-ink font-extrabold rounded-full text-xs">
+                        ${data.title}
+                    </span>
+                    <h3 class="font-display font-black text-3xl text-ink mt-2 mb-2">${data.subtitle}</h3>
+                    <p class="text-gray-700 font-semibold text-base leading-relaxed">${data.desc}</p>
+                </div>
+
+                <div class="space-y-3 mb-8">
+                    ${data.points.map(pt => `
+                        <div class="p-3.5 bg-gray-50 border-2 border-ink rounded-xl text-sm font-semibold text-ink flex items-start gap-3">
+                            <i class="ph-fill ph-check-circle text-teal text-xl flex-shrink-0 mt-0.5"></i>
+                            <div>${pt}</div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-green-50 border-2 border-green-800 p-4 rounded-2xl">
+                        <div class="flex items-center gap-2 font-display font-bold text-green-900 text-base mb-1">
+                            <i class="ph-fill ph-thumbs-up text-xl"></i> 可以這樣做
+                        </div>
+                        <p class="text-xs font-extrabold text-green-800 leading-relaxed">${data.do}</p>
+                    </div>
+                    <div class="bg-red-50 border-2 border-red-800 p-4 rounded-2xl">
+                        <div class="flex items-center gap-2 font-display font-bold text-red-900 text-base mb-1">
+                            <i class="ph-fill ph-thumbs-down text-xl"></i> 避免這樣
+                        </div>
+                        <p class="text-xs font-extrabold text-red-800 leading-relaxed">${data.dont}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function openScriptureModal(tabNum) {
+            switchStudyTab(tabNum);
+            const modalBody = document.getElementById('modal-body-content');
+            const data = STUDIES[tabNum];
+
+            modalBody.innerHTML = `
+                <div class="mb-4">
+                    <span class="px-3 py-1 bg-amber-light border border-ink text-ink font-extrabold rounded-full text-xs">
+                        ${data.title}
+                    </span>
+                    <h3 class="font-display font-black text-2xl text-ink mt-2">${data.subtitle}</h3>
+                </div>
+                <p class="text-sm font-semibold text-gray-700 leading-relaxed mb-4">${data.desc}</p>
+                <div class="space-y-2 mb-6">
+                    ${data.points.map(p => `<div class="p-3 bg-gray-100 rounded-xl text-xs font-bold text-ink">${p}</div>`).join('')}
+                </div>
+                <div class="text-right">
+                    <button onclick="closeScriptureModal()" class="btn-3d px-6 py-2 bg-terracotta text-white font-bold text-sm">關閉</button>
+                </div>
+            `;
+            document.getElementById('scripture-modal').classList.remove('hidden');
+        }
+
+        function closeScriptureModal() {
+            document.getElementById('scripture-modal').classList.add('hidden');
+        }
+
+        /* -------------------------------------------------------------
+           INITIALIZATION ON LOAD
+        ------------------------------------------------------------- */
+        window.addEventListener('load', () => {
+            resizeCanvas();
+            renderCompanions('all');
+            switchStudyTab(1);
+            updateFloatingStageCard(0);
+            handleScroll();
+        });
+    </script>
+</body>
+</html>
