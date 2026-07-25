@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微光小種子的奇幻之旅 | Celestial Seed Storytelling</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Modern Clean Sans-Serif Fonts (Inter & Noto Sans TC & Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Tone.js for Ambient Audio -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', '"Noto Sans TC"', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', '"Noto Sans TC"', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'monospace']
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            900: '#14532d'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #0b0f19;
+            color: #f1f5f9;
+            overflow-x: hidden;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Modern Glassmorphism panel inspired by Oji Holdings sleek UI */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.72);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .glass-nav {
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Custom smooth scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(11, 15, 25, 0.95);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(74, 222, 128, 0.4);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(74, 222, 128, 0.7);
+        }
+
+        /* WebGL Canvas Background fixed position */
+        #webgl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: auto;
+        }
+
+        .chapter-section {
+            min-height: 110vh;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Active Navigation indicator with modern pill highlight */
+        .nav-link {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link.active {
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+            border-color: rgba(74, 222, 128, 0.3);
+        }
+    </style>
+</head>
+<body class="relative select-none antialiased">
+
+    <!-- Fixed 3D Canvas Background -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Sticky Top Navigation Bar (Provides direct jumps while keeping scrollytelling feel) -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand Logo / Title -->
+            <div class="flex items-center space-x-3 cursor-pointer group" onclick="scrollToChapter(1)">
+                <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-seedling text-sm"></i>
+                </div>
+                <div>
+                    <h1 class="font-display font-bold text-base tracking-tight text-white flex items-center gap-2">
+                        <span>LUMINA</span>
+                        <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase tracking-widest">Brandbook</span>
+                    </h1>
+                    <p class="text-[11px] text-slate-400 -mt-0.5 tracking-wide">微光小種子的奇幻之旅</p>
+                </div>
+            </div>
+
+            <!-- Modern Horizontal Direct-Jump Links (Interactive Sticky Navigation) -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-1.5 text-xs font-medium">
+                <button onclick="scrollToChapter(1)" id="nav-ch-1" class="nav-link px-3 py-1.5 rounded-lg border border-transparent text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
+                    <span class="font-mono text-[10px] text-emerald-400 font-semibold">01</span>
+                    <span>星空啟程</span>
+                </button>
+                <i class="fa-solid fa-chevron-right text-[9px] text-slate-600"></i>
+
+                <button onclick="scrollToChapter(2)" id="nav-ch-2" class="nav-link px-3 py-1.5 rounded-lg border border-transparent text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
+                    <span class="font-mono text-[10px] text-emerald-400 font-semibold">02</span>
+                    <span>萌芽復甦</span>
+                </button>
+                <i class="fa-solid fa-chevron-right text-[9px] text-slate-600"></i>
+
+                <button onclick="scrollToChapter(3)" id="nav-ch-3" class="nav-link px-3 py-1.5 rounded-lg border border-transparent text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
+                    <span class="font-mono text-[10px] text-emerald-400 font-semibold">03</span>
+                    <span>陽光綠洲</span>
+                </button>
+                <i class="fa-solid fa-chevron-right text-[9px] text-slate-600"></i>
+
+                <button onclick="scrollToChapter(4)" id="nav-ch-4" class="nav-link px-3 py-1.5 rounded-lg border border-transparent text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
+                    <span class="font-mono text-[10px] text-emerald-400 font-semibold">04</span>
+                    <span>雲端天空</span>
+                </button>
+                <i class="fa-solid fa-chevron-right text-[9px] text-slate-600"></i>
+
+                <button onclick="scrollToChapter(5)" id="nav-ch-5" class="nav-link px-3 py-1.5 rounded-lg border border-transparent text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
+                    <span class="font-mono text-[10px] text-emerald-400 font-semibold">05</span>
+                    <span>永恆森林</span>
+                </button>
+            </nav>
+
+            <!-- Audio & RWD Menu Buttons -->
+            <div class="flex items-center space-x-2">
+                <!-- Sound Toggle Button -->
+                <button id="audio-btn" onclick="toggleAudio()" class="px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 border border-slate-700 text-xs font-medium flex items-center gap-2 transition-all">
+                    <i id="audio-icon" class="fa-solid fa-volume-xmark text-slate-400"></i>
+                    <span id="audio-text" class="hidden sm:inline">情境音效</span>
+                </button>
+
+                <!-- Mobile Navigation Toggle -->
+                <button onclick="toggleMobileMenu()" class="md:hidden w-8 h-8 rounded-lg bg-slate-800/80 text-slate-300 flex items-center justify-center border border-slate-700">
+                    <i class="fa-solid fa-bars text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Global Progress Bar -->
+        <div class="w-full bg-slate-900/80 h-0.5">
+            <div id="progress-bar" class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 h-0.5 w-0 transition-all duration-150"></div>
+        </div>
+    </header>
+
+    <!-- RWD Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="fixed inset-x-0 top-16 z-40 glass-panel p-5 transform -translate-y-full transition-transform duration-300 md:hidden flex flex-col space-y-2">
+        <div class="text-[11px] font-mono font-semibold text-emerald-400 uppercase tracking-wider mb-1">Navigation 目次導覽</div>
+        <button onclick="scrollToChapter(1); toggleMobileMenu();" class="flex items-center space-x-3 p-3 rounded-xl bg-slate-800/50 hover:bg-slate-700/60 text-left transition-all">
+            <span class="w-6 h-6 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono text-xs font-bold">01</span>
+            <div>
+                <p class="text-xs font-bold text-white">01. 星空啟程</p>
+                <p class="text-[11px] text-slate-400">微光的誕生與降落</p>
+            </div>
+        </button>
+        <button onclick="scrollToChapter(2); toggleMobileMenu();" class="flex items-center space-x-3 p-3 rounded-xl bg-slate-800/50 hover:bg-slate-700/60 text-left transition-all">
+            <span class="w-6 h-6 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono text-xs font-bold">02</span>
+            <div>
+                <p class="text-xs font-bold text-white">02. 萌芽復甦</p>
+                <p class="text-[11px] text-slate-400">生命破土而出</p>
+            </div>
+        </button>
+        <button onclick="scrollToChapter(3); toggleMobileMenu();" class="flex items-center space-x-3 p-3 rounded-xl bg-slate-800/50 hover:bg-slate-700/60 text-left transition-all">
+            <span class="w-6 h-6 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono text-xs font-bold">03</span>
+            <div>
+                <p class="text-xs font-bold text-white">03. 陽光綠洲</p>
+                <p class="text-[11px] text-slate-400">和諧生態的擴張</p>
+            </div>
+        </button>
+        <button onclick="scrollToChapter(4); toggleMobileMenu();" class="flex items-center space-x-3 p-3 rounded-xl bg-slate-800/50 hover:bg-slate-700/60 text-left transition-all">
+            <span class="w-6 h-6 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono text-xs font-bold">04</span>
+            <div>
+                <p class="text-xs font-bold text-white">04. 雲端天空</p>
+                <p class="text-[11px] text-slate-400">夢幻頂冠與未來種子</p>
+            </div>
+        </button>
+        <button onclick="scrollToChapter(5); toggleMobileMenu();" class="flex items-center space-x-3 p-3 rounded-xl bg-slate-800/50 hover:bg-slate-700/60 text-left transition-all">
+            <span class="w-6 h-6 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono text-xs font-bold">05</span>
+            <div>
+                <p class="text-xs font-bold text-white">05. 永恆森林</p>
+                <p class="text-[11px] text-slate-400">共生永續的藍圖</p>
+            </div>
+        </button>
+    </div>
+
+    <!-- Desktop Side Vertical Dots Indicator -->
+    <div class="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col space-y-3 items-center">
+        <button onclick="scrollToChapter(1)" class="group relative flex items-center justify-center">
+            <span class="dot-indicator w-2.5 h-2.5 rounded-full bg-slate-700 transition-all group-hover:scale-125"></span>
+            <span class="absolute right-6 px-2.5 py-1 rounded-md bg-slate-900 text-[11px] font-mono text-emerald-300 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-all border border-slate-800 shadow-xl pointer-events-none">01. 星空啟程</span>
+        </button>
+        <button onclick="scrollToChapter(2)" class="group relative flex items-center justify-center">
+            <span class="dot-indicator w-2.5 h-2.5 rounded-full bg-slate-700 transition-all group-hover:scale-125"></span>
+            <span class="absolute right-6 px-2.5 py-1 rounded-md bg-slate-900 text-[11px] font-mono text-emerald-300 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-all border border-slate-800 shadow-xl pointer-events-none">02. 萌芽復甦</span>
+        </button>
+        <button onclick="scrollToChapter(3)" class="group relative flex items-center justify-center">
+            <span class="dot-indicator w-2.5 h-2.5 rounded-full bg-slate-700 transition-all group-hover:scale-125"></span>
+            <span class="absolute right-6 px-2.5 py-1 rounded-md bg-slate-900 text-[11px] font-mono text-emerald-300 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-all border border-slate-800 shadow-xl pointer-events-none">03. 陽光綠洲</span>
+        </button>
+        <button onclick="scrollToChapter(4)" class="group relative flex items-center justify-center">
+            <span class="dot-indicator w-2.5 h-2.5 rounded-full bg-slate-700 transition-all group-hover:scale-125"></span>
+            <span class="absolute right-6 px-2.5 py-1 rounded-md bg-slate-900 text-[11px] font-mono text-emerald-300 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-all border border-slate-800 shadow-xl pointer-events-none">04. 雲端天空</span>
+        </button>
+        <button onclick="scrollToChapter(5)" class="group relative flex items-center justify-center">
+            <span class="dot-indicator w-2.5 h-2.5 rounded-full bg-slate-700 transition-all group-hover:scale-125"></span>
+            <span class="absolute right-6 px-2.5 py-1 rounded-md bg-slate-900 text-[11px] font-mono text-emerald-300 opacity-0 group-hover:opacity-100 whitespace-nowrap transition-all border border-slate-800 shadow-xl pointer-events-none">05. 永恆森林</span>
+        </button>
+    </div>
+
+    <!-- MAIN STORY CONTENT SECTIONS -->
+    <main class="relative z-10 pt-16">
+
+        <!-- CHAPTER 1: THE COSMIC SPARK -->
+        <section id="chapter-1" class="chapter-section flex items-center justify-start px-6 md:px-16 lg:px-24">
+            <div class="max-w-xl glass-panel p-8 md:p-10 rounded-2xl border border-white/10 my-20">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-400/20 text-indigo-300 text-xs font-mono font-medium mb-5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
+                    <span>CHAPTER 01 / COSMIC ORIGIN</span>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl md:text-4xl text-white mb-4 tracking-tight leading-tight">
+                    星空啟程<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 text-2xl md:text-3xl font-bold block mt-1">微光初生的奇蹟樂章</span>
+                </h2>
+                <p class="text-slate-300 text-sm md:text-base leading-relaxed mb-6 font-normal">
+                    在浩瀚沉靜的夜空中，一顆懷抱著生命溫度的微光種子悄然誕生。它攜帶著關於大地與森林的永恆承諾，劃破星海，降落於沉睡的土地之上。
+                </p>
+                
+                <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex items-start space-x-3 mb-6">
+                    <i class="fa-solid fa-circle-info text-emerald-400 mt-0.5 text-xs"></i>
+                    <p class="text-xs text-slate-300 leading-relaxed font-sans">
+                        <strong class="text-white font-medium">探索指南：</strong> 滾動滑鼠探索故事，或隨時點擊上方目次選單直達目標章節。亦可直接點擊 3D 種子互動。
+                    </p>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                    <button onclick="scrollToChapter(2)" class="px-5 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-lg shadow-emerald-500/20 hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
+                        <span>開始閱讀故事</span>
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+                    <button onclick="triggerSeedBounce()" class="px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-slate-700 text-xs font-medium transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-hand-pointer text-xs"></i>
+                        <span>互動觸控</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER 2: EARTH & SPROUT -->
+        <section id="chapter-2" class="chapter-section flex items-center justify-end px-6 md:px-16 lg:px-24">
+            <div class="max-w-xl glass-panel p-8 md:p-10 rounded-2xl border border-white/10 my-20">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-400/20 text-amber-300 text-xs font-mono font-medium mb-5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+                    <span>CHAPTER 02 / SPROUT & AWAKENING</span>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl md:text-4xl text-white mb-4 tracking-tight leading-tight">
+                    萌芽復甦<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-emerald-400 text-2xl md:text-3xl font-bold block mt-1">土壤深處的生命脈動</span>
+                </h2>
+                <p class="text-slate-300 text-sm md:text-base leading-relaxed mb-6 font-normal">
+                    種子深深沉澱於暖土之間，在靜謐中與雨露傾心對話。當第一道晨曦灑向大地，嫩綠的小芽破土而出，伸展第一雙稚嫩的葉翅。
+                </p>
+
+                <!-- Modern Feature Grid -->
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <i class="fa-solid fa-droplet text-cyan-400 text-sm mb-2"></i>
+                        <h4 class="font-bold text-xs text-white">雨露滋養</h4>
+                        <p class="text-[11px] text-slate-400 mt-1 leading-normal">凝聚清晨純淨水份，喚醒沉睡的養分循環。</p>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                        <i class="fa-solid fa-sun text-amber-400 text-sm mb-2"></i>
+                        <h4 class="font-bold text-xs text-white">日光光合</h4>
+                        <p class="text-[11px] text-slate-400 mt-1 leading-normal">吸收溫暖光能，為成長注入源源不絕的動力。</p>
+                    </div>
+                </div>
+
+                <button onclick="scrollToChapter(3)" class="px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 font-bold text-xs transition-all flex items-center gap-2">
+                    <span>前往陽光綠洲</span>
+                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- CHAPTER 3: SUNLIT MEADOW -->
+        <section id="chapter-3" class="chapter-section flex items-center justify-start px-6 md:px-16 lg:px-24">
+            <div class="max-w-xl glass-panel p-8 md:p-10 rounded-2xl border border-white/10 my-20">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-400/20 text-emerald-300 text-xs font-mono font-medium mb-5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>CHAPTER 03 / ECOLOGICAL OASIS</span>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl md:text-4xl text-white mb-4 tracking-tight leading-tight">
+                    陽光綠洲<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-300 text-2xl md:text-3xl font-bold block mt-1">繁茂綠意的共生樂園</span>
+                </h2>
+                <p class="text-slate-300 text-sm md:text-base leading-relaxed mb-6 font-normal">
+                    昔日的小芽已成長為挺拔的綠樹，茂密的樹冠吸引著無數生物前來棲息。懸浮的綠洲在蔚藍天空下散發蓬勃生機，交織出自然的共生樂章。
+                </p>
+
+                <div class="space-y-2.5 mb-6">
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+                        <span class="text-slate-300 flex items-center gap-2"><i class="fa-solid fa-leaf text-emerald-400"></i> 生態多樣性指數</span>
+                        <span class="text-emerald-400 font-mono font-bold">100% OPTIMAL</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+                        <span class="text-slate-300 flex items-center gap-2"><i class="fa-solid fa-wind text-cyan-400"></i> 空氣循環淨化力</span>
+                        <span class="text-cyan-400 font-mono font-bold">GRADE A+</span>
+                    </div>
+                </div>
+
+                <button onclick="scrollToChapter(4)" class="px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 font-bold text-xs transition-all flex items-center gap-2">
+                    <span>飛升雲端天空</span>
+                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- CHAPTER 4: FLOATING SKY CANOPY -->
+        <section id="chapter-4" class="chapter-section flex items-center justify-end px-6 md:px-16 lg:px-24">
+            <div class="max-w-xl glass-panel p-8 md:p-10 rounded-2xl border border-white/10 my-20">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-pink-500/10 border border-pink-400/20 text-pink-300 text-xs font-mono font-medium mb-5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse"></span>
+                    <span>CHAPTER 04 / SKY CANOPY</span>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl md:text-4xl text-white mb-4 tracking-tight leading-tight">
+                    雲端天空<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 text-2xl md:text-3xl font-bold block mt-1">繁星盛開的暮色幻境</span>
+                </h2>
+                <p class="text-slate-300 text-sm md:text-base leading-relaxed mb-6 font-normal">
+                    樹冠穿透雲靄，觸及紫羅蘭色的夢幻天空。枝頭結出宛如螢光水晶般的奇幻果實，隨風散播充滿希冀的新種子，向地平線另一端發射未來。
+                </p>
+
+                <div class="p-4 border-l-2 border-pink-400 bg-pink-950/20 rounded-r-xl text-xs text-pink-200/90 leading-relaxed mb-6 font-sans">
+                    「每一顆樹木都是大地的呼吸，每一顆種子都是對時間與未來的承諾。」
+                </div>
+
+                <button onclick="scrollToChapter(5)" class="px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/30 font-bold text-xs transition-all flex items-center gap-2">
+                    <span>抵達永恆森林</span>
+                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- CHAPTER 5: ETERNAL HARMONY -->
+        <section id="chapter-5" class="chapter-section flex items-center justify-center px-6 md:px-16 lg:px-24">
+            <div class="max-w-2xl glass-panel p-8 md:p-12 rounded-2xl border border-white/10 text-center my-20">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-400/20 text-teal-300 text-xs font-mono font-medium mb-5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
+                    <span>CHAPTER 05 / SUSTAINABLE FUTURE</span>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl md:text-5xl text-white mb-6 tracking-tight leading-tight">
+                    永恆森林<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300 text-2xl md:text-4xl font-bold block mt-2">人與自然共生的永續願景</span>
+                </h2>
+                <p class="text-slate-300 text-sm md:text-base leading-relaxed mb-8 max-w-lg mx-auto font-normal">
+                    當一顆微光種子繁衍為一片森林，永續發展便有了清晰的實踐軌跡。我們以和諧循環為核心，守護每一寸綠意，將生生不息的精神傳遞至未來。
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <button onclick="scrollToChapter(1)" class="px-6 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-xl shadow-emerald-500/20 hover:scale-105 active:scale-95 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span>重新瀏覽故事</span>
+                    </button>
+                    <button onclick="triggerSeedBounce()" class="px-5 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-slate-700 font-medium text-xs transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>注入微光能量</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Toast Notification -->
+    <div id="toast-modal" class="fixed bottom-6 left-6 z-50 glass-panel px-4 py-3 rounded-xl hidden flex items-center space-x-3 shadow-2xl border border-emerald-500/30 transition-all duration-300">
+        <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs">
+            <i id="toast-icon" class="fa-solid fa-sparkles"></i>
+        </div>
+        <div>
+            <p id="toast-title" class="text-xs font-bold text-white">互動提示</p>
+            <p id="toast-msg" class="text-[11px] text-slate-300">小種子感受到了你的觸控！</p>
+        </div>
+    </div>
+
+    <script>
+        let scene, camera, renderer;
+        let seedGroup, islandGroup, treeGroup, cloudGroup, particleSystem;
+        let isAudioPlaying = false;
+        let synth = null;
+
+        // Current scroll progress (0.0 to 1.0)
+        let scrollProgress = 0;
+        let targetScrollProgress = 0;
+
+        // Interactive mouse raycasting
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+        window.onload = function() {
+            initThreeScene();
+            create3DObjects();
+            setupEventListeners();
+            animate();
+            updateScrollProgress();
+        };
+
+        function initThreeScene() {
+            const canvas = document.getElementById('webgl-canvas');
+            
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x0b0f19, 0.025);
+
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 3, 16);
+
+            renderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                antialias: true,
+                alpha: true
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+            // Lighting Setup
+            const ambientLight = new THREE.AmbientLight(0xdbeafe, 0.85);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0xfff7ed, 1.5);
+            dirLight.position.set(10, 20, 15);
+            dirLight.castShadow = true;
+            dirLight.shadow.mapSize.width = 1024;
+            dirLight.shadow.mapSize.height = 1024;
+            scene.add(dirLight);
+
+            const pointLight = new THREE.PointLight(0x4ade80, 2, 20);
+            pointLight.position.set(0, 2, 0);
+            scene.add(pointLight);
+        }
+
+        function create3DObjects() {
+            
+            // --- 1. CUTE GLOWING SEED ---
+            seedGroup = new THREE.Group();
+
+            // Seed Main Body
+            const seedGeo = new THREE.SphereGeometry(0.7, 32, 32);
+            seedGeo.scale(1, 1.25, 0.9);
+            const seedMat = new THREE.MeshStandardMaterial({
+                color: 0x86efac,
+                emissive: 0x16a34a,
+                emissiveIntensity: 0.35,
+                roughness: 0.25,
+                metalness: 0.1
+            });
+            const seedMesh = new THREE.Mesh(seedGeo, seedMat);
+            seedMesh.castShadow = true;
+            seedGroup.add(seedMesh);
+
+            // Seed Eyes
+            const eyeGeo = new THREE.SphereGeometry(0.08, 16, 16);
+            const eyeMat = new THREE.MeshBasicMaterial({ color: 0x0f172a });
+            
+            const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
+            leftEye.position.set(-0.2, 0.2, 0.6);
+            seedGroup.add(leftEye);
+
+            const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
+            rightEye.position.set(0.2, 0.2, 0.6);
+            seedGroup.add(rightEye);
+
+            // Sprout Leaf
+            const leafGeo = new THREE.ConeGeometry(0.25, 0.6, 16);
+            leafGeo.rotateZ(-Math.PI / 4);
+            const leafMat = new THREE.MeshStandardMaterial({ color: 0x4ade80, roughness: 0.2 });
+            const leaf = new THREE.Mesh(leafGeo, leafMat);
+            leaf.position.set(0.1, 0.85, 0);
+            seedGroup.add(leaf);
+
+            seedGroup.position.set(0, 1.5, 0);
+            scene.add(seedGroup);
+
+
+            // --- 2. FLOATING LOW-POLY ISLAND ---
+            islandGroup = new THREE.Group();
+
+            const islandGeo = new THREE.CylinderGeometry(4, 3, 2, 8);
+            const islandMat = new THREE.MeshStandardMaterial({ color: 0x22c55e, roughness: 0.8, flatShading: true });
+            const island = new THREE.Mesh(islandGeo, islandMat);
+            island.position.y = -1.5;
+            island.receiveShadow = true;
+            islandGroup.add(island);
+
+            const dirtGeo = new THREE.ConeGeometry(3.2, 3, 8);
+            dirtGeo.rotateX(Math.PI);
+            const dirtMat = new THREE.MeshStandardMaterial({ color: 0x78350f, roughness: 0.9, flatShading: true });
+            const dirt = new THREE.Mesh(dirtGeo, dirtMat);
+            dirt.position.y = -3.8;
+            islandGroup.add(dirt);
+
+            islandGroup.position.set(0, -2, 0);
+            scene.add(islandGroup);
+
+
+            // --- 3. GROWING TREE ---
+            treeGroup = new THREE.Group();
+
+            const trunkGeo = new THREE.CylinderGeometry(0.4, 0.7, 4, 8);
+            const trunkMat = new THREE.MeshStandardMaterial({ color: 0xa16207, roughness: 0.8, flatShading: true });
+            const trunk = new THREE.Mesh(trunkGeo, trunkMat);
+            trunk.position.y = 1.5;
+            trunk.castShadow = true;
+            treeGroup.add(trunk);
+
+            const foliageMat = new THREE.MeshStandardMaterial({ color: 0x4ade80, roughness: 0.5, flatShading: true });
+            const foliagePositions = [
+                { x: 0, y: 3.8, z: 0, r: 1.8 },
+                { x: -1, y: 3.2, z: 0.5, r: 1.3 },
+                { x: 1, y: 3.3, z: -0.3, r: 1.4 },
+                { x: 0, y: 4.5, z: -0.2, r: 1.2 }
+            ];
+
+            foliagePositions.forEach(p => {
+                const fGeo = new THREE.DodecahedronGeometry(p.r, 1);
+                const fMesh = new THREE.Mesh(fGeo, foliageMat);
+                fMesh.position.set(p.x, p.y, p.z);
+                fMesh.castShadow = true;
+                treeGroup.add(fMesh);
+            });
+
+            // Fruit Crystals
+            const fruitGeo = new THREE.OctahedronGeometry(0.25);
+            const fruitMat = new THREE.MeshStandardMaterial({ color: 0xf472b6, emissive: 0xdb2777, emissiveIntensity: 0.6 });
+            for(let i = 0; i < 6; i++) {
+                const fruit = new THREE.Mesh(fruitGeo, fruitMat);
+                const angle = (i / 6) * Math.PI * 2;
+                fruit.position.set(Math.cos(angle) * 1.5, 3 + Math.sin(i) * 0.8, Math.sin(angle) * 1.5);
+                treeGroup.add(fruit);
+            }
+
+            treeGroup.position.set(0, -0.5, 0);
+            treeGroup.scale.set(0.01, 0.01, 0.01);
+            scene.add(treeGroup);
+
+
+            // --- 4. CLOUDS & PARTICLES ---
+            cloudGroup = new THREE.Group();
+            const cloudMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.9, transparent: true, opacity: 0.85 });
+            
+            for(let c = 0; c < 8; c++) {
+                const singleCloud = new THREE.Group();
+                const numSpheres = 5 + Math.floor(Math.random() * 4);
+                for(let s = 0; s < numSpheres; s++) {
+                    const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.8 + Math.random() * 0.6, 16, 16), cloudMat);
+                    sphere.position.set(s * 0.7, Math.random() * 0.3, Math.random() * 0.5);
+                    singleCloud.add(sphere);
+                }
+                singleCloud.position.set((Math.random() - 0.5) * 24, 4 + Math.random() * 8, (Math.random() - 0.5) * 20);
+                cloudGroup.add(singleCloud);
+            }
+            scene.add(cloudGroup);
+
+            // Floating Star Particles
+            const particleCount = 200;
+            const particleGeo = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 30;
+                positions[i + 1] = (Math.random() - 0.5) * 30;
+                positions[i + 2] = (Math.random() - 0.5) * 30;
+            }
+
+            particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            const particleMat = new THREE.PointsMaterial({
+                color: 0x6ee7b7,
+                size: 0.15,
+                transparent: true,
+                opacity: 0.75
+            });
+
+            particleSystem = new THREE.Points(particleGeo, particleMat);
+            scene.add(particleSystem);
+        }
+
+        function updateScrollProgress() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            targetScrollProgress = Math.max(0, Math.min(1, scrollTop / (scrollHeight || 1)));
+
+            document.getElementById('progress-bar').style.width = `${targetScrollProgress * 100}%`;
+
+            const currentChapterIndex = Math.min(5, Math.floor(targetScrollProgress * 5) + 1);
+            highlightActiveNav(currentChapterIndex);
+        }
+
+        function highlightActiveNav(chapterNum) {
+            for (let i = 1; i <= 5; i++) {
+                const navItem = document.getElementById(`nav-ch-${i}`);
+                if (navItem) {
+                    if (i === chapterNum) {
+                        navItem.classList.add('active');
+                    } else {
+                        navItem.classList.remove('active');
+                    }
+                }
+            }
+
+            const dots = document.querySelectorAll('.dot-indicator');
+            dots.forEach((dot, index) => {
+                if (index + 1 === chapterNum) {
+                    dot.classList.add('bg-emerald-400', 'scale-150');
+                    dot.classList.remove('bg-slate-700');
+                } else {
+                    dot.classList.remove('bg-emerald-400', 'scale-150');
+                    dot.classList.add('bg-slate-700');
+                }
+            });
+        }
+
+        function scrollToChapter(chapterNum) {
+            playChimeSound(chapterNum * 120 + 200);
+            const targetEl = document.getElementById(`chapter-${chapterNum}`);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth' });
+                showToast(`直達第 ${chapterNum} 章`, `目標：${targetEl.querySelector('h2').innerText.split('\n')[0]}`);
+            }
+        }
+
+        let clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const elapsedTime = clock.getElapsedTime();
+
+            scrollProgress += (targetScrollProgress - scrollProgress) * 0.05;
+
+            // Camera movement interpolation based on scroll position
+            camera.position.x = Math.sin(scrollProgress * Math.PI * 2) * 3;
+            camera.position.y = 2 + scrollProgress * 6;
+            camera.position.z = 16 - scrollProgress * 6;
+            camera.lookAt(0, 1 + scrollProgress * 2, 0);
+
+            if (seedGroup) {
+                seedGroup.rotation.y = elapsedTime * 0.8;
+                if (scrollProgress < 0.35) {
+                    const seedY = 1.5 - scrollProgress * 5 + Math.sin(elapsedTime * 3) * 0.15;
+                    seedGroup.position.set(0, Math.max(-0.5, seedY), 0);
+                    seedGroup.scale.set(1, 1, 1);
+                } else {
+                    const scaleFactor = Math.max(0.001, 1 - (scrollProgress - 0.35) * 4);
+                    seedGroup.scale.set(scaleFactor, scaleFactor, scaleFactor);
+                }
+            }
+
+            if (islandGroup) {
+                islandGroup.rotation.y = elapsedTime * 0.1;
+            }
+
+            if (treeGroup) {
+                treeGroup.rotation.y = elapsedTime * 0.15;
+                if (scrollProgress > 0.2) {
+                    const treeScale = Math.min(1.2, (scrollProgress - 0.2) * 1.8);
+                    treeGroup.scale.set(treeScale, treeScale, treeScale);
+                } else {
+                    treeGroup.scale.set(0.01, 0.01, 0.01);
+                }
+            }
+
+            if (cloudGroup) {
+                cloudGroup.rotation.y = elapsedTime * 0.02;
+                cloudGroup.position.y = Math.sin(elapsedTime * 0.5) * 0.5;
+            }
+
+            if (particleSystem) {
+                particleSystem.rotation.y = elapsedTime * 0.05;
+                particleSystem.rotation.x = Math.sin(elapsedTime * 0.03) * 0.1;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        function setupEventListeners() {
+            window.addEventListener('scroll', updateScrollProgress);
+            window.addEventListener('resize', onWindowResize);
+            window.addEventListener('pointerdown', onPointerDown);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function triggerSeedBounce() {
+            if (!seedGroup) return;
+            playChimeSound(523.25);
+
+            let startTime = performance.now();
+            function bounce() {
+                let now = performance.now();
+                let progress = (now - startTime) / 600;
+                if (progress < 1) {
+                    seedGroup.scale.y = 1 + Math.sin(progress * Math.PI) * 0.4;
+                    seedGroup.scale.x = 1 - Math.sin(progress * Math.PI) * 0.2;
+                    requestAnimationFrame(bounce);
+                } else {
+                    seedGroup.scale.set(1, 1, 1);
+                }
+            }
+            bounce();
+            showToast("🌱 微光脈動", "微光能量已注入土地。");
+        }
+
+        function onPointerDown(event) {
+            if (event.target.tagName === 'BUTTON' || event.target.closest('header') || event.target.closest('.glass-panel')) return;
+
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(scene.children, true);
+
+            if (intersects.length > 0) {
+                triggerSeedBounce();
+            }
+        }
+
+        function toggleAudio() {
+            if (!synth) {
+                synth = new Tone.PolySynth(Tone.Synth).toDestination();
+                synth.set({
+                    envelope: { attack: 0.1, decay: 0.8, sustain: 0.3, release: 1.2 }
+                });
+            }
+
+            if (!isAudioPlaying) {
+                Tone.start();
+                isAudioPlaying = true;
+                document.getElementById('audio-icon').className = "fa-solid fa-volume-high text-emerald-400";
+                document.getElementById('audio-text').innerText = "音效已開啟";
+                playChimeSound(440);
+                showToast("🎵 情境音效已開啟", "導覽或探索時將播放靈動和弦。");
+            } else {
+                isAudioPlaying = false;
+                document.getElementById('audio-icon').className = "fa-solid fa-volume-xmark text-slate-400";
+                document.getElementById('audio-text').innerText = "情境音效";
+                showToast("🔇 音效已靜音", "");
+            }
+        }
+
+        function playChimeSound(freq) {
+            if (isAudioPlaying && synth) {
+                try {
+                    synth.triggerAttackRelease([freq, freq * 1.25, freq * 1.5], "8n");
+                } catch(e) {
+                    console.log("Audio play allowed on user interaction");
+                }
+            }
+        }
+
+        let toastTimeout;
+        function showToast(title, msg) {
+            const toast = document.getElementById('toast-modal');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-msg').innerText = msg;
+            
+            toast.classList.remove('hidden');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('-translate-y-full')) {
+                menu.classList.remove('-translate-y-full');
+            } else {
+                menu.classList.add('-translate-y-full');
+            }
+        }
+    </script>
+</body>
+</html>
