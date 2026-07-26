@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark" class="dark scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paul 宣教航程與 Eutychus 復活神蹟 · 互動研讀</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts: Inter & Plus Jakarta Sans & Noto Sans TC -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"Noto Sans TC"', '"Inter"', 'sans-serif'],
+          display: ['"Plus Jakarta Sans"', '"Noto Sans TC"', 'sans-serif'],
+          mono: ['ui-monospace', 'SFMono-Regular', 'monospace']
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  :root, [data-theme="dark"] {
+    --bg-main: #070a14;
+    --bg-surface: #0e1626;
+    --card-bg: rgba(18, 28, 45, 0.82);
+    --card-border: rgba(245, 158, 11, 0.3);
+    --card-border-glow: rgba(245, 158, 11, 0.6);
+    --text-primary: #f8fafc;
+    --text-muted: #cbd5e1;
+    --text-faint: #94a3b8;
+    
+    --accent-gold: #f59e0b;
+    --accent-gold-deep: #d97706;
+    --accent-amber: #b45309;
+    --accent-sky: #38bdf8;
+    --accent-emerald: #34d399;
+    --accent-rose: #fb7185;
+    --accent-purple: #c084fc;
+
+    --stage-bg: #090e1a;
+    --hud-bg: rgba(7, 10, 20, 0.92);
+    --table-header: #131c2e;
+    --svg-bg: #0b1220;
+  }
+
+  [data-theme="light"] {
+    --bg-main: #f8f6f0;
+    --bg-surface: #ffffff;
+    --card-bg: rgba(255, 255, 255, 0.92);
+    --card-border: rgba(180, 83, 9, 0.25);
+    --card-border-glow: rgba(180, 83, 9, 0.5);
+    --text-primary: #0f172a;
+    --text-muted: #334155;
+    --text-faint: #64748b;
+
+    --accent-gold: #d97706;
+    --accent-gold-deep: #b45309;
+    --accent-amber: #92400e;
+    --accent-sky: #0284c7;
+    --accent-emerald: #059669;
+    --accent-rose: #e11d48;
+    --accent-purple: #7e22ce;
+
+    --stage-bg: #f1ebd8;
+    --hud-bg: rgba(248, 246, 240, 0.92);
+    --table-header: #ede6d6;
+    --svg-bg: #f4efe2;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: "Noto Sans TC", "Inter", sans-serif;
+    line-height: 1.75;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Ambient Glass Background */
+  .ambient-scene {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .blob-gold {
+    position: absolute;
+    top: -100px;
+    right: 10%;
+    width: 600px;
+    height: 600px;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, rgba(217, 119, 6, 0.03) 50%, transparent 80%);
+    filter: blur(60px);
+  }
+
+  .blob-sky {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    width: 500px;
+    height: 500px;
+    border-radius: 9999px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(2, 132, 199, 0.02) 50%, transparent 80%);
+    filter: blur(60px);
+  }
+
+  /* Sticky Top HUD Bar */
+  .hud-bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: 64px;
+    background: var(--hud-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1.5px solid var(--card-border);
+  }
+
+  /* Premium Glass Cards */
+  .glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1.5px solid var(--card-border);
+    border-radius: 1.25rem;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .glass-card:hover {
+    border-color: var(--card-border-glow);
+  }
+
+  .diagram-stage {
+    background-color: var(--stage-bg);
+    border: 1.5px solid var(--card-border);
+    border-radius: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Keyframe Animations */
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.35; transform: scale(0.95); }
+    50% { opacity: 0.95; transform: scale(1.18); }
+  }
+
+  .pulse-ring {
+    animation: pulseGlow 2.4s ease-in-out infinite;
+  }
+
+  @keyframes routeFlow {
+    to { stroke-dashoffset: -28; }
+  }
+
+  .flowing-route {
+    animation: routeFlow 1.6s linear infinite;
+  }
+
+  @keyframes flickeringLamp {
+    0%, 100% { opacity: 0.85; filter: drop-shadow(0 0 12px rgba(245,158,11,0.8)); }
+    25% { opacity: 0.65; filter: drop-shadow(0 0 6px rgba(245,158,11,0.4)); }
+    50% { opacity: 0.95; filter: drop-shadow(0 0 16px rgba(251,191,36,0.9)); }
+    75% { opacity: 0.75; filter: drop-shadow(0 0 8px rgba(245,158,11,0.5)); }
+  }
+
+  .flickering-light {
+    animation: flickeringLamp 3s ease-in-out infinite;
+  }
+
+  @keyframes fallPhysical {
+    0% { transform: translateY(0) scale(1); opacity: 0.3; }
+    20% { opacity: 1; }
+    85% { transform: translateY(225px) scale(1.2); opacity: 1; }
+    92% { transform: translateY(215px) scale(0.9, 1.3); }
+    100% { transform: translateY(225px) scale(1); opacity: 0.9; }
+  }
+
+  .animate-fall-physics {
+    animation: fallPhysical 1.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  }
+
+  @keyframes pulseMiracle {
+    0% { transform: scale(0.8); opacity: 0.3; }
+    50% { opacity: 0.9; }
+    100% { transform: scale(1.8); opacity: 0; }
+  }
+
+  .miracle-shockwave {
+    animation: pulseMiracle 2s ease-out infinite;
+  }
+
+  .interactive-hotspot {
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease;
+  }
+
+  .interactive-hotspot:hover {
+    filter: drop-shadow(0 0 10px var(--accent-gold));
+  }
+
+  .interactive-hotspot:focus-visible {
+    outline: 2px solid var(--accent-sky);
+    outline-offset: 4px;
+  }
+
+  .btn-3d {
+    background: linear-gradient(135deg, var(--accent-gold-deep), var(--accent-gold));
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 9999px;
+    box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .btn-3d:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(217, 119, 6, 0.5);
+  }
+
+  .btn-3d:active {
+    transform: translateY(1px);
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-ring, .flowing-route, .flickering-light, .animate-fall-physics, .miracle-shockwave {
+      animation: none !important;
+    }
+    body, .glass-card { transition: none !important; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- Ambient Background Lighting Scene -->
+<div class="ambient-scene">
+  <div class="blob-gold"></div>
+  <div class="blob-sky"></div>
+</div>
+
+<!-- SVG Icon Symbols Library -->
+<svg width="0" height="0" class="absolute">
+  <defs>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275L12 3z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><polygon points="1 6 1 22 8 18 15 22 22 18 22 2 15 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="15" y1="6" x2="15" y2="22"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="6" x2="9" y2="6.01"/><line x1="15" y1="6" x2="15" y2="6.01"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/><path d="M10 22v-4h4v4"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  </defs>
+</svg>
+
+<!-- Top Floating HUD Navigation -->
+<header class="hud-bar px-4 flex items-center justify-between shadow-md">
+  <div class="flex items-center gap-3">
+    <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center font-display font-black text-sm text-[var(--accent-gold)] shadow-inner">
+      聖
+    </div>
+    <div class="flex flex-col">
+      <span class="text-xs font-bold text-[var(--accent-gold)] tracking-wider uppercase">使徒行傳 20 章 &amp; 哥林多後書 12 章</span>
+      <span id="hud-chapter-badge" class="text-[11px] font-bold text-[var(--text-muted)] truncate max-w-[180px] sm:max-w-none">
+        Paul 宣教航程與 Eutychus 復活神蹟
+      </span>
+    </div>
+  </div>
+
+  <!-- Navigation Pills (Scrollspy) -->
+  <nav class="hidden md:flex items-center gap-1.5 overflow-x-auto py-1">
+    <button onclick="scrollToStation(1)" id="hud-pill-1" class="px-3 py-1 text-xs rounded-full font-bold transition-colors bg-amber-500/20 text-[var(--accent-gold)] border border-amber-500/40">① 宣教路線</button>
+    <button onclick="scrollToStation(2)" id="hud-pill-2" class="px-3 py-1 text-xs rounded-full font-bold transition-colors bg-stone-500/10 text-[var(--text-muted)] border border-stone-300 dark:border-stone-700">② 深夜聚會</button>
+    <button onclick="scrollToStation(3)" id="hud-pill-3" class="px-3 py-1 text-xs rounded-full font-bold transition-colors bg-stone-500/10 text-[var(--text-muted)] border border-stone-300 dark:border-stone-700">③ Eutychus 復活</button>
+    <button onclick="scrollToStation(4)" id="hud-pill-4" class="px-3 py-1 text-xs rounded-full font-bold transition-colors bg-stone-500/10 text-[var(--text-muted)] border border-stone-300 dark:border-stone-700">④ 使徒憑據</button>
+    <button onclick="scrollToStation(5)" id="hud-pill-5" class="px-3 py-1 text-xs rounded-full font-bold transition-colors bg-stone-500/10 text-[var(--text-muted)] border border-stone-300 dark:border-stone-700">⑤ 詞彙與來源</button>
+  </nav>
+
+  <!-- Theme Toggle & Progress Bar -->
+  <div class="flex items-center gap-3">
+    <button onclick="toggleTheme()" id="theme-toggle-btn" class="p-2.5 rounded-full border border-stone-300 dark:border-stone-700 bg-stone-100 dark:bg-stone-800 text-[var(--text-primary)] hover:border-amber-500 transition focus:outline-none focus:ring-2 focus:ring-amber-500" aria-label="切換明暗主題">
+      <svg class="icon" id="theme-icon"><use href="#i-sun"/></svg>
+    </button>
+    <div class="flex items-center gap-1.5">
+      <div class="w-16 sm:w-20 h-1.5 bg-stone-200 dark:bg-stone-800 rounded-full overflow-hidden border border-stone-300 dark:border-stone-700">
+        <div id="hud-progress-fill" class="h-full bg-gradient-to-r from-amber-500 to-amber-600 w-0 transition-all duration-150"></div>
+      </div>
+      <span id="hud-progress-percent" class="text-[10px] font-mono font-bold text-[var(--accent-gold)]">0%</span>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="pt-10 pb-6 px-4 text-center">
+  <div class="max-w-4xl mx-auto space-y-3">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-600/30 text-[var(--accent-gold)] text-xs font-bold uppercase tracking-widest shadow-sm">
+      <svg class="icon text-amber-500"><use href="#i-sparkles"/></svg>
+      
+    </div>
+    <h1 class="font-display text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+      Paul 宣教航程 <span class="text-[var(--accent-gold)]">&amp; Eutychus 復活神蹟</span>
+    </h1>
+    <p class="text-xs sm:text-sm text-[var(--text-muted)] max-w-2xl mx-auto">
+      點擊路線節點、樓層區域或開啟自動航程播放器，探索 Paul 的宣教旅程與聖經歷史考證。
+    </p>
+  </div>
+</section>
+
+<main class="max-w-4xl mx-auto px-4 py-6 space-y-12">
+
+  <!-- STATION 1: MISSIONARY JOURNEY & DETOUR MAP -->
+  <section id="station-1" class="glass-card p-6 sm:p-8 space-y-6">
+    <div class="flex items-center justify-between border-b border-stone-200 dark:border-stone-800 pb-3">
+      <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-600/30 text-[var(--accent-gold)] font-mono font-bold text-xs">
+        STATION 01 · 使徒行傳 20:1-6
+      </span>
+      <span class="text-xs text-[var(--text-faint)] font-bold">CCB / NIV 平行研讀</span>
+    </div>
+
+    <div>
+      <h2 class="font-display text-2xl sm:text-3xl font-bold mb-2">
+        巡迴宣教與 Macedonia 改道
+      </h2>
+      <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+        Ephesus 的騷亂平息後，Paul 勸勉門徒並辭別，前往 Macedonia 與 Greece，停留 3 個月。正要搭船前往 Syria 時，得知猶太人密謀加害，便改道從陸路折返 Macedonia。同工先行前往 Troas 等候，除酵節後 Paul 從 Philippi 啟航，5 天後在 Troas 會合，停留 7 天。
+      </p>
+    </div>
+
+    <!-- DIAGRAM 1: DYNAMIC MISSIONARY MAP STAGE -->
+    <div class="diagram-stage p-4 space-y-3">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <span class="text-xs font-bold text-[var(--accent-gold)] flex items-center gap-1.5">
+          <svg class="icon text-amber-500"><use href="#i-map"/></svg>
+          圖解 1: Paul 宣教航程與繞道地圖 (Missionary Route Map)
+        </span>
+        <div class="flex items-center gap-2">
+          <button onclick="toggleMapAutoPlay()" id="map-play-btn" class="btn-3d px-3 py-1 text-[11px] font-bold flex items-center gap-1.5">
+            <svg class="icon" id="map-play-icon" style="width:14px;height:14px"><use href="#i-play"/></svg>
+            <span id="map-play-text">自動播放航程</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="relative w-full h-[290px] sm:h-[340px] rounded-xl overflow-hidden border border-stone-300 dark:border-stone-800" style="background-color: var(--svg-bg);">
+        <svg id="map-svg" viewBox="0 0 800 360" class="w-full h-full" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="route-grad-main" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#f59e0b"/>
+              <stop offset="50%" stop-color="#38bdf8"/>
+              <stop offset="100%" stop-color="#34d399"/>
+            </linearGradient>
+
+            <filter id="ship-glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          <!-- Latitude & Longitude Chart Grid -->
+          <g opacity="0.12" stroke="var(--accent-gold)" stroke-width="0.8" stroke-dasharray="4 6">
+            <line x1="0" y1="90" x2="800" y2="90"/>
+            <line x1="0" y1="180" x2="800" y2="180"/>
+            <line x1="0" y1="270" x2="800" y2="270"/>
+            <line x1="200" y1="0" x2="200" y2="360"/>
+            <line x1="400" y1="0" x2="400" y2="360"/>
+            <line x1="600" y1="0" x2="600" y2="360"/>
+          </g>
+
+          <!-- Aegean Sea Coastlines -->
+          <path d="M50,50 Q180,30 270,110 T390,190" fill="none" stroke="#a8a29e" stroke-width="2" opacity="0.3"/>
+          <path d="M470,110 Q610,90 730,220" fill="none" stroke="#a8a29e" stroke-width="2" opacity="0.3"/>
+
+          <!-- Geographical Labels -->
+          <text x="220" y="60" fill="var(--text-faint)" font-size="11" font-weight="bold" text-anchor="middle">MACEDONIA</text>
+          <text x="180" y="300" fill="var(--text-faint)" font-size="11" font-weight="bold" text-anchor="middle">GREECE / CORINTH</text>
+          <text x="580" y="75" fill="var(--text-faint)" font-size="11" font-weight="bold" text-anchor="middle">TROAS</text>
+          <text x="670" y="300" fill="var(--text-faint)" font-size="10" font-weight="bold" text-anchor="middle">SYRIA (預定航線)</text>
+
+          <!-- Trajectory Base & Animated Dash Path -->
+          <path d="M100,200 L220,110 L180,240 L380,100 L580,120" fill="none" stroke="url(#route-grad-main)" stroke-width="3" opacity="0.35"/>
+          <path id="route-path-actual" d="M100,200 L220,110 L180,240 L380,100 L580,120" fill="none" stroke="url(#route-grad-main)" stroke-width="3.5" stroke-dasharray="8 6" class="flowing-route"/>
+
+          <!-- Companion Convergence Route -->
+          <path d="M220,110 Q400,60 580,120" fill="none" stroke="var(--text-faint)" stroke-width="1.2" stroke-dasharray="3 4" opacity="0.5"/>
+          <text x="400" y="68" fill="var(--text-faint)" font-size="9" text-anchor="middle">同工先行前往 Troas</text>
+
+          <!-- Cancelled Syrian Route -->
+          <path d="M180,240 Q420,310 670,280" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="3 4" opacity="0.8"/>
+          <text x="420" y="315" fill="#dc2626" font-size="10" font-weight="bold" text-anchor="middle">因猶太人密謀取消直航 Syria</text>
+
+          <!-- Interactive Node 0: Ephesus -->
+          <g class="interactive-hotspot" onclick="clickMapNode('ephesus')" onkeydown="if(event.key==='Enter'||event.key===' ')clickMapNode('ephesus')" tabindex="0" role="button" aria-label="Ephesus 起點">
+            <circle cx="100" cy="200" r="28" fill="transparent"/>
+            <circle id="node-ring-ephesus" cx="100" cy="200" r="16" fill="none" stroke="#f59e0b" stroke-width="2" opacity="1"/>
+            <circle cx="100" cy="200" r="10" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+            <text x="100" y="225" fill="var(--text-primary)" font-size="11" font-weight="bold" text-anchor="middle">1. Ephesus (起點)</text>
+          </g>
+
+          <!-- Interactive Node 1: Macedonia -->
+          <g class="interactive-hotspot" onclick="clickMapNode('macedonia')" onkeydown="if(event.key==='Enter'||event.key===' ')clickMapNode('macedonia')" tabindex="0" role="button" aria-label="Macedonia">
+            <circle cx="220" cy="110" r="28" fill="transparent"/>
+            <circle id="node-ring-macedonia" cx="220" cy="110" r="16" fill="none" stroke="#f59e0b" stroke-width="2" opacity="0"/>
+            <circle cx="220" cy="110" r="10" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+            <text x="220" y="95" fill="var(--text-primary)" font-size="11" font-weight="bold" text-anchor="middle">2. Macedonia</text>
+          </g>
+
+          <!-- Interactive Node 2: Greece / Corinth -->
+          <g class="interactive-hotspot" onclick="clickMapNode('greece')" onkeydown="if(event.key==='Enter'||event.key===' ')clickMapNode('greece')" tabindex="0" role="button" aria-label="Greece">
+            <circle cx="180" cy="240" r="28" fill="transparent"/>
+            <circle id="node-ring-greece" cx="180" cy="240" r="16" fill="none" stroke="#38bdf8" stroke-width="2" opacity="0"/>
+            <circle cx="180" cy="240" r="10" fill="#38bdf8" stroke="#ffffff" stroke-width="2"/>
+            <text x="180" y="265" fill="var(--text-primary)" font-size="11" font-weight="bold" text-anchor="middle">3. Greece (停留3個月)</text>
+          </g>
+
+          <!-- Interactive Node 3: Philippi -->
+          <g class="interactive-hotspot" onclick="clickMapNode('philippi')" onkeydown="if(event.key==='Enter'||event.key===' ')clickMapNode('philippi')" tabindex="0" role="button" aria-label="Philippi">
+            <circle cx="380" cy="100" r="28" fill="transparent"/>
+            <circle id="node-ring-philippi" cx="380" cy="100" r="16" fill="none" stroke="#f59e0b" stroke-width="2" opacity="0"/>
+            <circle cx="380" cy="100" r="9" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+            <text x="380" y="85" fill="var(--text-primary)" font-size="11" font-weight="bold" text-anchor="middle">4. Philippi (搭船)</text>
+          </g>
+
+          <!-- Interactive Node 4: Troas -->
+          <g class="interactive-hotspot" onclick="clickMapNode('troas')" onkeydown="if(event.key==='Enter'||event.key===' ')clickMapNode('troas')" tabindex="0" role="button" aria-label="Troas">
+            <circle cx="580" cy="120" r="32" fill="transparent"/>
+            <circle id="node-ring-troas" cx="580" cy="120" r="18" fill="none" stroke="#34d399" stroke-width="2" class="pulse-ring"/>
+            <circle cx="580" cy="120" r="12" fill="#34d399" stroke="#ffffff" stroke-width="2"/>
+            <text x="580" y="152" fill="var(--accent-emerald)" font-size="12" font-weight="extrabold" text-anchor="middle">5. Troas (停留7天)</text>
+          </g>
+
+          <!-- Cancelled Route Node: Syria -->
+          <g class="interactive-hotspot" onclick="clickMapNode('syria')" onkeydown="if(event.key==='Enter'||event.key===' ')clickMapNode('syria')" tabindex="0" role="button" aria-label="Syria">
+            <circle cx="670" cy="280" r="28" fill="transparent"/>
+            <circle id="node-ring-syria" cx="670" cy="280" r="16" fill="none" stroke="#dc2626" stroke-width="2" opacity="0"/>
+            <circle cx="670" cy="280" r="8" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+            <text x="670" y="260" fill="#dc2626" font-size="10" font-weight="bold" text-anchor="middle">取消航線: Syria</text>
+          </g>
+
+          <!-- Dynamic Trajectory Vessel Marker -->
+          <g id="map-ship" transform="translate(100,200)" style="transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);" filter="url(#ship-glow)">
+            <circle cx="0" cy="0" r="15" fill="#f59e0b" fill-opacity="0.3"/>
+            <circle cx="0" cy="0" r="7" fill="#f59e0b" stroke="#ffffff" stroke-width="2"/>
+          </g>
+        </svg>
+
+        <!-- Map Legend -->
+        <div class="absolute bottom-2 left-2 bg-stone-900/85 backdrop-blur text-[10px] text-stone-200 px-2.5 py-1.5 rounded-lg border border-stone-700/60 flex items-center gap-3">
+          <span class="flex items-center gap-1"><span class="w-3 h-0.5 bg-amber-500 inline-block"></span>實際路線</span>
+          <span class="flex items-center gap-1"><span class="w-3 h-0.5 bg-rose-500 inline-block border-b border-dashed"></span>取消路線</span>
+          <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-500 inline-block"></span>宣教據點</span>
+        </div>
+      </div>
+
+      <!-- Map Walkthrough Buttons & Information Card -->
+      <div class="space-y-3 pt-1">
+        <div class="flex flex-wrap items-center gap-1.5 text-xs">
+          <span class="text-[var(--text-faint)] font-bold mr-1">航程分布：</span>
+          <button onclick="clickMapNode('ephesus')" id="map-btn-ephesus" class="px-2.5 py-1 rounded-full bg-amber-500/20 text-[var(--accent-gold)] border border-amber-500/40 font-bold transition">1. Ephesus</button>
+          <button onclick="clickMapNode('macedonia')" id="map-btn-macedonia" class="px-2.5 py-1 rounded-full bg-stone-200/60 dark:bg-stone-800/80 hover:bg-amber-500/20 text-[var(--text-primary)] border border-stone-300 dark:border-stone-700 font-bold transition">2. Macedonia</button>
+          <button onclick="clickMapNode('greece')" id="map-btn-greece" class="px-2.5 py-1 rounded-full bg-stone-200/60 dark:bg-stone-800/80 hover:bg-amber-500/20 text-[var(--text-primary)] border border-stone-300 dark:border-stone-700 font-bold transition">3. Greece 繞道</button>
+          <button onclick="clickMapNode('philippi')" id="map-btn-philippi" class="px-2.5 py-1 rounded-full bg-stone-200/60 dark:bg-stone-800/80 hover:bg-amber-500/20 text-[var(--text-primary)] border border-stone-300 dark:border-stone-700 font-bold transition">4. Philippi</button>
+          <button onclick="clickMapNode('troas')" id="map-btn-troas" class="px-2.5 py-1 rounded-full bg-stone-200/60 dark:bg-stone-800/80 hover:bg-amber-500/20 text-[var(--text-primary)] border border-stone-300 dark:border-stone-700 font-bold transition">5. Troas 會合</button>
+        </div>
+
+        <!-- Node Dynamic Info Detail Box -->
+        <div id="map-node-detail" class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs space-y-1.5 transition-all duration-300">
+          <div class="flex items-center justify-between font-bold text-[var(--accent-gold)]">
+            <span id="map-detail-title" class="text-sm flex items-center gap-1.5">
+              <svg class="icon text-amber-500"><use href="#i-compass"/></svg>
+              1. Ephesus (起點)
+            </span>
+            <span id="map-detail-scripture" class="font-mono text-[11px] opacity-80">使徒行傳 20:1</span>
+          </div>
+          <p id="map-detail-desc" class="text-[var(--text-muted)] leading-relaxed">
+            Ephesus 的騷亂平息後，Paul 召集門徒並勸勉他們，辭別後動身前往 Macedonia。
+          </p>
+          <div id="map-detail-badge-wrap" class="flex items-center gap-2 pt-1 border-t border-amber-500/20 text-[11px] text-[var(--text-faint)]">
+            <span class="font-bold text-[var(--accent-sky)]">關鍵焦點：</span>
+            <span id="map-detail-tag" class="px-2 py-0.5 rounded bg-stone-200 dark:bg-stone-800 font-mono">起點 · 辭別門徒</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Practical Application Guidelines -->
+    <div class="grid sm:grid-cols-2 gap-3 pt-2">
+      <div class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-600/30">
+        <div class="flex items-center gap-1.5 text-xs font-bold text-[var(--accent-emerald)] mb-1">
+          <svg class="icon"><use href="#i-check"/></svg> 可以這樣做
+        </div>
+        <p class="text-xs text-[var(--text-muted)]">在同工體力疲憊時給予主動關懷，並在突發危險中保持靈活調整彈性。</p>
+      </div>
+      <div class="p-3.5 rounded-xl bg-rose-500/10 border border-rose-600/30">
+        <div class="flex items-center gap-1.5 text-xs font-bold text-[var(--accent-rose)] mb-1">
+          <svg class="icon"><use href="#i-x"/></svg> 避免這樣
+        </div>
+        <p class="text-xs text-[var(--text-muted)]">面對陪伴夥伴的疲倦冷眼旁觀，或公開嚴厲指責困倦打盹者。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATION 2 & 3: TROAS MIDNIGHT MEETING & MIRACLE RESURRECTION -->
+  <section id="station-2" class="glass-card p-6 sm:p-8 space-y-6">
+    <div class="flex items-center justify-between border-b border-stone-200 dark:border-stone-800 pb-3">
+      <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-600/30 text-[var(--accent-gold)] font-mono font-bold text-xs">
+        STATION 02 &amp; 03 · 使徒行傳 20:7-12
+      </span>
+      <span class="text-xs text-[var(--text-faint)] font-bold">擘餅聚會與復活神蹟</span>
+    </div>
+
+    <div>
+      <h2 class="font-display text-2xl sm:text-3xl font-bold mb-2">
+        深夜聚會、Eutychus 墜樓與復活
+      </h2>
+      <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+        七日的第一日，門徒聚集擘餅。Paul 因次日要行，講道直講到半夜。在點了許多燈火的三樓聚會房間，坐在窗臺上的青年 Eutychus 睡意沉重，從三樓掉落地面，扶起來已經死了。Paul 下樓伏在他身上抱著他，Eutychus 奇蹟復活，大家得到極大的安慰。
+      </p>
+    </div>
+
+    <!-- DIAGRAM 2: TROAS 3-STORY BUILDING & ATMOSPHERE ENGINE -->
+    <div id="station-3" class="diagram-stage p-4 space-y-3">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <span class="text-xs font-bold text-[var(--accent-gold)] flex items-center gap-1.5">
+          <svg class="icon text-amber-500"><use href="#i-building"/></svg>
+          圖解 2: Troas 三樓聚會建築與 Eutychus 復活結構圖
+        </span>
+
+        <!-- Time-of-Day Micro-Controller -->
+        <div class="flex items-center gap-2">
+          <span class="text-[11px] font-bold text-[var(--text-faint)] flex items-center gap-1">
+            <svg class="icon" style="width:14px;height:14px"><use href="#i-clock"/></svg>
+            時間氛圍：
+          </span>
+          <button onclick="setBuildingTime('midnight')" id="btn-time-midnight" class="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-[var(--accent-gold)] border border-amber-500/40 text-[11px] font-bold transition">
+            🌙 深夜燈火
+          </button>
+          <button onclick="setBuildingTime('dawn')" id="btn-time-dawn" class="px-2.5 py-0.5 rounded-full bg-stone-200/60 dark:bg-stone-800/80 text-[var(--text-muted)] border border-stone-300 dark:border-stone-700 text-[11px] font-bold transition">
+            🌅 拂曉天亮
+          </button>
+        </div>
+      </div>
+
+      <div class="relative w-full h-[330px] sm:h-[380px] rounded-xl overflow-hidden border border-stone-300 dark:border-stone-800 transition-colors duration-500" id="building-canvas-container" style="background-color: var(--svg-bg);">
+        <svg viewBox="0 0 800 400" class="w-full h-full" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <radialGradient id="grad-lamp-glow" cx="50%" cy="30%" r="60%">
+              <stop id="lamp-stop-1" offset="0%" stop-color="#f59e0b" stop-opacity="0.9"/>
+              <stop id="lamp-stop-2" offset="65%" stop-color="#d97706" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+            </radialGradient>
+
+            <radialGradient id="grad-dawn-sky" cx="80%" cy="20%" r="75%">
+              <stop offset="0%" stop-color="#fef08a" stop-opacity="0.6"/>
+              <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#070a14" stop-opacity="0"/>
+            </radialGradient>
+
+            <radialGradient id="grad-miracle-light" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.95"/>
+              <stop offset="60%" stop-color="#0284c7" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- Sky Glow Overlay -->
+          <rect id="sky-glow-rect" x="0" y="0" width="800" height="400" fill="transparent"/>
+
+          <!-- Architectural Frame: 3-Story Building -->
+          <rect x="200" y="30" width="400" height="340" rx="12" fill="var(--card-bg)" stroke="var(--accent-amber)" stroke-width="2.5"/>
+          
+          <!-- Floor Divider Lines -->
+          <line x1="200" y1="135" x2="600" y2="135" stroke="var(--card-border)" stroke-width="2" stroke-dasharray="4 4"/>
+          <line x1="200" y1="245" x2="600" y2="245" stroke="var(--card-border)" stroke-width="2" stroke-dasharray="4 4"/>
+
+          <!-- Staircase Guide Vector (Offset coordinates x=212, y=215 to prevent title text overlap) -->
+          <path d="M208,135 L208,245 L208,350" stroke="var(--text-faint)" stroke-width="1.5" stroke-dasharray="2 3" opacity="0.4"/>
+          <text x="214" y="215" fill="var(--text-faint)" font-size="8.5" font-weight="bold">樓梯通道</text>
+
+          <!-- Hotspot 1: 3rd Floor Meeting Room -->
+          <g class="interactive-hotspot" onclick="clickBuildingHotspot('floor3')" onkeydown="if(event.key==='Enter'||event.key===' ')clickBuildingHotspot('floor3')" tabindex="0" role="button" aria-label="3樓 聚會房間">
+            <rect id="spot-bg-floor3" x="205" y="35" width="390" height="95" rx="8" fill="var(--accent-gold)" fill-opacity="0.12"/>
+            <text x="220" y="62" fill="var(--accent-gold)" font-size="12.5" font-weight="extrabold">3樓 (聚會房間 / 許多燈火)</text>
+            <!-- Candlelight Glow Circles -->
+            <circle id="lamp-glow-circle" cx="440" cy="85" r="48" fill="url(#grad-lamp-glow)" class="flickering-light"/>
+            <circle cx="390" cy="80" r="6" fill="#f59e0b"/>
+            <circle cx="490" cy="80" r="6" fill="#f59e0b"/>
+            <text x="440" y="110" fill="var(--text-muted)" font-size="10" font-weight="bold" text-anchor="middle">深夜聚會 / Paul 講道 / 擘餅</text>
+          </g>
+
+          <!-- Hotspot 2: 3rd Floor Window Sill -->
+          <g class="interactive-hotspot" onclick="clickBuildingHotspot('window')" onkeydown="if(event.key==='Enter'||event.key===' ')clickBuildingHotspot('window')" tabindex="0" role="button" aria-label="3樓 窗臺 Eutychus 睡著墜樓處">
+            <rect x="535" y="55" width="45" height="70" rx="4" fill="none" stroke="#d97706" stroke-width="2"/>
+            <circle id="spot-bg-window" cx="557" cy="90" r="18" fill="#f59e0b" fill-opacity="0.25"/>
+            <circle cx="557" cy="80" r="6" fill="#f59e0b"/>
+            <text x="557" y="110" fill="#d97706" font-size="9" font-weight="bold" text-anchor="middle">窗臺</text>
+          </g>
+
+          <!-- Fall Physics Vector Line & Trajectory Dot -->
+          <path id="fall-path-line" d="M557,95 L557,310" stroke="#dc2626" stroke-width="2" stroke-dasharray="4 4" opacity="0.6"/>
+          <polygon points="557,320 552,308 562,308" fill="#dc2626"/>
+          <text x="568" y="200" fill="#dc2626" font-size="10" font-weight="bold">墜落軌跡</text>
+          
+          <!-- Animated Falling Dot -->
+          <circle id="falling-dot" cx="557" cy="95" r="5" fill="#dc2626" class="animate-fall-physics"/>
+
+          <!-- Hotspot 3: 2nd Floor Passage (Clear spacing at x=310, y=180) -->
+          <g class="interactive-hotspot" onclick="clickBuildingHotspot('floor2')" onkeydown="if(event.key==='Enter'||event.key===' ')clickBuildingHotspot('floor2')" tabindex="0" role="button" aria-label="2樓 過道樓層">
+            <rect id="spot-bg-floor2" x="205" y="140" width="390" height="100" rx="8" fill="transparent"/>
+            <text x="310" y="180" fill="var(--text-muted)" font-size="12" font-weight="bold">2樓 (過道樓層)</text>
+          </g>
+
+          <!-- Hotspot 4: Ground Floor Resurrection Stage -->
+          <g class="interactive-hotspot" onclick="clickBuildingHotspot('ground')" onkeydown="if(event.key==='Enter'||event.key===' ')clickBuildingHotspot('ground')" tabindex="0" role="button" aria-label="1樓 地面 Paul 伏抱神蹟處">
+            <rect id="spot-bg-ground" x="205" y="250" width="390" height="115" rx="8" fill="var(--accent-sky)" fill-opacity="0.05"/>
+            <text x="220" y="280" fill="var(--accent-sky)" font-size="12.5" font-weight="extrabold">1樓 地面 (Paul 伏抱與復活神蹟)</text>
+
+            <!-- Miracle Pulsing Halo -->
+            <circle id="miracle-pulse-circle" cx="557" cy="320" r="36" fill="url(#grad-miracle-light)" class="miracle-shockwave"/>
+            <circle cx="557" cy="320" r="10" fill="#0284c7" stroke="#ffffff" stroke-width="2"/>
+            <text x="557" y="362" fill="var(--accent-sky)" font-size="11" font-weight="extrabold" text-anchor="middle">伏抱神蹟：「他還活著！」得大安慰</text>
+          </g>
+        </svg>
+
+        <!-- Building Legend -->
+        <div class="absolute bottom-2 left-2 bg-stone-900/85 backdrop-blur text-[10px] text-stone-200 px-2.5 py-1.5 rounded-lg border border-stone-700/60 flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span> 3樓深夜聚會
+          <span class="w-2 h-2 rounded-full bg-rose-500 ml-1"></span> 窗臺墜樓
+          <span class="w-2 h-2 rounded-full bg-sky-500 ml-1"></span> 1樓復活神蹟
+        </div>
+      </div>
+
+      <!-- Story Narrative Controls & Detail Card -->
+      <div class="space-y-3 pt-1">
+        <div class="flex flex-wrap items-center gap-1.5 text-xs">
+          <span class="text-[var(--text-faint)] font-bold mr-1">敘事步驟：</span>
+          <button onclick="clickBuildingHotspot('floor3')" id="bld-btn-floor3" class="px-2.5 py-1 rounded-full bg-sky-500/20 text-[var(--accent-sky)] border border-sky-500/40 font-bold transition">1. 3樓講道</button>
+          <button onclick="clickBuildingHotspot('window')" id="bld-btn-window" class="px-2.5 py-1 rounded-full bg-stone-200/60 dark:bg-stone-800/80 hover:bg-sky-500/20 text-[var(--text-primary)] border border-stone-300 dark:border-stone-700 font-bold transition">2. 窗臺墜樓</button>
+          <button onclick="clickBuildingHotspot('ground')" id="bld-btn-ground" class="px-2.5 py-1 rounded-full bg-stone-200/60 dark:bg-stone-800/80 hover:bg-sky-500/20 text-[var(--text-primary)] border border-stone-300 dark:border-stone-700 font-bold transition">3. 1樓伏抱復活</button>
+          <button onclick="clickBuildingHotspot('floor3_meal')" id="bld-btn-floor3_meal" class="px-2.5 py-1 rounded-full bg-stone-200/60 dark:bg-stone-800/80 hover:bg-sky-500/20 text-[var(--text-primary)] border border-stone-300 dark:border-stone-700 font-bold transition">4. 談論到天亮</button>
+        </div>
+
+        <!-- Hotspot Detail Card -->
+        <div id="building-spot-detail" class="p-4 rounded-xl bg-sky-500/10 border border-sky-500/30 text-xs space-y-1.5 transition-all duration-300">
+          <div class="flex items-center justify-between font-bold text-[var(--accent-sky)]">
+            <span id="building-detail-title" class="text-sm flex items-center gap-1.5">
+              <svg class="icon text-sky-500"><use href="#i-building"/></svg>
+              1. 3樓聚會房間 (深夜講道與擘餅)
+            </span>
+            <span id="building-detail-scripture" class="font-mono text-[11px] opacity-80">使徒行傳 20:7-8</span>
+          </div>
+          <p id="building-detail-desc" class="text-[var(--text-muted)] leading-relaxed">
+            七日的第一日，門徒聚集擘餅。Paul 因次日要行，講道直講到半夜。聚會的樓房點了許多燈火。
+          </p>
+          <div id="building-detail-badge-wrap" class="flex items-center gap-2 pt-1 border-t border-sky-500/20 text-[11px] text-[var(--text-faint)]">
+            <span class="font-bold text-[var(--accent-gold)]">核心核心：</span>
+            <span id="building-detail-tag" class="px-2 py-0.5 rounded bg-stone-200 dark:bg-stone-800 font-mono">主日聚會 · 聖餐擘餅</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-[var(--text-primary)] font-semibold">
+      <strong class="text-[var(--accent-gold)]">歷史傳統：</strong> 「七日的第一日」（主日）聚集擘餅聽道，是早期教會流傳下來的傳統。這場深夜的意外，也讓人看見神在患難中安慰百姓的心意。
+    </div>
+  </section>
+
+  <!-- STATION 4: APOSTLE CREDENTIALS & PATIENCE -->
+  <section id="station-4" class="glass-card p-6 sm:p-8 space-y-6">
+    <div class="flex items-center justify-between border-b border-stone-200 dark:border-stone-800 pb-3">
+      <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-600/30 text-[var(--accent-gold)] font-mono font-bold text-xs">
+        STATION 04 · 哥林多後書 12:11-13
+      </span>
+      <span class="text-xs text-[var(--text-faint)] font-bold">使徒身份與憑據</span>
+    </div>
+
+    <div>
+      <h2 class="font-display text-2xl sm:text-3xl font-bold mb-2">
+        使徒憑據與百般忍耐
+      </h2>
+      <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+        Corinth 教會內部有人質疑 Paul 的使徒權柄，Paul 回應說，真使徒的憑據不只是神蹟、奇事、異能，更是在苦難中依然堅持的「百般忍耐」(Utmost Perseverance/Patience)。他從不加重教會的負擔，這份無私才是他服事最扎實的證明。
+      </p>
+    </div>
+
+    <!-- Credentials Interactive Comparison -->
+    <div class="grid sm:grid-cols-2 gap-4 pt-2">
+      <div class="p-5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-center space-y-2 hover:border-amber-500 transition-colors">
+        <div class="text-xs font-bold text-[var(--text-faint)] uppercase flex items-center justify-center gap-1.5">
+          <svg class="icon text-sky-400"><use href="#i-sparkles"/></svg>
+          外在憑證 (External Manifestations)
+        </div>
+        <div class="font-display text-xl font-black text-[var(--accent-sky)]">神蹟 · 奇事 · 異能</div>
+        <div class="text-[11px] text-[var(--text-muted)] font-mono">Signs, Wonders and Miracles</div>
+        <p class="text-xs text-[var(--text-faint)] pt-2 border-t border-amber-500/20">
+          神藉著使徒在門徒中間顯出的超自然能力與印記。
+        </p>
+      </div>
+
+      <div class="p-5 rounded-xl bg-sky-500/10 border border-sky-500/30 text-center space-y-2 hover:border-sky-500 transition-colors">
+        <div class="text-xs font-bold text-[var(--text-faint)] uppercase flex items-center justify-center gap-1.5">
+          <svg class="icon text-amber-500"><use href="#i-shield"/></svg>
+          核心品格 (Core Character Credential)
+        </div>
+        <div class="font-display text-xl font-black text-[var(--accent-gold)]">百般忍耐 (Utmost Perseverance)</div>
+        <div class="text-[11px] text-[var(--text-muted)] font-mono">Perseverance in all circumstances</div>
+        <p class="text-xs text-[var(--text-faint)] pt-2 border-t border-sky-500/20">
+          在誤解、試煉與磨難中持守到底的堅韌愛心與信心。
+        </p>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-3 pt-2">
+      <div class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-600/30">
+        <div class="flex items-center gap-1.5 text-xs font-bold text-[var(--accent-emerald)] mb-1">
+          <svg class="icon"><use href="#i-check"/></svg> 可以這樣做
+        </div>
+        <p class="text-xs text-[var(--text-muted)]">服事他人時保持「百般忍耐」，不因遭遇抵觸或阻力而輕言放棄。</p>
+      </div>
+      <div class="p-3.5 rounded-xl bg-rose-500/10 border border-rose-600/30">
+        <div class="flex items-center gap-1.5 text-xs font-bold text-[var(--accent-rose)] mb-1">
+          <svg class="icon"><use href="#i-x"/></svg> 避免這樣
+        </div>
+        <p class="text-xs text-[var(--text-muted)]">只追求表面亮眼的成就，卻忽略了日常中的忍耐與服事品格。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATION 5: GLOSSARY & VERIFIABLE SOURCE LINKS -->
+  <section id="station-5" class="glass-card p-6 sm:p-8 space-y-8">
+    <div class="flex items-center justify-between border-b border-stone-200 dark:border-stone-800 pb-3">
+      <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-600/30 text-[var(--accent-gold)] font-mono font-bold text-xs">
+        STATION 05 · 詞彙對照與經文校對
+      </span>
+    </div>
+
+    <!-- Glossary Table with Live Filter Search -->
+    <div class="space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h3 class="text-xl font-bold flex items-center gap-2">
+            <svg class="icon text-amber-500"><use href="#i-book"/></svg>
+            雙語專有名詞對照表
+          </h3>
+          <p class="text-xs text-[var(--text-faint)] mt-0.5">專有名詞雙語對照與經文出處</p>
+        </div>
+
+        <div class="relative max-w-xs w-full">
+          <input type="text" id="glossary-search" placeholder="搜尋詞彙 (如: Troas / Eutychus)..." class="w-full bg-stone-100 dark:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded-full px-4 py-2 pl-9 text-xs text-[var(--text-primary)] placeholder-stone-400 focus:outline-none focus:border-amber-500 transition-colors">
+          <svg class="icon absolute left-3 top-2.5 text-stone-400"><use href="#i-search"/></svg>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-stone-200 dark:border-stone-800">
+        <table class="w-full text-left text-xs text-[var(--text-primary)] min-w-[500px]">
+          <thead class="bg-[var(--table-header)] text-[var(--accent-gold)] font-mono border-b border-stone-200 dark:border-stone-800 uppercase">
+            <tr>
+              <th class="p-3">英文原名</th>
+              <th class="p-3">中文譯名參考</th>
+              <th class="p-3">經文出處</th>
+            </tr>
+          </thead>
+          <tbody id="glossary-tbody" class="divide-y divide-stone-200 dark:divide-stone-800">
+            <tr class="hover:bg-amber-500/10 transition-colors">
+              <td class="p-3 font-mono font-bold text-[var(--accent-gold)]">Ephesus</td>
+              <td class="p-3 font-bold">以弗所</td>
+              <td class="p-3 text-[var(--text-faint)]">使徒行傳 20:1</td>
+            </tr>
+            <tr class="hover:bg-amber-500/10 transition-colors">
+              <td class="p-3 font-mono font-bold text-[var(--accent-gold)]">Eutychus</td>
+              <td class="p-3 font-bold">猶推古</td>
+              <td class="p-3 text-[var(--text-faint)]">使徒行傳 20:9</td>
+            </tr>
+            <tr class="hover:bg-amber-500/10 transition-colors">
+              <td class="p-3 font-mono font-bold text-[var(--accent-gold)]">Greece / Corinth</td>
+              <td class="p-3 font-bold">希臘 / 哥林多</td>
+              <td class="p-3 text-[var(--text-faint)]">使徒行傳 20:2 / 哥林多後書 12:11</td>
+            </tr>
+            <tr class="hover:bg-amber-500/10 transition-colors">
+              <td class="p-3 font-mono font-bold text-[var(--accent-gold)]">Macedonia</td>
+              <td class="p-3 font-bold">馬其頓</td>
+              <td class="p-3 text-[var(--text-faint)]">使徒行傳 20:1</td>
+            </tr>
+            <tr class="hover:bg-amber-500/10 transition-colors">
+              <td class="p-3 font-mono font-bold text-[var(--accent-gold)]">Paul</td>
+              <td class="p-3 font-bold">保羅</td>
+              <td class="p-3 text-[var(--text-faint)]">使徒行傳 20:1 / 哥林多後書 12:11</td>
+            </tr>
+            <tr class="hover:bg-amber-500/10 transition-colors">
+              <td class="p-3 font-mono font-bold text-[var(--accent-gold)]">Philippi</td>
+              <td class="p-3 font-bold">腓立比</td>
+              <td class="p-3 text-[var(--text-faint)]">使徒行傳 20:6</td>
+            </tr>
+            <tr class="hover:bg-amber-500/10 transition-colors">
+              <td class="p-3 font-mono font-bold text-[var(--accent-gold)]">Syria</td>
+              <td class="p-3 font-bold">敘利亞</td>
+              <td class="p-3 text-[var(--text-faint)]">使徒行傳 20:3</td>
+            </tr>
+            <tr class="hover:bg-amber-500/10 transition-colors">
+              <td class="p-3 font-mono font-bold text-[var(--accent-gold)]">Troas</td>
+              <td class="p-3 font-bold">特羅亞</td>
+              <td class="p-3 text-[var(--text-faint)]">使徒行傳 20:5</td>
+            </tr>
+            <tr class="hover:bg-amber-500/10 transition-colors">
+              <td class="p-3 font-mono font-bold text-[var(--accent-sky)]">Signs, Wonders and Miracles</td>
+              <td class="p-3 font-bold">神蹟、奇事、異能</td>
+              <td class="p-3 text-[var(--text-faint)]">哥林多後書 12:12</td>
+            </tr>
+            <tr class="hover:bg-amber-500/10 transition-colors">
+              <td class="p-3 font-mono font-bold text-[var(--accent-sky)]">Utmost Patience / Perseverance</td>
+              <td class="p-3 font-bold">百般忍耐</td>
+              <td class="p-3 text-[var(--text-faint)]">哥林多後書 12:12</td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="glossary-empty" class="hidden p-6 text-center text-xs text-[var(--text-faint)]">
+          沒有找到符合搜尋條件的專有名詞。
+        </div>
+      </div>
+    </div>
+
+    <!-- Verifiable Source Links -->
+    <div class="space-y-3 border-t border-stone-200 dark:border-stone-800 pt-6">
+      <h4 class="text-sm font-bold flex items-center gap-2">
+        <svg class="icon text-amber-500"><use href="#i-link"/></svg>
+        可驗證聖經經文來源
+      </h4>
+      <div class="grid sm:grid-cols-2 gap-3 text-xs">
+        <a href="https://www.biblegateway.com/passage/?search=Acts+20%3A1-12&version=CCB" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-stone-100 dark:bg-stone-800 hover:border-amber-500 border border-transparent transition-colors flex items-center justify-between font-bold">
+          <span>使徒行傳 20:1-12 (CCB 當代譯本)</span>
+          <svg class="icon opacity-60"><use href="#i-link"/></svg>
+        </a>
+        <a href="https://www.biblegateway.com/passage/?search=Acts+20%3A1-12&version=NIV" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-stone-100 dark:bg-stone-800 hover:border-amber-500 border border-transparent transition-colors flex items-center justify-between font-bold">
+          <span>Acts 20:1-12 (NIV 英文版)</span>
+          <svg class="icon opacity-60"><use href="#i-link"/></svg>
+        </a>
+        <a href="https://www.biblegateway.com/passage/?search=%E5%93%A5%E6%9E%97%E5%A4%9A%E5%BE%8C%E6%9B%B8+12%3A11-13&version=CUV" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-stone-100 dark:bg-stone-800 hover:border-amber-500 border border-transparent transition-colors flex items-center justify-between font-bold">
+          <span>哥林多後書 12:11-13 (CUV 和合本)</span>
+          <svg class="icon opacity-60"><use href="#i-link"/></svg>
+        </a>
+        <a href="https://www.biblegateway.com/passage/?search=2+Corinthians+12%3A11-13&version=NIV" target="_blank" rel="noopener noreferrer" class="p-3 rounded-xl bg-stone-100 dark:bg-stone-800 hover:border-amber-500 border border-transparent transition-colors flex items-center justify-between font-bold">
+          <span>2 Corinthians 12:11-13 (NIV 英文版)</span>
+          <svg class="icon opacity-60"><use href="#i-link"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="py-8 text-center text-xs text-[var(--text-faint)] border-t border-stone-200 dark:border-stone-800">
+  <p>Paul 宣教航程與 Eutychus 復活神蹟 · 互動聖經研讀探索</p>
+</footer>
+
+<div id="toast-container" class="fixed bottom-5 right-5 z-50 pointer-events-none flex flex-col gap-2"></div>
+
+<script>
+  let is_programmatic_scroll = false;
+  let mapAutoPlayTimer = null;
+  let isMapPlaying = false;
+
+  const STATION_TITLES = {
+    1: '第一站：宣教航程與 Macedonia 繞道',
+    2: '第二站：深夜聚會與 Eutychus 墜樓',
+    3: '第三站：Paul 伏抱與復活神蹟',
+    4: '第四站：使徒憑據與百般忍耐',
+    5: '第五站：雙語詞彙表與校對來源'
+  };
+
+  /* MAP NODE DATA MODEL */
+  const MAP_NODES_DATA = {
+    ephesus: {
+      title: "1. Ephesus (起點)",
+      scripture: "使徒行傳 20:1",
+      coords: { x: 100, y: 200 },
+      tag: "起點 · 辭別門徒",
+      desc: "Ephesus 的騷亂平息後，Paul 召集門徒勸勉他們，隨後辭別並動身前往 Macedonia。"
+    },
+    macedonia: {
+      title: "2. Macedonia",
+      scripture: "使徒行傳 20:1-2",
+      coords: { x: 220, y: 110 },
+      tag: "巡迴區域 · 勸勉信徒",
+      desc: "Paul 走過 Macedonia 各地，用許多話安慰鼓勵當地的門徒，隨後來到 Greece。"
+    },
+    greece: {
+      title: "3. Greece / Corinth",
+      scripture: "使徒行傳 20:2-3",
+      coords: { x: 180, y: 240 },
+      tag: "停留 3 個月 · 陸路繞道",
+      desc: "Paul 在 Greece 住了 3 個月。正要搭船前往 Syria 時，因得知猶太人密謀陷害，果斷決定改道折返 Macedonia 走陸路。"
+    },
+    philippi: {
+      title: "4. Philippi (搭船據點)",
+      scripture: "使徒行傳 20:6",
+      coords: { x: 380, y: 100 },
+      tag: "除酵節後 · 5天航程",
+      desc: "過了除酵節，Paul 一行從 Philippi 搭船啟航，5 天後在 Troas 與同工會合。路加在此歸隊。"
+    },
+    troas: {
+      title: "5. Troas (停留7天與會合)",
+      scripture: "使徒行傳 20:4-6",
+      coords: { x: 580, y: 120 },
+      tag: "團隊大會合 · 停留 7 天",
+      desc: "同工們先走一步前往 Troas 等候。Paul 一行抵達後停留 7 天，在此期間發生了深夜聚會與 Eutychus 復活神蹟。"
+    },
+    syria: {
+      title: "取消航線：Syria",
+      scripture: "使徒行傳 20:3",
+      coords: { x: 670, y: 280 },
+      tag: "原定據點 · 因安全改道",
+      desc: "Paul 原本計劃直接搭船至 Syria，但為避開猶太人的密謀，改走陸路繞道安全前行。"
+    }
+  };
+
+  /* BUILDING HOTSPOT DATA MODEL */
+  const BUILDING_SPOTS_DATA = {
+    floor3: {
+      title: "1. 3樓聚會房間 (深夜講道與擘餅)",
+      scripture: "使徒行傳 20:7-8",
+      tag: "主日聚會 · 聖餐擘餅",
+      desc: "七日的第一日，門徒聚集擘餅。Paul 因次日要行，講道直講到半夜。聚會的樓房點了許多燈火。"
+    },
+    window: {
+      title: "2. 窗臺 (Eutychus 困倦墜樓)",
+      scripture: "使徒行傳 20:9",
+      tag: "講道延長 · 沉睡墜樓",
+      desc: "青年 Eutychus 坐在窗臺上。Paul 講了許久，Eutychus 睡意沉重，從三樓掉落地面，扶起來已經死了。"
+    },
+    ground: {
+      title: "3. 1樓地面 (Paul 伏抱與復活神蹟)",
+      scripture: "使徒行傳 20:10",
+      tag: "伏抱擁抱 · 「他還活著！」",
+      desc: "Paul 下去伏在他身上，抱著他說：「不要驚慌，他的靈魂還在身上。」Eutychus 奇蹟復活。"
+    },
+    floor3_meal: {
+      title: "4. 返回3樓 (談論直到天亮)",
+      scripture: "使徒行傳 20:11-12",
+      tag: "肢體交通 · 直到天亮",
+      desc: "Paul 上樓擘餅吃了，談論許久直到天亮才走。眾人把活著的 Eutychus 帶走，得到極大的安慰。"
+    },
+    floor2: {
+      title: "2樓 (過道樓層)",
+      scripture: "使徒行傳 20:9-10",
+      tag: "過道 · 迅速反應",
+      desc: "連結三樓與地面的過道。Eutychus 墜樓穿過此處，Paul 迅速沿樓梯衝下樓伏抱他。"
+    }
+  };
+
+  /* Interactive Map Node Click Handler */
+  function clickMapNode(nodeKey) {
+    const data = MAP_NODES_DATA[nodeKey];
+    if (!data) return;
+
+    const mapKeys = ['ephesus', 'macedonia', 'greece', 'philippi', 'troas', 'syria'];
+
+    mapKeys.forEach(k => {
+      const ring = document.getElementById(`node-ring-${k}`);
+      if (ring && k !== 'troas') ring.setAttribute('opacity', '0');
+
+      const btn = document.getElementById(`map-btn-${k}`);
+      if (btn) {
+        btn.className = 'px-2.5 py-1 rounded-full bg-stone-200/60 dark:bg-stone-800/80 hover:bg-amber-500/20 text-[var(--text-primary)] border border-stone-300 dark:border-stone-700 font-bold transition';
+      }
+    });
+
+    const activeRing = document.getElementById(`node-ring-${nodeKey}`);
+    if (activeRing) {
+      activeRing.setAttribute('opacity', '1');
+    }
+
+    const activeBtn = document.getElementById(`map-btn-${nodeKey}`);
+    if (activeBtn) {
+      activeBtn.className = 'px-2.5 py-1 rounded-full bg-amber-500/20 text-[var(--accent-gold)] border border-amber-500/40 font-bold transition';
+    }
+
+    const ship = document.getElementById('map-ship');
+    if (ship && data.coords) {
+      ship.setAttribute('transform', `translate(${data.coords.x}, ${data.coords.y})`);
+    }
+
+    const titleEl = document.getElementById('map-detail-title');
+    const scriptureEl = document.getElementById('map-detail-scripture');
+    const descEl = document.getElementById('map-detail-desc');
+    const tagEl = document.getElementById('map-detail-tag');
+
+    if (titleEl) titleEl.innerHTML = `<svg class="icon text-amber-500"><use href="#i-compass"/></svg> ${data.title}`;
+    if (scriptureEl) scriptureEl.innerText = data.scripture;
+    if (descEl) descEl.innerText = data.desc;
+    if (tagEl && data.tag) tagEl.innerText = data.tag;
+
+    showToast('地圖焦點', `目前位置：${data.title}`);
+  }
+
+  /* Map Auto-Play Walkthrough */
+  function toggleMapAutoPlay() {
+    const keys = ['ephesus', 'macedonia', 'greece', 'philippi', 'troas'];
+    const playBtnText = document.getElementById('map-play-text');
+    const playIcon = document.getElementById('map-play-icon');
+
+    if (isMapPlaying) {
+      clearInterval(mapAutoPlayTimer);
+      isMapPlaying = false;
+      if (playBtnText) playBtnText.innerText = "自動播放航程";
+      if (playIcon) playIcon.innerHTML = `<use href="#i-play"/>`;
+      showToast('播放控制', '已暫停自動模擬');
+    } else {
+      isMapPlaying = true;
+      if (playBtnText) playBtnText.innerText = "暫停播放";
+      if (playIcon) playIcon.innerHTML = `<use href="#i-pause"/>`;
+
+      let currentIdx = 0;
+      clickMapNode(keys[currentIdx]);
+
+      mapAutoPlayTimer = setInterval(() => {
+        currentIdx = (currentIdx + 1) % keys.length;
+        clickMapNode(keys[currentIdx]);
+      }, 2600);
+
+      showToast('播放控制', '已啟動 Paul 航程動態導覽');
+    }
+  }
+
+  /* Building Hotspot Click Handler */
+  function clickBuildingHotspot(spotKey) {
+    const data = BUILDING_SPOTS_DATA[spotKey];
+    if (!data) return;
+
+    const spotKeys = ['floor3', 'window', 'ground', 'floor3_meal', 'floor2'];
+
+    ['floor3', 'floor2', 'ground'].forEach(k => {
+      const bg = document.getElementById(`spot-bg-${k}`);
+      if (bg) bg.setAttribute('fill-opacity', '0.02');
+    });
+
+    spotKeys.forEach(k => {
+      const btn = document.getElementById(`bld-btn-${k}`);
+      if (btn) {
+        btn.className = 'px-2.5 py-1 rounded-full bg-stone-200/60 dark:bg-stone-800/80 hover:bg-sky-500/20 text-[var(--text-primary)] border border-stone-300 dark:border-stone-700 font-bold transition';
+      }
+    });
+
+    const activeBgKey = spotKey === 'floor3_meal' ? 'floor3' : spotKey;
+    const activeBg = document.getElementById(`spot-bg-${activeBgKey}`);
+    if (activeBg) {
+      activeBg.setAttribute('fill-opacity', spotKey === 'ground' ? '0.2' : '0.15');
+    }
+
+    const activeBtn = document.getElementById(`bld-btn-${spotKey}`);
+    if (activeBtn) {
+      activeBtn.className = 'px-2.5 py-1 rounded-full bg-sky-500/20 text-[var(--accent-sky)] border border-sky-500/40 font-bold transition';
+    }
+
+    const fallingDot = document.getElementById('falling-dot');
+    if (fallingDot) {
+      fallingDot.style.display = (spotKey === 'window' || spotKey === 'ground') ? 'block' : 'none';
+    }
+
+    const titleEl = document.getElementById('building-detail-title');
+    const scriptureEl = document.getElementById('building-detail-scripture');
+    const descEl = document.getElementById('building-detail-desc');
+    const tagEl = document.getElementById('building-detail-tag');
+
+    if (titleEl) titleEl.innerHTML = `<svg class="icon text-sky-500"><use href="#i-building"/></svg> ${data.title}`;
+    if (scriptureEl) scriptureEl.innerText = data.scripture;
+    if (descEl) descEl.innerText = data.desc;
+    if (tagEl && data.tag) tagEl.innerText = data.tag;
+
+    showToast('敘事階段', `選擇：${data.title}`);
+  }
+
+  /* Building Atmosphere Switcher (Midnight vs Dawn) */
+  function setBuildingTime(mode) {
+    const btnMidnight = document.getElementById('btn-time-midnight');
+    const btnDawn = document.getElementById('btn-time-dawn');
+    const skyRect = document.getElementById('sky-glow-rect');
+    const lamp1 = document.getElementById('lamp-stop-1');
+    const lamp2 = document.getElementById('lamp-stop-2');
+
+    if (mode === 'dawn') {
+      if (btnMidnight) btnMidnight.className = 'px-2.5 py-0.5 rounded-full bg-stone-200/60 dark:bg-stone-800/80 text-[var(--text-muted)] border border-stone-300 dark:border-stone-700 text-[11px] font-bold transition';
+      if (btnDawn) btnDawn.className = 'px-2.5 py-0.5 rounded-full bg-amber-500/20 text-[var(--accent-gold)] border border-amber-500/40 text-[11px] font-bold transition';
+      if (skyRect) skyRect.setAttribute('fill', 'url(#grad-dawn-sky)');
+      if (lamp1) lamp1.setAttribute('stop-color', '#fbbf24');
+      if (lamp2) lamp2.setAttribute('stop-opacity', '0.1');
+
+      clickBuildingHotspot('floor3_meal');
+      showToast('時間氛圍', '切換至「🌅 拂曉天亮」情境');
+    } else {
+      if (btnDawn) btnDawn.className = 'px-2.5 py-0.5 rounded-full bg-stone-200/60 dark:bg-stone-800/80 text-[var(--text-muted)] border border-stone-300 dark:border-stone-700 text-[11px] font-bold transition';
+      if (btnMidnight) btnMidnight.className = 'px-2.5 py-0.5 rounded-full bg-amber-500/20 text-[var(--accent-gold)] border border-amber-500/40 text-[11px] font-bold transition';
+      if (skyRect) skyRect.setAttribute('fill', 'transparent');
+      if (lamp1) lamp1.setAttribute('stop-color', '#f59e0b');
+      if (lamp2) lamp2.setAttribute('stop-opacity', '0.3');
+
+      clickBuildingHotspot('floor3');
+      showToast('時間氛圍', '切換至「🌙 深夜燈火」情境');
+    }
+  }
+
+  /* Theme Switcher Logic */
+  function toggleTheme() {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute('data-theme') || 'dark';
+    const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    html.setAttribute('data-theme', nextTheme);
+    html.classList.toggle('dark', nextTheme === 'dark');
+    
+    const icon = document.getElementById('theme-icon');
+    if (icon) {
+      icon.innerHTML = `<use href="${nextTheme === 'dark' ? '#i-sun' : '#i-moon'}"/>`;
+    }
+
+    showToast('主題切換', `已更換為 ${nextTheme === 'dark' ? '深色' : '淺色'} 模式`);
+  }
+
+  function showToast(title, message) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'glass-card p-3.5 text-xs max-w-xs shadow-xl pointer-events-auto transition-all duration-300 transform translate-y-4 opacity-0 border border-amber-500';
+    toast.setAttribute('role', 'status');
+    toast.innerHTML = `
+      <div class="font-bold text-[var(--accent-gold)] mb-0.5 flex items-center gap-1.5">
+        <svg class="icon text-amber-500"><use href="#i-sparkles"/></svg>
+        ${title}
+      </div>
+      <div class="text-[var(--text-muted)]">${message}</div>
+    `;
+    container.appendChild(toast);
+
+    requestAnimationFrame(() => {
+      toast.classList.remove('translate-y-4', 'opacity-0');
+    });
+
+    setTimeout(() => {
+      toast.classList.add('opacity-0', 'translate-y-2');
+      setTimeout(() => toast.remove(), 300);
+    }, 2800);
+  }
+
+  function scrollToStation(index) {
+    const el = document.getElementById(`station-${index}`);
+    if (!el) return;
+    
+    is_programmatic_scroll = true;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    showToast(`快速跳轉`, `${STATION_TITLES[index] || ''}`);
+
+    setTimeout(() => {
+      is_programmatic_scroll = false;
+    }, 800);
+  }
+
+  /* Scroll Progress Calculation */
+  let rAFPending = false;
+  function handleScroll() {
+    if (rAFPending) return;
+    rAFPending = true;
+
+    requestAnimationFrame(() => {
+      rAFPending = false;
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollTop = window.scrollY;
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+
+      const fill = document.getElementById('hud-progress-fill');
+      const percent = document.getElementById('hud-progress-percent');
+      if (fill) fill.style.width = `${Math.min(100, Math.max(0, progress * 100))}%`;
+      if (percent) percent.innerText = `${Math.round(progress * 100)}%`;
+    });
+  }
+
+  /* Scrollspy to update HUD active pills */
+  function setupScrollspy() {
+    const options = {
+      root: null,
+      rootMargin: '-20% 0px -40% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      if (is_programmatic_scroll) return;
+
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          const match = id.match(/station-(\d+)/);
+          if (match) {
+            const idx = parseInt(match[1], 10);
+            updateHUDActivePill(idx);
+          }
+        }
+      });
+    }, options);
+
+    for (let i = 1; i <= 5; i++) {
+      const el = document.getElementById(`station-${i}`);
+      if (el) observer.observe(el);
+    }
+  }
+
+  function updateHUDActivePill(activeIdx) {
+    for (let i = 1; i <= 5; i++) {
+      const pill = document.getElementById(`hud-pill-${i}`);
+      if (pill) {
+        if (i === activeIdx) {
+          pill.className = 'px-3 py-1 text-xs rounded-full font-bold transition-colors bg-amber-500/20 text-[var(--accent-gold)] border border-amber-500/40';
+        } else {
+          pill.className = 'px-3 py-1 text-xs rounded-full font-bold transition-colors bg-stone-500/10 text-[var(--text-muted)] border border-stone-300 dark:border-stone-700';
+        }
+      }
+    }
+
+    const badge = document.getElementById('hud-chapter-badge');
+    if (badge && STATION_TITLES[activeIdx]) {
+      badge.innerText = STATION_TITLES[activeIdx];
+    }
+  }
+
+  /* Glossary Filter Search */
+  function setupGlossarySearch() {
+    const input = document.getElementById('glossary-search');
+    const tbody = document.getElementById('glossary-tbody');
+    const emptyState = document.getElementById('glossary-empty');
+
+    if (!input || !tbody) return;
+
+    input.addEventListener('input', (e) => {
+      const query = e.target.value.trim().toLowerCase();
+      const rows = tbody.querySelectorAll('tr');
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        if (text.includes(query)) {
+          row.style.display = '';
+          visibleCount++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      if (emptyState) {
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+    });
+  }
+
+  window.addEventListener('load', () => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    setupScrollspy();
+    setupGlossarySearch();
+    handleScroll();
+  });
+</script>
+</body>
+</html>

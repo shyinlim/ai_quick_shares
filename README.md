@@ -1,5 +1,6 @@
 # ai_quick_share
 
+- https://shyinlim.github.io/ai_quick_shares/20260726_202411503_paul-eutychus.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260726_202411503_paul-eutychus.html)
 - https://shyinlim.github.io/ai_quick_shares/20260725_224903377_scrolling-story.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260725_224903377_scrolling-story.html)
 - https://shyinlim.github.io/ai_quick_shares/20260725_223622345_paul.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260725_223622345_paul.html)
 - https://shyinlim.github.io/ai_quick_shares/20260720_001425282_paul-missionary-journey-retro-canvas.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260720_001425282_paul-missionary-journey-retro-canvas.html)
