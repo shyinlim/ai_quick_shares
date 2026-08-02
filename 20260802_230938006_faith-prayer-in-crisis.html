@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>危機中的信心與禱告 | Faith & Prayer in Crisis</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#090a0f',
+                        nightPurple: '#120826',
+                        amberGold: '#f59e0b',
+                        neonBlue: '#3b82f6',
+                        sacredPurple: '#a855f7',
+                        parchment: '#f8fafc',
+                        bronzeGold: '#b45309',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d97706;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+        
+        /* High-contrast theme adaptive glass cards */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        html:not(.dark) .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(217, 119, 6, 0.3);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        .glow-border {
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.25);
+            border: 1px solid rgba(245, 158, 11, 0.5);
+        }
+
+        .glow-border-purple {
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.25);
+            border: 1px solid rgba(168, 85, 247, 0.5);
+        }
+
+        .glow-border-blue {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.25);
+            border: 1px solid rgba(59, 130, 246, 0.5);
+        }
+
+        /* Canvas Fullscreen Stage */
+        #webgl-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Responsive light/dark body background */
+        body {
+            background-color: #090a0f;
+            color: #f1f5f9;
+        }
+        body.light {
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+    </style>
+</head>
+<body class="transition-colors duration-300 font-sans antialiased overflow-x-hidden selection:bg-amber-500 selection:text-slate-950">
+
+    <div id="webgl-container"></div>
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-950/90 backdrop-blur-md border-b border-amber-500/30 dark:border-amber-500/20 transition-all duration-300">
+        <!-- Scroll Progress Bar -->
+        <div id="scroll-progress" class="h-1 bg-gradient-to-r from-amber-500 via-purple-500 to-blue-500 w-0 transition-all duration-150"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-500 to-purple-600 flex items-center justify-center text-slate-950 font-bold shadow-lg shadow-amber-500/30 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-hands-praying text-sm text-slate-950"></i>
+                </div>
+                <span class="text-lg font-bold tracking-wide text-slate-900 dark:text-slate-100">
+                    危機中的信心與禱告
+                </span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-bold">
+                <a href="#hero" class="text-slate-800 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">Hero</a>
+                <a href="#scrollytelling" class="text-slate-800 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">Chapters</a>
+                <a href="#practical" class="text-slate-800 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">Application</a>
+                <a href="#sources" class="text-slate-800 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">Sources</a>
+                <a href="#glossary" class="text-slate-800 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">Glossary</a>
+            </nav>
+
+            <!-- Actions & Theme Toggle -->
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-amber-600 dark:text-amber-400 border border-amber-500/40 transition-all" title="Theme Toggle">
+                    <i class="fa-solid fa-moon text-base dark:inline hidden"></i>
+                    <i class="fa-solid fa-sun text-base dark:hidden inline text-amber-600"></i>
+                </button>
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-slate-800 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-drawer" class="hidden md:hidden bg-slate-50 dark:bg-slate-950 border-b border-amber-500/20 px-4 pt-3 pb-6 space-y-3 backdrop-blur-xl">
+            <a href="#hero" class="mobile-link block px-3 py-2 rounded-lg text-slate-800 dark:text-slate-200 font-bold">Hero</a>
+            <a href="#scrollytelling" class="mobile-link block px-3 py-2 rounded-lg text-slate-800 dark:text-slate-200 font-bold">Chapters</a>
+            <a href="#practical" class="mobile-link block px-3 py-2 rounded-lg text-slate-800 dark:text-slate-200 font-bold">Application</a>
+            <a href="#sources" class="mobile-link block px-3 py-2 rounded-lg text-slate-800 dark:text-slate-200 font-bold">Sources</a>
+            <a href="#glossary" class="mobile-link block px-3 py-2 rounded-lg text-slate-800 dark:text-slate-200 font-bold">Glossary</a>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-16">
+
+        <!-- SECTION 1: HERO SECTION -->
+        <section id="hero" class="min-h-screen flex flex-col items-center justify-between px-4 py-12 max-w-7xl mx-auto">
+            <div class="w-full text-center mt-8 space-y-4">
+                <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight text-slate-900 dark:text-slate-100">
+                    危機中的信心與禱告
+                </h1>
+                <p class="max-w-2xl mx-auto text-slate-700 dark:text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
+                    絕境臨頭時，逃避不是唯一的路。這裡收錄四段轉折：Esther 冒死見王、Hezekiah 痛哭求活、Jesus 在 Cana 行的第一個神蹟，還有 Saul 在 Damascus 路上被光照倒後的徹底轉變。
+                </p>
+            </div>
+
+            <!-- Stage Micro Controls -->
+            <div class="w-full max-w-4xl glass-card rounded-2xl p-6 sm:p-8 my-8 glow-border transition-all">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-amber-500/20">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-sliders text-amber-600 dark:text-amber-400 text-xl"></i>
+                        <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100">Presets & Stage Control</h2>
+                    </div>
+                </div>
+
+                <!-- Scene Presets -->
+                <div class="space-y-3 mb-6">
+                    <label class="text-xs font-bold uppercase text-slate-600 dark:text-slate-400 tracking-wider block">Presets</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <button onclick="setPreset('esther')" class="preset-btn px-4 py-3 rounded-xl bg-slate-200/80 dark:bg-slate-800/80 border border-amber-500/40 hover:border-amber-500 text-left transition-all active:scale-95 group">
+                            <div class="text-xs text-amber-600 dark:text-amber-400 font-bold mb-1 flex items-center justify-between">
+                                Scene 01 <i class="fa-solid fa-crown group-hover:rotate-12 transition-transform"></i>
+                            </div>
+                            <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">Esther</div>
+                        </button>
+                        <button onclick="setPreset('hezekiah')" class="preset-btn px-4 py-3 rounded-xl bg-slate-200/80 dark:bg-slate-800/80 border border-amber-500/40 hover:border-amber-500 text-left transition-all active:scale-95 group">
+                            <div class="text-xs text-amber-600 dark:text-amber-400 font-bold mb-1 flex items-center justify-between">
+                                Scene 02 <i class="fa-solid fa-sun group-hover:rotate-12 transition-transform"></i>
+                            </div>
+                            <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">Hezekiah</div>
+                        </button>
+                        <button onclick="setPreset('jesus')" class="preset-btn px-4 py-3 rounded-xl bg-slate-200/80 dark:bg-slate-800/80 border border-purple-500/40 hover:border-purple-500 text-left transition-all active:scale-95 group">
+                            <div class="text-xs text-purple-600 dark:text-purple-400 font-bold mb-1 flex items-center justify-between">
+                                Scene 03 <i class="fa-solid fa-wine-glass group-hover:rotate-12 transition-transform"></i>
+                            </div>
+                            <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">Jesus</div>
+                        </button>
+                        <button onclick="setPreset('saul')" class="preset-btn px-4 py-3 rounded-xl bg-slate-200/80 dark:bg-slate-800/80 border border-blue-500/40 hover:border-blue-500 text-left transition-all active:scale-95 group">
+                            <div class="text-xs text-blue-600 dark:text-blue-400 font-bold mb-1 flex items-center justify-between">
+                                Scene 04 <i class="fa-solid fa-bolt group-hover:rotate-12 transition-transform"></i>
+                            </div>
+                            <div class="text-sm font-semibold text-slate-900 dark:text-slate-100">Saul</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sliders -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
+                            <span><i class="fa-solid fa-sun mr-1 text-amber-500"></i> Glow</span>
+                            <span id="val-glow">1.0</span>
+                        </div>
+                        <input id="slider-glow" type="range" min="0.2" max="2.5" step="0.1" value="1.0" class="w-full accent-amber-500 bg-slate-300 dark:bg-slate-700 rounded-lg h-2 cursor-pointer">
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
+                            <span><i class="fa-solid fa-cubes mr-1 text-purple-500"></i> Density</span>
+                            <span id="val-density">100%</span>
+                        </div>
+                        <input id="slider-density" type="range" min="20" max="100" step="5" value="100" class="w-full accent-purple-500 bg-slate-300 dark:bg-slate-700 rounded-lg h-2 cursor-pointer">
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
+                            <span><i class="fa-solid fa-rotate mr-1 text-blue-500"></i> Speed</span>
+                            <span id="val-speed">1.0x</span>
+                        </div>
+                        <input id="slider-speed" type="range" min="0.1" max="3.0" step="0.1" value="1.0" class="w-full accent-blue-500 bg-slate-300 dark:bg-slate-700 rounded-lg h-2 cursor-pointer">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Chevron Indicator (NO TEXT PER RULE) -->
+            <div class="py-4 flex flex-col items-center">
+                <a href="#scrollytelling" class="text-amber-500 hover:text-amber-400 text-3xl animate-bounce duration-1000 p-2" title="Scroll Down">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- SECTION 2: SCROLLEYTELLING CORE CHAPTERS -->
+        <section id="scrollytelling" class="relative max-w-7xl mx-auto px-4 py-16">
+            
+            <!-- Sticky Stage Navigator -->
+            <div class="sticky top-20 z-30 mb-10 glass-card rounded-xl p-3 flex items-center justify-between border border-amber-500/30 shadow-xl">
+                <div class="flex items-center space-x-2 overflow-x-auto py-1 px-1 no-scrollbar text-xs font-bold">
+                    <a href="#chapter-esther" class="px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-700 dark:text-amber-300 hover:bg-amber-500/30 whitespace-nowrap transition-colors border border-amber-500/40">
+                        1. Esther
+                    </a>
+                    <a href="#chapter-hezekiah" class="px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-700 dark:text-amber-300 hover:bg-amber-500/30 whitespace-nowrap transition-colors border border-amber-500/40">
+                        2. Hezekiah
+                    </a>
+                    <a href="#chapter-jesus" class="px-3 py-1.5 rounded-lg bg-purple-500/20 text-purple-700 dark:text-purple-300 hover:bg-purple-500/30 whitespace-nowrap transition-colors border border-purple-500/40">
+                        3. Jesus
+                    </a>
+                    <a href="#chapter-saul" class="px-3 py-1.5 rounded-lg bg-blue-500/20 text-blue-700 dark:text-blue-300 hover:bg-blue-500/30 whitespace-nowrap transition-colors border border-blue-500/40">
+                        4. Saul
+                    </a>
+                </div>
+            </div>
+
+            <!-- Story Cards Container -->
+            <div class="space-y-32">
+
+                <!-- CHAPTER 1: ESTHER -->
+                <div id="chapter-esther" class="story-chapter min-h-[80vh] flex items-center" data-scene="esther">
+                    <div class="w-full lg:w-3/5 glass-card rounded-3xl p-6 sm:p-10 glow-border relative overflow-hidden group hover:border-amber-400 transition-all duration-300">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/40">
+                                第一幕 ｜ 以斯帖記 4:13-17
+                            </span>
+                            <span class="text-xs text-slate-600 dark:text-slate-400 font-mono"><i class="fa-solid fa-location-dot text-amber-500 mr-1"></i> Susa</span>
+                        </div>
+
+                        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4">
+                            宮牆內的抉擇：死就死吧！
+                        </h3>
+
+                        <p class="text-slate-800 dark:text-slate-200 text-base leading-relaxed mb-6 font-normal">
+                            猶太人面臨滅族危機時，Mordecai 捎信給猶豫不決的王后 Esther，提醒她躲在王宮不代表能倖免。「焉知妳得了王后的位份，不是為了現今的機會嗎？」Esther 回話，請眾人為她禁食三日三夜，然後準備冒死見王。
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                            <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800">
+                                <div class="text-xs text-amber-700 dark:text-amber-400 font-bold mb-1"><i class="fa-solid fa-comment-dots mr-1"></i> Mordecai 的提醒</div>
+                                <div class="text-xs text-slate-800 dark:text-slate-200 font-medium">「此時妳若保持沉默，拯救必從別處臨到，但妳與父家必面臨滅亡。」</div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800">
+                                <div class="text-xs text-purple-700 dark:text-purple-400 font-bold mb-1"><i class="fa-solid fa-shield-heart mr-1"></i> Esther 的決斷</div>
+                                <div class="text-xs text-slate-800 dark:text-slate-200 font-medium">「招聚在 Susa 的所有人為我禁食三日三夜，我若死就死吧！」</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-slate-300 dark:border-slate-800">
+                            <button onclick="openModal('esther')" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-md transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-book-open-reader"></i> 深度閱讀 / 雙語對照
+                            </button>
+                            <a href="https://www.biblegateway.com/passage/?search=Esther+4%3A13-17&version=NIV" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 text-sm font-semibold border border-slate-300 dark:border-slate-700 flex items-center gap-2 transition-colors">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> NIV 原始經文
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHAPTER 2: HEZEKIAH -->
+                <div id="chapter-hezekiah" class="story-chapter min-h-[80vh] flex items-center justify-end" data-scene="hezekiah">
+                    <div class="w-full lg:w-3/5 glass-card rounded-3xl p-6 sm:p-10 glow-border relative overflow-hidden group hover:border-amber-400 transition-all duration-300">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/40">
+                                第二幕 ｜ 列王紀下 20:1-11
+                            </span>
+                            <span class="text-xs text-slate-600 dark:text-slate-400 font-mono"><i class="fa-solid fa-hourglass-half text-amber-500 mr-1"></i> Jerusalem</span>
+                        </div>
+
+                        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4">
+                            痛哭與十五年的應許：日晷倒退十階
+                        </h3>
+
+                        <p class="text-slate-800 dark:text-slate-200 text-base leading-relaxed mb-6 font-normal">
+                            Hezekiah 病重將死，先知 Isaiah 前來交代後事。Hezekiah 轉臉朝牆，向上帝痛哭祈禱。Isaiah 都還沒走出中院，上帝的話就臨到：「我聽見了你的禱告，看見了你的眼淚，必醫治你，加增你十五年壽數。」記號是 Ahaz 日晷的影子後退十階。
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                            <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800">
+                                <div class="text-xs text-amber-700 dark:text-amber-400 font-bold mb-1"><i class="fa-solid fa-face-sad-cry mr-1"></i> 朝牆痛哭</div>
+                                <div class="text-xs text-slate-800 dark:text-slate-200 font-medium">「Hezekiah 轉臉朝牆向上帝切切祈禱，上帝聽見並看見了他的眼淚。」</div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800">
+                                <div class="text-xs text-emerald-700 dark:text-emerald-400 font-bold mb-1"><i class="fa-solid fa-clock-rotate-left mr-1"></i> 日晷神蹟</div>
+                                <div class="text-xs text-slate-800 dark:text-slate-200 font-medium">「無花果餅貼於瘡上，Ahaz 日晷上的影子往後退了十階作為記號。」</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-slate-300 dark:border-slate-800">
+                            <button onclick="openModal('hezekiah')" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-sm shadow-md transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-book-open-reader"></i> 深度閱讀 / 雙語對照
+                            </button>
+                            <a href="https://www.biblegateway.com/passage/?search=2+Kings+20%3A1-11&version=NIV" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 text-sm font-semibold border border-slate-300 dark:border-slate-700 flex items-center gap-2 transition-colors">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> NIV 原始經文
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHAPTER 3: JESUS AT CANA -->
+                <div id="chapter-jesus" class="story-chapter min-h-[80vh] flex items-center" data-scene="jesus">
+                    <div class="w-full lg:w-3/5 glass-card rounded-3xl p-6 sm:p-10 glow-border-purple relative overflow-hidden group hover:border-purple-400 transition-all duration-300">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase bg-purple-500/20 text-purple-800 dark:text-purple-300 border border-purple-500/40">
+                                第三幕 ｜ 約翰福音 2:1-11
+                            </span>
+                            <span class="text-xs text-slate-600 dark:text-slate-400 font-mono"><i class="fa-solid fa-wine-glass text-purple-500 mr-1"></i> Cana, Galilee</span>
+                        </div>
+
+                        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4">
+                            婚宴上的缺乏：水變好酒的神蹟
+                        </h3>
+
+                        <p class="text-slate-800 dark:text-slate-200 text-base leading-relaxed mb-6 font-normal">
+                            Galilee 的 Cana 婚宴上，酒喝完了。Mary 把這件事告訴 Jesus，又交代僕人：「他吩咐你們什麼，就做什麼。」Jesus 讓僕人把六口石缸裝滿水，舀出來一嘗，水已經變成好酒。這是 Jesus 所行的第一個神蹟，門徒因此信了祂。
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                            <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800">
+                                <div class="text-xs text-purple-700 dark:text-purple-400 font-bold mb-1"><i class="fa-solid fa-hand-holding-droplet mr-1"></i> 完全順服</div>
+                                <div class="text-xs text-slate-800 dark:text-slate-200 font-medium">「僕人遵照吩咐，把六口石缸倒滿水直到缸口。」</div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800">
+                                <div class="text-xs text-amber-700 dark:text-amber-400 font-bold mb-1"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> 好酒留到最後</div>
+                                <div class="text-xs text-slate-800 dark:text-slate-200 font-medium">「管筵席的嘗了水變成的酒，驚嘆竟把最好的酒留到了現在。」</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-slate-300 dark:border-slate-800">
+                            <button onclick="openModal('jesus')" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-sm shadow-md transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-book-open-reader"></i> 深度閱讀 / 雙語對照
+                            </button>
+                            <a href="https://www.biblegateway.com/passage/?search=John+2%3A1-11&version=NIV" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 text-sm font-semibold border border-slate-300 dark:border-slate-700 flex items-center gap-2 transition-colors">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> NIV 原始經文
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHAPTER 4: SAUL AT DAMASCUS -->
+                <div id="chapter-saul" class="story-chapter min-h-[80vh] flex items-center justify-end" data-scene="saul">
+                    <div class="w-full lg:w-3/5 glass-card rounded-3xl p-6 sm:p-10 glow-border-blue relative overflow-hidden group hover:border-blue-400 transition-all duration-300">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase bg-blue-500/20 text-blue-800 dark:text-blue-300 border border-blue-500/40">
+                                第四幕 ｜ 使徒行傳 9:1-22
+                            </span>
+                            <span class="text-xs text-slate-600 dark:text-slate-400 font-mono"><i class="fa-solid fa-sun text-blue-500 mr-1"></i> Damascus</span>
+                        </div>
+
+                        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4">
+                            大光中的呼喚：Saul 生命的徹底翻轉
+                        </h3>
+
+                        <p class="text-slate-800 dark:text-slate-200 text-base leading-relaxed mb-6 font-normal">
+                            Saul 手持授權，準備前往 Damascus 逮捕基督徒。快到城時，天上忽然射下強光，Saul 撲倒在地，聽見聲音：「Saul，Saul！你為什麼逼迫我？」他失明禁食三天後，門徒 Ananias 照著異象按手在他身上，眼睛像掉下鱗片般重見光明。昔日的迫害者，從此成了傳講 Jesus 就是 Christ 的使徒。
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                            <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800">
+                                <div class="text-xs text-blue-700 dark:text-blue-400 font-bold mb-1"><i class="fa-solid fa-bolt mr-1"></i> 天上的強光</div>
+                                <div class="text-xs text-slate-800 dark:text-slate-200 font-medium">「『主啊，你是誰？』『我就是你所逼迫的 Jesus。』」</div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800">
+                                <div class="text-xs text-emerald-700 dark:text-emerald-400 font-bold mb-1"><i class="fa-solid fa-eye mr-1"></i> 鱗片掉落與受洗</div>
+                                <div class="text-xs text-slate-800 dark:text-slate-200 font-medium">「Ananias 按手禱告，Saul 眼睛如鱗片掉落重見光明並受洗。」</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-slate-300 dark:border-slate-800">
+                            <button onclick="openModal('saul')" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-book-open-reader"></i> 深度閱讀 / 雙語對照
+                            </button>
+                            <a href="https://www.biblegateway.com/passage/?search=Acts+9%3A1-22&version=NIV" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-200 text-sm font-semibold border border-slate-300 dark:border-slate-700 flex items-center gap-2 transition-colors">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> NIV 原始經文
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: PRACTICAL APPLICATIONS -->
+        <section id="practical" class="max-w-7xl mx-auto px-4 py-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 mb-2">
+                    Application
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Recommended Card -->
+                <div class="glass-card rounded-3xl p-8 border border-emerald-500/40 relative overflow-hidden">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-emerald-500/20">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100">Recommended</h3>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                            <i class="fa-solid fa-check text-emerald-600 dark:text-emerald-400 mt-1 text-sm"></i>
+                            <div class="text-sm text-slate-800 dark:text-slate-200 font-medium">
+                                <span class="font-bold text-emerald-700 dark:text-emerald-300 block mb-0.5">停下與祈禱：</span>
+                                職場或家庭遇到難關時，先停下來祈禱讓心靜下來，再找身邊的人一起想辦法。
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                            <i class="fa-solid fa-check text-emerald-600 dark:text-emerald-400 mt-1 text-sm"></i>
+                            <div class="text-sm text-slate-800 dark:text-slate-200 font-medium">
+                                <span class="font-bold text-emerald-700 dark:text-emerald-300 block mb-0.5">勇敢承擔責任：</span>
+                                手上有資源、知識或位份時，站出來替需要幫助的人扛責任。
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                            <i class="fa-solid fa-check text-emerald-600 dark:text-emerald-400 mt-1 text-sm"></i>
+                            <div class="text-sm text-slate-800 dark:text-slate-200 font-medium">
+                                <span class="font-bold text-emerald-700 dark:text-emerald-300 block mb-0.5">細心留意他人需要：</span>
+                                留意團隊或身邊的人臨時遇到的困難，主動幫一把。
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                            <i class="fa-solid fa-check text-emerald-600 dark:text-emerald-400 mt-1 text-sm"></i>
+                            <div class="text-sm text-slate-800 dark:text-slate-200 font-medium">
+                                <span class="font-bold text-emerald-700 dark:text-emerald-300 block mb-0.5">保持開放接納：</span>
+                                對過去印象不好或立場不同的人保持開放，相信人會改變。
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- To Avoid Card -->
+                <div class="glass-card rounded-3xl p-8 border border-rose-500/40 relative overflow-hidden">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-rose-500/20">
+                        <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100">To Avoid</h3>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                            <i class="fa-solid fa-xmark text-rose-600 dark:text-rose-400 mt-1 text-sm"></i>
+                            <div class="text-sm text-slate-800 dark:text-slate-200 font-medium">
+                                <span class="font-bold text-rose-700 dark:text-rose-300 block mb-0.5">佯裝不知與躲避：</span>
+                                遇到危機就假裝沒看見、躲進舒適圈，指望問題自己消失。
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                            <i class="fa-solid fa-xmark text-rose-600 dark:text-rose-400 mt-1 text-sm"></i>
+                            <div class="text-sm text-slate-800 dark:text-slate-200 font-medium">
+                                <span class="font-bold text-rose-700 dark:text-rose-300 block mb-0.5">情緒化與焦慮發脾氣：</span>
+                                缺東西的時候只顧著焦慮、對旁人發脾氣，卻不肯冷靜想辦法或聽別人的建議。
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                            <i class="fa-solid fa-xmark text-rose-600 dark:text-rose-400 mt-1 text-sm"></i>
+                            <div class="text-sm text-slate-800 dark:text-slate-200 font-medium">
+                                <span class="font-bold text-rose-700 dark:text-rose-300 block mb-0.5">刻板印象否定他人：</span>
+                                憑刻板印象否定一個人，連改過或合作的機會都不給。
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3.5 rounded-xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
+                            <i class="fa-solid fa-xmark text-rose-600 dark:text-rose-400 mt-1 text-sm"></i>
+                            <div class="text-sm text-slate-800 dark:text-slate-200 font-medium">
+                                <span class="font-bold text-rose-700 dark:text-rose-300 block mb-0.5">固執己見拒絕改變：</span>
+                                明明感覺到該調整了，還是死抱著原本的偏見不肯改。
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: SOURCES -->
+        <section id="sources" class="max-w-7xl mx-auto px-4 py-16">
+            <div class="glass-card rounded-3xl p-8 border border-amber-500/30">
+                <div class="flex items-center justify-between mb-8 pb-4 border-b border-amber-500/20">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100">Scripture & Sources</h2>
+                    </div>
+                    <i class="fa-solid fa-shield-halved text-3xl text-amber-500/40 hidden sm:inline"></i>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <a href="https://www.biblegateway.com/passage/?search=Esther+4%3A13-17&version=NIV" target="_blank" class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 hover:border-amber-500/50 transition-all hover:-translate-y-1 group">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-amber-600 dark:text-amber-400">BibleGateway</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-amber-500"></i>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-slate-200 mb-1">Esther 4:13-17</h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">NIV / CCB 聖經典籍譯本對照</p>
+                    </a>
+
+                    <a href="https://www.biblegateway.com/passage/?search=2+Kings+20%3A1-11&version=NIV" target="_blank" class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 hover:border-amber-500/50 transition-all hover:-translate-y-1 group">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-amber-600 dark:text-amber-400">BibleGateway</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-amber-500"></i>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-slate-200 mb-1">2 Kings 20:1-11</h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">NIV / CCB / AMP 希西家記事校對</p>
+                    </a>
+
+                    <a href="https://www.biblegateway.com/passage/?search=John+2%3A1-11&version=NIV" target="_blank" class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 hover:border-purple-500/50 transition-all hover:-translate-y-1 group">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-purple-600 dark:text-purple-400">BibleGateway</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-purple-500"></i>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-slate-200 mb-1">John 2:1-11</h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">NIV / CCB 加利利迦拿婚宴記載</p>
+                    </a>
+
+                    <a href="https://www.biblegateway.com/passage/?search=Acts+9%3A1-22&version=NIV" target="_blank" class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800 hover:border-blue-500/50 transition-all hover:-translate-y-1 group">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-blue-600 dark:text-blue-400">BibleGateway</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-blue-500"></i>
+                        </div>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-slate-200 mb-1">Acts 9:1-22</h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 font-medium">NIV / CCB 掃羅大馬士革歸主歷程</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: GLOSSARY SECTION -->
+        <section id="glossary" class="max-w-7xl mx-auto px-4 py-16">
+            <div class="glass-card rounded-3xl p-8 border border-purple-500/30">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-purple-500/20">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100">Glossary</h2>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="relative w-full sm:w-72">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+                        <input id="glossary-search" type="text" placeholder="Search Glossary..." class="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 text-sm focus:outline-none focus:border-purple-500 transition-colors">
+                    </div>
+                </div>
+
+                <!-- Glossary Items Grid -->
+                <div id="glossary-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-amber-600 dark:text-amber-400 text-sm">Ahaz</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">亞哈斯</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-blue-600 dark:text-blue-400 text-sm">Ananias</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">亞南亞</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-purple-600 dark:text-purple-400 text-sm">Cana</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">迦拿</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-blue-600 dark:text-blue-400 text-sm">Christ</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">基督</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-blue-600 dark:text-blue-400 text-sm">Damascus</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">大馬士革</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-amber-600 dark:text-amber-400 text-sm">Esther</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">以斯帖</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-purple-600 dark:text-purple-400 text-sm">Galilee</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">加利利</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-amber-600 dark:text-amber-400 text-sm">Hezekiah</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">希西家</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-amber-600 dark:text-amber-400 text-sm">Isaiah</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">以賽亞</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-blue-600 dark:text-blue-400 text-sm">Israel</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">以色列</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-blue-600 dark:text-blue-400 text-sm">Jerusalem</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">耶路撒冷</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-purple-600 dark:text-purple-400 text-sm">Jesus</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">耶穌</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-purple-600 dark:text-purple-400 text-sm">Mary</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">瑪利亞</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-amber-600 dark:text-amber-400 text-sm">Mordecai</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">末底改</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-blue-600 dark:text-blue-400 text-sm">Saul</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">掃羅</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-amber-600 dark:text-amber-400 text-sm">Susa</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">書珊城</div>
+                    </div>
+                    <div class="glossary-item p-3 rounded-xl bg-slate-100 dark:bg-slate-900/70 border border-slate-300 dark:border-slate-800 text-center">
+                        <div class="font-bold text-blue-600 dark:text-blue-400 text-sm">Tarsus</div>
+                        <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">大數</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/90 py-8 px-4 text-center text-xs text-slate-600 dark:text-slate-400 font-medium">
+            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    © 2026 危機中的信心與禱告
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span>Three.js Engine</span>
+                    <span>•</span>
+                    <span>Tailwind CSS</span>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- INTERACTIVE DETAIL MODAL -->
+    <div id="detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md hidden opacity-0 transition-all duration-300">
+        <div class="bg-white dark:bg-slate-900 w-full max-w-3xl max-h-[85vh] rounded-3xl p-6 sm:p-8 overflow-y-auto border border-amber-500/40 relative transform scale-95 transition-all duration-300 shadow-2xl" id="modal-container">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Modal Dynamic Content Container -->
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC & THREE.JS ENGINE -->
+    <script>
+        const modalData = {
+            esther: {
+                title: "Esther 宮牆內的抉擇 (以斯帖記 4:13-17)",
+                location: "Susa",
+                badgeColor: "bg-amber-500/20 text-amber-800 dark:text-amber-300 border-amber-500/40",
+                zhText: `末底改託人回覆以斯帖說：「你不要以為自己在王宮裡，就比其他猶大人安全。此時你若保持沉默，猶大人必從別處得拯救、蒙解脫，但你和你的父家必面臨滅亡。誰知道你得到王後的位份，不是為了拯救當前的危機呢？」以斯帖隨即吩咐人回覆末底改說：「你去招聚書珊城所有的猶大人，為我禁食三日三夜，不吃不喝。我和我的宮女也要這樣禁食。隨後，我即使違背法律也要去見王。我若死就死吧！」`,
+                enText: `Mordecai sent back this answer to Esther: "Do not think that because you are in the king’s house you alone of all the Jews will escape. For if you remain silent at this time, relief and deliverance for the Jews will arise from another place, but you and your father’s family will perish. And who knows but that you have come to your royal position for such a time as this?" Then Esther sent this reply to Mordecai: "Go, gather together all the Jews who are in Susa, and fast for me. Do not eat or drink for three days, night or day. I and my attendants will fast as you do. When this is done, I will go to the king, even though it is against the law. And if I perish, I perish."`,
+                sourceUrl: "https://www.biblegateway.com/passage/?search=Esther+4%3A13-17&version=NIV"
+            },
+            hezekiah: {
+                title: "Hezekiah 痛哭與十五年的應許 (列王紀下 20:1-11)",
+                location: "Jerusalem",
+                badgeColor: "bg-amber-500/20 text-amber-800 dark:text-amber-300 border-amber-500/40",
+                zhText: `那時希西家患了重病，臨近死亡。亞摩斯的兒子以賽亞先知去見他，對他說：「耶和華這樣說：『你留下一份遺囑交代後事吧，因為你必死無疑，無法痊癒。』」希西家就轉臉朝牆，向耶和華禱告說：「耶和華啊，求你記念我在你面前怎樣誠誠實實、一心一意地行事，做了你眼中看為善的事。」希西家痛哭起來。以賽亞還沒走出中院，耶和華的話語就臨到他：「你回去告訴我百姓的君王希西家：『你祖先大衛的上主耶和華這樣說：我聽見了你的禱告，看見了你的眼淚。看哪，我必醫治你；到第三天，你必上耶和華的殿。我必為你的生命增加十五年...』」以賽亞說：「取一塊無花果餅來。」他們取來貼在瘡上，他就痊癒了。希西家問以賽亞：「耶和華醫治我...有什麼記號呢？」以賽亞說：「耶和華必成就祂所應許的...亞哈斯日晷上的影子往後退了十階。」`,
+                enText: `In those days Hezekiah became ill and was at the point of death. The prophet Isaiah son of Amoz went to him and said, "This is what the Lord says: Put your house in order, because you are going to die; you will not recover." Hezekiah turned his face to the wall and prayed to the Lord... And Hezekiah wept bitterly. Before Isaiah had left the middle court, the word of the Lord came to him: "Go back and tell Hezekiah... 'I have heard your prayer and seen your tears; I will heal you... I will add fifteen years to your life.'" Then Isaiah said, "Prepare a cake of figs." They did so and applied it to the boil, and he recovered. Hezekiah had asked Isaiah, "What will be the sign..." The prophet Isaiah called on the Lord, and the Lord made the shadow go back the ten steps it had gone down on the stairway of Ahaz.`,
+                sourceUrl: "https://www.biblegateway.com/passage/?search=2+Kings+20%3A1-11&version=NIV"
+            },
+            jesus: {
+                title: "Jesus Cana 婚宴水變好酒 (約翰福音 2:1-11)",
+                location: "Cana, Galilee",
+                badgeColor: "bg-purple-500/20 text-purple-800 dark:text-purple-300 border-purple-500/40",
+                zhText: `第三天，在加利利的迦拿有一場婚宴，耶穌的母親在那裡。耶穌和祂的門徒也被邀請參加婚宴。酒用盡的時候，耶穌的母親對祂說：「他們沒有酒了。」耶穌說：「母親，我與你有什麼相干？我的時刻還沒有到。」祂母親對僕人說：「祂吩咐你們什麼，你們就做什麼。」那裡有六口潔淨用的石缸...耶穌對僕人說：「把缸倒滿水。」他們就倒滿了，直到缸口。耶穌又說：「現在舀出來，送給管筵席的。」他們就送去了。管筵席的嘗了那水變成的酒，不知道酒是哪裡來的...就叫新郎來，對他說：「人都是先擺上好酒，等客人喝夠了，才擺上次等的；你倒把好酒留到現在！」這是耶穌所行的第一個神蹟，是在加利利的迦拿完成的，顯出了祂的榮耀；祂的門徒就相信祂了。`,
+                enText: `On the third day a wedding took place at Cana in Galilee. Jesus’ mother was there, and Jesus and his disciples had also been invited to the wedding. When the wine was gone, Jesus’ mother said to him, "They have no more wine." "Woman, why do you involve me?" Jesus replied. "My hour has not yet come." His mother said to the servants, "Do whatever he tells you." Nearby stood six stone water jars... Jesus said to the servants, "Fill the jars with water"; so they filled them to the brim. Then he told them, "Now draw some out and take it to the master of the banquet." They did so, and the master of the banquet tasted the water that had been turned into wine... He called the bridegroom aside and said, "Everyone brings out the choice wine first... but you have saved the best till now." What Jesus did here in Cana of Galilee was the first of the signs through which he revealed his glory; and his disciples believed in him.`,
+                sourceUrl: "https://www.biblegateway.com/passage/?search=John+2%3A1-11&version=NIV"
+            },
+            saul: {
+                title: "Saul 大馬士革大光與生命翻轉 (使徒行傳 9:1-22)",
+                location: "Damascus",
+                badgeColor: "bg-blue-500/20 text-blue-800 dark:text-blue-300 border-blue-500/40",
+                zhText: `掃羅仍然口吐威嚇兇殺的話，逼迫主的門徒...就在他快到大馬士革的時候，天上突然射出一道光照耀他。他就撲倒在地，聽見有聲音對他說：「掃羅，掃羅！你為什麼逼迫我？」掃羅問：「主啊，你是誰？」那聲音回答說：「我就是你所逼迫的耶穌...」掃羅從地上起來，睜開眼睛卻什麼也看不見...三天不能看見，也不吃不喝。在大馬士革有一個門徒叫亞南亞，主在異象中呼喚他...「你隻管去！他是我揀選的器皿，要在外族人、君王和以色列人面前傳揚我的名。」亞南亞就去了...按手在掃羅身上說：「掃羅兄弟，在你來的路上向你顯現的主，就是耶穌，發我前來，要讓你重見光明，並被聖靈充滿。」掃羅的眼睛上立刻有像鱗片一樣的東西掉下來，他就重見光明，隨即起來受洗...在各會堂傳揚耶穌，宣告耶穌就是上帝的兒子。`,
+                enText: `Meanwhile, Saul was still breathing out murderous threats against the Lord’s disciples... As he neared Damascus on his journey, suddenly a light from heaven flashed around him. He fell to the ground and heard a voice say to him, "Saul, Saul, why do you persecute me?" "Who are you, Lord?" Saul asked. "I am Jesus, whom you are persecuting," he replied... Saul got up from the ground, but when he opened his eyes he could see nothing. For three days he was blind, and did not eat or drink anything. In Damascus there was a disciple named Ananias... The Lord said to Ananias, "Go! This man is my chosen instrument to proclaim my name to the Gentiles..." Then Ananias went to the house and entered it. Placing his hands on Saul, he said, "Brother Saul, the Lord—Jesus, who appeared to you on the road as you were coming here—has sent me so that you may see again and be filled with the Holy Spirit." Immediately, something like scales fell from Saul’s eyes, and he could see again. He got up and was baptized... At once he began to preach in the synagogues that Jesus is the Son of God.`,
+                sourceUrl: "https://www.biblegateway.com/passage/?search=Acts+9%3A1-22&version=NIV"
+            }
+        };
+
+        let scene, camera, renderer, particleSystem, particleGeo, particleMat;
+        let particleCount = 1500;
+        let currentThemeParams = {
+            color: 0xf59e0b,
+            speed: 1.0,
+            density: 1.0,
+            glow: 1.0,
+            rotY: 0.001
+        };
+
+        const scenePresets = {
+            esther: { color: 0xd97706, rotY: 0.0015, darkBg: 0x090a0f, lightBg: 0xf8fafc },
+            hezekiah: { color: 0xb45309, rotY: 0.0025, darkBg: 0x120a05, lightBg: 0xfef3c7 },
+            jesus: { color: 0x9333ea, rotY: 0.0020, darkBg: 0x100820, lightBg: 0xf3e8ff },
+            saul: { color: 0x2563eb, rotY: 0.0035, darkBg: 0x050f20, lightBg: 0xeff6ff }
+        };
+
+        function initWebGL() {
+            try {
+                const container = document.getElementById('webgl-container');
+                scene = new THREE.Scene();
+                
+                const isDark = document.documentElement.classList.contains('dark');
+                const initialBg = isDark ? 0x090a0f : 0xf8fafc;
+                scene.fog = new THREE.FogExp2(initialBg, 0.015);
+
+                camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+                camera.position.z = 100;
+
+                renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                container.appendChild(renderer.domElement);
+
+                createParticles();
+                window.addEventListener('resize', onWindowResize);
+                animate();
+            } catch (e) {
+                console.error("WebGL Initialization failed:", e);
+            }
+        }
+
+        function createParticles() {
+            if (particleSystem) scene.remove(particleSystem);
+
+            const activeCount = Math.floor(particleCount * currentThemeParams.density);
+            particleGeo = new THREE.BufferGeometry();
+            const positions = new Float32Array(activeCount * 3);
+
+            for (let i = 0; i < activeCount; i++) {
+                positions[i * 3] = (Math.random() - 0.5) * 300;
+                positions[i * 3 + 1] = (Math.random() - 0.5) * 300;
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 300;
+            }
+
+            particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            const canvas = document.createElement('canvas');
+            canvas.width = 64;
+            canvas.height = 64;
+            const ctx = canvas.getContext('2d');
+            const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+            grad.addColorStop(0, 'rgba(255,255,255,1)');
+            grad.addColorStop(0.4, 'rgba(255,255,255,0.6)');
+            grad.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 64, 64);
+
+            const texture = new THREE.CanvasTexture(canvas);
+
+            particleMat = new THREE.PointsMaterial({
+                color: currentThemeParams.color,
+                size: 3 * currentThemeParams.glow,
+                map: texture,
+                transparent: true,
+                opacity: 0.85,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+
+            particleSystem = new THREE.Points(particleGeo, particleMat);
+            scene.add(particleSystem);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (particleSystem) {
+                particleSystem.rotation.y += currentThemeParams.rotY * currentThemeParams.speed;
+                particleSystem.rotation.x += currentThemeParams.rotY * 0.5 * currentThemeParams.speed;
+            }
+
+            const time = Date.now() * 0.0005;
+            camera.position.x = Math.sin(time) * 10;
+            camera.position.y = Math.cos(time * 0.8) * 10;
+
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function setPreset(key) {
+            const preset = scenePresets[key];
+            if (!preset) return;
+
+            currentThemeParams.color = preset.color;
+            currentThemeParams.rotY = preset.rotY;
+
+            if (particleMat) {
+                particleMat.color.setHex(preset.color);
+            }
+
+            if (scene) {
+                const isDark = document.documentElement.classList.contains('dark');
+                scene.fog.color.setHex(isDark ? preset.darkBg : preset.lightBg);
+            }
+        }
+
+        document.getElementById('slider-glow').addEventListener('input', (e) => {
+            const val = parseFloat(e.target.value);
+            currentThemeParams.glow = val;
+            document.getElementById('val-glow').innerText = val.toFixed(1);
+            if (particleMat) particleMat.size = 3 * val;
+        });
+
+        document.getElementById('slider-density').addEventListener('input', (e) => {
+            const val = parseInt(e.target.value);
+            currentThemeParams.density = val / 100;
+            document.getElementById('val-density').innerText = val + '%';
+            createParticles();
+        });
+
+        document.getElementById('slider-speed').addEventListener('input', (e) => {
+            const val = parseFloat(e.target.value);
+            currentThemeParams.speed = val;
+            document.getElementById('val-speed').innerText = val.toFixed(1) + 'x';
+        });
+
+        function setupScrollTriggers() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '-30% 0px -30% 0px',
+                threshold: 0.2
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sceneKey = entry.target.getAttribute('data-scene');
+                        if (sceneKey) {
+                            setPreset(sceneKey);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.story-chapter').forEach(el => observer.observe(el));
+        }
+
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+
+        // Theme Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            document.body.classList.toggle('light');
+            
+            const isDark = document.documentElement.classList.contains('dark');
+            if (scene) {
+                scene.fog.color.setHex(isDark ? 0x090a0f : 0xf8fafc);
+            }
+        });
+
+        // Mobile Drawer
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileDrawer.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileDrawer.classList.add('hidden');
+            });
+        });
+
+        function openModal(key) {
+            const data = modalData[key];
+            if (!data) return;
+
+            const modal = document.getElementById('detail-modal');
+            const container = document.getElementById('modal-container');
+            const content = document.getElementById('modal-content');
+
+            content.innerHTML = `
+                <div class="space-y-6 text-left">
+                    <div class="flex items-center gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase border ${data.badgeColor}">
+                            <i class="fa-solid fa-book mr-1"></i> ${data.location}
+                        </span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100">${data.title}</h3>
+
+                    <div class="space-y-4">
+                        <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800">
+                            <h4 class="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-language"></i> 中文對照 (CCB 譯本)
+                            </h4>
+                            <p class="text-slate-800 dark:text-slate-200 text-sm leading-relaxed font-normal">${data.zhText}</p>
+                        </div>
+
+                        <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-800">
+                            <h4 class="text-xs font-bold text-blue-700 dark:text-blue-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-globe"></i> English Translation (NIV)
+                            </h4>
+                            <p class="text-slate-800 dark:text-slate-200 text-sm leading-relaxed font-normal">${data.enText}</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-300 dark:border-slate-800 flex justify-between items-center">
+                        <a href="${data.sourceUrl}" target="_blank" class="text-xs font-bold text-amber-700 dark:text-amber-400 hover:underline flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> BibleGateway
+                        </a>
+                        <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold transition-colors">
+                            Close (Esc)
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                container.classList.remove('scale-95');
+                container.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('detail-modal');
+            const container = document.getElementById('modal-container');
+
+            container.classList.remove('scale-100');
+            container.classList.add('scale-95');
+            modal.classList.add('opacity-0');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        document.getElementById('detail-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'detail-modal') closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        const glossarySearch = document.getElementById('glossary-search');
+        glossarySearch.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase().trim();
+            const items = document.querySelectorAll('.glossary-item');
+
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                item.style.display = text.includes(term) ? 'block' : 'none';
+            });
+        });
+
+        window.onload = function () {
+            initWebGL();
+            setupScrollTriggers();
+        };
+    </script>
+</body>
+</html>

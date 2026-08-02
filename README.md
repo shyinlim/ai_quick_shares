@@ -1,6 +1,6 @@
 # ai_quick_share
 
-- https://shyinlim.github.io/ai_quick_shares/20260802_160020683_faith_and_prayer_in_crisis.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260802_160020683_faith_and_prayer_in_crisis.html)
+- https://shyinlim.github.io/ai_quick_shares/20260802_230938006_faith-prayer-in-crisis.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260802_230938006_faith-prayer-in-crisis.html)
 - https://shyinlim.github.io/ai_quick_shares/20260726_202411503_paul-eutychus.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260726_202411503_paul-eutychus.html)
 - https://shyinlim.github.io/ai_quick_shares/20260725_224903377_scrolling-story.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260725_224903377_scrolling-story.html)
 - https://shyinlim.github.io/ai_quick_shares/20260725_223622345_paul.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260725_223622345_paul.html)
