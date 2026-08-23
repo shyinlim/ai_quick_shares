@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="light" data-mode="wise">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>20260823_220549440_傳道書智慧與省思</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet">
+<style>
+/* ===== single token set. mode = wise|folly drives hue; theme = dark|light drives lightness ===== */
+:root{
+  --bh:162; --h:50;                     /* bh 背景色相 / h accent 色相 */
+  --bg:hsl(var(--bh) 62% 9%);
+  --bg-2:hsl(var(--bh) 52% 12%);
+  --panel:hsl(var(--bh) 48% 14%);
+  --panel-2:hsl(var(--bh) 44% 18%);
+  --border:hsl(var(--bh) 34% 22%);
+  --border-soft:hsl(var(--bh) 34% 17%);
+  --text:hsl(var(--bh) 30% 96%);
+  --text-2:hsl(var(--bh) 18% 80%);
+  --muted:hsl(var(--bh) 14% 62%);
+  --acc:hsl(var(--h) 88% 62%);
+  --acc-2:hsl(var(--h) 88% 46%);
+  --on-acc:hsl(var(--bh) 60% 8%);
+  --acc-dim:hsl(var(--h) 88% 62% / .16);
+  --acc-line:hsl(var(--h) 88% 62% / .5);
+  --shadow:0 14px 40px hsl(var(--bh) 60% 3% / .55);
+  --r:16px;
+  transition:--x .01s;
+}
+:root[data-mode="folly"]{--bh:14; --h:9}
+:root[data-theme="light"]{
+  --bg:hsl(var(--bh) 44% 95%);
+  --bg-2:hsl(var(--bh) 40% 91%);
+  --panel:hsl(var(--bh) 46% 99%);
+  --panel-2:hsl(var(--bh) 38% 94%);
+  --border:hsl(var(--bh) 26% 82%);
+  --border-soft:hsl(var(--bh) 26% 88%);
+  --text:hsl(var(--bh) 48% 11%);
+  --text-2:hsl(var(--bh) 26% 26%);
+  --muted:hsl(var(--bh) 16% 42%);
+  --acc:hsl(var(--h) 72% 33%);
+  --acc-2:hsl(var(--h) 72% 24%);
+  --on-acc:hsl(var(--bh) 44% 98%);
+  --acc-dim:hsl(var(--h) 72% 33% / .14);
+  --acc-line:hsl(var(--h) 72% 33% / .5);
+  --shadow:0 10px 30px hsl(var(--bh) 30% 40% / .16);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  line-height:1.8; overflow-x:hidden;
+  transition:background .7s ease, color .7s ease;   /* 色溫轉換：驅動變數 = data-mode */
+}
+.wrap{max-width:1140px; margin:0 auto; padding:0 20px}
+svg.i{flex:0 0 auto; width:18px; height:18px; min-width:0; stroke:currentColor; fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round}
+
+/* ===== hud ===== */
+.hud{
+  position:sticky; top:0; z-index:40; background:var(--bg);
+  border-bottom:1px solid var(--border-soft);
+  transform:translateY(-100%); transition:transform .28s ease, background .7s ease;
+}
+.hud.on{transform:translateY(0)}
+.hud-in{display:flex; align-items:center; gap:10px; padding:8px 20px; max-width:1140px; margin:0 auto}
+.pills{display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; flex:1}
+.pills::-webkit-scrollbar{display:none}
+.pill{
+  flex:0 0 auto; cursor:pointer; font-family:inherit; line-height:1.4;
+  border:1.5px solid var(--border); background:transparent; color:var(--text-2);
+  border-radius:0; padding:5px 12px; font-size:.78rem; font-weight:700;
+  transition:transform .22s, box-shadow .22s, color .22s, border-color .22s, background .22s;
+}
+.pill:hover{transform:translateY(-2px); color:var(--acc); border-color:var(--acc)}
+.pill[aria-current="true"]{background:var(--acc); color:var(--on-acc); border-color:var(--acc)}
+.icon-btn{
+  flex:0 0 auto; width:34px; height:34px; display:grid; place-items:center;
+  border:1.5px solid var(--border); background:transparent; color:var(--text-2);
+  cursor:pointer; transition:transform .22s, color .22s, border-color .22s;
+}
+.icon-btn:hover{transform:translateY(-2px); color:var(--acc); border-color:var(--acc)}
+
+/* ===== mode switch (主控台：智慧 / 愚昧) ===== */
+.modesw{
+  display:inline-flex; border:2px solid var(--acc); background:transparent; flex:0 0 auto;
+  transition:border-color .7s ease;
+}
+.modesw button{
+  cursor:pointer; font-family:inherit; font-weight:900; font-size:.8rem; letter-spacing:.08em;
+  padding:6px 16px; border:0; background:transparent; color:var(--text-2);
+  transition:background .3s, color .3s;
+}
+.modesw button[aria-pressed="true"]{background:var(--acc); color:var(--on-acc)}
+.hero .modesw button{font-size:1rem; padding:11px 30px}
+
+/* ===== hero ===== */
+.hero{padding:70px 0 34px}
+.kicker{font-size:.74rem; letter-spacing:.3em; color:var(--muted); font-weight:700; margin:0 0 16px}
+.hero h1{margin:0; font-weight:900; line-height:1.04; font-size:clamp(3rem,13vw,8.5rem); letter-spacing:-.03em}
+.hero h1 .swap-word{
+  display:inline-block; color:var(--acc);
+  font-family:"Noto Serif TC",serif;
+  transition:opacity .35s ease, transform .35s ease, color .7s ease;
+}
+.hero h1 .swap-word.out{opacity:0; transform:translateY(-14px)}
+.hero .sub{margin:14px 0 0; font-size:clamp(1.1rem,3.2vw,1.7rem); font-weight:900; line-height:1.4}
+.hero .lead{max-width:60ch; color:var(--text-2); margin:18px 0 0}
+.mode-row{display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:28px 0 0}
+.mode-hint{font-size:.82rem; color:var(--muted)}
+.jump{display:flex; flex-wrap:wrap; gap:8px; margin-top:26px}
+.jbadge{
+  display:flex; align-items:center; gap:8px; cursor:pointer; font-family:inherit;
+  border:1.5px solid var(--border); background:transparent; color:var(--text-2);
+  padding:7px 14px 7px 7px; font-size:.82rem; font-weight:700;
+  transition:transform .24s, box-shadow .24s, border-color .24s, color .24s;
+}
+.jbadge .dot{
+  width:24px; height:24px; display:grid; place-items:center;
+  font-size:.74rem; font-weight:900; background:var(--acc); color:var(--on-acc);
+  transition:background .7s ease;
+}
+.jbadge:hover,.jbadge[aria-current="true"]{transform:translateY(-3px); border-color:var(--acc); color:var(--text); box-shadow:5px 5px 0 var(--acc-dim)}
+
+/* ===== stat tiles ===== */
+.stats{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin:38px 0 0}
+@media(min-width:640px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{border:1.5px solid var(--border); padding:16px; transition:border-color .3s, background .3s}
+.stat b{display:block; font-size:clamp(2rem,5vw,2.8rem); font-weight:900; line-height:1.15; font-family:"Noto Serif TC",serif}
+.stat span{display:block; font-size:.68rem; letter-spacing:.16em; color:var(--muted); font-weight:700; margin-top:2px}
+.stat.lit{border-color:var(--acc); background:var(--acc-dim)}
+.stat.lit b{color:var(--acc)}
+
+/* ===== chapter ===== */
+.ch{
+  border:1.5px solid var(--border); background:var(--panel); box-shadow:var(--shadow);
+  padding:26px 22px 22px; margin:22px 0; scroll-margin-top:66px;
+  transition:border-color .3s, box-shadow .3s, background .7s ease;
+}
+.ch.active{border-color:var(--acc); box-shadow:8px 8px 0 var(--acc-dim)}
+.ch-head{display:flex; align-items:flex-start; gap:14px; flex-wrap:wrap}
+.ch-no{
+  flex:0 0 auto; width:44px; height:44px; display:grid; place-items:center;
+  font-family:"Noto Serif TC",serif; font-weight:700; font-size:1.2rem;
+  background:var(--acc); color:var(--on-acc); transition:background .7s ease;
+}
+.ch-head .ht{flex:1 1 240px; min-width:0}
+.ch-head h2{margin:0; font-size:clamp(1.35rem,3.6vw,2rem); font-weight:900; line-height:1.3; font-family:"Noto Serif TC",serif}
+.ch-head .gist{display:block; font-size:.86rem; color:var(--muted); margin-top:4px}
+.scr-btn{
+  flex:0 0 auto; display:flex; align-items:center; gap:8px; cursor:pointer; font-family:inherit;
+  border:2px solid var(--acc); background:transparent; color:var(--acc);
+  padding:8px 16px; font-size:.82rem; font-weight:900; letter-spacing:.04em;
+  transition:transform .22s, background .22s, color .22s;
+}
+.scr-btn:hover{transform:translateY(-2px); background:var(--acc); color:var(--on-acc)}
+.answer{margin:18px 0 0; padding:16px 18px; background:var(--panel-2); border-left:4px solid var(--acc); transition:border-color .7s ease}
+.sec-label{font-size:.68rem; letter-spacing:.24em; color:var(--muted); font-weight:700; margin:26px 0 10px}
+
+/* ===== story timeline (全展開，不需點擊) ===== */
+.story{list-style:none; margin:0; padding:0 0 0 30px; position:relative}
+.story::before{content:""; position:absolute; left:9px; top:8px; bottom:8px; width:2px; background:var(--border)}
+.story li{position:relative; padding:0 0 18px}
+.story li:last-child{padding-bottom:0}
+.story .mk{
+  position:absolute; left:-30px; top:6px; width:20px; height:20px;
+  border:2px solid var(--border); background:var(--bg); transition:border-color .3s, background .3s;
+}
+/* breathing halo — driver: 目前捲到的 Story 段落 index */
+.story li.here .mk{border-color:var(--acc); background:var(--acc); animation:breathe 2.6s ease-in-out infinite}
+@keyframes breathe{0%,100%{box-shadow:0 0 0 0 var(--acc-dim)}50%{box-shadow:0 0 0 9px var(--acc-dim)}}
+.story .vs{
+  display:inline-block; font-family:"Noto Serif TC",serif; font-weight:700; font-size:.76rem;
+  color:var(--acc); border:1px solid var(--acc-line); padding:1px 9px; margin-bottom:5px;
+}
+.story p{margin:0; color:var(--text-2)}
+
+/* ===== do / avoid flip ===== */
+.flip{position:relative; border:1.5px dashed var(--border); padding:18px 20px; background:var(--panel-2)}
+.face{display:none}
+.face.on{display:block; animation:rise .42s cubic-bezier(.2,.7,.3,1)}
+@keyframes rise{from{opacity:0; transform:translateY(14px)}to{opacity:1; transform:none}}
+.face h3{margin:0 0 12px; font-size:.8rem; letter-spacing:.18em; font-weight:900; color:var(--acc); display:flex; align-items:center; gap:8px}
+.face ol{margin:0; padding-left:1.3em; color:var(--text-2)}
+.face li+li{margin-top:9px}
+.parallel{margin-top:18px; font-size:.84rem; color:var(--muted); border-top:1px solid var(--border-soft); padding-top:12px}
+.parallel b{color:var(--text-2)}
+
+/* ===== modal ===== */
+.mask{
+  position:fixed; inset:0; z-index:80; display:none;
+  background:hsl(var(--bh) 60% 4% / .78); padding:20px; overflow-y:auto;
+}
+.mask.on{display:block}
+.modal{
+  max-width:1000px; margin:24px auto; background:var(--panel); border:2px solid var(--acc);
+  box-shadow:var(--shadow); animation:rise .3s ease;
+}
+.modal-top{
+  display:flex; align-items:center; gap:12px; padding:16px 20px;
+  border-bottom:1.5px solid var(--border); position:sticky; top:0; background:var(--panel); z-index:2;
+}
+.modal-top h3{margin:0; flex:1; font-size:1rem; font-weight:900; font-family:"Noto Serif TC",serif}
+.cols{display:grid; gap:0}
+@media(min-width:840px){.cols{grid-template-columns:1fr 1fr}}
+.col{padding:18px 20px}
+.col+.col{border-top:1.5px solid var(--border)}
+@media(min-width:840px){.col+.col{border-top:0; border-left:1.5px solid var(--border)}}
+.col.en{font-family:system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+.col h4{margin:0 0 12px; font-size:.68rem; letter-spacing:.2em; color:var(--muted); font-weight:700}
+.v{display:flex; gap:10px; margin-bottom:11px}
+.v b{flex:0 0 auto; font-family:"Noto Serif TC",serif; color:var(--acc); font-size:.8rem; min-width:2.1em; line-height:1.9}
+.v span{color:var(--text-2)}
+.modal-foot{padding:14px 20px; border-top:1.5px solid var(--border); display:grid; gap:8px}
+.modal-foot a{color:var(--acc); font-size:.8rem; word-break:break-all; text-decoration:none; border-bottom:1px solid var(--acc-line)}
+.modal-foot a:hover{background:var(--acc-dim)}
+
+/* ===== glossary / sources ===== */
+.gl-search{
+  width:100%; max-width:340px; font-family:inherit; font-size:.9rem;
+  background:transparent; color:var(--text); border:1.5px solid var(--border);
+  padding:9px 14px; margin-bottom:14px;
+}
+.gl-search:focus{outline:none; border-color:var(--acc)}
+.gl-wrap{overflow-x:auto}
+.gl{width:100%; border-collapse:collapse; min-width:400px; font-size:.92rem}
+.gl th{text-align:left; font-size:.68rem; letter-spacing:.18em; color:var(--muted); padding:0 12px 8px; font-weight:700}
+.gl td{padding:10px 12px; border-top:1px solid var(--border-soft); color:var(--text-2)}
+.gl td:first-child{color:var(--text); font-weight:700; width:1%; white-space:nowrap; vertical-align:top}
+.gl tr:hover td{background:var(--panel-2)}
+.gl-empty{color:var(--muted); padding:14px 12px; display:none}
+.gl-empty.on{display:block}
+.src{display:grid; gap:8px}
+@media(min-width:760px){.src{grid-template-columns:repeat(2,1fr)}}
+.src a{
+  display:block; border:1.5px solid var(--border); padding:12px 15px;
+  text-decoration:none; color:var(--text); transition:transform .22s, border-color .22s, box-shadow .22s;
+}
+.src a:hover{transform:translateY(-3px); border-color:var(--acc); box-shadow:5px 5px 0 var(--acc-dim)}
+.src b{display:block; font-size:.88rem}
+.src span{display:block; font-size:.7rem; color:var(--muted); word-break:break-all; margin-top:3px}
+.note{color:var(--muted); font-size:.82rem; margin:0 0 14px}
+
+/* ===== dots / toast ===== */
+.dots{display:none}
+@media(min-width:1340px){.dots{display:flex; flex-direction:column; gap:13px; position:fixed; right:24px; top:50%; transform:translateY(-50%); z-index:35}}
+.dots button{width:10px; height:10px; padding:0; cursor:pointer; border:1.6px solid var(--muted); background:transparent; position:relative; transition:transform .22s, background .22s, border-color .22s}
+.dots button:hover{transform:scale(1.5); border-color:var(--acc)}
+.dots button[aria-current="true"]{background:var(--acc); border-color:var(--acc); transform:scale(1.4)}
+.dots button::after{
+  content:attr(data-label); position:absolute; right:20px; top:50%; transform:translateY(-50%);
+  white-space:nowrap; font-size:.72rem; font-weight:700; color:var(--text);
+  background:var(--panel); border:1px solid var(--border); padding:4px 9px;
+  opacity:0; pointer-events:none; transition:opacity .2s;
+}
+.dots button:hover::after{opacity:1}
+.toast-wrap{position:fixed; right:16px; bottom:16px; z-index:90; display:flex; flex-direction:column; gap:8px}
+.toast{display:flex; align-items:center; gap:9px; background:var(--panel); border:2px solid var(--acc); padding:10px 14px; box-shadow:var(--shadow); font-size:.84rem; font-weight:700; animation:rise .26s ease}
+.toast svg{color:var(--acc)}
+
+footer{padding:44px 0 66px; color:var(--muted); font-size:.8rem}
+:focus-visible{outline:3px solid var(--acc); outline-offset:2px}
+@media(max-width:640px){
+  .hud-in{padding:6px 14px; gap:8px}
+  .ch{padding:20px 15px}
+  .modesw button{padding:6px 12px; font-size:.74rem}
+  .hero .modesw button{font-size:.9rem; padding:10px 20px}
+  .mask{padding:0}
+  .modal{margin:0; border-width:0 0 2px}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important; transition-duration:.01ms !important}
+}
+</style>
+</head>
+<!--
+資料盤點表 (定案資料 → 頁面區塊)；來源 A：傳道書 10_10 的智慧與省思.pdf 全 7 頁；來源 B：BibleGateway CCBT / NIV 實抓經文
+A-P1 傳道書10:10 答案/Story×4/可以×2/避免×1/章節對照 → 第1章 答案·Story 時間線·flip 兩面·parallel
+A-P1..P7 各則來源連結 (原始標註的免責文字依使用者指示移除) → 頁尾來源區改列實抓頁面
+A-P2 路加16:10 答案/Story×5/可以×2/避免×1/章節對照   → 第2章
+A-P3 馬太25:1-4 答案/Story×8/可以×2/避免×1/章節對照  → 第3章
+A-P4 馬太25:14-30 答案/Story×7                       → 第4章
+A-P4,P5 可以×2/避免×1/章節對照/來源×2                → 第4章 + 頁尾
+A-P5 傳道書1:3 答案/Story×7                          → 第5章
+A-P5,P6 可以×2/避免×1/章節對照/來源×2                → 第5章 + 頁尾
+A-P6 詞彙 David/Jerusalem                            → 詞彙對照表
+A-P6 約翰10:10 答案/Story×6                          → 第6章
+A-P7 可以×2/避免×1/章節對照/來源×2                   → 第6章 + 頁尾
+B 六段 CCBT 繁體全文 + 六段 NIV 全文                 → 各章「經文」modal 左右兩欄
+未落點資料：無
+-->
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 0 4 22V4.5z"/><path d="M4 17.5h16"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l9.5 17H2.5L12 3z"/><path d="M12 10v4M12 17.5v.01"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></symbol>
+</defs></svg>
+
+<header class="hud" id="hud">
+  <div class="hud-in">
+    <div class="modesw" id="modeswTop" role="group" aria-label="切換智慧面或愚昧面">
+      <button data-mode="wise" aria-pressed="true">智慧</button>
+      <button data-mode="folly" aria-pressed="false">愚昧</button>
+    </div>
+    <nav class="pills" id="pills" aria-label="章節導覽"></nav>
+    <button class="icon-btn" id="themeBtn" aria-label="切換明暗主題"><svg class="i"><use href="#i-sun"/></svg></button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <p class="kicker">6 則經文 · 智慧與省思</p>
+    <h1><span class="swap-word" id="bigWord">磨利</span></h1>
+    <p class="sub" id="bigSub">傳道書 10:10 的智慧與省思</p>
+    <p class="lead" id="lead"></p>
+    <div class="mode-row">
+      <div class="modesw" id="modeswHero" role="group" aria-label="切換智慧面或愚昧面">
+        <button data-mode="wise" aria-pressed="true">智慧</button>
+        <button data-mode="folly" aria-pressed="false">愚昧</button>
+      </div>
+      <span class="mode-hint">按一下，六則同時翻面</span>
+    </div>
+    <nav class="jump" id="jump" aria-label="快速跳轉"></nav>
+    <div class="stats">
+      <div class="stat" id="st0"><b>6</b><span>則經文問答</span></div>
+      <div class="stat" id="st1"><b>4</b><span>卷書</span></div>
+      <div class="stat" id="st2"><b>12</b><span>可以這樣做</span></div>
+      <div class="stat" id="st3"><b>6</b><span>避免這樣</span></div>
+    </div>
+  </section>
+
+  <div id="chapters"></div>
+
+  <section id="glossary" class="ch">
+    <div class="ch-head"><div class="ch-no">語</div><div class="ht"><h2>詞彙對照</h2><span class="gist">GLOSSARY</span></div></div>
+    <input class="gl-search" id="glSearch" type="search" placeholder="搜尋詞彙或說明…" aria-label="搜尋詞彙對照">
+    <div class="gl-wrap"><table class="gl"><thead><tr><th>詞</th><th>說明</th></tr></thead><tbody id="glBody"></tbody></table></div>
+    <p class="gl-empty" id="glEmpty">沒有符合的詞彙。</p>
+  </section>
+
+  <section id="sources" class="ch">
+    <div class="ch-head"><div class="ch-no">源</div><div class="ht"><h2>來源校對</h2><span class="gist">SOURCES</span></div></div>
+    <div class="src" id="srcList"></div>
+  </section>
+</main>
+
+<nav class="dots" id="dots" aria-label="章節指示"></nav>
+<div class="toast-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+<div class="mask" id="mask" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="modal" id="modal">
+    <div class="modal-top">
+      <svg class="i" style="color:var(--acc)"><use href="#i-book"/></svg>
+      <h3 id="mTitle"></h3>
+      <button class="icon-btn" id="mClose" aria-label="關閉經文"><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="cols" id="mBody"></div>
+    <div class="modal-foot" id="mFoot"></div>
+  </div>
+</div>
+
+<footer class="wrap">傳道書 10:10 的智慧與省思</footer>
+
+<script>
+/* ============ 定案資料 (PDF 逐字) ============ */
+const DATA=[
+{pill:"傳道書 10:10", ref:"傳道書 10:10",
+ answer:"斧頭鈍了不磨，就得花加倍的力氣。真正省力的地方在動手之前的準備。",
+ intro:"這段是傳道書探討智慧與愚昧對比的一部分  (傳道書 10:8-11)。",
+ story:[
+  ["10:10","想像一個樵夫拿著一把很久沒磨的斧頭去砍樹。斧刃已經鈍了，如果他不去磨利，就必須花費加倍的力氣拼命砍，最後把自己累得半死 (傳道書 10:10)。"],
+  ["10:10","但如果他先停下來磨斧頭，砍起來就輕鬆多了。力氣解決不了鈍掉的刀刃 (傳道書 10:10)。"],
+  ["10:8-9","挖陷阱的人可能自己掉進去，拆牆的人可能被蛇咬，做事如果缺乏謹慎與預備，往往會自食其果 (傳道書 10:8-9)。"],
+  ["10:10","智慧讓人看清方向，在動手前先把準備做完 (傳道書 10:10)。"]],
+ doList:["大案子動手前先把流程和工具確認好，磨完斧頭再砍。","雜務多到做不完的時候去學自動化工具，不要只靠加班硬撐。"],
+ avoidList:["不找原因，只憑蠻力一直做，最後人累垮了事情還在原地。"],
+ parallel:"Ecclesiastes 10:8-11 (NIV)｜傳道書 10:8-11"},
+
+{pill:"路加 16:10", ref:"路加福音 16:10",
+ answer:"小事上怎麼做，決定大事會不會交到你手上。主人看的是你面對責任的態度，跟事情的規模無關。",
+ intro:"這段是不義管家比喻的一部分 (路加福音 16:1-13)。",
+ story:[
+  ["16:1-2","有一個富翁的管家被主人發現浪費主人的財物，即將被革職 (路加福音 16:1-2)。"],
+  ["16:3-7","管家知道自己即將失去工作，便私下把欠主人債的人找來，主動把他們的借據金額改少，為自己未來的退路做準備 (路加福音 16:3-7)。"],
+  ["16:8","主人知道後，反而誇獎這個不義的管家做事精明，懂得為未來打算 (路加福音 16:8)。"],
+  ["16:10","耶穌藉此提醒大家，如果人在最小的事上忠心，在大事上也必定忠心；若在最小的事上不義，在大事上也必定不義 (路加福音 16:10)。"],
+  ["16:11","如果人連今世短暫、容易讓人迷失的金錢都無法忠心管理，又有誰會把真正屬天的財富託付給他呢 (路加福音 16:11)？"]],
+ doList:["例行報表和日常檢查一樣認真做，不因為沒人看就敷衍。","答應家人朋友的小約定就準時到，這些細節累積起來就是別人對你的信任。"],
+ avoidList:["覺得雜務沒人看就偷工，等升遷機會來了才想認真。"],
+ parallel:"Luke 16:1-13 (NIV)｜路加福音 16:1-13"},
+
+{pill:"馬太 25:1-4", ref:"馬太福音 25:1-4",
+ answer:"油得自己先備好，臨時跟人借是借不到的。半夜喊聲一響，五個沒帶油的伴娘就被關在門外。",
+ intro:"這段是十個伴娘比喻的一部分 (馬太福音 25:1-13)。",
+ story:[
+  ["25:1","古時的婚禮常常在晚上舉行，十個伴娘拿著燈走出去迎接新郎，準備加入熱鬧的婚禮隊伍 (馬太福音 25:1)。"],
+  ["25:2","這十個人當中有五個是聰明的，五個是糊塗的 (馬太福音 25:2)。"],
+  ["25:3-4","糊塗的伴娘雖然拿了燈，卻沒有隨身多預備額外的油；聰明的伴娘拿著燈的同時，還用器皿帶足了油 (馬太福音 25:3-4)。"],
+  ["25:5","因為新郎遲遲沒有來，大家都等得非常疲倦，最後全都睡著了 (馬太福音 25:5)。"],
+  ["25:6-7","到了半夜，突然有人大聲喊著新郎來了，大家趕緊起來整理自己的燈 (馬太福音 25:6-7)。"],
+  ["25:8-9","糊塗伴娘的燈快要熄滅了，她們想向聰明的伴娘借油，但聰明的伴娘回答說，油可能不夠大家一起用，不如自己去買 (馬太福音 25:8-9)。"],
+  ["25:10","當糊塗的伴娘跑去買油時，新郎到了，那些預備好的人便跟著進去參加婚宴，門隨即關上了 (馬太福音 25:10)。"],
+  ["25:11-13","後來那五個伴娘回來敲門，新郎卻回答說不認識她們，因此大家必須時刻警醒，因為不知道主何時會再來 (馬太福音 25:11-13)。"]],
+ doList:["每天留一小段時間讀經禱告，不要等出事了才臨時求救。","重要任務先想過風險，留時間也留備案，不要全壓在截止日前一天。"],
+ avoidList:["平時完全不準備，以為關鍵時刻拉同事一把就能過關。"],
+ parallel:"Matthew 25:1-13 (NIV)｜馬太福音 25:1-13"},
+
+{pill:"馬太 25:14-30", ref:"馬太福音 25:12-15, 28-30",
+ answer:"每個人拿到的銀子不一樣多。主人回來時問的是你有沒有把銀子拿去用。埋錢的那個僕人，連手上那一千都被主人收走。",
+ intro:"這段是按才幹受託付比喻的一部分 (馬太福音 25:14-30)。",
+ story:[
+  ["25:14-15","主人出國與託付銀子 有一個主人要出遠門，臨走前把僕人們叫來，按照各自的能力把財產交給他們管理 (馬太福音 25:14-15)。"],
+  ["25:15","他給了一個人五千銀子，給了另一個人兩千銀子，給了第三個人一千銀子，隨後就出發了 (馬太福音 25:15)。"],
+  ["25:16-17","僕人們的不同行動 拿到五千銀子的僕人立刻去做買賣，另外賺了五千；拿到兩千銀子的也照樣賺了兩千 (馬太福音 25:16-17)。"],
+  ["25:18","但那個只拿到一千銀子的僕人，卻跑去地上挖了一個洞，把主人的銀子偷偷埋藏起來 (馬太福音 25:18)。"],
+  ["25:19-23","結算工價與不同結局 過了很久主人回來結帳，拿到五千和兩千的僕人帶著賺來的銀子前來，主人稱讚他們是又良善又忠心的僕人，派他們管理更多事 (馬太福音 25:19-23)。"],
+  ["25:24-25","拿到一千銀子的僕人卻推託說主人嚴苛，自己害怕才把銀子埋在地裡，原封不動還給主人 (馬太福音 25:24-25)。"],
+  ["25:26-30","主人嚴厲斥責他是又惡又懶的僕人，既然知道責任就該把錢放給兌換銀錢的人收利息，隨即奪過那一千銀子分給有一萬的，並把無用的僕人丟到外面的黑暗裡 (馬太福音 25:26-30)。"]],
+ doList:["清點自己手上的專長，主動接責任，讓它幫得上身邊的人。","沒做過的任務願意接來學，不要因為怕做錯就閃開。"],
+ avoidList:["拿「我不如別人」當藉口躺著，時間就這樣拖掉了。"],
+ parallel:"Matthew 25:14-30 (NIV)｜馬太福音 25:14-30"},
+
+{pill:"傳道書 1:3", ref:"傳道書 1:3",
+ answer:"眼光只放在日光之下，勞碌一輩子留不下什麼。傳道者回顧自己的一生，問的是這些辛苦到底換來什麼益處。",
+ intro:"這段是傳道書探討人生虛空與永恆價值的一部分 (傳道書 1:1-11)。",
+ story:[
+  ["1:1","傳道者也是 David 的兒子，在 Jerusalem 作王，他回顧自己的一生，發出深沉的感嘆 (傳道書 1:1)。"],
+  ["1:2","他觀察到世上的一切如果脫離了上帝，就像捕風捉影一樣虛空 (傳道書 1:2)。"],
+  ["1:3","人一生在日光之下辛辛苦苦地勞碌工作，到底能為自己留下什麼永恆的益處呢 (傳道書 1:3)？"],
+  ["1:4","世代不斷更替，一代過去，一代又來，但大地卻依然長存 (傳道書 1:4)。"],
+  ["1:5-9","太陽升起又落下，風向南吹又向北轉，江河奔流不息注入大海，萬事都在循環往復，人卻永遠無法得到真正的滿足 (傳道書 1:5-9)。"],
+  ["1:9-10","過去發生的事將來還會發生，日光之下其實沒有任何真正的新鮮事，歷史總是不斷重演 (傳道書 1:9-10)。"],
+  ["1:11","以前的人沒有被記住，將來要來的人也不會被後代記念，單靠地上的成就無法換來永恆 (傳道書 1:11)。"]],
+ doList:["賺錢之外留時間給家人和朋友，也留給自己的品格。","職場的得失看淡一點，那些成敗都只是過程。"],
+ avoidList:["把時間和健康全押在名利上，家庭和心裡的平安都空著。"],
+ parallel:"Ecclesiastes 1:1-11 (NIV)｜傳道書 1:1-11"},
+
+{pill:"約翰 10:10", ref:"約翰福音 10:10",
+ answer:"盜賊來是要偷、要殺、要毀壞，耶穌來是要人活得豐盛。羊認得牧人的聲音，就不會跟著陌生人走。",
+ intro:"這段是好牧人比喻的一部分 (約翰福音 10:1-18)。",
+ story:[
+  ["10:1-3","古時的羊圈通常有一個門，看門的人會為真正的牧人開門，羊也認得牧人的聲音 (約翰福音 10:1-3)。"],
+  ["10:4-5","牧人走在羊群的前面引導方向，羊因為認得牧人的聲音就跟著他；如果遇到陌生人，羊不但不跟從，反而會逃跑 (約翰福音 10:4-5)。"],
+  ["10:7-9","耶穌向大家說明，自己就是羊的門，凡是從祂進來的必然得救，並且可以自由出入找到草吃 (約翰福音 10:7-9)。"],
+  ["10:10","盜賊過來無非是要偷竊、殺害、毀壞，但耶穌來是要叫羊得生命，並且得的更豐盛 (約翰福音 10:10)。"],
+  ["10:11-13","祂是好牧人，好牧人甚至願意為自己的羊捨棄性命，不像雇工看見狼來了就丟下羊逃跑 (約翰福音 10:11-13)。"],
+  ["10:14-16","耶穌認識自己的羊，羊也認識祂，祂要將不同圈裡的羊都引導聚集在一起，成為一個群體 (約翰福音 10:14-16)。"]],
+ doList:["每天留一段安靜的時間，別讓社群上的比較偷走你的平安。","遇到抉擇的時候選誠實的那條路，即使它比較慢。"],
+ avoidList:["為了眼前的爽快跟著壞習慣或損友走，健康和關係都被啃掉。"],
+ parallel:"John 10:1-18 (NIV)｜約翰福音 10:1-18"}
+];
+
+/* ============ 經文全文 (實抓 BibleGateway CCBT + NIV) ============ */
+const SCR=[
+{range:"傳道書 10:8-11｜Ecclesiastes 10:8-11",
+ zh:[[8,"挖掘陷阱的，自己必掉在其中；拆圍牆的，必被蛇咬；"],[9,"開鑿石頭的，必被砸傷；劈木頭的，必有危險。"],[10,"斧頭鈍了若不磨利，用起來必多費力氣，但智慧能助人成功。"],[11,"弄蛇人行法術之前，若先被蛇咬，行法術還有什麼用呢？"]],
+ en:[[8,"Whoever digs a pit may fall into it; whoever breaks through a wall may be bitten by a snake."],[9,"Whoever quarries stones may be injured by them; whoever splits logs may be endangered by them."],[10,"If the ax is dull and its edge unsharpened, more strength is needed, but skill will bring success."],[11,"If a snake bites before it is charmed, the charmer receives no fee."]]},
+
+{range:"路加福音 16:1-13｜Luke 16:1-13",
+ zh:[[1,"耶穌又對門徒說：「某財主有個管家，有人控告這管家浪費主人的財物。"],[2,"財主便把管家召來，對他說，『聽說你浪費我的財物，到底是怎麼回事？把帳目交代清楚，你不能再當管家了。』"],[3,"「管家私下盤算，『主人要辭退我了，怎麼辦呢？鋤地我沒有力氣，討飯我又感到羞恥。"],[4,"我知道該怎麼辦了！就算被辭退了，也會有人照應我。』"],[5,"於是，他把欠他主人債的一個一個召來，問第一個，『你欠了我主人多少？』"],[6,"「他回答說，『一百桶油。』「管家說，『這是你的帳，快坐下，改成五十吧！』"],[7,"「管家又問另一個，『你欠多少？』「他回答說，『一百石麥子。』「管家說，『這是你的帳，改成八十石吧。』"],[8,"「主人誇獎這個不義的管家精明。因為今世的兒女在處理世事方面比光明的兒女更精明。"],[9,"「我告訴你們，要善用今世的錢財，廣結朋友。這樣，當錢財不管用時，他們會接你們到永遠的居所。"],[10,"「一個人在小事上忠心，在大事上也會忠心；在小事上靠不住，在大事上更靠不住。"],[11,"如果你們不能忠心地處理今世的財富，誰會把真正的財富交託給你們呢？"],[12,"如果你們不能忠心地處理別人的產業，誰會把你們名下的產業交給你們呢？"],[13,"一個僕人不能服侍兩位主人，因為他不是恨這位、愛那位，就是重這位、輕那位。你們不能又事奉上帝，又崇拜金錢。」"]],
+ en:[[1,"Jesus told his disciples: “There was a rich man whose manager was accused of wasting his possessions."],[2,"So he called him in and asked him, ‘What is this I hear about you? Give an account of your management, because you cannot be manager any longer.’"],[3,"“The manager said to himself, ‘What shall I do now? My master is taking away my job. I’m not strong enough to dig, and I’m ashamed to beg—"],[4,"I know what I’ll do so that, when I lose my job here, people will welcome me into their houses.’"],[5,"“So he called in each one of his master’s debtors. He asked the first, ‘How much do you owe my master?’"],[6,"“‘Nine hundred gallons of olive oil,’ he replied. “The manager told him, ‘Take your bill, sit down quickly, and make it four hundred and fifty.’"],[7,"“Then he asked the second, ‘And how much do you owe?’ “‘A thousand bushels of wheat,’ he replied. “He told him, ‘Take your bill and make it eight hundred.’"],[8,"“The master commended the dishonest manager because he had acted shrewdly. For the people of this world are more shrewd in dealing with their own kind than are the people of the light."],[9,"I tell you, use worldly wealth to gain friends for yourselves, so that when it is gone, you will be welcomed into eternal dwellings."],[10,"“Whoever can be trusted with very little can also be trusted with much, and whoever is dishonest with very little will also be dishonest with much."],[11,"So if you have not been trustworthy in handling worldly wealth, who will trust you with true riches?"],[12,"And if you have not been trustworthy with someone else’s property, who will give you property of your own?"],[13,"“No one can serve two masters. Either you will hate the one and love the other, or you will be devoted to the one and despise the other. You cannot serve both God and money.”"]]},
+
+{range:"馬太福音 25:1-13｜Matthew 25:1-13",
+ zh:[[1,"「那時，天國就像十個伴娘提著燈去迎接新郎，"],[2,"其中五個是糊塗的，五個是聰明的。"],[3,"五個糊塗的只顧拿著燈，卻不預備油；"],[4,"那些聰明的不但拿著燈，還用器皿預備了足夠的油。"],[5,"新郎遲遲未到，她們等得困倦，便打盹睡著了。"],[6,"「到了半夜，忽然聽見有人喊道，『新郎來了！出來迎接吧！』"],[7,"伴娘們醒來，把燈點亮。"],[8,"糊塗的伴娘對聰明的伴娘說，『請給我們一些油吧，因為我們的燈快要滅了！』"],[9,"「聰明的伴娘回答說，『不行，我們的油不夠大家用的，你們去油店買吧！』"],[10,"「當糊塗的伴娘去買油的時候，新郎來了。那些預備好的伴娘跟他一同進去參加婚宴，門就關了。"],[11,"後來，其他伴娘回來了，喊道，『主啊！主啊！請給我們開門吧！』"],[12,"「新郎卻說，『我實在告訴你們，我不認識你們。』"],[13,"「所以，你們要警醒，因為你們不知道我回來的日子和時辰。"]],
+ en:[[1,"“At that time the kingdom of heaven will be like ten virgins who took their lamps and went out to meet the bridegroom."],[2,"Five of them were foolish and five were wise."],[3,"The foolish ones took their lamps but did not take any oil with them."],[4,"The wise ones, however, took oil in jars along with their lamps."],[5,"The bridegroom was a long time in coming, and they all became drowsy and fell asleep."],[6,"“At midnight the cry rang out: ‘Here’s the bridegroom! Come out to meet him!’"],[7,"“Then all the virgins woke up and trimmed their lamps."],[8,"The foolish ones said to the wise, ‘Give us some of your oil; our lamps are going out.’"],[9,"“‘No,’ they replied, ‘there may not be enough for both us and you. Instead, go to those who sell oil and buy some for yourselves.’"],[10,"“But while they were on their way to buy the oil, the bridegroom arrived. The virgins who were ready went in with him to the wedding banquet. And the door was shut."],[11,"“Later the others also came. ‘Lord, Lord,’ they said, ‘open the door for us!’"],[12,"“But he replied, ‘Truly I tell you, I don’t know you.’"],[13,"“Therefore keep watch, because you do not know the day or the hour."]]},
+
+{range:"馬太福音 25:14-30｜Matthew 25:14-30",
+ zh:[[14,"「天國就像一個人即將遠行，他召來自己的奴僕，把產業託付給他們，"],[15,"按各人的才幹分別交給一個人五千銀幣，一個人兩千銀幣，一個人一千銀幣，然後便離開了。"],[16,"得到五千銀幣的立刻去做買賣，結果賺了五千；"],[17,"得到兩千銀幣的也賺了兩千；"],[18,"可是得到一千銀幣的卻挖了一個洞，把主人的錢藏在地裡。"],[19,"過了很久，這些奴僕的主人回來了，要跟他們結帳。"],[20,"得到五千銀幣的奴僕帶來了另外的五千，說，『主人，你交給我五千銀幣，請看，我又賺了五千。』"],[21,"「主人說，『做得好！你真是個又良善又忠心的奴僕。既然你在小事上忠心，我要把更大的事交給你。進來分享你主人的快樂吧！』"],[22,"「得到兩千銀幣的奴僕也上前說，『主人，你交給我兩千銀幣，請看，我又賺了兩千。』"],[23,"「主人說，『做得好！你真是個又良善又忠心的奴僕，既然你在小事上忠心，我要把更大的事交給你。進來分享你主人的快樂吧！』"],[24,"「得到一千銀幣的奴僕也上前說，『主人，我知道你為人苛刻，沒有播種的地方也要收割，沒有撒種的地方也要收穫。"],[25,"我很害怕，就去把你的錢藏在地裡。請看，這是你的錢。』"],[26,"「主人說，『你這又可惡又懶惰的奴僕！既然你知道我沒有播種的地方也要收割，沒有撒種的地方也要收穫，"],[27,"就應該把錢存入錢莊，等我回來時，可以連本帶利還給我。』"],[28,"「主人接著說，『收回他的一千銀幣，賞給那個有一萬銀幣的奴僕。"],[29,"因為凡有的，還要給他更多，使他豐富有餘；凡沒有的，連他僅有的，也要奪去。"],[30,"把這沒用的奴僕扔進外邊的黑暗裡，他必在那裡哀哭切齒。』"]],
+ en:[[14,"“Again, it will be like a man going on a journey, who called his servants and entrusted his wealth to them."],[15,"To one he gave five bags of gold, to another two bags, and to another one bag, each according to his ability. Then he went on his journey."],[16,"The man who had received five bags of gold went at once and put his money to work and gained five bags more."],[17,"So also, the one with two bags of gold gained two more."],[18,"But the man who had received one bag went off, dug a hole in the ground and hid his master’s money."],[19,"“After a long time the master of those servants returned and settled accounts with them."],[20,"The man who had received five bags of gold brought the other five. ‘Master,’ he said, ‘you entrusted me with five bags of gold. See, I have gained five more.’"],[21,"“His master replied, ‘Well done, good and faithful servant! You have been faithful with a few things; I will put you in charge of many things. Come and share your master’s happiness!’"],[22,"“The man with two bags of gold also came. ‘Master,’ he said, ‘you entrusted me with two bags of gold; see, I have gained two more.’"],[23,"“His master replied, ‘Well done, good and faithful servant! You have been faithful with a few things; I will put you in charge of many things. Come and share your master’s happiness!’"],[24,"“Then the man who had received one bag of gold came. ‘Master,’ he said, ‘I knew that you are a hard man, harvesting where you have not sown and gathering where you have not scattered seed."],[25,"So I was afraid and went out and hid your gold in the ground. See, here is what belongs to you.’"],[26,"“His master replied, ‘You wicked, lazy servant! So you knew that I harvest where I have not sown and gather where I have not scattered seed?"],[27,"Well then, you should have put my money on deposit with the bankers, so that when I returned I would have received it back with interest."],[28,"“‘So take the bag of gold from him and give it to the one who has ten bags."],[29,"For whoever has will be given more, and they will have an abundance. Whoever does not have, even what they have will be taken from them."],[30,"And throw that worthless servant outside, into the darkness, where there will be weeping and gnashing of teeth.’”"]]},
+
+{range:"傳道書 1:1-11｜Ecclesiastes 1:1-11",
+ zh:[[1,"以下是在耶路撒冷做王的大衛之子——傳道者的話。"],[2,"傳道者說：虛空的虛空，虛空的虛空，一切都是虛空。"],[3,"人在日光之下的一切勞碌有什麼益處呢？"],[4,"一代過去，一代又來，大地卻永遠長存。"],[5,"太陽升起，太陽落下，匆忙回到升起之地。"],[6,"風吹向南，又轉向北，循環不息，周而復始。"],[7,"江河湧流入海，海卻不會滿溢；江河從何處流出，又返回何處。"],[8,"萬事令人厭煩，人述說不盡。眼看，看不飽；耳聽，聽不夠。"],[9,"以往發生的事，將來還會發生；先前做過的事，將來也必再做。日光之下，根本沒有新事。"],[10,"人可以指著哪件事說：「看啊，這是新事」？所謂的新事在我們以前早就有了。"],[11,"過去的事無人記得，將來的事後人也不記得。"]],
+ en:[[1,"The words of the Teacher, son of David, king in Jerusalem:"],[2,"“Meaningless! Meaningless!” says the Teacher. “Utterly meaningless! Everything is meaningless.”"],[3,"What do people gain from all their labors at which they toil under the sun?"],[4,"Generations come and generations go, but the earth remains forever."],[5,"The sun rises and the sun sets, and hurries back to where it rises."],[6,"The wind blows to the south and turns to the north; round and round it goes, ever returning on its course."],[7,"All streams flow into the sea, yet the sea is never full. To the place the streams come from, there they return again."],[8,"All things are wearisome, more than one can say. The eye never has enough of seeing, nor the ear its fill of hearing."],[9,"What has been will be again, what has been done will be done again; there is nothing new under the sun."],[10,"Is there anything of which one can say, “Look! This is something new”? It was here already, long ago; it was here before our time."],[11,"No one remembers the former generations, and even those yet to come will not be remembered by those who follow them."]]},
+
+{range:"約翰福音 10:1-18｜John 10:1-18",
+ zh:[[1,"耶穌說：「我實實在在地告訴你們，不從門進羊圈而從別處爬進去的人就是賊，是強盜。"],[2,"從門進去的才是羊的牧人，"],[3,"看門的會給他開門，羊也聽他的聲音。他按名字叫自己的羊，把牠們領出來。"],[4,"領出來之後，自己便走在前面，羊群也跟著他，因為羊認得他的聲音。"],[5,"羊從不跟隨陌生人，見了陌生人就逃跑，因為牠們不認得陌生人的聲音。」"],[6,"耶穌講了這個比喻，但聽的人都不明白祂的意思。"],[7,"於是祂又說：「我實實在在地告訴你們，我就是羊的門。"],[8,"在我以前來的，都是賊，是強盜，羊不聽從他們。"],[9,"我就是門，從我進來的必定得救，並且會安然出入，找到草吃。"],[10,"盜賊來，無非是要偷竊、殺害、毀壞。但我來是要羊得生命，並且得到豐盛的生命。"],[11,"「我是好牧人，好牧人為羊捨命。"],[12,"如果是僱工，不是牧人，羊也不是他的，狼一來，他必撇下羊逃命。狼就會抓住羊，把羊群驅散。"],[13,"他逃走，因為他是僱工，並不在乎羊。"],[14,"我是好牧人，我認識我的羊，我的羊也認識我，"],[15,"正如父認識我，我也認識父，並且我為羊捨命。"],[16,"我還有別的羊不在這羊圈裡，我必須領他們回來，他們也必聽我的聲音。這樣，我所有的羊將要合成一群，由一個牧人來帶領。"],[17,"父愛我，因為我捨棄自己的生命，為了再得回生命。"],[18,"沒有人能奪走我的生命，我是甘心捨棄的。我有權捨棄，也有權得回，這是我從父那裡得到的命令。」"]],
+ en:[[1,"“Very truly I tell you Pharisees, anyone who does not enter the sheep pen by the gate, but climbs in by some other way, is a thief and a robber."],[2,"The one who enters by the gate is the shepherd of the sheep."],[3,"The gatekeeper opens the gate for him, and the sheep listen to his voice. He calls his own sheep by name and leads them out."],[4,"When he has brought out all his own, he goes on ahead of them, and his sheep follow him because they know his voice."],[5,"But they will never follow a stranger; in fact, they will run away from him because they do not recognize a stranger’s voice."],[6,"Jesus used this figure of speech, but the Pharisees did not understand what he was telling them."],[7,"Therefore Jesus said again, “Very truly I tell you, I am the gate for the sheep."],[8,"All who have come before me are thieves and robbers, but the sheep have not listened to them."],[9,"I am the gate; whoever enters through me will be saved. They will come in and go out, and find pasture."],[10,"The thief comes only to steal and kill and destroy; I have come that they may have life, and have it to the full."],[11,"“I am the good shepherd. The good shepherd lays down his life for the sheep."],[12,"The hired hand is not the shepherd and does not own the sheep. So when he sees the wolf coming, he abandons the sheep and runs away. Then the wolf attacks the flock and scatters it."],[13,"The man runs away because he is a hired hand and cares nothing for the sheep."],[14,"“I am the good shepherd; I know my sheep and my sheep know me—"],[15,"just as the Father knows me and I know the Father—and I lay down my life for the sheep."],[16,"I have other sheep that are not of this sheep pen. I must bring them also. They too will listen to my voice, and there shall be one flock and one shepherd."],[17,"The reason my Father loves me is that I lay down my life—only to take it up again."],[18,"No one takes it from me, but I lay it down of my own accord. I have authority to lay it down and authority to take it up again. This command I received from my Father."]]}
+];
+
+const GLOSSARY=[["日光之下","傳道書的固定說法，指人活在地上的這一生。"],["虛空","不是心情空虛。意思是抓不住、留不下，像伸手去捕風。"],["不義的管家","路加 16 章那個改別人借據的管家。主人誇的是他懂得為將來打算，不是誇他做假帳。"],["兌換銀錢的人","當時的錢莊。錢存進去可以生利息，主人認為僕人至少該這樣做。"],["銀幣 (talent)","英文版用 talent。NIV 註腳說一個 talent 超過工人 15 年的工資。三個僕人拿到五千、兩千、一千。"],["哀哭切齒","又哭又咬牙。形容被趕到外面以後的悔恨。"],["弄蛇人行法術","靠法術控制蛇的人。還沒開始就先被咬，本事再好也用不上。"],["器皿","裝東西的容器。聰明的伴娘用它多帶了油。"],["羊圈","晚上關羊的圍欄。有一個門，有人看門。"],["僱工","領工錢看羊的人。羊不是他的，所以狼一來他就先跑。"],["捨命","把自己的命放下。好牧人為羊做這件事。"],["警醒","隨時準備好。因為不知道時間，所以不能等到最後一刻。"],["忠心","把交給你的事認真做完，不管事情大小。"],["Ecclesiastes","傳道書"],["Luke","路加福音"],["Matthew","馬太福音"],["John","約翰福音"],["David","大衛"],["Jerusalem","耶路撒冷"]];
+
+const SOURCES=[
+ ["傳道書 10:8-11 · Chinese Contemporary Bible (Traditional)","https://www.biblegateway.com/passage/?search=Ecclesiastes+10%3A8-11&version=CCBT"],
+ ["Ecclesiastes 10:8-11 · New International Version","https://www.biblegateway.com/passage/?search=Ecclesiastes+10%3A8-11&version=NIV"],
+ ["路加福音 16:1-13 · Chinese Contemporary Bible (Traditional)","https://www.biblegateway.com/passage/?search=Luke+16%3A1-13&version=CCBT"],
+ ["Luke 16:1-13 · New International Version","https://www.biblegateway.com/passage/?search=Luke+16%3A1-13&version=NIV"],
+ ["馬太福音 25:1-13 · Chinese Contemporary Bible (Traditional)","https://www.biblegateway.com/passage/?search=Matthew+25%3A1-13&version=CCBT"],
+ ["Matthew 25:1-13 · New International Version","https://www.biblegateway.com/passage/?search=Matthew+25%3A1-13&version=NIV"],
+ ["馬太福音 25:14-30 · Chinese Contemporary Bible (Traditional)","https://www.biblegateway.com/passage/?search=Matthew+25%3A14-30&version=CCBT"],
+ ["Matthew 25:14-30 · New International Version","https://www.biblegateway.com/passage/?search=Matthew+25%3A14-30&version=NIV"],
+ ["傳道書 1:1-11 · Chinese Contemporary Bible (Traditional)","https://www.biblegateway.com/passage/?search=Ecclesiastes+1%3A1-11&version=CCBT"],
+ ["Ecclesiastes 1:1-11 · New International Version","https://www.biblegateway.com/passage/?search=Ecclesiastes+1%3A1-11&version=NIV"],
+ ["約翰福音 10:1-18 · Chinese Contemporary Bible (Traditional)","https://www.biblegateway.com/passage/?search=John+10%3A1-18&version=CCBT"],
+ ["John 10:1-18 · New International Version","https://www.biblegateway.com/passage/?search=John+10%3A1-18&version=NIV"]
+];
+/* modal 底部連結：對應該章的 CCBT / NIV 實抓頁面 */
+const SCRLINK=[
+ ["https://www.biblegateway.com/passage/?search=Ecclesiastes+10%3A8-11&version=CCBT","https://www.biblegateway.com/passage/?search=Ecclesiastes+10%3A8-11&version=NIV"],
+ ["https://www.biblegateway.com/passage/?search=Luke+16%3A1-13&version=CCBT","https://www.biblegateway.com/passage/?search=Luke+16%3A1-13&version=NIV"],
+ ["https://www.biblegateway.com/passage/?search=Matthew+25%3A1-13&version=CCBT","https://www.biblegateway.com/passage/?search=Matthew+25%3A1-13&version=NIV"],
+ ["https://www.biblegateway.com/passage/?search=Matthew+25%3A14-30&version=CCBT","https://www.biblegateway.com/passage/?search=Matthew+25%3A14-30&version=NIV"],
+ ["https://www.biblegateway.com/passage/?search=Ecclesiastes+1%3A1-11&version=CCBT","https://www.biblegateway.com/passage/?search=Ecclesiastes+1%3A1-11&version=NIV"],
+ ["https://www.biblegateway.com/passage/?search=John+10%3A1-18&version=CCBT","https://www.biblegateway.com/passage/?search=John+10%3A1-18&version=NIV"]
+];
+
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const RM=matchMedia("(prefers-reduced-motion: reduce)");
+const root=document.documentElement;
+
+/* ============ 章節 ============ */
+document.getElementById("lead").textContent=DATA[0].answer;
+document.getElementById("chapters").innerHTML=DATA.map((c,i)=>`
+<section class="ch" id="ch${i}">
+  <div class="ch-head">
+    <div class="ch-no">${i+1}</div>
+    <div class="ht"><h2>${esc(c.ref)}</h2><span class="gist">${esc(c.intro)}</span></div>
+    <button class="scr-btn" data-scr="${i}"><svg class="i"><use href="#i-book"/></svg>經文</button>
+  </div>
+  <p class="answer">${esc(c.answer)}</p>
+
+  <p class="sec-label">STORY</p>
+  <ol class="story">${c.story.map(([v,t])=>`
+    <li><span class="mk"></span><span class="vs">${esc(v)}</span><p>${esc(t)}</p></li>`).join("")}
+  </ol>
+
+  <p class="sec-label">EXAMPLE</p>
+  <div class="flip">
+    <div class="face wise on">
+      <h3><svg class="i"><use href="#i-check"/></svg>可以這樣做</h3>
+      <ol>${c.doList.map(t=>`<li>${esc(t)}</li>`).join("")}</ol>
+    </div>
+    <div class="face folly">
+      <h3><svg class="i"><use href="#i-alert"/></svg>避免這樣</h3>
+      <ol>${c.avoidList.map(t=>`<li>${esc(t)}</li>`).join("")}</ol>
+    </div>
+  </div>
+  <p class="parallel"><b>章節對照</b>　${esc(c.parallel)}</p>
+</section>`).join("");
+
+/* ============ mode 切換：六則同時翻面 + 全頁色溫 ============ */
+const WORD={wise:"磨利",folly:"硬幹"};
+function setMode(m){
+  if(root.dataset.mode===m) return;
+  root.dataset.mode=m;
+  document.querySelectorAll(".modesw button").forEach(b=>
+    b.setAttribute("aria-pressed", b.dataset.mode===m ? "true":"false"));
+  document.querySelectorAll(".face").forEach(f=>f.classList.toggle("on",f.classList.contains(m)));
+  document.getElementById("st2").classList.toggle("lit",m==="wise");
+  document.getElementById("st3").classList.toggle("lit",m==="folly");
+  const w=document.getElementById("bigWord");
+  if(RM.matches){w.textContent=WORD[m];}
+  else{
+    w.classList.add("out");
+    setTimeout(()=>{w.textContent=WORD[m]; w.classList.remove("out")},340);
+  }
+  toast(m==="wise"?"智慧面：12 條可以這樣做":"愚昧面：6 條避免這樣");
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".modesw button"); if(!b) return;
+  setMode(b.dataset.mode);
+});
+document.getElementById("st2").classList.add("lit");
+
+/* ============ 經文 modal ============ */
+const mask=document.getElementById("mask"), modal=document.getElementById("modal");
+let lastFocus=null;
+function openScr(i){
+  const s=SCR[i];
+  document.getElementById("mTitle").textContent=s.range;
+  const col=(title,rows,cls="")=>`<div class="col ${cls}"><h4>${title}</h4>${
+    rows.map(([n,t])=>`<div class="v"><b>${n}</b><span>${esc(t)}</span></div>`).join("")}</div>`;
+  document.getElementById("mBody").innerHTML=
+    col("CHINESE CONTEMPORARY BIBLE (TRADITIONAL)",s.zh)+col("NEW INTERNATIONAL VERSION",s.en,"en");
+  document.getElementById("mFoot").innerHTML=SCRLINK[i].map(u=>
+    `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a>`).join("");
+  lastFocus=document.activeElement;
+  mask.classList.add("on");
+  document.body.style.overflow="hidden";
+  document.getElementById("mClose").focus();
+}
+function closeScr(){
+  mask.classList.remove("on");
+  document.body.style.overflow="";
+  lastFocus?.focus();
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-scr]");
+  if(b){openScr(+b.dataset.scr); return;}
+  if(e.target===mask||e.target.closest("#mClose")) closeScr();
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"&&mask.classList.contains("on")) closeScr();
+  if(e.key==="Tab"&&mask.classList.contains("on")){
+    const f=modal.querySelectorAll("button,a");
+    if(!f.length) return;
+    const first=f[0], last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault(); last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault(); first.focus();}
+  }
+});
+
+/* ============ nav / scrollspy ============ */
+const navItems=DATA.map((c,i)=>({id:"ch"+i,label:c.pill,no:i+1}))
+  .concat([{id:"glossary",label:"詞彙對照",no:"語"},{id:"sources",label:"來源校對",no:"源"}]);
+document.getElementById("pills").innerHTML=navItems.map(n=>
+  `<button class="pill" data-target="${n.id}">${esc(n.label)}</button>`).join("");
+document.getElementById("jump").innerHTML=navItems.map(n=>
+  `<button class="jbadge" data-target="${n.id}"><span class="dot">${n.no}</span>${esc(n.label)}</button>`).join("");
+document.getElementById("dots").innerHTML=navItems.map(n=>
+  `<button data-target="${n.id}" data-label="${esc(n.label)}" aria-label="${esc(n.label)}"></button>`).join("");
+
+let lockTo=null, lockT=null;
+function setActive(id){
+  document.querySelectorAll("[data-target]").forEach(b=>
+    b.setAttribute("aria-current", b.dataset.target===id ? "true":"false"));
+  document.querySelectorAll(".ch").forEach(s=>s.classList.toggle("active",s.id===id));
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-target]"); if(!b) return;
+  const id=b.dataset.target;
+  lockTo=id; setActive(id);
+  document.getElementById(id).scrollIntoView({behavior:RM.matches?"auto":"smooth",block:"start"});
+  clearTimeout(lockT); lockT=setTimeout(()=>{lockTo=null},900);
+});
+const ioSec=new IntersectionObserver(es=>{
+  if(lockTo) return;
+  const v=es.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+  if(v) setActive(v.target.id);
+},{rootMargin:"-14% 0px -56% 0px",threshold:[0,.25,.6]});
+document.querySelectorAll("main section[id]").forEach(s=>ioSec.observe(s));
+
+/* Story 段落：捲到哪亮到哪 (呼吸光暈的驅動變數) */
+const ioStory=new IntersectionObserver(es=>{
+  es.forEach(e=>e.target.classList.toggle("here",e.isIntersecting));
+},{rootMargin:"-42% 0px -42% 0px"});
+document.querySelectorAll(".story li").forEach(li=>ioStory.observe(li));
+
+const hud=document.getElementById("hud");
+let tick=false;
+addEventListener("scroll",()=>{
+  if(tick) return; tick=true;
+  requestAnimationFrame(()=>{hud.classList.toggle("on",scrollY>400); tick=false});
+},{passive:true});
+
+/* ============ glossary / sources ============ */
+const glBody=document.getElementById("glBody"), glEmpty=document.getElementById("glEmpty");
+glBody.innerHTML=GLOSSARY.map(([a,b])=>`<tr><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join("");
+document.getElementById("glSearch").addEventListener("input",e=>{
+  const q=e.target.value.trim().toLowerCase(); let hit=0;
+  [...glBody.rows].forEach(r=>{
+    const ok=!q||r.textContent.toLowerCase().includes(q);
+    r.style.display=ok?"":"none"; if(ok) hit++;
+  });
+  glEmpty.classList.toggle("on",hit===0);
+});
+document.getElementById("srcList").innerHTML=SOURCES.map(([t,u])=>
+  `<a href="${esc(u)}" target="_blank" rel="noopener"><b>${esc(t)}</b><span>${esc(u)}</span></a>`).join("");
+
+/* ============ theme + toast ============ */
+const tBtn=document.getElementById("themeBtn");
+const paintTheme=()=>tBtn.querySelector("use")
+  .setAttribute("href", root.dataset.theme==="light" ? "#i-sun":"#i-moon");
+paintTheme();
+tBtn.addEventListener("click",()=>{
+  root.dataset.theme = root.dataset.theme==="dark" ? "light":"dark";
+  paintTheme();
+  toast(root.dataset.theme==="dark"?"深色主題":"淺色主題");
+});
+let toastT;
+function toast(msg){
+  const w=document.getElementById("toasts");
+  w.innerHTML=`<div class="toast"><svg class="i"><use href="#i-check"/></svg>${esc(msg)}</div>`;
+  clearTimeout(toastT); toastT=setTimeout(()=>{w.innerHTML=""},3000);
+}
+</script>
+</body>
+</html>

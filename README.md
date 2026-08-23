@@ -1,5 +1,6 @@
 # ai_quick_share
 
+- https://shyinlim.github.io/ai_quick_shares/20260823_220549440_ecclesiastes-wisdom.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260823_220549440_ecclesiastes-wisdom.html)
 - https://shyinlim.github.io/ai_quick_shares/20260809_163522529_cornelius-peter-vision.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260809_163522529_cornelius-peter-vision.html)
 - https://shyinlim.github.io/ai_quick_shares/20260802_230938006_faith-prayer-in-crisis.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260802_230938006_faith-prayer-in-crisis.html)
 - https://shyinlim.github.io/ai_quick_shares/20260726_202411503_paul-eutychus.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260726_202411503_paul-eutychus.html)
