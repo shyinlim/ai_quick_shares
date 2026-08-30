@@ -1,0 +1,1285 @@
+<title>20260830_220809_以利亞在何烈山的經歷</title>
+
+<!--
+資料盤點表（定案資料 → 頁面落點），來源＝以利亞在何烈山的經歷.pdf 全 3 頁
+1  標題「以利亞在何烈山的經歷」                              → hero 主標
+2  Elijah 答案段（耗竭與恐懼／飲食休息／微小聲音重塑使命）   → 序章 lead 卡 #intro
+3  Ahab 把 Mount Carmel 殺假先知的事告訴 Jezebel (19:1)      → 站 A1
+4  Jezebel 發誓隔天殺 Elijah；逃到 Beersheba；留僕人；進曠野 (19:2-4) → 站 A2
+5  羅騰樹下求死、受夠了、不比祖先強、躺下睡著 (19:4-5)       → 站 A3
+6  天使拍醒、炭火烤餅與一瓶水、路程太遠 (19:5-7)             → 站 A4
+7  四十天四十夜到 Horeb、住洞穴、上帝問話、Elijah 訴苦 (19:8-10) → 站 A5
+8  狂風／地震／烈火／微小聲音、蒙臉走出、再問、新任務 (19:11-16) → 站 A6 ＋ 微控台四態
+9  膏立 Hazael、Jehu、Elisha；七千人未向 Baal 屈膝 (19:15-18) → 站 A7
+10 找到耕地的 Elisha、外衣披上、宰牛煮肉、起程跟隨 (19:19-21) → 站 A8
+11 Elijah 可以這樣做 2 條／避免這樣 1 條                     → 實踐章 #practice-1
+12 章節對照 1 Kings 19:1-21 (NIV)｜列王紀上 19:1-21          → 來源區 #sources
+13 BibleGateway 1 Kings 19 NIV／CCB 兩連結                    → 來源區 #sources
+14 Matthew 答案段（禁食四十天／三次試探／話語抵擋）          → 第二部 lead 卡 #stage-b-intro
+15 聖靈引到曠野、禁食四十天四十夜、飢餓、石頭變麵包、人活著不是單靠食物 (4:1-4) → 站 B1
+16 帶進 Jerusalem 聖殿最高處、跳下去、不可試探主你的神 (4:5-7) → 站 B2
+17 極高的山、萬國榮華、俯伏拜我、Satan 退去、魔鬼離開、天使服侍 (4:8-11) → 站 B3
+18 Matthew 可以這樣做 2 條／避免這樣 1 條                    → 實踐章 #practice-2
+19 章節對照 Matthew 4:1-11 (NIV)｜馬太福音 4:1-11 ＋ 兩連結  → 來源區 #sources
+20 詞彙對照 13 條（Ahab…Baal）＋ 2 條（Jerusalem、Satan）    → 詞彙表 #glossary
+21 詞彙表的「白話」欄：15 條專名的白話出自經文本身（節號附在該欄）；另加 6 條難字
+   （膏、屈膝、親嘴、羅騰樹、外衣、先知），「膏」的說明依據已列入來源區
+數字：四十天四十夜、七千人、三次試探、兩段經文               → hero stat tiles
+未落點項目：無。PDF 的 Sources 1-4 只有標題沒有 URL，依「禁裝飾性假連結」不做成連結，
+            其中 2 條指向的 BibleGateway 頁面已由第 13 項的真實 URL 承載。
+經文校對：站點與節點的敘述文字已逐句對照 CUVMPT 新標點和合本（連結在來源區）修正，
+          修正處＝天使拍他兩次（19:5-7）、訴苦補回「用刀殺了你的先知」（19:10、19:14）、
+          第二次同問同答（19:13-14）、「從曠野往大馬士革去」語序（19:15）、
+          七千人補「未曾與巴力親嘴」（19:18）、Elisha 求親嘴父母與一對牛（19:19-21）、
+          石頭變「食物」而非麵包（太 4:3）、「殿頂上」而非聖殿最高處（太 4:5）、
+          「一座最高的山」（太 4:8）、「四十晝夜」統一（王上 19:8、太 4:2）。
+-->
+
+<style>
+/* ============ design tokens（一套貫穿全頁；淺色為底，深色與 [data-theme] 對稱覆蓋） ============ */
+:root{
+  --bg:#fdf6ee;
+  --bg-2:#f4e9dc;
+  --surface:#fffaf3;
+  --panel:rgba(255,250,243,.90);
+  --border:rgba(28,18,10,.16);
+  --border-strong:rgba(28,18,10,.30);
+  --text:#1a120b;
+  --muted:#574535;
+  --accent:#b8460a;        /* 炭火橙：天使的炭火烤餅、火後的聲音 */
+  --accent-2:#0a6f66;      /* 微聲冷青：火後那一陣微小的聲音 */
+  --warn:#a3161f;          /* 追殺與試探的威脅線 */
+  --faint:rgba(28,18,10,.28);
+  --grid:rgba(28,18,10,.10);
+  --band-1:rgba(184,70,10,.10);
+  --band-2:rgba(10,111,102,.10);
+  --shadow:0 1px 2px rgba(28,18,10,.06),0 12px 28px rgba(28,18,10,.10);
+  --radius:14px;
+  --font:"PingFang TC","Noto Sans TC","Hiragino Sans TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-display:"PingFang TC","Noto Sans TC","Hiragino Sans TC","Microsoft JhengHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#0b0a0d;
+  --bg-2:#131117;
+  --surface:#16141b;
+  --panel:rgba(22,20,27,.88);
+  --border:rgba(255,255,255,.14);
+  --border-strong:rgba(255,255,255,.30);
+  --text:#f4ede4;
+  --muted:#bcb0a3;
+  --accent:#ff8a3d;
+  --accent-2:#5fdfd0;
+  --warn:#ff6b78;
+  --faint:rgba(244,237,228,.34);
+  --grid:rgba(244,237,228,.10);
+  --band-1:rgba(255,138,61,.12);
+  --band-2:rgba(95,223,208,.12);
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 16px 40px rgba(0,0,0,.55);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0a0d; --bg-2:#131117; --surface:#16141b; --panel:rgba(22,20,27,.88);
+    --border:rgba(255,255,255,.14); --border-strong:rgba(255,255,255,.30);
+    --text:#f4ede4; --muted:#bcb0a3; --accent:#ff8a3d; --accent-2:#5fdfd0; --warn:#ff6b78;
+    --faint:rgba(244,237,228,.34); --grid:rgba(244,237,228,.10);
+    --band-1:rgba(255,138,61,.12); --band-2:rgba(95,223,208,.12);
+    --shadow:0 1px 2px rgba(0,0,0,.5),0 16px 40px rgba(0,0,0,.55);
+    color-scheme:dark;
+  }
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--font);line-height:1.75;font-size:16px;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+h1,h2,h3,h4{line-height:1.3;margin:0}
+p{margin:0 0 .85em}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--accent-2);outline-offset:3px;border-radius:6px}
+
+/* 靜態 ambient 光斑：版面質感，無動畫、不計動效預算 */
+.ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.ambient i{position:absolute;display:block;border-radius:50%;filter:blur(90px);opacity:.28}
+.ambient i:nth-child(1){width:46vw;height:46vw;left:-14vw;top:-10vw;background:var(--accent)}
+.ambient i:nth-child(2){width:40vw;height:40vw;right:-12vw;bottom:-12vw;background:var(--accent-2)}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+
+/* ============ HUD：進度條＋目前章節 badge＋章節 nav（全站唯一 sticky nav） ============ */
+#hud{
+  position:sticky;top:0;z-index:60;background:var(--panel);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  transform:translateY(-100%);transition:transform .28s ease;
+}
+#hud.visible{transform:translateY(0)}
+#hud .bar{height:3px;background:var(--border)}
+#hud .bar i{display:block;height:100%;width:0;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+#hud .row{display:flex;align-items:center;gap:12px;padding:8px 20px;max-width:1180px;margin:0 auto}
+#hud .badge{
+  flex:0 0 auto;font-size:12px;font-weight:800;letter-spacing:.06em;
+  padding:5px 11px;border-radius:999px;border:1px solid var(--border-strong);
+  color:var(--text);background:var(--surface);white-space:nowrap;
+}
+#pills{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;flex:1 1 auto}
+#pills::-webkit-scrollbar{display:none}
+.pill{
+  flex:0 0 auto;font:inherit;font-size:13px;font-weight:700;cursor:pointer;
+  padding:6px 13px;border-radius:999px;border:1px solid var(--border);
+  background:transparent;color:var(--muted);transition:all .25s ease;white-space:nowrap;
+}
+.pill:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--text);box-shadow:0 0 0 3px var(--band-1)}
+.pill[aria-current="true"]{
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff;border-color:transparent;
+}
+:root:not([data-theme="dark"]) .pill[aria-current="true"]{color:#fff}
+.iconbtn{
+  flex:0 0 auto;width:38px;height:38px;display:grid;place-items:center;cursor:pointer;
+  border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);
+  transition:all .25s ease;
+}
+.iconbtn:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 0 0 3px var(--band-1)}
+.icon{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#burger{display:none}
+
+/* 手機章節抽屜（章節 7 > 6 → 依 pattern 8 走抽屜） */
+#drawer{
+  position:fixed;left:0;right:0;top:0;z-index:59;background:var(--panel);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);padding:64px 16px 16px;
+  transform:translateY(-110%);transition:transform .3s ease;
+}
+#drawer.open{transform:translateY(0)}
+#drawer button{
+  display:block;width:100%;text-align:left;font:inherit;cursor:pointer;
+  padding:11px 13px;margin-bottom:7px;border-radius:11px;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);
+}
+#drawer button[aria-current="true"]{border-color:var(--accent);box-shadow:0 0 0 3px var(--band-1)}
+#drawer .n{font-weight:800;color:var(--accent);margin-right:8px}
+#drawer .s{display:block;font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.6}
+
+/* 桌機側邊 dot indicator */
+#dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:55;display:none;flex-direction:column;gap:13px}
+@media (min-width:1280px){#dots{display:flex}}
+#dots button{
+  position:relative;width:12px;height:12px;padding:0;cursor:pointer;border-radius:50%;
+  border:1.5px solid var(--border-strong);background:transparent;transition:all .25s ease;
+}
+#dots button:hover{transform:scale(1.35);border-color:var(--accent)}
+#dots button[aria-current="true"]{background:var(--accent);border-color:var(--accent);transform:scale(1.35)}
+#dots button span{
+  position:absolute;right:22px;top:50%;transform:translateY(-50%);
+  white-space:nowrap;font-size:12px;font-weight:700;padding:4px 9px;border-radius:8px;
+  background:var(--surface);border:1px solid var(--border);color:var(--text);
+  opacity:0;pointer-events:none;transition:opacity .2s ease;
+}
+#dots button:hover span,#dots button:focus-visible span{opacity:1}
+
+/* ============ hero ============ */
+#hero{padding:78px 0 56px;position:relative;z-index:1}
+.kicker{
+  display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.14em;
+  padding:5px 12px;border-radius:999px;border:1px solid var(--border-strong);color:var(--muted);
+}
+.h1{
+  font-family:var(--font-display);font-weight:900;letter-spacing:-.02em;
+  font-size:clamp(2.6rem,8.4vw,5.6rem);line-height:1.12;margin:18px 0 6px;
+}
+.h1 .band{
+  display:inline-block;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff;padding:0 .18em;border-radius:8px;
+}
+.h1 .q{display:block;color:var(--accent-2)}
+.lead{max-width:62ch;color:var(--muted);font-size:17px;margin-top:14px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:30px 0 26px;max-width:760px}
+@media (min-width:640px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{
+  border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);
+  padding:16px 14px;box-shadow:var(--shadow);
+}
+.stat b{display:block;font-family:var(--font-display);font-weight:900;font-size:clamp(1.9rem,5vw,2.6rem);line-height:1.15;color:var(--accent)}
+.stat span{display:block;font-size:11.5px;font-weight:800;letter-spacing:.1em;color:var(--muted);margin-top:5px;text-transform:uppercase}
+#jump{display:flex;flex-wrap:wrap;gap:9px}
+.jump{
+  font:inherit;font-size:13.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;
+  padding:9px 15px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--text);
+  transition:all .25s ease;
+}
+.jump:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 0 0 3px var(--band-1)}
+.jump[aria-current="true"]{border-color:var(--accent);box-shadow:0 0 0 3px var(--band-1)}
+.jump .icon{width:16px;height:16px}
+.scrollcue{margin-top:34px;color:var(--muted);width:26px;height:26px}
+.scrollcue .icon{width:26px;height:26px;animation:cue 1.9s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:translateY(0);opacity:.45}50%{transform:translateY(7px);opacity:1}}
+
+/* ============ 章節容器卡 ============ */
+.card{
+  border:1px solid var(--border);border-radius:18px;background:var(--surface);
+  box-shadow:var(--shadow);padding:26px 22px;margin:0 0 22px;position:relative;
+}
+.card > header{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+.num{
+  flex:0 0 auto;width:34px;height:34px;display:grid;place-items:center;border-radius:10px;
+  font-weight:900;font-size:14px;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+}
+.card h2{font-family:var(--font-display);font-weight:900;font-size:clamp(1.3rem,3.4vw,1.75rem)}
+.card h3{font-size:15.5px;font-weight:800;margin:16px 0 8px;color:var(--accent)}
+.card p,.card li{color:var(--text)}
+.card ol{margin:0;padding-left:1.35em}
+.card li{margin-bottom:7px}
+.two{display:grid;gap:18px}
+@media (min-width:900px){.two{grid-template-columns:1fr 1fr}}
+.sub{color:var(--muted);font-size:14.5px}
+section{scroll-margin-top:88px}
+
+/* ============ scrollytelling：全寬 sticky 舞台，站點文字在舞台內（只有一份） ============ */
+.scrolly{position:relative}
+.stage{
+  position:sticky;top:56px;height:calc(100dvh - 76px);align-self:start;z-index:5;
+  display:flex;flex-direction:column;gap:8px;padding:10px 0 14px;
+}
+@supports not (height:100dvh){.stage{height:calc(100vh - 76px)}}
+.stage-inner{
+  flex:1 1 auto;min-height:0;position:relative;border:1px solid var(--border);
+  border-radius:18px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.stage-tools{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  padding:9px 12px;border-bottom:1px solid var(--border);
+}
+.stage-title{font-size:12.5px;font-weight:800;letter-spacing:.08em;color:var(--muted);margin-right:auto;white-space:nowrap;flex:0 0 auto}
+.tool{
+  font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;
+  padding:6px 11px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text);
+  transition:all .22s ease;white-space:nowrap;flex:0 0 auto;
+}
+.tool:hover:not(:disabled){transform:translateY(-2px);border-color:var(--accent);box-shadow:0 0 0 3px var(--band-1)}
+.tool[aria-pressed="true"]{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent}
+.tool .icon{width:14px;height:14px}
+.stage-svg{flex:1 1 auto;min-height:0;width:100%;display:block}
+.stage-dots{display:flex;justify-content:center;gap:7px;padding:8px 12px;border-top:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+.stage-dots::-webkit-scrollbar{display:none}
+.sdot{
+  flex:0 0 auto;font:inherit;font-size:11.5px;font-weight:800;cursor:pointer;min-width:30px;
+  padding:4px 9px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--muted);
+  transition:all .22s ease;
+}
+.sdot:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--text)}
+.sdot[aria-current="true"]{background:var(--accent);color:#fff;border-color:transparent}
+:root[data-theme="dark"] .sdot[aria-current="true"]{color:#0b0a0d}
+
+/* 站點內容區（捲動與點擊節點共用同一份文字，不再另開卡片） */
+.detail{
+  flex:0 0 auto;border-top:1px solid var(--border);padding:14px 16px;background:var(--bg-2);
+  max-height:38%;overflow-y:auto;
+}
+.detail .hd{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.detail .stn{
+  width:28px;height:28px;flex:0 0 auto;display:grid;place-items:center;border-radius:9px;
+  font-size:12px;font-weight:900;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+}
+.detail h4{font-size:16.5px;font-weight:900}
+.detail .ref{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:.04em}
+.detail .where{font-size:12px;font-weight:800;color:var(--muted);margin-left:auto}
+.detail p{font-size:14.5px;color:var(--text);margin:4px 0 9px;line-height:1.8}
+.detail .tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;border:1px solid var(--border);color:var(--muted)}
+.detail.flash{animation:flash .45s ease}
+@keyframes flash{from{background:var(--band-1)}to{background:var(--bg-2)}}
+
+/* trigger track：只提供捲動距離，本身不顯示內容（疊在舞台後方） */
+.track{position:relative;z-index:1;margin-top:calc(-100dvh + 76px);pointer-events:none}
+@supports not (height:100dvh){.track{margin-top:calc(-100vh + 76px)}}
+.trig{min-height:92vh}
+
+/* ============ 詞彙對照 ============ */
+.search{
+  display:flex;align-items:center;gap:9px;border:1px solid var(--border);border-radius:12px;
+  background:var(--bg-2);padding:9px 13px;margin-bottom:14px;max-width:420px;
+}
+.search input{flex:1;font:inherit;font-size:14.5px;border:0;background:transparent;color:var(--text);outline:none;min-width:0}
+.gtable-wrap{overflow-x:auto}
+table.g{width:100%;border-collapse:collapse;min-width:520px}
+table.g td.plain{color:var(--muted);font-size:14px;line-height:1.75}
+table.g td:first-child{white-space:nowrap}
+table.g td:nth-child(2){white-space:nowrap}
+@media (max-width:699px){
+  .gtable-wrap{overflow-x:visible}
+  table.g{min-width:0}
+  table.g thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  table.g tbody tr{display:block;border:1px solid var(--border);border-radius:12px;padding:11px 13px;margin-bottom:9px;background:var(--bg-2)}
+  table.g tbody td{display:block;border:0;padding:0}
+  table.g tbody td:first-child{font-size:16px}
+  table.g tbody td:nth-child(2){color:var(--accent);font-weight:800;font-size:13.5px;margin-top:1px}
+  table.g tbody td.plain{margin-top:5px}
+  table.g tbody tr:hover td{background:transparent}
+}
+table.g th{
+  text-align:left;font-size:11.5px;font-weight:800;letter-spacing:.1em;color:var(--muted);
+  padding:8px 12px;border-bottom:1px solid var(--border-strong);text-transform:uppercase;
+}
+table.g td{padding:9px 12px;border-bottom:1px solid var(--border);font-size:15px}
+table.g td:first-child{font-weight:800}
+table.g tr:hover td{background:var(--band-1)}
+.empty{display:none;padding:22px 12px;text-align:center;color:var(--muted)}
+.empty.on{display:block}
+.empty .icon{width:34px;height:34px;margin-bottom:8px}
+
+/* ============ 來源 ============ */
+.srcgrid{display:grid;gap:12px}
+@media (min-width:760px){.srcgrid{grid-template-columns:1fr 1fr}}
+.src{border:1px solid var(--border);border-radius:12px;padding:13px 14px;background:var(--bg-2);transition:all .25s ease}
+.src:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 0 0 3px var(--band-1)}
+.src .t{font-size:11.5px;font-weight:800;letter-spacing:.08em;color:var(--muted);margin-bottom:5px}
+.src a{font-size:14px;font-weight:700;word-break:break-all}
+
+/* toast：僅承載狀態通知 */
+#toast{
+  position:fixed;right:16px;bottom:16px;z-index:90;display:flex;flex-direction:column;gap:8px;
+  pointer-events:none;max-width:min(320px,86vw);
+}
+#toast .t{
+  display:flex;gap:9px;align-items:flex-start;padding:11px 13px;border-radius:12px;
+  border:1px solid var(--border-strong);background:var(--panel);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:var(--shadow);
+  font-size:13px;opacity:0;transform:translateY(10px);transition:opacity .25s ease,transform .25s ease;
+}
+#toast .t.on{opacity:1;transform:translateY(0)}
+#toast b{display:block;font-size:13px;font-weight:900;margin-bottom:1px}
+#toast span{color:var(--muted);line-height:1.6}
+
+/* SVG 舞台元素 */
+.node-hit{fill:transparent;cursor:pointer}
+.node-dot{transition:r .25s ease,fill .25s ease}
+.node-ring{opacity:0;transform-origin:center;transform-box:fill-box}
+.node-label,.node-state,.zone-t,.legend-t{paint-order:stroke;stroke:var(--surface);stroke-width:4px;stroke-linejoin:round}
+.node-label{font-family:var(--font);font-size:15px;font-weight:800;fill:var(--text);pointer-events:none}
+.node-state{font-family:var(--font);font-size:12.5px;fill:var(--muted);pointer-events:none}
+.g-node:hover .node-dot{r:19;fill:var(--accent)}
+.g-node:focus-visible{outline:none}
+.g-node:focus-visible .node-dot{r:19;fill:var(--accent)}
+.g-node[data-active="true"] .node-ring{opacity:1;animation:breathe 2.6s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.5);opacity:0}}
+.legend-t{font-family:var(--font);font-size:12px;fill:var(--muted);font-weight:700}
+.zone-t{font-family:var(--font);font-size:13px;fill:var(--faint);font-weight:800;letter-spacing:.14em}
+.pulse-ring{opacity:0}
+.pulse-ring.go{animation:pulseOnce .75s ease-out}
+@keyframes pulseOnce{0%{opacity:.75;r:16}100%{opacity:0;r:110}}
+
+@media (max-width:899px){
+  #burger{display:grid}
+  #pills{display:none}
+  .trig{min-height:78vh}
+  #hud .row{padding:7px 14px}
+  #hud .badge{font-size:11px;padding:4px 9px}
+  .stage{top:58px;height:calc(100dvh - 70px)}
+  @supports not (height:100dvh){.stage{height:calc(100vh - 70px)}}
+  .track{margin-top:calc(-100dvh + 70px)}
+  @supports not (height:100dvh){.track{margin-top:calc(-100vh + 70px)}}
+  .detail{max-height:52%;padding:12px 13px}
+  .detail h4{font-size:15.5px}
+  .detail p{font-size:14px}
+  .node-label{font-size:21px}
+  .node-state{font-size:17px}
+  .legend-t{font-size:17px}
+  .zone-t{font-size:18px}
+  .stage-tools{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .stage-tools::-webkit-scrollbar{display:none}
+
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .scrollcue .icon{animation:none}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.6M12 19v2.6M4.4 12H1.8M22.2 12h-2.6M6.3 6.3 4.5 4.5M19.5 19.5l-1.8-1.8M17.7 6.3l1.8-1.8M4.5 19.5l1.8-1.8"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.6A8.8 8.8 0 0 1 9.4 3.5 8.8 8.8 0 1 0 20.5 14.6Z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3.5 7h17M3.5 12h17M3.5 17h17"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M5.5 5.5l13 13M18.5 5.5l-13 13"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6.5 9.5 12 15l5.5-5.5"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="5.5" cy="18.5" r="2.4"/><circle cx="18.5" cy="5.5" r="2.4"/><path d="M8 18.5h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6"/></symbol>
+    <symbol id="i-peak" viewBox="0 0 24 24"><path d="M2.5 19.5 9 7l4 6.6L15.5 10l6 9.5Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4.5h6.5a2.5 2.5 0 0 1 2.5 2.5v13a2 2 0 0 0-2-2H4Z"/><path d="M20 4.5h-6.5A2.5 2.5 0 0 0 11 7v13a2 2 0 0 1 2-2h7Z"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10.5 13.5a4 4 0 0 0 5.7 0l2.6-2.6a4 4 0 0 0-5.7-5.7l-1.4 1.4"/><path d="M13.5 10.5a4 4 0 0 0-5.7 0l-2.6 2.6a4 4 0 0 0 5.7 5.7l1.4-1.4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5 9.5 17.5 19.5 6.5"/></symbol>
+    <symbol id="i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M6 18 18 6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 20.5 20.5"/></symbol>
+    <symbol id="i-empty" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="M3.5 10.5h17M8.5 15h7"/></symbol>
+    <symbol id="i-wind" viewBox="0 0 24 24"><path d="M3 8.5h10a2.8 2.8 0 1 0-2.8-2.8"/><path d="M3 13h14a2.8 2.8 0 1 1-2.8 2.8"/><path d="M3 17.5h6"/></symbol>
+    <symbol id="i-quake" viewBox="0 0 24 24"><path d="M2.5 12h3l2.5-6 3.5 12 3-9 2 3h5"/></symbol>
+    <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 21.5c3.6 0 6-2.4 6-5.6 0-4.4-4.4-5.6-3.4-11.4-3 1.2-5.2 4-5.2 6.4 0 1.4.6 2.4.6 2.4S8.4 12 7.4 12c-.9 1.2-1.4 2.6-1.4 3.9 0 3.2 2.4 5.6 6 5.6Z"/></symbol>
+    <symbol id="i-voice" viewBox="0 0 24 24"><path d="M12 4.5v15M8 8v8M16 8v8M4.5 10.5v3M19.5 10.5v3"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.1"/></symbol>
+  </defs>
+</svg>
+
+<div class="ambient" aria-hidden="true"><i></i><i></i></div>
+
+<div id="hud">
+  <div class="bar"><i id="hudbar"></i></div>
+  <div class="row">
+    <button id="burger" class="iconbtn" aria-label="開啟章節選單" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button>
+    <span class="badge" id="hudbadge">序章</span>
+    <nav id="pills" aria-label="章節導覽"></nav>
+    <button id="themebtn" class="iconbtn" aria-label="切換明暗主題"><svg class="icon"><use href="#i-moon"/></svg></button>
+  </div>
+</div>
+<div id="drawer" aria-label="章節選單"></div>
+<nav id="dots" aria-label="章節指示"></nav>
+
+<main class="wrap">
+
+  <header id="hero">
+    <span class="kicker">1 KINGS 19 ＋ MATTHEW 4</span>
+    <h1 class="h1"><span class="band">以利亞</span>在何烈山的<br><span class="q">經歷</span></h1>
+    <p class="lead">先知 Elijah 在屬靈高峰後陷入極度耗竭與恐懼，上帝先以飲食和休息恢復他的體力，再以微小的聲音重塑他的使命。即使是信心堅定的人也會有崩潰時刻，但上帝接納人的軟弱，並在安靜中賜下繼續前行的力量。</p>
+    <div class="stats">
+      <div class="stat"><b>40</b><span>晝夜的路程</span></div>
+      <div class="stat"><b>7000</b><span>人未向 Baal 屈膝</span></div>
+      <div class="stat"><b>3</b><span>次曠野的試探</span></div>
+      <div class="stat"><b>2</b><span>段經文</span></div>
+    </div>
+    <div id="jump"></div>
+    <div class="scrollcue" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></div>
+  </header>
+
+  <section id="intro">
+    <div class="card">
+      <header><span class="num">01</span><h2>序章：從高峰跌落</h2></header>
+      <p>Ahab 把 Elijah 在 Mount Carmel 殺死假先知的事告訴王后 Jezebel，Jezebel 發誓要在隔天殺死 Elijah。接下來的路線，從迦密山的勝利一路走到 Horeb 的洞穴。</p>
+    </div>
+  </section>
+
+  <section id="stage-a" aria-label="以利亞的路線">
+    <div class="scrolly" id="scrolly-a">
+      <div class="stage">
+        <div class="stage-inner">
+          <div class="stage-tools">
+            <span class="stage-title">以利亞的路線圖</span>
+            <button class="tool" data-theo="wind"><svg class="icon"><use href="#i-wind"/></svg>狂風</button>
+            <button class="tool" data-theo="quake"><svg class="icon"><use href="#i-quake"/></svg>地震</button>
+            <button class="tool" data-theo="fire"><svg class="icon"><use href="#i-fire"/></svg>烈火</button>
+            <button class="tool" data-theo="voice"><svg class="icon"><use href="#i-voice"/></svg>微小的聲音</button>
+          </div>
+          <svg class="stage-svg" id="svg-a" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet" role="img" aria-label="以利亞從迦密山到何烈山的路線圖"></svg>
+          <div class="stage-dots" id="dots-a" role="tablist" aria-label="以利亞路線的站點"></div>
+          <div class="detail" id="detail-a" aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="track" id="track-a"></div>
+    </div>
+  </section>
+
+  <section id="practice-1">
+    <div class="card">
+      <header><span class="num">02</span><h2>耗竭時可以怎麼做</h2></header>
+      <div class="two">
+        <div>
+          <h3><svg class="icon" style="width:16px;height:16px;vertical-align:-2px"><use href="#i-check"/></svg> 可以這樣做</h3>
+          <ol>
+            <li>當身心耗竭、情緒崩潰時，先好好吃一頓飯、睡一覺，照顧好生理基本需求，不急著在低谷做重大決定。</li>
+            <li>覺得自己在職場或家庭中孤立無援時，向信任的同伴或上帝坦誠說出真實感受，尋求休息與支持。</li>
+          </ol>
+        </div>
+        <div>
+          <h3><svg class="icon" style="width:16px;height:16px;vertical-align:-2px"><use href="#i-ban"/></svg> 避免這樣</h3>
+          <ol>
+            <li>在極度疲憊時責怪自己「抗壓性太差」或「不夠堅強」，把暫時的耗竭當成永久的失敗。</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stage-b-intro">
+    <div class="card">
+      <header><span class="num">03</span><h2>曠野的試探</h2></header>
+      <p>耶穌在曠野禁食四十晝夜後面對魔鬼的三次試探，並每次都用上帝的話語成功抵擋。即使在生理極度虛弱或面對世俗名利的誘惑時，單單依靠上帝的話語與信靠祂的旨意，是勝過試探的核心力量。</p>
+      <p class="sub">三次試探發生在三個高度：曠野、聖城的殿頂上、一座最高的山。</p>
+    </div>
+  </section>
+
+  <section id="stage-b" aria-label="三次試探">
+    <div class="scrolly" id="scrolly-b">
+      <div class="stage">
+        <div class="stage-inner">
+          <div class="stage-tools">
+            <span class="stage-title">三次試探的高度</span>
+          </div>
+          <svg class="stage-svg" id="svg-b" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet" role="img" aria-label="三次試探所在高度的分層圖"></svg>
+          <div class="stage-dots" id="dots-b" role="tablist" aria-label="試探的站點"></div>
+          <div class="detail" id="detail-b" aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="track" id="track-b"></div>
+    </div>
+  </section>
+
+  <section id="practice-2">
+    <div class="card">
+      <header><span class="num">04</span><h2>面對誘惑可以怎麼做</h2></header>
+      <div class="two">
+        <div>
+          <h3><svg class="icon" style="width:16px;height:16px;vertical-align:-2px"><use href="#i-check"/></svg> 可以這樣做</h3>
+          <ol>
+            <li>當生活面臨急迫需求或焦慮時，不走捷徑或違背原則的手段，選擇回到原則與真理中尋求引導。</li>
+            <li>遇到外界以名利、捷徑誘惑自己妥協底線時，堅定拒絕並清楚表明自己的核心價值觀。</li>
+          </ol>
+        </div>
+        <div>
+          <h3><svg class="icon" style="width:16px;height:16px;vertical-align:-2px"><use href="#i-ban"/></svg> 避免這樣</h3>
+          <ol>
+            <li>刻意讓自己陷入危險或投機的境地，心存僥倖地認為「反正不會出事」來試探界線。</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="glossary">
+    <div class="card">
+      <header><span class="num">05</span><h2>詞彙對照</h2></header>
+      <div class="search">
+        <svg class="icon" style="color:var(--muted)"><use href="#i-search"/></svg>
+        <input id="gq" type="search" placeholder="搜尋原文、譯名或白話" aria-label="搜尋詞彙對照">
+      </div>
+      <div class="gtable-wrap">
+        <table class="g">
+          <thead><tr><th>原文</th><th>譯名</th><th>白話</th></tr></thead>
+          <tbody id="gbody"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="gempty"><svg class="icon"><use href="#i-empty"/></svg><div>沒有符合的詞彙，換個關鍵字試試。</div></div>
+    </div>
+  </section>
+
+  <section id="sources">
+    <div class="card">
+      <header><span class="num">06</span><h2>章節對照與來源</h2></header>
+      <p class="sub">1 Kings 19:1-21 (NIV)｜列王紀上 19:1-21 · Matthew 4:1-11 (NIV)｜馬太福音 4:1-11</p>
+      <div class="srcgrid" style="margin-top:12px">
+        <div class="src"><div class="t">BIBLEGATEWAY 1 KINGS 19 (NIV)</div><a href="https://www.biblegateway.com/passage/?search=1%20Kings%2019&version=NIV" target="_blank" rel="noopener"><svg class="icon" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-link"/></svg> biblegateway.com／1 Kings 19 NIV</a></div>
+        <div class="src"><div class="t">BIBLEGATEWAY 1 KINGS 19 (CCB)</div><a href="https://www.biblegateway.com/passage/?search=1%20Kings%2019&version=CCB" target="_blank" rel="noopener"><svg class="icon" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-link"/></svg> biblegateway.com／1 Kings 19 CCB</a></div>
+        <div class="src"><div class="t">BIBLEGATEWAY MATTHEW 4 (NIV)</div><a href="https://www.biblegateway.com/passage/?search=Matthew+4%3A1-11&version=NIV" target="_blank" rel="noopener"><svg class="icon" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-link"/></svg> biblegateway.com／Matthew 4:1-11 NIV</a></div>
+        <div class="src"><div class="t">BIBLEGATEWAY MATTHEW 4 (CCB)</div><a href="https://www.biblegateway.com/passage/?search=Matthew+4%3A1-11&version=CCB" target="_blank" rel="noopener"><svg class="icon" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-link"/></svg> biblegateway.com／Matthew 4:1-11 CCB</a></div>
+        <div class="src"><div class="t">校對底本 1 KINGS 19 (CUVMPT 新標點和合本)</div><a href="https://www.biblegateway.com/passage/?search=1%20Kings%2019&version=CUVMPT" target="_blank" rel="noopener"><svg class="icon" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-link"/></svg> biblegateway.com／列王紀上 19 和合本</a></div>
+        <div class="src"><div class="t">白話說明的依據：受膏是什麼</div><a href="https://www.gotquestions.org/T-Chinese/T-Chinese-anointed.html" target="_blank" rel="noopener"><svg class="icon" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-link"/></svg> gotquestions.org／受膏是什麼？受膏者是什麼意思？</a></div>
+        <div class="src"><div class="t">白話說明的依據：膏抹 ANOINT</div><a href="https://www.churchofjesuschrist.org/study/scriptures/gs/anoint?lang=zho" target="_blank" rel="noopener"><svg class="icon" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-link"/></svg> churchofjesuschrist.org／經文指南「膏抹」</a></div>
+        <div class="src"><div class="t">校對底本 MATTHEW 4 (CUVMPT 新標點和合本)</div><a href="https://www.biblegateway.com/passage/?search=Matthew+4%3A1-11&version=CUVMPT" target="_blank" rel="noopener"><svg class="icon" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-link"/></svg> biblegateway.com／馬太福音 4:1-11 和合本</a></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+const RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+const $ = (s,r)=> (r||document).querySelector(s);
+const SVGNS = 'http://www.w3.org/2000/svg';
+
+/* ---------- 定案資料 ---------- */
+const SECTIONS = [
+  {id:'intro',       n:'01', t:'序章',       s:'從迦密山的勝利到 Jezebel 的誓言'},
+  {id:'stage-a',     n:'02', t:'以利亞的路', s:'八站：曠野求死到交棒 Elisha'},
+  {id:'practice-1',  n:'03', t:'實踐一',     s:'耗竭時可以怎麼做'},
+  {id:'stage-b',     n:'04', t:'曠野的試探', s:'三次試探的三個高度'},
+  {id:'practice-2',  n:'05', t:'實踐二',     s:'面對誘惑可以怎麼做'},
+  {id:'glossary',    n:'06', t:'詞彙對照',   s:'15 條原文與譯名'},
+  {id:'sources',     n:'07', t:'來源',       s:'章節對照與 BibleGateway'}
+];
+const JUMP_ICON = {intro:'i-book','stage-a':'i-route','practice-1':'i-check','stage-b':'i-peak','practice-2':'i-ban',glossary:'i-book',sources:'i-link'};
+
+// 舞台 A 的地理節點：座標為 viewBox 1000×620 上的抽象位置（北在上），非等比實測地圖
+const NODES_A = [
+  {id:'carmel', x:250, y:120, name:'Mount Carmel', state:'殺死假先知之處', ref:'列王紀上 19:1',
+   desc:'Ahab 把 Elijah 在 Mount Carmel 殺死假先知的事告訴王后 Jezebel。', tags:['Ahab','Jezebel'], anchor:'start'},
+  {id:'beersheba', x:300, y:330, name:'Beersheba', state:'屬猶大，僕人留在這裡', ref:'列王紀上 19:2-3',
+   desc:'Jezebel 發誓要在隔天殺死 Elijah，Elijah 嚇得逃命到 Judah 的 Beersheba，把僕人留在那裡。', tags:['Judah','逃命'], anchor:'start'},
+  {id:'broom', x:430, y:430, name:'羅騰樹下', state:'求死、睡著、天使兩次供應', ref:'列王紀上 19:4-7',
+   desc:'Elijah 自己在曠野走了一日的路程，來到一棵羅騰樹下坐著求死，說：「耶和華啊，罷了！求你取我的性命，因為我不勝於我的列祖。」他躺在樹下睡著了。一個天使拍他說「起來吃吧」，他看見頭旁有一瓶水與炭火燒的餅，吃了喝了仍然躺下；天使第二次來拍他說：「起來吃吧，因為你當走的路甚遠。」', tags:['求死','炭火燒的餅','一瓶水','天使兩次'], anchor:'start'},
+  {id:'horeb', x:520, y:545, name:'Horeb', state:'上帝的山，洞穴與微小的聲音', ref:'列王紀上 19:8-16',
+   desc:'仗著這飲食的力，Elijah 走了四十晝夜到了神的山 Horeb，進了一個洞住在洞中。耶和華問他：「Elijah，你在這裡做什麼？」他回答：以色列人背棄了神的約、毀壞了神的壇、用刀殺了神的先知，只剩下他一個人，他們還要尋索他的命。火後有微小的聲音，他用外衣蒙上臉出來站在洞口，聲音再問他同一句話，他也答了同樣的話。', tags:['四十晝夜','洞中','微小的聲音'], anchor:'middle'},
+  {id:'damascus', x:790, y:105, name:'Damascus', state:'從曠野往這裡去，膏立兩位王', ref:'列王紀上 19:15-18',
+   desc:'耶和華說：你回去，從曠野往 Damascus 去。到了那裡就膏 Hazael 作 Aram 王，又膏 Jehu 作以色列王。耶和華也說，他在以色列人中為自己留下七千人，是未曾向 Baal 屈膝、未曾與 Baal 親嘴的。', tags:['Hazael','Aram','Jehu','七千人'], anchor:'end'},
+  {id:'elisha', x:660, y:250, name:'Elisha 的田', state:'外衣披上，起程跟隨', ref:'列王紀上 19:19-21',
+   desc:'Elijah 遇見 Elisha 耕地，在他前頭有十二對牛，自己趕著第十二對。Elijah 把外衣搭在他身上。Elisha 離開牛跑過去說：「求你容我先與父母親嘴，然後我便跟隨你。」Elijah 說：「你回去吧，我向你做了什麼呢？」Elisha 回去宰了一對牛，用套牛的器具煮肉給民吃，隨後起身跟隨 Elijah，服侍他。', tags:['Elisha','外衣','十二對牛'], anchor:'end'}
+];
+// 八站：每站綁一個節點；主線行進進度由該節點在路徑上的最近點算出（見 nearestOnPath），不手填
+const STATIONS_A = [
+  {n:'01', node:'carmel',    p:0.00, title:'消息傳到王后耳中', ref:'列王紀上 19:1',
+   text:'Ahab 把 Elijah 在 Mount Carmel 殺死假先知的事告訴王后 Jezebel。'},
+  {n:'02', node:'beersheba', p:0.30, title:'死亡誓言與逃命', ref:'列王紀上 19:2-4',
+   text:'Jezebel 發誓要在隔天殺死 Elijah。Elijah 嚇得逃命到 Judah 的 Beersheba，把僕人留在那裡，自己走進曠野。'},
+  {n:'03', node:'broom',     p:0.50, title:'羅騰樹下求死', ref:'列王紀上 19:4-5',
+   text:'Elijah 把僕人留在別是巴後，自己在曠野走了一日的路程，來到一棵羅騰樹下坐著求死，說：「耶和華啊，罷了！求你取我的性命，因為我不勝於我的列祖。」他就躺在羅騰樹下睡著了。'},
+  {n:'04', node:'broom',     p:0.56, title:'天使兩次拍他', ref:'列王紀上 19:5-7',
+   text:'一個天使拍他說：「起來吃吧！」他觀看，見頭旁有一瓶水與炭火燒的餅，就吃了喝了，仍然躺下。耶和華的使者第二次來拍他，說：「起來吃吧！因為你當走的路甚遠。」'},
+  {n:'05', node:'horeb',     p:1.00, title:'四十晝夜到 Horeb', ref:'列王紀上 19:8-10',
+   text:'他仗著這飲食的力，走了四十晝夜到了神的山，就是 Horeb。他在那裡進了一個洞，就住在洞中。耶和華的話臨到他說：「Elijah，你在這裡做什麼？」他說：以色列人背棄了你的約、毀壞了你的壇、用刀殺了你的先知，只剩下我一個人，他們還要尋索我的命。'},
+  {n:'06', node:'horeb',     p:1.00, title:'風、地震、火，然後是微小的聲音', ref:'列王紀上 19:11-16',
+   text:'耶和華說：你出來站在山上，在我面前。烈風大作、崩山碎石，耶和華卻不在風中；風後地震，耶和華卻不在其中；地震後有火，耶和華也不在火中；火後有微小的聲音。Elijah 聽見就用外衣蒙上臉，出來站在洞口。有聲音再問他同一句話，他也答了同樣的話。'},
+  {n:'07', node:'damascus',  p:1.00, title:'膏立兩位王與七千人的盼望', ref:'列王紀上 19:15-18',
+   text:'耶和華對他說：你回去，從曠野往 Damascus 去。到了那裡，就要膏 Hazael 作 Aram 王，又膏 Jehu 作以色列王，並膏 Elisha 作先知接續你。耶和華也說：我在以色列人中為自己留下七千人，是未曾向 Baal 屈膝、未曾與 Baal 親嘴的。'},
+  {n:'08', node:'elisha',    p:1.00, title:'外衣披在 Elisha 身上', ref:'列王紀上 19:19-21',
+   text:'Elijah 離開那裡，遇見 Elisha 耕地，在他前頭有十二對牛，自己趕著第十二對。Elijah 到他那裡，將外衣搭在他身上。Elisha 離開牛跑過去說：「求你容我先與父母親嘴，然後我便跟隨你。」Elijah 說：「你回去吧，我向你做了什麼呢？」Elisha 就回去宰了一對牛，用套牛的器具煮肉給民吃，隨後起身跟隨 Elijah，服侍他。'}
+];
+// 舞台 B：三個高度層帶（分層色帶，非具象場景）
+const BANDS_B = [
+  {id:'mount',  y:70,  h:150, name:'一座最高的山', zone:'萬國與萬國的榮華'},
+  {id:'temple', y:250, h:150, name:'聖城的殿頂上', zone:'從殿頂跳下的考驗'},
+  {id:'desert', y:430, h:150, name:'曠野', zone:'禁食四十晝夜之後'}
+];
+const NODES_B = [
+  {id:'b-desert', band:'desert', x:300, y:505, name:'曠野的石頭', state:'第一次試探', ref:'馬太福音 4:1-4',
+   desc:'耶穌被聖靈引到曠野，受魔鬼的試探。他禁食四十晝夜，後來就餓了。那試探人的進前來說：「你若是神的兒子，可以吩咐這些石頭變成食物！」耶穌回答說：經上記著說，人活著不是單靠食物，乃是靠神口裡所出的一切話。', tags:['禁食四十晝夜','石頭變食物']},
+  {id:'b-temple', band:'temple', x:520, y:325, name:'殿頂上', state:'第二次試探', ref:'馬太福音 4:5-7',
+   desc:'魔鬼帶他進了聖城，叫他站在殿頂上，說：「你若是神的兒子，可以跳下去！因為經上記著說：主要為你吩咐他的使者用手托著你，免得你的腳碰在石頭上。」耶穌說：經上又記著說，不可試探主你的神。', tags:['Jerusalem','殿頂','跳下去']},
+  {id:'b-mount', band:'mount', x:740, y:145, name:'最高的山', state:'第三次試探', ref:'馬太福音 4:8-11',
+   desc:'魔鬼又帶他上了一座最高的山，將世上的萬國與萬國的榮華都指給他看，說：「你若俯伏拜我，我就把這一切都賜給你。」耶穌說：「Satan，退去吧！因為經上記著說：當拜主你的神，單要侍奉他。」於是魔鬼離了耶穌，有天使來伺候他。', tags:['Satan','萬國的榮華','天使伺候']}
+];
+const STATIONS_B = [
+  {n:'01', node:'b-desert', title:'石頭變食物', ref:'馬太福音 4:1-4',
+   text:'當時，耶穌被聖靈引到曠野，受魔鬼的試探。他禁食四十晝夜，後來就餓了。那試探人的進前來，對他說：「你若是神的兒子，可以吩咐這些石頭變成食物！」耶穌卻回答說：「經上記著說：人活著不是單靠食物，乃是靠神口裡所出的一切話。」'},
+  {n:'02', node:'b-temple', title:'殿頂上的考驗', ref:'馬太福音 4:5-7',
+   text:'魔鬼就帶他進了聖城，叫他站在殿頂上，對他說：「你若是神的兒子，可以跳下去！因為經上記著說：主要為你吩咐他的使者用手托著你，免得你的腳碰在石頭上。」耶穌對他說：「經上又記著說：不可試探主你的神。」'},
+  {n:'03', node:'b-mount', title:'高山上的萬國與得勝', ref:'馬太福音 4:8-11',
+   text:'魔鬼又帶他上了一座最高的山，將世上的萬國與萬國的榮華都指給他看，對他說：「你若俯伏拜我，我就把這一切都賜給你。」耶穌說：「Satan，退去吧！因為經上記著說：當拜主你的神，單要侍奉他。」於是魔鬼離了耶穌，有天使來伺候他。'}
+];
+const GLOSSARY = [
+  ['Ahab','亞哈','把 Elijah 殺死假先知的事告訴 Jezebel 的人（19:1）'],
+  ['Jezebel','耶洗別','王后，發誓要在隔天殺死 Elijah（19:2）'],
+  ['Elijah','以利亞','這段的主角，先知'],
+  ['Judah','猶大','Beersheba 所屬的地方（19:3）'],
+  ['Beersheba','別是巴','Elijah 逃到的城，把僕人留在這裡（19:3）'],
+  ['Horeb','何烈山','神的山。Elijah 走了四十晝夜到這裡，住在洞中（19:8-9）'],
+  ['Mount Carmel','迦密山','Elijah 殺死假先知的地方（19:1）'],
+  ['Damascus','大馬士革','神叫 Elijah 從曠野回去的方向（19:15）'],
+  ['Hazael','哈薛','被膏作 Aram 王的人（19:15）'],
+  ['Aram','亞蘭','Hazael 作王的國（19:15）'],
+  ['Jehu','耶戶','被膏作以色列王的人（19:16）'],
+  ['Elisha','以利沙','接續 Elijah 作先知的人，原本在耕地（19:16、19:19）'],
+  ['Baal','巴力','以色列人拜的神。神說還留下七千人未曾向它屈膝（19:18）'],
+  ['Jerusalem','耶路撒冷','聖城。魔鬼帶耶穌去那裡，叫他站在殿頂上（太 4:5）'],
+  ['Satan','撒旦','耶穌叫它退去的那一位（太 4:10）'],
+  ['膏','anoint','把橄欖油倒在頭上的就職禮，代表這個人是神挑的、正式上任。「受膏者」希伯來文就是 Messiah'],
+  ['屈膝','bow the knee','下跪。古代拜偶像的動作之一（19:18）'],
+  ['親嘴','kiss','親吻神像。古代拜偶像的另一個動作（19:18）'],
+  ['羅騰樹','broom tree','曠野裡的一種灌木。Elijah 坐在它下面求死（19:4）'],
+  ['外衣','cloak','先知穿的外袍。Elijah 把它搭在 Elisha 身上，Elisha 就離開牛跟隨他（19:19-20）'],
+  ['先知','prophet','替神向人說話的人']
+];
+const THEO = {
+  wind:{label:'狂風',       text:'狂風大作、崩山碎石，但上帝不在風中。', ref:'列王紀上 19:11'},
+  quake:{label:'地震',      text:'風後有地震，上帝也不在地震中。',       ref:'列王紀上 19:11'},
+  fire:{label:'烈火',       text:'地震後有烈火，上帝也不在火中。',       ref:'列王紀上 19:12'},
+  voice:{label:'微小的聲音',text:'火後傳來一陣微小的聲音。Elijah 用外衣蒙臉走出來。', ref:'列王紀上 19:12-13'}
+};
+
+/* ---------- toast（僅狀態通知） ---------- */
+const toastBox = $('#toast');
+let toastTimer = null;
+function toast(title, msg){
+  toastBox.innerHTML = '';
+  const el = document.createElement('div');
+  el.className = 't';
+  el.innerHTML = '<svg class="icon" style="width:16px;height:16px;flex:0 0 auto;color:var(--accent)"><use href="#i-info"/></svg><div><b></b><span></span></div>';
+  el.querySelector('b').textContent = title;
+  el.querySelector('span').textContent = msg;
+  toastBox.appendChild(el);
+  requestAnimationFrame(()=> el.classList.add('on'));
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>{ el.classList.remove('on'); setTimeout(()=>{ if(el.parentNode) el.remove(); },300); }, 3000);
+}
+
+/* ---------- 主題 ---------- */
+const themeBtn = $('#themebtn');
+function currentTheme(){
+  const set = document.documentElement.getAttribute('data-theme');
+  if(set) return set;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+function paintThemeBtn(){
+  themeBtn.querySelector('use').setAttribute('href', currentTheme()==='dark' ? '#i-sun' : '#i-moon');
+}
+themeBtn.addEventListener('click', ()=>{
+  const next = currentTheme()==='dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  paintThemeBtn();
+  toast('主題已切換', next==='dark' ? '深色：曠野的夜' : '淺色：日間的曠野');
+});
+paintThemeBtn();
+
+/* ---------- nav：pill／抽屜／側邊 dot／hero 快速跳轉 ---------- */
+const pills = $('#pills'), drawer = $('#drawer'), dotsNav = $('#dots'), jump = $('#jump');
+SECTIONS.forEach(s=>{
+  const p = document.createElement('button');
+  p.className='pill'; p.type='button'; p.dataset.target=s.id; p.textContent = s.n+' '+s.t;
+  pills.appendChild(p);
+
+  const d = document.createElement('button');
+  d.type='button'; d.dataset.target=s.id;
+  d.innerHTML = '<span class="n"></span><span class="tt"></span><span class="s"></span>';
+  d.querySelector('.n').textContent = s.n;
+  d.querySelector('.tt').textContent = s.t;
+  d.querySelector('.s').textContent = s.s;
+  drawer.appendChild(d);
+
+  const dot = document.createElement('button');
+  dot.type='button'; dot.dataset.target=s.id;
+  dot.setAttribute('aria-label', s.t);
+  dot.innerHTML='<span></span>';
+  dot.querySelector('span').textContent = s.t;
+  dotsNav.appendChild(dot);
+
+  const j = document.createElement('button');
+  j.className='jump'; j.type='button'; j.dataset.target=s.id;
+  j.innerHTML = '<svg class="icon"><use href="#'+(JUMP_ICON[s.id]||'i-book')+'"/></svg><span></span>';
+  j.querySelector('span').textContent = s.t;
+  jump.appendChild(j);
+});
+const drawerClose = document.createElement('button');
+drawerClose.type='button'; drawerClose.textContent='關閉選單';
+drawerClose.style.borderColor='var(--border-strong)';
+drawerClose.addEventListener('click', ()=> setDrawer(false));
+drawer.appendChild(drawerClose);
+
+function goto(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.scrollIntoView({behavior: RM.matches ? 'auto' : 'smooth', block:'start'});
+}
+document.addEventListener('click', e=>{
+  const b = e.target.closest('[data-target]');
+  if(!b) return;
+  goto(b.dataset.target);
+  setDrawer(false);
+});
+const burger = $('#burger');
+function setDrawer(open){
+  drawer.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', String(open));
+  burger.querySelector('use').setAttribute('href', open ? '#i-close' : '#i-menu');
+}
+burger.addEventListener('click', ()=> setDrawer(!drawer.classList.contains('open')));
+
+function setActiveSection(id){
+  const s = SECTIONS.find(x=>x.id===id);
+  $('#hudbadge').textContent = s ? (s.n+' '+s.t) : '序章';
+  document.querySelectorAll('[data-target]').forEach(b=>{
+    b.setAttribute('aria-current', String(b.dataset.target===id));
+  });
+}
+const secObserver = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{ if(en.isIntersecting) setActiveSection(en.target.id); });
+}, {rootMargin:'-45% 0px -45% 0px', threshold:0});
+SECTIONS.forEach(s=>{ const el=document.getElementById(s.id); if(el) secObserver.observe(el); });
+
+/* ---------- HUD 進度條（驅動變數＝整頁捲動進度）＋ hero 之後才滑出 ---------- */
+const hud = $('#hud'), hudbar = $('#hudbar');
+let ticking = false;
+function onScroll(){
+  if(ticking) return;
+  ticking = true;
+  requestAnimationFrame(()=>{
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max>0 ? Math.min(1, window.scrollY/max) : 0;
+    hudbar.style.width = (pct*100).toFixed(2)+'%';
+    hud.classList.toggle('visible', window.scrollY > window.innerHeight*0.45);
+    ticking = false;
+  });
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+/* ---------- 詞彙對照 ---------- */
+const gbody = $('#gbody'), gempty = $('#gempty');
+GLOSSARY.forEach(([en,zh,plain])=>{
+  const tr = document.createElement('tr');
+  const a = document.createElement('td'); a.textContent = en; a.dataset.label='原文';
+  const b = document.createElement('td'); b.textContent = zh; b.dataset.label='譯名';
+  const c = document.createElement('td'); c.textContent = plain; c.dataset.label='白話'; c.className='plain';
+  tr.append(a,b,c); gbody.appendChild(tr);
+});
+$('#gq').addEventListener('input', e=>{
+  const q = e.target.value.trim().toLowerCase();
+  let hit = 0;
+  Array.from(gbody.rows).forEach(r=>{
+    const ok = !q || r.cells[0].textContent.toLowerCase().includes(q)
+                  || r.cells[1].textContent.toLowerCase().includes(q)
+                  || r.cells[2].textContent.toLowerCase().includes(q);
+    r.style.display = ok ? '' : 'none';
+    if(ok) hit++;
+  });
+  gempty.classList.toggle('on', hit===0);
+});
+
+/* ---------- SVG 舞台建構工具 ---------- */
+function el(tag, attrs){
+  const n = document.createElementNS(SVGNS, tag);
+  for(const k in attrs) n.setAttribute(k, attrs[k]);
+  return n;
+}
+// touch target 換算（pattern 5 死公式）：以 390px 手機寬計，viewBox 寬 1000
+// r ≥ 22 × 1000 ÷ 390 = 56.41 → 取 hit 半徑 58，可見節點 r=14
+const HIT_R = 58;
+
+function buildNode(node, onPick){
+  const g = el('g', {class:'g-node', tabindex:'0', role:'button', 'data-node':node.id});
+  g.setAttribute('aria-label', node.name + '，' + node.state);
+  g.appendChild(el('circle', {class:'pulse-ring', cx:node.x, cy:node.y, r:16, fill:'none', stroke:'var(--accent)', 'stroke-width':3}));
+  g.appendChild(el('circle', {class:'node-ring', cx:node.x, cy:node.y, r:20, fill:'none', stroke:'var(--accent)', 'stroke-width':2.5}));
+  const dot = el('circle', {class:'node-dot', cx:node.x, cy:node.y, r:14, fill:'var(--accent-2)', stroke:'var(--surface)', 'stroke-width':3});
+  g.appendChild(dot);
+  g.appendChild(el('circle', {class:'node-hit', cx:node.x, cy:node.y, r:HIT_R}));
+  const anchor = node.anchor || 'start';
+  const dx = anchor==='end' ? -24 : (anchor==='middle' ? 0 : 24);
+  const lab = el('text', {class:'node-label', x:node.x+dx, y:node.y-26, 'text-anchor':anchor});
+  lab.textContent = node.name;
+  const st = el('text', {class:'node-state', x:node.x+dx, y:node.y-6, 'text-anchor':anchor});
+  st.textContent = node.state;
+  g.append(lab, st);
+  const pick = ()=> onPick(node.id);
+  g.addEventListener('click', pick);
+  g.addEventListener('keydown', e=>{
+    if(e.key==='Enter' || e.key===' ' || e.key==='Spacebar'){ e.preventDefault(); pick(); }
+  });
+  return g;
+}
+function pulseAt(svg, nodeId){
+  if(RM.matches) return;
+  const g = svg.querySelector('[data-node="'+nodeId+'"]');
+  if(!g) return;
+  const ring = g.querySelector('.pulse-ring');
+  // pulse 期間暫停同一節點的呼吸光暈，避免兩組動畫疊加
+  const breathe = g.querySelector('.node-ring');
+  breathe.style.animation = 'none';
+  ring.classList.remove('go'); void ring.getBBox();
+  ring.classList.add('go');
+  setTimeout(()=>{ ring.classList.remove('go'); breathe.style.animation=''; }, 780);
+}
+
+/* ---------- 舞台 A：以利亞的路線圖 ---------- */
+const svgA = $('#svg-a');
+(function buildA(){
+  // a. faint 背景 context 層：經緯格線＋區域色帶＋區域標籤
+  const bg = el('g', {'aria-hidden':'true'});
+  for(let x=100;x<1000;x+=100) bg.appendChild(el('line',{x1:x,y1:0,x2:x,y2:620,stroke:'var(--grid)','stroke-width':1}));
+  for(let y=60;y<620;y+=80) bg.appendChild(el('line',{x1:0,y1:y,x2:1000,y2:y,stroke:'var(--grid)','stroke-width':1}));
+  bg.appendChild(el('rect',{x:120,y:60,width:420,height:210,fill:'var(--band-2)',rx:16}));
+  bg.appendChild(el('rect',{x:180,y:270,width:340,height:140,fill:'var(--band-1)',rx:16}));
+  bg.appendChild(el('rect',{x:260,y:410,width:420,height:190,fill:'var(--band-1)',rx:16,opacity:.6}));
+  bg.appendChild(el('rect',{x:640,y:60,width:320,height:230,fill:'var(--band-2)',rx:16,opacity:.7}));
+  const zones = [['以色列',150,88],['猶大',210,298],['曠野',290,442],['亞蘭方向',700,296]];
+  zones.forEach(([t,x,y])=>{ const n=el('text',{class:'zone-t',x:x,y:y}); n.textContent=t; bg.appendChild(n); });
+  svgA.appendChild(bg);
+
+  const defs = el('defs');
+  const grad = el('linearGradient',{id:'routeGrad',x1:'0',y1:'0',x2:'1',y2:'1'});
+  grad.appendChild(el('stop',{offset:'0','stop-color':'var(--accent)'}));
+  grad.appendChild(el('stop',{offset:'1','stop-color':'var(--accent-2)'}));
+  defs.appendChild(grad);
+  const arrow = el('marker',{id:'warnArrow',viewBox:'0 0 10 10',refX:'8',refY:'5',markerWidth:'6',markerHeight:'6',orient:'auto-start-reverse'});
+  arrow.appendChild(el('path',{d:'M0,0 L10,5 L0,10 z',fill:'var(--warn)'}));
+  defs.appendChild(arrow);
+  const glow = el('radialGradient',{id:'flowGlow'});
+  glow.appendChild(el('stop',{offset:'0','stop-color':'var(--accent)','stop-opacity':'0.9'}));
+  glow.appendChild(el('stop',{offset:'1','stop-color':'var(--accent)','stop-opacity':'0'}));
+  defs.appendChild(glow);
+  svgA.appendChild(defs);
+
+  const D_MAIN = 'M250,120 C270,200 280,270 300,330 C340,380 390,400 430,430 C470,470 500,510 520,545';
+  const D_BRANCH = 'M520,545 C640,470 740,300 790,105';
+  const D_ELISHA = 'M790,105 C750,160 700,210 660,250';
+  const D_THREAT = 'M420,70 C400,150 340,250 305,315';
+  const D_SERVANT = 'M250,120 C268,205 282,272 298,326';
+
+  // faint 細 dashed：僕人陪同到 Beersheba 為止（第四類次要路徑）
+  svgA.appendChild(el('path',{d:D_SERVANT,fill:'none',stroke:'var(--faint)','stroke-width':2.5,'stroke-dasharray':'3 8','stroke-linecap':'round'}));
+  // warn dashed ＋箭頭：Jezebel 的死亡誓言
+  svgA.appendChild(el('path',{d:D_THREAT,fill:'none',stroke:'var(--warn)','stroke-width':3,'stroke-dasharray':'9 8','stroke-linecap':'round','marker-end':'url(#warnArrow)',opacity:.85}));
+  const thr = el('text',{class:'node-state',x:430,y:62,fill:'var(--warn)','text-anchor':'start'});
+  thr.textContent = 'Jezebel 的死亡誓言';
+  svgA.appendChild(thr);
+  // 支線 dashed：Horeb 之後的回程指示
+  svgA.appendChild(el('path',{id:'a-branch',d:D_BRANCH,fill:'none',stroke:'var(--accent-2)','stroke-width':3,'stroke-dasharray':'12 9','stroke-linecap':'round',opacity:.75}));
+  svgA.appendChild(el('path',{id:'a-elisha',d:D_ELISHA,fill:'none',stroke:'var(--accent-2)','stroke-width':3,'stroke-dasharray':'12 9','stroke-linecap':'round',opacity:.75}));
+  // 主線：底線＋覆蓋線（覆蓋長度＝目前站的行進進度）
+  svgA.appendChild(el('path',{d:D_MAIN,fill:'none',stroke:'var(--border-strong)','stroke-width':4,'stroke-linecap':'round'}));
+  const mainPath = el('path',{id:'a-main',d:D_MAIN,fill:'none',stroke:'var(--accent)','stroke-width':6,'stroke-linecap':'round'});
+  svgA.appendChild(mainPath);
+
+  // 沿主線的光點：位置由站點進度驅動
+  const flowGlow = el('circle',{id:'a-flow-glow',cx:250,cy:120,r:34,fill:'url(#flowGlow)','pointer-events':'none'});
+  const flow = el('circle',{id:'a-flow',cx:250,cy:120,r:7,fill:'var(--accent)','pointer-events':'none'});
+  svgA.append(flowGlow, flow);
+
+  NODES_A.forEach(n=> svgA.appendChild(buildNode(n, id=> pickNodeA(id))));
+
+  // b. 內嵌圖例（置舞台角落）
+  const lg = el('g',{transform:'translate(700,430)','aria-hidden':'true'});
+  lg.appendChild(el('rect',{x:0,y:0,width:288,height:150,rx:12,fill:'var(--panel)',stroke:'var(--border)'}));
+  const rows = [
+    ['solid','var(--accent)','走過的路線'],
+    ['dash','var(--accent-2)','上帝指示的回程'],
+    ['dash','var(--warn)','Jezebel 的追殺'],
+    ['fine','var(--faint)','僕人同行到 Beersheba']
+  ];
+  rows.forEach((r,i)=>{
+    const y = 30 + i*30;
+    const line = el('line',{x1:16,y1:y,x2:64,y2:y,stroke:r[1],'stroke-width':r[0]==='fine'?2.5:4,'stroke-linecap':'round'});
+    if(r[0]==='dash') line.setAttribute('stroke-dasharray','10 7');
+    if(r[0]==='fine') line.setAttribute('stroke-dasharray','3 7');
+    lg.appendChild(line);
+    const t = el('text',{class:'legend-t',x:76,y:y+5}); t.textContent = r[2];
+    lg.appendChild(t);
+  });
+  svgA.appendChild(lg);
+
+  // 顯現序列的光暈點（微控台驅動；預設隱藏）
+  const theo = el('g',{id:'a-theo',opacity:'0','pointer-events':'none'});
+  theo.appendChild(el('circle',{id:'a-theo-glow',cx:520,cy:545,r:90,fill:'url(#flowGlow)'}));
+  const tl = el('text',{id:'a-theo-label',class:'node-state',x:520,y:600,'text-anchor':'middle',fill:'var(--accent)'});
+  theo.appendChild(tl);
+  svgA.insertBefore(theo, svgA.querySelector('.g-node'));   // 光暈壓在節點標籤之下
+})();
+
+/* ---------- 舞台 B：三次試探的高度（分層色帶＋發光節點） ---------- */
+const svgB = $('#svg-b');
+(function buildB(){
+  const bg = el('g',{'aria-hidden':'true'});
+  for(let y=40;y<620;y+=60) bg.appendChild(el('line',{x1:0,y1:y,x2:1000,y2:y,stroke:'var(--grid)','stroke-width':1}));
+  svgB.appendChild(bg);
+
+  const defs = el('defs');
+  const g2 = el('linearGradient',{id:'bandGrad',x1:'0',y1:'0',x2:'1',y2:'0'});
+  g2.appendChild(el('stop',{offset:'0','stop-color':'var(--accent)','stop-opacity':'0.20'}));
+  g2.appendChild(el('stop',{offset:'1','stop-color':'var(--accent-2)','stop-opacity':'0.08'}));
+  defs.appendChild(g2);
+  const glow2 = el('radialGradient',{id:'bGlow'});
+  glow2.appendChild(el('stop',{offset:'0','stop-color':'var(--accent)','stop-opacity':'0.85'}));
+  glow2.appendChild(el('stop',{offset:'1','stop-color':'var(--accent)','stop-opacity':'0'}));
+  defs.appendChild(glow2);
+  const arrow2 = el('marker',{id:'bArrow',viewBox:'0 0 10 10',refX:'8',refY:'5',markerWidth:'6',markerHeight:'6',orient:'auto-start-reverse'});
+  arrow2.appendChild(el('path',{d:'M0,0 L10,5 L0,10 z',fill:'var(--warn)'}));
+  defs.appendChild(arrow2);
+  svgB.appendChild(defs);
+
+  BANDS_B.forEach(b=>{
+    const g = el('g',{'data-band':b.id});
+    g.appendChild(el('rect',{class:'band-rect',x:60,y:b.y,width:880,height:b.h,rx:18,fill:'url(#bandGrad)',stroke:'var(--border)','stroke-width':1.5}));
+    const t1 = el('text',{class:'node-label',x:84,y:b.y+34}); t1.textContent = b.name;
+    const t2 = el('text',{class:'zone-t',x:84,y:b.y+58}); t2.textContent = b.zone;
+    g.append(t1,t2);
+    svgB.appendChild(g);
+  });
+
+  const D_UP = 'M300,505 C380,470 440,400 520,325 C600,255 670,200 740,145';
+  svgB.appendChild(el('path',{d:D_UP,fill:'none',stroke:'var(--border-strong)','stroke-width':4,'stroke-linecap':'round'}));
+  svgB.appendChild(el('path',{id:'b-main',d:D_UP,fill:'none',stroke:'var(--accent)','stroke-width':6,'stroke-linecap':'round'}));
+  // warn dashed ＋箭頭：魔鬼的三個提議
+  svgB.appendChild(el('path',{d:'M180,560 C200,470 220,380 250,300',fill:'none',stroke:'var(--warn)','stroke-width':3,'stroke-dasharray':'9 8','marker-end':'url(#bArrow)',opacity:.85,'stroke-linecap':'round'}));
+  const wt = el('text',{class:'node-state',x:120,y:588,fill:'var(--warn)'});
+  wt.textContent = '魔鬼的提議';
+  svgB.appendChild(wt);
+
+  const fg = el('circle',{id:'b-flow-glow',cx:300,cy:505,r:40,fill:'url(#bGlow)','pointer-events':'none'});
+  const f = el('circle',{id:'b-flow',cx:300,cy:505,r:7,fill:'var(--accent)','pointer-events':'none'});
+  svgB.append(fg,f);
+
+  NODES_B.forEach(n=>{
+    const node = Object.assign({}, n, {anchor:'start'});
+    svgB.appendChild(buildNode(node, id=> pickNodeB(id)));
+  });
+
+  const lg = el('g',{transform:'translate(660,430)','aria-hidden':'true'});
+  lg.appendChild(el('rect',{x:0,y:0,width:300,height:120,rx:12,fill:'var(--panel)',stroke:'var(--border)'}));
+  const rows = [['solid','var(--accent)','耶穌被帶往的路徑'],['dash','var(--warn)','魔鬼的提議'],['band','var(--accent-2)','所在的高度層']];
+  rows.forEach((r,i)=>{
+    const y = 30+i*30;
+    if(r[0]==='band'){
+      lg.appendChild(el('rect',{x:16,y:y-9,width:48,height:18,rx:5,fill:'url(#bandGrad)',stroke:'var(--border)'}));
+    }else{
+      const line = el('line',{x1:16,y1:y,x2:64,y2:y,stroke:r[1],'stroke-width':4,'stroke-linecap':'round'});
+      if(r[0]==='dash') line.setAttribute('stroke-dasharray','10 7');
+      lg.appendChild(line);
+    }
+    const t = el('text',{class:'legend-t',x:76,y:y+5}); t.textContent=r[2];
+    lg.appendChild(t);
+  });
+  svgB.appendChild(lg);
+})();
+
+/* ---------- 常駐資訊卡 ---------- */
+function renderStation(box, st, node){
+  box.innerHTML = '<div class="hd"><span class="stn"></span><h4></h4><span class="ref"></span><span class="where"></span></div><p></p><div class="tags"></div>';
+  box.querySelector('.stn').textContent = st.n;
+  box.querySelector('h4').textContent = st.title;
+  box.querySelector('.ref').textContent = st.ref;
+  box.querySelector('.where').textContent = node ? node.name : '';
+  box.querySelector('p').textContent = st.text;
+  const tags = box.querySelector('.tags');
+  ((node && node.tags) || []).forEach(t=>{
+    const s = document.createElement('span'); s.className='tag'; s.textContent=t; tags.appendChild(s);
+  });
+  box.classList.remove('flash'); void box.offsetWidth; box.classList.add('flash');
+}
+
+/* ---------- 站點 track 與內容卡 ---------- */
+function buildTrack(trackId, stations){
+  const track = document.getElementById(trackId);
+  stations.forEach((st,i)=>{
+    const t = document.createElement('div');
+    t.className = 'trig';
+    t.dataset.idx = String(i);
+    t.setAttribute('aria-hidden','true');
+    track.appendChild(t);
+  });
+  return track;
+}
+function buildDots(boxId, stations, onPick){
+  const box = document.getElementById(boxId);
+  stations.forEach((st,i)=>{
+    const b = document.createElement('button');
+    b.className='sdot'; b.type='button'; b.setAttribute('role','tab');
+    b.setAttribute('aria-label','第 '+st.n+' 站：'+st.title);
+    b.textContent = st.n;
+    b.addEventListener('click', ()=> onPick(i, true));
+    box.appendChild(b);
+  });
+  return box;
+}
+
+/* ---------- 舞台狀態機（共用） ---------- */
+function makeStage(cfg){
+  const track = buildTrack(cfg.trackId, cfg.stations);
+  const dotsBox = buildDots(cfg.dotsId, cfg.stations, (i,jumpTo)=>{
+    lockTo(i);
+    if(jumpTo){
+      scrollToStation(i);
+    }
+    setStation(i, true);
+  });
+  const detail = document.getElementById(cfg.detailId);
+  let idx = -1, locked = -1, lockTimer = null;
+
+  function lockTo(i){
+    locked = i;
+    clearTimeout(lockTimer);
+    lockTimer = setTimeout(()=>{ locked = -1; }, 900);
+  }
+  function setStation(i, fromClick){
+    if(i<0 || i>=cfg.stations.length) return;
+    const st = cfg.stations[i];
+    if(i!==idx){
+      idx = i;
+      Array.from(dotsBox.children).forEach((b,k)=> b.setAttribute('aria-current', String(k===i)));
+      cfg.svg.querySelectorAll('.g-node').forEach(g=>{
+        g.setAttribute('data-active', String(g.dataset.node===st.node));
+      });
+      renderStation(detail, st, cfg.nodes.find(n=>n.id===st.node));
+      cfg.onStation && cfg.onStation(i, st);
+      cfg.moveTo(st, i);
+    }
+    if(fromClick) pulseAt(cfg.svg, st.node);
+  }
+  function scrollToStation(i){
+    const trig = track.children[i];
+    if(!trig) return;
+    window.scrollTo({top: window.scrollY + trig.getBoundingClientRect().top - window.innerHeight*0.45,
+                     behavior: RM.matches ? 'auto':'smooth'});
+  }
+  function pickNode(nodeId){
+    const i = cfg.stations.findIndex(s=>s.node===nodeId);
+    if(i<0){ pulseAt(cfg.svg, nodeId); return; }
+    lockTo(i);
+    if(i===idx) pulseAt(cfg.svg, nodeId);
+    else setStation(i, true);
+    scrollToStation(i);
+  }
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(!en.isIntersecting) return;
+      const i = Number(en.target.dataset.idx);
+      if(locked>=0 && locked!==i) return;   // 程式化跳轉期間鎖定目標站，抑制逐站閃亮
+      setStation(i, false);
+    });
+  }, {rootMargin:'-45% 0px -45% 0px', threshold:0});
+  Array.from(track.children).forEach(t=> io.observe(t));
+
+  function goTo(i){
+    lockTo(i);
+    setStation(i, true);
+    scrollToStation(i);
+  }
+  setStation(0, false);   // 初始預載第一站，不留空卡
+  return {pickNode, setStation, lockTo, goTo, at:()=>idx};
+}
+
+/* ---------- A 舞台：主線覆蓋長度與光點由站點進度 p 驅動 ---------- */
+const aMain = $('#a-main'), aFlow = $('#a-flow'), aFlowGlow = $('#a-flow-glow');
+const A_LEN = aMain.getTotalLength();
+// 把每個節點投影到主線上，取最近點當作該站的行進進度，光點才會剛好停在節點上
+function nearestOnPath(path, len, x, y, samples){
+  let best = 0, bestD = Infinity;
+  for(let i=0;i<=samples;i++){
+    const t = i/samples, pt = path.getPointAtLength(len*t);
+    const d = (pt.x-x)*(pt.x-x) + (pt.y-y)*(pt.y-y);
+    if(d < bestD){ bestD = d; best = t; }
+  }
+  return best;
+}
+(function calibrateA(){
+  const cache = {};
+  STATIONS_A.forEach(st=>{
+    const node = NODES_A.find(n=>n.id===st.node);
+    if(!node) return;
+    if(!(node.id in cache)) cache[node.id] = nearestOnPath(aMain, A_LEN, node.x, node.y, 400);
+    st.p = cache[node.id];
+  });
+  // Horeb 之後的三站已抵達終點，光點停在終點不再回頭
+  const horebP = cache['horeb'];
+  STATIONS_A.forEach(st=>{ if(st.p > horebP) st.p = horebP; });
+  STATIONS_A.forEach((st,i)=>{ if(i>=4) st.p = horebP; });
+})();
+aMain.style.strokeDasharray = A_LEN;
+let aTarget = 0, aCur = 0, aRaf = null, aOff = null;
+function aPaint(){
+  aMain.style.strokeDashoffset = String(A_LEN*(1-aCur));
+  // aOff：站點在支線上（Damascus 之後的回程），光點直接停在該節點
+  const pt = aOff || aMain.getPointAtLength(A_LEN*aCur);
+  aFlow.setAttribute('cx', pt.x); aFlow.setAttribute('cy', pt.y);
+  aFlowGlow.setAttribute('cx', pt.x); aFlowGlow.setAttribute('cy', pt.y);
+}
+// 持續動效 1／2（舞台 A 視口）：沿主線的光點。驅動變數＝STATIONS_A[i].p（定案資料的行進進度欄）
+function aTick(){
+  aCur += (aTarget-aCur)*0.16;
+  if(Math.abs(aTarget-aCur) < 0.0008){ aCur = aTarget; aPaint(); aRaf=null; return; }
+  aPaint();
+  aRaf = requestAnimationFrame(aTick);
+}
+function aMoveTo(st){
+  // 最後一站他真的走了回程，支線從「指示」變成「走過的路線」
+  const walked = (st.node === 'elisha');
+  ['a-branch','a-elisha'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.setAttribute('stroke', walked ? 'var(--accent)' : 'var(--accent-2)');
+    if(walked) el.removeAttribute('stroke-dasharray'); else el.setAttribute('stroke-dasharray','12 9');
+    el.setAttribute('opacity', walked ? '1' : '.75');
+  });
+  const offNode = walked ? NODES_A.find(n=>n.id==='elisha') : null;
+  aOff = offNode ? {x:offNode.x, y:offNode.y} : null;
+  aTarget = st.p;
+  if(aOff){ aCur = aTarget; aPaint(); return; }
+  if(RM.matches){ aCur = aTarget; aPaint(); return; }   // reduced-motion：瞬時定格
+  if(!aRaf) aRaf = requestAnimationFrame(aTick);
+}
+let stageA = null;
+function pickNodeA(id){ stageA && stageA.pickNode(id); }
+
+/* ---------- B 舞台 ---------- */
+const bMain = $('#b-main'), bFlow = $('#b-flow'), bFlowGlow = $('#b-flow-glow');
+const B_LEN = bMain.getTotalLength();
+bMain.style.strokeDasharray = B_LEN;
+let bTarget = 0, bCur = 0, bRaf = null;
+function bPaint(){
+  bMain.style.strokeDashoffset = String(B_LEN*(1-bCur));
+  const pt = bMain.getPointAtLength(B_LEN*bCur);
+  bFlow.setAttribute('cx', pt.x); bFlow.setAttribute('cy', pt.y);
+  bFlowGlow.setAttribute('cx', pt.x); bFlowGlow.setAttribute('cy', pt.y);
+}
+// 持續動效 1／2（舞台 B 視口）：沿路徑的光點。驅動變數＝目前試探的 station index（0/1/2 → 0/0.5/1）
+function bTick(){
+  bCur += (bTarget-bCur)*0.16;
+  if(Math.abs(bTarget-bCur) < 0.0008){ bCur=bTarget; bPaint(); bRaf=null; return; }
+  bPaint();
+  bRaf = requestAnimationFrame(bTick);
+}
+function bMoveTo(st,i){
+  bTarget = i/(STATIONS_B.length-1);
+  if(RM.matches){ bCur=bTarget; bPaint(); return; }
+  if(!bRaf) bRaf = requestAnimationFrame(bTick);
+}
+let stageB = null;
+function pickNodeB(id){ stageB && stageB.pickNode(id); }
+
+/* ---------- 微控台：顯現序列（僅第 6 站啟用；與捲動進度正交） ---------- */
+const theoBtns = Array.from(document.querySelectorAll('[data-theo]'));
+const theoG = $('#a-theo'), theoGlow = $('#a-theo-glow'), theoLabel = $('#a-theo-label');
+const THEO_STYLE = {
+  wind:{r:130,color:'var(--muted)',op:.35},
+  quake:{r:150,color:'var(--warn)',op:.45},
+  fire:{r:170,color:'var(--accent)',op:.75},
+  voice:{r:70,color:'var(--accent-2)',op:.95}
+};
+function setTheo(key){
+  const s = THEO_STYLE[key], d = THEO[key];
+  theoG.setAttribute('opacity','1');
+  theoGlow.setAttribute('r', s.r);
+  theoGlow.setAttribute('opacity', s.op);
+  theoGlow.setAttribute('fill', key==='voice' ? 'none' : 'url(#flowGlow)');
+  theoGlow.setAttribute('stroke', s.color);
+  theoGlow.setAttribute('stroke-width', key==='voice' ? 3 : 0);
+  theoLabel.textContent = d.label + '：' + d.text + '（' + d.ref + '）';
+  theoLabel.setAttribute('fill', s.color);
+  theoBtns.forEach(b=> b.setAttribute('aria-pressed', String(b.dataset.theo===key)));
+}
+const THEO_STATION = 5;   // 第 6 站＝風、地震、火與微小的聲音
+theoBtns.forEach(b=>{
+  b.addEventListener('click', ()=>{
+    // 不在第 6 站就先跳過去，按鈕永遠可按
+    if(stageA && stageA.at() !== THEO_STATION) stageA.goTo(THEO_STATION);
+    setTheo(b.dataset.theo);
+  });
+});
+function setTheoEnabled(on){
+  if(!on){
+    theoG.setAttribute('opacity','0');
+    theoBtns.forEach(b=> b.setAttribute('aria-pressed','false'));
+  }else if(!theoBtns.some(b=>b.getAttribute('aria-pressed')==='true')){
+    setTheo('wind');
+  }
+}
+
+/* ---------- 窄螢幕聚焦 viewBox（內容區裁邊，桌機還原） ---------- */
+const NARROW = window.matchMedia('(max-width:899px)');
+function applyViewBox(){
+  const narrow = NARROW.matches;
+  svgA.setAttribute('viewBox', narrow ? '150 55 850 570' : '130 45 870 575');
+  svgB.setAttribute('viewBox', narrow ? '40 55 940 560'  : '40 45 940 575');
+}
+applyViewBox();
+NARROW.addEventListener('change', applyViewBox);
+
+/* ---------- 啟動兩個舞台 ---------- */
+stageA = makeStage({
+  trackId:'track-a', dotsId:'dots-a', detailId:'detail-a',
+  svg:svgA, nodes:NODES_A, stations:STATIONS_A, alternate:true,
+  moveTo:aMoveTo,
+  onStation:(i)=> setTheoEnabled(i===THEO_STATION)
+});
+stageB = makeStage({
+  trackId:'track-b', dotsId:'dots-b', detailId:'detail-b',
+  svg:svgB, nodes:NODES_B, stations:STATIONS_B, alternate:true,
+  moveTo:bMoveTo
+});
+setTheoEnabled(false);
+})();
+</script>
+
+<!-- share sync -->

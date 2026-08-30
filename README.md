@@ -1,5 +1,6 @@
 # ai_quick_share
 
+- https://shyinlim.github.io/ai_quick_shares/20260830_220809_以利亞在何烈山的經歷.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260830_220809_以利亞在何烈山的經歷.html)
 - https://shyinlim.github.io/ai_quick_shares/20260823_220549440_ecclesiastes-wisdom.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260823_220549440_ecclesiastes-wisdom.html)
 - https://shyinlim.github.io/ai_quick_shares/20260809_163522529_cornelius-peter-vision.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260809_163522529_cornelius-peter-vision.html)
 - https://shyinlim.github.io/ai_quick_shares/20260802_230938006_faith-prayer-in-crisis.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260802_230938006_faith-prayer-in-crisis.html)
