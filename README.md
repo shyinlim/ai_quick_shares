@@ -1,6 +1,6 @@
 # ai_quick_share
 
-- https://shyinlim.github.io/ai_quick_shares/20260913_205359882_acts-and-revelation-eli5.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260913_205359882_acts-and-revelation-eli5.html)
+- https://shyinlim.github.io/ai_quick_shares/20260913_213113685_from-resurrection-to-revelation.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260913_213113685_from-resurrection-to-revelation.html)
 - https://shyinlim.github.io/ai_quick_shares/20260906_225130_Acts1_AscensionAndWaiting.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260906_225130_Acts1_AscensionAndWaiting.html)
 - https://shyinlim.github.io/ai_quick_shares/20260830_220809_以利亞在何烈山的經歷.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260830_220809_以利亞在何烈山的經歷.html)
 - https://shyinlim.github.io/ai_quick_shares/20260823_220549440_ecclesiastes-wisdom.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260823_220549440_ecclesiastes-wisdom.html)
