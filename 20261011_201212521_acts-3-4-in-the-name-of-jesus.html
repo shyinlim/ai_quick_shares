@@ -1,0 +1,2282 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>使徒行傳 3:1-4:31 解析 互動研究系統 · 奉耶穌的名：首場正面衝突與放膽見證</title>
+  
+  <!--
+  ======================================================================
+  [§1 資料忠實與盤點表 Data Fidelity Inventory]
+  定案資料出處: /Users/shyin/Downloads/使徒行傳 3_1-4_31 解析.pdf
+  逐項落點對照:
+  1. 核心結論 (Acts 3-4): 面對權貴威脅不退縮，同心禱告求上帝賜下膽量做見證 -> 頁首 Hero 導讀
+  2. Story 1 美門口的醫治 (Acts 3:1-10): 下午三點、美門、生來瘸腿、Peter/John、無金銀奉耶穌的名、跳起讚美 -> Station 01 (時間軸與聖殿分層圖)
+  3. Story 2 所羅門廊下的講道 (Acts 3:11-26): Solomon廊下、非靠自身虔誠、Pilate處死耶穌但上帝使復活、信耶穌名復原、回轉離開過犯 -> Station 02 (講道核心論證)
+  4. Story 3 公會受審與宣告 (Acts 4:1-12): 祭司/守殿官/Sadducees惱怒關監、Annas/Caiaphas質問憑何權柄、聖靈充滿回答、天下人間別無拯救 -> Station 03 (審訊攻防)
+  5. Story 4 恐嚇與釋放 (Acts 4:13-22): 官長見勇氣/認出無學問小民、嚴禁再傳講、聽從你們或上帝請自行判斷、看見聽見的不能不說 -> Station 04 (法庭對抗)
+  6. Story 5 同心禱告得膽量 (Acts 4:23-31): 回信徒處同心合意禱告、引述David詩篇君王聚集抵擋、求主鑑察恐嚇大有膽量、地方震動充滿勇氣 -> Station 05 (集體禱告與震動)
+  7. 應用實踐 (Example 1-4): 可以這樣做 (歸功團隊夥伴、群體壓力堅定講出事實) / 避免這樣 (宣揚善行期待感恩、反對聲音妥協推諉) -> 實踐原則對比矩陣
+  8. 延伸主題 1 拿撒勒意涵 (Nazareth 3層面): 地理身分(Galilee偏僻/Bethlehem出生/Nazareth長大)、謙卑被藐視(Nathaniel拿但業名言)、權能對比(世人藐視木匠之子 vs 上帝復活榮耀) -> 深度探究切換器 1
+  9. 延伸主題 2 馬太福音 22:23-46 (太 22 辯駁): Sadducees復活難題(七兄弟娶同婦/活人的上帝)、律法師最大誡命(愛主愛鄰舍)、基督身分反問(David子孫與我主之辯/無人敢再發問) + 實踐原則(抓核心本質/回到基本事實/避免極端邊界推翻/避免單一維度) -> 深度探究切換器 2
+  10. 延伸主題 3 腓立比書 2:5-8 (基督頌歌): Paul勸勉基督之心、不以同等為強奪把持特權、倒空自己成奴僕人樣、降卑順服至死十字架 + 實踐原則(放下架子承擔瑣碎/考量他人益處/避免頭銜順從/避免要面子拒服) -> 深度探究切換器 3
+  11. 詞彙對照表 (16 條專有名詞完整收錄): Peter, John, Solomon, Pilate, Sadducees, Annas, Caiaphas, David, Nazareth, Galilee, Bethlehem, Nathaniel, Moses, Abraham, Isaac, Jacob, Pharisees, Paul, Philippians -> 專名即時檢索系統
+  12. 資料來源與章節對照 (真實可驗證 URL): Bible Gateway Acts 3, Acts 4, Matt 22, Phil 2 (CCB, NIV) -> 頁尾考證區塊完整展示
+  ======================================================================
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Design Tokens: 現代清晰黑體與暗色質調 (Plus Jakarta Sans + Noto Sans TC) */
+    :root {
+      --font-display: 'Plus Jakarta Sans', var(--font-sans);
+      --font-serif: var(--font-sans);
+      --font-sans: 'Plus Jakarta Sans', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --radius-sm: 4px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      
+      /* Dark Theme (Default: 古典羊皮紙與耶路撒冷暗石質調) */
+      --color-surface-base: #0E0C0A;
+      --color-surface-raised: #171412;
+      --color-surface-overlay: #211D1A;
+      --color-surface-card: #1A1613;
+      --color-surface-subtle: #241F1B;
+      
+      --color-border-subtle: rgba(212, 163, 89, 0.12);
+      --color-border-strong: rgba(212, 163, 89, 0.32);
+      
+      --color-text-primary: #F4EFEB;
+      --color-text-secondary: #CFC5BC;
+      --color-text-muted: #9E9286;
+      
+      --color-action-primary: #C59345; /* 略加深金黃色，提高對比 */
+      --color-action-hover: #D8A658;
+      --color-action-glow: rgba(197, 147, 69, 0.25);
+      --color-action-text: #171412; /* 金底按鈕搭配深色文字，確保對比度達標 */
+      
+      --color-accent-blue: #38BDF8;
+      --color-accent-crimson: #EF4444;
+      --color-accent-green: #10B981;
+      
+      --shadow-elevation: 0 16px 40px -12px rgba(0, 0, 0, 0.75), 0 4px 14px -2px rgba(0, 0, 0, 0.5);
+    }
+
+    html[data-theme="light"] {
+      --color-surface-base: #F8F5EE;
+      --color-surface-raised: #EFE9DC;
+      --color-surface-overlay: #E4DCCB;
+      --color-surface-card: #FCFAF5;
+      --color-surface-subtle: #F3ECE0;
+      
+      --color-border-subtle: rgba(160, 108, 38, 0.15);
+      --color-border-strong: rgba(160, 108, 38, 0.4);
+      
+      --color-text-primary: #211B14;
+      --color-text-secondary: #4A4035;
+      --color-text-muted: #7E7060;
+      
+      --color-action-primary: #9E6A26;
+      --color-action-hover: #7D5117;
+      --color-action-glow: rgba(158, 106, 38, 0.18);
+      
+      --color-accent-blue: #0284C7;
+      --color-accent-crimson: #DC2626;
+      --color-accent-green: #059669;
+      
+      --shadow-elevation: 0 16px 36px -10px rgba(45, 35, 25, 0.12), 0 4px 12px -2px rgba(45, 35, 25, 0.06);
+    }
+
+    /* Base Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Impeccable Craft Floor: 自訂系統表面 (選取反白、焦點框、捲軸) */
+    ::selection {
+      background: var(--color-action-primary);
+      color: #FFFFFF;
+    }
+    :focus-visible {
+      outline: 2px solid var(--color-action-primary);
+      outline-offset: 2px;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--color-surface-base);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-surface-overlay);
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--color-surface-base);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-action-primary);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      background-color: var(--color-surface-base);
+      color: var(--color-text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 1rem;
+      background: var(--color-action-primary);
+      color: #FFFFFF;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      z-index: 9999;
+      font-weight: 700;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* HUD: 簡練、極致細節、單行 */
+    .app-hud {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 60px;
+      background: var(--color-surface-raised);
+      border-bottom: 1px solid var(--color-border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .hud-brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hud-badge {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-sm);
+      background: var(--color-surface-overlay);
+      color: var(--color-action-primary);
+      border: 1px solid var(--color-border-subtle);
+    }
+
+    .hud-title {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .hud-nav-pills {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow-x: auto;
+      max-width: 58vw;
+      padding: 0.25rem 0;
+      scrollbar-width: none;
+    }
+    .hud-nav-pills::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-pill {
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-pill:hover, .nav-pill:focus-visible {
+      color: var(--color-text-primary);
+      background: var(--color-surface-overlay);
+      outline: none;
+    }
+    .nav-pill.active {
+      color: var(--color-action-text);
+      background: var(--color-action-primary);
+      border-color: var(--color-action-primary);
+      font-weight: 700;
+    }
+
+    .hud-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .mode-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-sm);
+      background: rgba(212, 163, 89, 0.12);
+      border: 1px solid var(--color-action-primary);
+      color: var(--color-action-primary);
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .mode-toggle-btn:hover, .mode-toggle-btn:focus-visible {
+      background: var(--color-action-primary);
+      color: #FFFFFF;
+      outline: none;
+    }
+    .mode-toggle-btn.active {
+      background: var(--color-action-primary);
+      color: #FFFFFF;
+      box-shadow: 0 0 12px var(--color-action-glow);
+    }
+    .mode-indicator-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      background: var(--color-surface-overlay);
+      border: 1px solid var(--color-border-subtle);
+      color: var(--color-text-primary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .icon-btn:hover, .icon-btn:focus-visible {
+      border-color: var(--color-action-primary);
+      color: var(--color-action-primary);
+      outline: none;
+    }
+
+    /* 3分鐘極速掌握總結板塊 (Executive 3-Minute Summary / ELI5) */
+    .fast-summary-section {
+      background: linear-gradient(135deg, var(--color-surface-card), var(--color-surface-overlay));
+      border: 2px solid var(--color-action-primary);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 3.5rem;
+      box-shadow: var(--shadow-elevation);
+      position: relative;
+      overflow: hidden;
+    }
+    .fast-summary-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-accent-blue), var(--color-action-primary), var(--color-accent-green));
+    }
+    .fast-summary-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .fast-summary-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-sm);
+      background: var(--color-action-primary);
+      color: #FFFFFF;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .fast-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+    .fast-point-card {
+      background: var(--color-surface-subtle);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .fast-point-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-action-primary);
+    }
+    .fast-point-step {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-action-primary);
+    }
+    .fast-point-title {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--color-text-primary);
+    }
+    .fast-point-desc {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+    .fast-point-eli5 {
+      margin-top: auto;
+      font-size: 0.8125rem;
+      color: var(--color-accent-blue);
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid var(--color-accent-blue);
+      padding: 0.4rem 0.65rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    }
+
+    /* ELI5 / ADHD 導讀微元件 */
+    .eli5-callout {
+      background: rgba(212, 163, 89, 0.08);
+      border-left: 3px solid var(--color-action-primary);
+      padding: 0.75rem 1rem;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .eli5-callout-header {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--color-action-primary);
+      letter-spacing: 0.04em;
+    }
+    .eli5-callout-text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      line-height: 1.5;
+    }
+
+    /* ADHD Mode 狀態下的高亮樣式 */
+    body.adhd-mode .act-text {
+      font-size: 0.95rem;
+    }
+    body.adhd-mode .eli5-callout {
+      background: rgba(212, 163, 89, 0.16);
+      border-left-width: 4px;
+      transform: scale(1.01);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    body.adhd-mode .fast-summary-section {
+      border-color: #E5B874;
+      box-shadow: 0 0 25px rgba(212, 163, 89, 0.25);
+    }
+
+    .progress-track {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--color-border-subtle);
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--color-action-primary);
+      transition: width 0.15s ease-out;
+    }
+
+    .app-container {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 7rem;
+    }
+
+    /* Hero Section: 50/50 非對稱雜誌級跨版排版 (Asymmetric Split Screen) */
+    .hero-split-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 4rem;
+      align-items: center;
+      padding: 2.5rem 0 4.5rem;
+      border-bottom: 1px solid var(--color-border-subtle);
+      margin-bottom: 5rem;
+    }
+    @media (max-width: 960px) {
+      .hero-split-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    .hero-lead-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .hero-kicker-strip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-action-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-title {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--color-text-primary);
+    }
+
+    .hero-title .highlight-gold {
+      color: var(--color-action-primary);
+      font-style: italic;
+      font-weight: 700;
+    }
+
+    .hero-subtext {
+      font-size: 1.05rem;
+      color: var(--color-text-secondary);
+      line-height: 1.85;
+      max-width: 58ch;
+    }
+
+    .hero-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-hero-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--color-action-primary);
+      color: var(--color-action-text);
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 0.75rem 1.6rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-action-primary);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-hero-primary:hover, .btn-hero-primary:focus-visible {
+      background: var(--color-action-hover);
+      transform: translateY(-1px);
+    }
+    .btn-hero-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--color-surface-overlay);
+      color: var(--color-text-primary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.75rem 1.4rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border-subtle);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-hero-secondary:hover, .btn-hero-secondary:focus-visible {
+      border-color: var(--color-action-primary);
+      color: var(--color-action-primary);
+    }
+
+    /* 非對稱節奏 Bento Grid: 2大2小多尺度節奏 */
+    .hero-bento-card {
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-elevation);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .bento-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-border-subtle);
+      padding-bottom: 0.85rem;
+    }
+
+    .bento-card-title {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+
+    .bento-grid-metrics {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 1rem;
+    }
+
+    .bento-metric-tile {
+      background: var(--color-surface-subtle);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      transition: border-color 0.2s ease;
+    }
+    .bento-metric-tile:hover {
+      border-color: var(--color-border-strong);
+    }
+    .bento-metric-tile.highlight {
+      grid-column: span 2;
+      background: linear-gradient(135deg, var(--color-surface-subtle), var(--color-surface-overlay));
+      border-color: var(--color-border-strong);
+    }
+    .metric-val {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--color-action-primary);
+      font-variant-numeric: tabular-nums;
+    }
+    .bento-metric-tile.highlight .metric-val {
+      font-size: 2.4rem;
+    }
+    .metric-lbl {
+      font-size: 0.825rem;
+      color: var(--color-text-muted);
+      line-height: 1.4;
+    }
+
+    /* Section Headings */
+    .section-heading-wrap {
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-border-subtle);
+      padding-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.3;
+      color: var(--color-text-primary);
+    }
+    .section-subhead {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Scrollytelling Stage Layout */
+    .story-stage-wrap {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      margin-bottom: 5.5rem;
+    }
+    @media (max-width: 1024px) {
+      .story-stage-wrap {
+        grid-template-columns: 1fr;
+      }
+      .sticky-stage-col {
+        position: static;
+      }
+    }
+
+    .sticky-stage-col {
+      position: sticky;
+      top: 76px;
+      z-index: 10;
+    }
+
+    .stage-canvas-panel {
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-strong);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-elevation);
+    }
+
+    .stage-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--color-border-subtle);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .stage-toolbar-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      letter-spacing: 0.03em;
+    }
+
+    .btn-step {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--color-surface-overlay);
+      border: 1px solid var(--color-border-subtle);
+      color: var(--color-text-primary);
+      padding: 0.4rem 0.9rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-step:hover, .btn-step:focus-visible {
+      border-color: var(--color-action-primary);
+      color: var(--color-action-primary);
+      outline: none;
+    }
+
+    .svg-stage-container {
+      width: 100%;
+      height: 290px;
+      background: var(--color-surface-base);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border-subtle);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .svg-stage {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .svg-node {
+      cursor: pointer;
+      outline: none;
+    }
+    .svg-node:hover circle.node-glow,
+    .svg-node:focus-visible circle.node-glow {
+      opacity: 0.8;
+      r: 28;
+    }
+    .svg-node.active circle.node-core {
+      stroke: #FFFFFF;
+      stroke-width: 3;
+    }
+
+    /* 常駐資訊卡 */
+    .stage-detail-card {
+      margin-top: 1.35rem;
+      background: var(--color-surface-subtle);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.35rem;
+      min-height: 140px;
+      transition: border-color 0.25s ease;
+    }
+    .stage-detail-card.active-pulse {
+      border-color: var(--color-action-primary);
+    }
+    .detail-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.6rem;
+    }
+    .detail-card-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.15rem 0.55rem;
+      border-radius: var(--radius-sm);
+      background: var(--color-action-primary);
+      color: #FFFFFF;
+    }
+    .detail-card-scripture {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+    .detail-card-title {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 0.45rem;
+    }
+    .detail-card-body {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      line-height: 1.75;
+    }
+
+    /* 故事串流卡片 */
+    .story-stream-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
+    }
+
+    .story-act-card {
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-elevation);
+      transition: border-color 0.25s ease, transform 0.25s ease;
+      position: relative;
+    }
+    .story-act-card.in-view {
+      border-color: var(--color-border-strong);
+      transform: translateY(-2px);
+    }
+
+    .act-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+    .act-number {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--color-surface-overlay);
+      color: var(--color-action-primary);
+      border: 1px solid var(--color-border-subtle);
+    }
+    .story-act-card.in-view .act-number {
+      background: var(--color-action-primary);
+      color: #FFFFFF;
+    }
+    .act-title {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: -0.01em;
+    }
+    .act-ref {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      margin-left: auto;
+    }
+    .act-text {
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+    
+    /* Impeccable 精準重構：將粗邊框引述盒改為整體優雅背景卡片 */
+    .act-keynote {
+      background: var(--color-surface-subtle);
+      border: 1px solid var(--color-border-subtle);
+      padding: 0.875rem 1.15rem;
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      color: var(--color-text-primary);
+    }
+
+    /* 矩陣容器 */
+    .matrix-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    @media (max-width: 640px) {
+      .matrix-box {
+        grid-template-columns: 1fr;
+      }
+    }
+    .matrix-col {
+      padding: 1.5rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border-subtle);
+    }
+    .matrix-col.positive {
+      background: rgba(16, 185, 129, 0.04);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+    .matrix-col.negative {
+      background: rgba(239, 68, 68, 0.04);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+    .matrix-col-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .matrix-col.positive .matrix-col-title {
+      color: var(--color-accent-green);
+    }
+    .matrix-col.negative .matrix-col-title {
+      color: var(--color-accent-crimson);
+    }
+    .matrix-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .matrix-item {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--color-text-secondary);
+      position: relative;
+      padding-left: 1.25rem;
+    }
+    .matrix-item::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+    .matrix-col.positive .matrix-item::before {
+      color: var(--color-accent-green);
+    }
+    .matrix-col.negative .matrix-item::before {
+      color: var(--color-accent-crimson);
+    }
+
+    /* 工具型探索卡片網格 */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4.5rem;
+    }
+    @media (max-width: 640px) {
+      .tool-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tool-card {
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-elevation);
+    }
+    .tool-card-title {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 0.45rem;
+    }
+    .tool-card-desc {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      margin-bottom: 1.35rem;
+      line-height: 1.65;
+    }
+
+    .tab-nav {
+      display: flex;
+      gap: 0.4rem;
+      background: var(--color-surface-base);
+      padding: 0.3rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1.25rem;
+      border: 1px solid var(--color-border-subtle);
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 0.45rem 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border: none;
+      background: transparent;
+      color: var(--color-text-muted);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background: var(--color-surface-raised);
+      color: var(--color-text-primary);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+
+    .tab-pane {
+      display: none;
+    }
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 詞彙檢索區塊 */
+    .term-section {
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      margin-bottom: 4.5rem;
+      box-shadow: var(--shadow-elevation);
+    }
+    .term-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .search-input-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 260px;
+    }
+    .search-input {
+      width: 100%;
+      background: var(--color-surface-base);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 0.875rem 0.6rem 2.25rem;
+      color: var(--color-text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .search-input:focus {
+      border-color: var(--color-action-primary);
+    }
+    .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      color: var(--color-text-muted);
+      pointer-events: none;
+    }
+    .term-count {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    .term-table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-md);
+    }
+    .term-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+      font-family: var(--font-serif);
+    }
+    .term-table th {
+      background: var(--color-surface-overlay);
+      padding: 0.95rem 1.25rem;
+      font-family: var(--font-serif);
+      font-weight: 700;
+      color: var(--color-action-primary);
+      border-bottom: 1px solid var(--color-border-subtle);
+      letter-spacing: 0.03em;
+    }
+    .term-table td {
+      padding: 0.95rem 1.25rem;
+      border-bottom: 1px solid var(--color-border-subtle);
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      vertical-align: top;
+      transition: background-color 0.15s ease;
+    }
+    .term-table td:nth-child(2) {
+      font-weight: 600;
+      color: var(--color-text-primary);
+      white-space: nowrap;
+    }
+    .term-table tr:last-child td {
+      border-bottom: none;
+    }
+    .term-table tr:hover td {
+      background: var(--color-surface-subtle);
+      color: var(--color-text-primary);
+    }
+    .term-en {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      color: var(--color-action-primary);
+      letter-spacing: 0.02em;
+    }
+    .empty-state {
+      display: none;
+      padding: 2.5rem;
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* 來源頁尾 */
+    .source-section {
+      background: var(--color-surface-card);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-elevation);
+    }
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    .source-item {
+      background: var(--color-surface-subtle);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .source-title {
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: var(--color-text-primary);
+    }
+    .source-url {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-action-primary);
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .source-url:hover, .source-url:focus-visible {
+      text-decoration: underline;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+    .toast-pill {
+      background: var(--color-surface-raised);
+      border: 1px solid var(--color-border-strong);
+      color: var(--color-text-primary);
+      padding: 0.65rem 1.1rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-elevation);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: auto;
+    }
+    .toast-pill.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.25; transform: scale(1); }
+      50% { opacity: 0.65; transform: scale(1.15); }
+    }
+    .pulse-glow {
+      animation: pulseGlow 3s infinite ease-in-out;
+      transform-origin: center;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .pulse-glow {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">跳至主要內容</a>
+
+  <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+    </symbol>
+    <symbol id="icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="6" y="4" width="4" height="16"></rect>
+      <rect x="14" y="4" width="4" height="16"></rect>
+    </symbol>
+    <symbol id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </symbol>
+    <symbol id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </symbol>
+    <symbol id="icon-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+    </symbol>
+  </svg>
+
+  <header class="app-hud" role="banner">
+    <div class="hud-brand">
+      <span class="hud-badge">ACTS 3:1-4:31</span>
+      <span class="hud-title">使徒行傳解析研讀系統</span>
+    </div>
+
+    <nav class="hud-nav-pills" aria-label="章節跳轉">
+      <button class="nav-pill active" data-target="act-1">美門醫治</button>
+      <button class="nav-pill" data-target="act-2">所羅門廊講道</button>
+      <button class="nav-pill" data-target="act-3">公會受審</button>
+      <button class="nav-pill" data-target="act-4">恐嚇與釋放</button>
+      <button class="nav-pill" data-target="act-5">同心禱告</button>
+      <button class="nav-pill" data-target="sec-examples">應用準則</button>
+      <button class="nav-pill" data-target="sec-nazareth">拿撒勒解析</button>
+      <button class="nav-pill" data-target="sec-matthew">馬太福音辯駁</button>
+      <button class="nav-pill" data-target="sec-philippians">腓立比書頌歌</button>
+      <button class="nav-pill" data-target="sec-terms">詞彙對照</button>
+    </nav>
+
+    <div class="hud-controls">
+      <button class="mode-toggle-btn" id="adhd-toggle" aria-label="切換 3分鐘極速導讀模式" title="切換 3分鐘極速白話導讀模式">
+        <span class="mode-indicator-dot"></span>
+        <span class="mode-toggle-text">⚡ 3分鐘快讀</span>
+      </button>
+      <button class="icon-btn" id="theme-toggle" aria-label="切換日夜間主題">
+        <svg class="w-4 h-4" width="18" height="18"><use href="#icon-sun"></use></svg>
+      </button>
+    </div>
+
+    <div class="progress-track" aria-hidden="true">
+      <div class="progress-bar" id="hud-progress"></div>
+    </div>
+  </header>
+
+  <main id="main-content" class="app-container">
+
+    <section class="hero-split-grid" aria-labelledby="hero-title">
+      <div class="hero-lead-col">
+        <div class="hero-kicker-strip">
+          <span>使徒行傳 3:1-4:31 研讀文獻</span>
+          <span style="opacity: 0.4;">/</span>
+          <span>歷史衝突與神學見證</span>
+        </div>
+        <h1 class="hero-title" id="hero-title">
+          奉耶穌的名：<br>
+          <span class="highlight-gold">首場正面衝突</span>與放膽見證
+        </h1>
+        <p class="hero-subtext">
+          這段經文記錄門徒初次面臨正面衝突。使徒倚靠耶穌的名醫治並放膽講論，面對權貴的恐嚇與威脅不退縮，同心禱告求上帝賜下更大的膽量持續作見證。
+        </p>
+        <div class="hero-actions-row">
+          <a href="#act-1" class="btn-hero-primary">開始研讀歷程</a>
+          <a href="#sec-terms" class="btn-hero-secondary">查閱專有名詞</a>
+        </div>
+      </div>
+
+      <div class="hero-bento-card">
+        <div class="bento-card-header">
+          <span class="bento-card-title">衝突與勇氣 · 5 站研讀路線圖</span>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-action-primary);">STAGE 1 TO 5</span>
+        </div>
+        <div class="hero-route-list" style="display: flex; flex-direction: column; gap: 0.65rem;">
+          <a href="#act-1" class="hero-route-item" style="display: flex; align-items: center; gap: 0.85rem; padding: 0.65rem 0.85rem; background: var(--color-surface-subtle); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-sm); text-decoration: none; color: inherit; transition: all 0.2s ease;">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--color-action-primary); color: var(--color-action-text); font-weight: 700; font-size: 0.8rem;">1</span>
+            <div style="flex: 1;">
+              <div style="font-weight: 700; font-size: 0.88rem; color: var(--color-text-primary);">第 1 站：美門醫治</div>
+              <div style="font-size: 0.78rem; color: var(--color-text-muted);">奉耶穌的名讓生來瘸腿者行走</div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-action-primary);">3:1-10 &rarr;</span>
+          </a>
+          <a href="#act-2" class="hero-route-item" style="display: flex; align-items: center; gap: 0.85rem; padding: 0.65rem 0.85rem; background: var(--color-surface-subtle); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-sm); text-decoration: none; color: inherit; transition: all 0.2s ease;">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--color-action-primary); color: var(--color-action-text); font-weight: 700; font-size: 0.8rem;">2</span>
+            <div style="flex: 1;">
+              <div style="font-weight: 700; font-size: 0.88rem; color: var(--color-text-primary);">第 2 站：廊下講道</div>
+              <div style="font-size: 0.78rem; color: var(--color-text-muted);">拒攬神力功勞，直指復活與悔改</div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-action-primary);">3:11-26 &rarr;</span>
+          </a>
+          <a href="#act-3" class="hero-route-item" style="display: flex; align-items: center; gap: 0.85rem; padding: 0.65rem 0.85rem; background: var(--color-surface-subtle); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-sm); text-decoration: none; color: inherit; transition: all 0.2s ease;">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--color-action-primary); color: var(--color-action-text); font-weight: 700; font-size: 0.8rem;">3</span>
+            <div style="flex: 1;">
+              <div style="font-weight: 700; font-size: 0.88rem; color: var(--color-text-primary);">第 3 站：公會受審</div>
+              <div style="font-size: 0.78rem; color: var(--color-text-muted);">宣告天下人間別無拯救</div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-action-primary);">4:1-12 &rarr;</span>
+          </a>
+          <a href="#act-4" class="hero-route-item" style="display: flex; align-items: center; gap: 0.85rem; padding: 0.65rem 0.85rem; background: var(--color-surface-subtle); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-sm); text-decoration: none; color: inherit; transition: all 0.2s ease;">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--color-action-primary); color: var(--color-action-text); font-weight: 700; font-size: 0.8rem;">4</span>
+            <div style="flex: 1;">
+              <div style="font-weight: 700; font-size: 0.88rem; color: var(--color-text-primary);">第 4 站：恐嚇釋放</div>
+              <div style="font-size: 0.78rem; color: var(--color-text-muted);">聽從官長或聽從上帝，不能不說</div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-action-primary);">4:13-22 &rarr;</span>
+          </a>
+          <a href="#act-5" class="hero-route-item" style="display: flex; align-items: center; gap: 0.85rem; padding: 0.65rem 0.85rem; background: var(--color-surface-subtle); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-sm); text-decoration: none; color: inherit; transition: all 0.2s ease;">
+            <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--color-action-primary); color: var(--color-action-text); font-weight: 700; font-size: 0.8rem;">5</span>
+            <div style="flex: 1;">
+              <div style="font-weight: 700; font-size: 0.88rem; color: var(--color-text-primary);">第 5 站：同心禱告</div>
+              <div style="font-size: 0.78rem; color: var(--color-text-muted);">求主賜大膽量，聚會處震動得力</div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-action-primary);">4:23-31 &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 分鐘超速掌握板塊：核心全貌 -->
+    <section class="fast-summary-section" id="sec-fast-summary" aria-label="3分鐘全景速讀">
+      <div class="fast-summary-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span class="fast-summary-badge">⚡ 3-MIN EXECUTIVE SUMMARY</span>
+          <h2 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin: 0;">
+            三分鐘看懂使徒行傳 3-4 章：衝突與放膽見證
+          </h2>
+        </div>
+        <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--color-action-primary);">
+          極速導讀：10 秒掌握關鍵事實
+        </span>
+      </div>
+
+      <div class="fast-summary-grid">
+        <div class="fast-point-card">
+          <div class="fast-point-step">STAGE 01 · 美門醫治 (Acts 3:1-10)</div>
+          <div class="fast-point-title">金銀我都沒有，但給你耶穌的名</div>
+          <div class="fast-point-eli5">
+            <strong>白話核心：</strong> 瘸腿者原本只求零錢度日，彼得宣告耶穌的名使他完全痊癒，且絲毫不歸功自己。
+          </div>
+        </div>
+
+        <div class="fast-point-card">
+          <div class="fast-point-step">STAGE 02 · 廊下講道 (Acts 3:11-26)</div>
+          <div class="fast-point-title">這不是我們的能力，是復活的主</div>
+          <div class="fast-point-eli5">
+            <strong>白話核心：</strong> 面對驚訝圍聚的群眾，彼得立刻推開個人光環，直指是上帝使耶穌復活醫治了這人。
+          </div>
+        </div>
+
+        <div class="fast-point-card">
+          <div class="fast-point-step">STAGE 03 · 公會受審 (Acts 4:1-12)</div>
+          <div class="fast-point-title">遭收押受審！除祂以外別無拯救</div>
+          <div class="fast-point-eli5">
+            <strong>白話核心：</strong> 宗教領袖因不滿宣講復活而收押門徒；受審時彼得滿有膽量，宣告天下人間唯有耶穌能拯救。
+          </div>
+        </div>
+
+        <div class="fast-point-card">
+          <div class="fast-point-step">STAGE 04 · 恐嚇釋放 (Acts 4:13-22)</div>
+          <div class="fast-point-title">聽你們還是聽上帝？不能不說！</div>
+          <div class="fast-point-eli5">
+            <strong>白話核心：</strong> 官長見平民門徒極有膽量，只能嚴令封口；門徒堅定表明上帝優先，無法保持沉默。
+          </div>
+        </div>
+
+        <div class="fast-point-card">
+          <div class="fast-point-step">STAGE 05 · 同心禱告 (Acts 4:23-31)</div>
+          <div class="fast-point-title">不求消滅仇敵，求賜更大膽量！</div>
+          <div class="fast-point-eli5">
+            <strong>白話核心：</strong> 獲釋後信徒不求風平浪靜或仇敵遭報，而是同心求主賜下更大膽量，禱告完聚會處震動得力。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-heading-wrap">
+      <h2 class="section-heading">衝突與見證歷程分層解析</h2>
+      <span class="section-subhead">CHRONOLOGICAL EVENT MAP & SANCTUARY ANALYSIS</span>
+    </div>
+
+    <div class="story-stage-wrap">
+      
+      <aside class="sticky-stage-col" aria-label="局勢壓力與膽量雙線歷程圖解">
+        <div class="stage-canvas-panel">
+          <div class="stage-toolbar">
+            <div class="stage-toolbar-title">
+              <svg width="18" height="18" style="color: var(--color-action-primary);"><use href="#icon-compass"></use></svg>
+              <span>局勢壓力 vs 門徒膽量 · 雙線歷程</span>
+            </div>
+            <div class="stage-actions">
+              <button class="btn-step" id="btn-play-tour" aria-label="自動步進播放">
+                <svg width="14" height="14" id="play-icon"><use href="#icon-play"></use></svg>
+                <span id="play-label">導覽</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="svg-stage-container">
+            <svg class="svg-stage" viewBox="0 0 520 260" role="img" aria-label="局勢威脅與門徒膽量隨時間推進之雙線對比圖">
+              <!-- 圖例說明 -->
+              <g transform="translate(60, 20)">
+                <line x1="0" y1="0" x2="24" y2="0" stroke="var(--color-accent-crimson)" stroke-width="2.5" stroke-dasharray="4,3" />
+                <circle cx="12" cy="0" r="3" fill="var(--color-accent-crimson)" />
+                <text x="32" y="4" fill="var(--color-text-muted)" font-family="var(--font-sans)" font-size="11">外部威脅 (圍觀 &rarr; 收押 &rarr; 恐嚇 &rarr; 釋放)</text>
+              </g>
+              <g transform="translate(320, 20)">
+                <line x1="0" y1="0" x2="24" y2="0" stroke="var(--color-action-primary)" stroke-width="3" />
+                <circle cx="12" cy="0" r="3" fill="var(--color-action-primary)" />
+                <text x="32" y="4" fill="var(--color-action-primary)" font-family="var(--font-sans)" font-size="11" font-weight="700">門徒膽量 (順從上帝 &rarr; 震動)</text>
+              </g>
+
+              <!-- 背景座標格線 -->
+              <g opacity="0.25">
+                <line x1="60" y1="50" x2="480" y2="50" stroke="var(--color-border-subtle)" stroke-dasharray="2,2"/>
+                <line x1="60" y1="110" x2="480" y2="110" stroke="var(--color-border-subtle)" stroke-dasharray="2,2"/>
+                <line x1="60" y1="170" x2="480" y2="170" stroke="var(--color-border-subtle)" stroke-dasharray="2,2"/>
+                
+                <text x="52" y="54" text-anchor="end" fill="var(--color-text-muted)" font-family="var(--font-mono)" font-size="9">極高</text>
+                <text x="52" y="114" text-anchor="end" fill="var(--color-text-muted)" font-family="var(--font-mono)" font-size="9">中度</text>
+                <text x="52" y="174" text-anchor="end" fill="var(--color-text-muted)" font-family="var(--font-mono)" font-size="9">初始</text>
+              </g>
+
+              <!-- X 軸時間刻度標記 (經文時間點) -->
+              <g transform="translate(0, 195)">
+                <line x1="60" y1="0" x2="480" y2="0" stroke="var(--color-border-strong)" stroke-width="1.5" />
+                
+                <!-- 站點 1 -->
+                <line x1="70" y1="0" x2="70" y2="6" stroke="var(--color-border-strong)" />
+                <text x="70" y="18" text-anchor="middle" fill="var(--color-text-primary)" font-family="var(--font-sans)" font-size="11" font-weight="700">1. 美門</text>
+                <text x="70" y="32" text-anchor="middle" fill="var(--color-text-muted)" font-family="var(--font-mono)" font-size="9">15:00 申初</text>
+
+                <!-- 站點 2 -->
+                <line x1="165" y1="0" x2="165" y2="6" stroke="var(--color-border-strong)" />
+                <text x="165" y="18" text-anchor="middle" fill="var(--color-text-primary)" font-family="var(--font-sans)" font-size="11" font-weight="700">2. 廊下</text>
+                <text x="165" y="32" text-anchor="middle" fill="var(--color-text-muted)" font-family="var(--font-mono)" font-size="9">群眾圍觀</text>
+
+                <!-- 站點 3 -->
+                <line x1="265" y1="0" x2="265" y2="6" stroke="var(--color-border-strong)" />
+                <text x="265" y="18" text-anchor="middle" fill="var(--color-text-primary)" font-family="var(--font-sans)" font-size="11" font-weight="700">3. 公會</text>
+                <text x="265" y="32" text-anchor="middle" fill="var(--color-text-muted)" font-family="var(--font-mono)" font-size="9">當夜收押/隔日審</text>
+
+                <!-- 站點 4 -->
+                <line x1="365" y1="0" x2="365" y2="6" stroke="var(--color-border-strong)" />
+                <text x="365" y="18" text-anchor="middle" fill="var(--color-text-primary)" font-family="var(--font-sans)" font-size="11" font-weight="700">4. 威嚇</text>
+                <text x="365" y="32" text-anchor="middle" fill="var(--color-text-muted)" font-family="var(--font-mono)" font-size="9">法庭下禁令</text>
+
+                <!-- 站點 5 -->
+                <line x1="465" y1="0" x2="465" y2="6" stroke="var(--color-border-strong)" />
+                <text x="465" y="18" text-anchor="middle" fill="var(--color-text-primary)" font-family="var(--font-sans)" font-size="11" font-weight="700">5. 震動</text>
+                <text x="465" y="32" text-anchor="middle" fill="var(--color-text-muted)" font-family="var(--font-mono)" font-size="9">獲釋後同心禱告</text>
+              </g>
+
+              <!-- 兩線間張力區域高亮 (預設 subtle) -->
+              <polygon id="tension-area" points="70,165 165,135 265,90 365,70 465,50 465,150 365,65 265,75 165,150 70,175" fill="var(--color-action-primary)" opacity="0.06" />
+
+              <!-- 折線 1：威脅線 (紅虛線: 初始平靜 -> 群眾騷動 -> 當夜收押 -> 嚴令威嚇 -> 獲釋放人) -->
+              <path d="M 70 175 L 165 150 L 265 75 L 365 65 L 465 150" fill="none" stroke="var(--color-accent-crimson)" stroke-width="2.5" stroke-dasharray="5,4" />
+              <circle cx="70" cy="175" r="3.5" fill="var(--color-accent-crimson)" />
+              <circle cx="165" cy="150" r="3.5" fill="var(--color-accent-crimson)" />
+              <circle cx="265" cy="75" r="4.5" fill="var(--color-accent-crimson)" />
+              <circle cx="365" cy="65" r="4.5" fill="var(--color-accent-crimson)" />
+              <circle cx="465" cy="150" r="3.5" fill="var(--color-accent-crimson)" />
+
+              <!-- 折線 2：膽量線 (金實線: 宣告醫治 -> 放膽講道 -> 聖靈充滿受審 -> 據理抗辯 -> 震動爆發) -->
+              <path d="M 70 165 L 165 135 L 265 90 L 365 70 L 465 50" fill="none" stroke="var(--color-action-primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+
+              <!-- 5 個互動節點 -->
+              <g class="svg-node active" id="node-act-1" tabindex="0" role="button" aria-label="第 1 站：美門醫治" transform="translate(70, 165)">
+                <circle class="node-glow pulse-glow" r="20" fill="var(--color-action-primary)" opacity="0.25"></circle>
+                <circle class="node-core" r="12" fill="var(--color-action-primary)" stroke="#0E0C0A" stroke-width="2"></circle>
+                <circle r="26" fill="transparent"></circle>
+                <text text-anchor="middle" dy="4" fill="#0E0C0A" font-family="var(--font-mono)" font-size="10" font-weight="800">1</text>
+              </g>
+
+              <g class="svg-node" id="node-act-2" tabindex="0" role="button" aria-label="第 2 站：廊下講道" transform="translate(165, 135)">
+                <circle class="node-glow" r="16" fill="var(--color-action-primary)" opacity="0.15"></circle>
+                <circle class="node-core" r="12" fill="var(--color-action-primary)" stroke="#0E0C0A" stroke-width="2"></circle>
+                <circle r="26" fill="transparent"></circle>
+                <text text-anchor="middle" dy="4" fill="#0E0C0A" font-family="var(--font-mono)" font-size="10" font-weight="800">2</text>
+              </g>
+
+              <g class="svg-node" id="node-act-3" tabindex="0" role="button" aria-label="第 3 站：公會受審" transform="translate(265, 90)">
+                <circle class="node-glow" r="16" fill="var(--color-action-primary)" opacity="0.15"></circle>
+                <circle class="node-core" r="12" fill="var(--color-action-primary)" stroke="#0E0C0A" stroke-width="2"></circle>
+                <circle r="26" fill="transparent"></circle>
+                <text text-anchor="middle" dy="4" fill="#0E0C0A" font-family="var(--font-mono)" font-size="10" font-weight="800">3</text>
+              </g>
+
+              <g class="svg-node" id="node-act-4" tabindex="0" role="button" aria-label="第 4 站：恐嚇釋放" transform="translate(365, 70)">
+                <circle class="node-glow" r="16" fill="var(--color-action-primary)" opacity="0.15"></circle>
+                <circle class="node-core" r="12" fill="var(--color-action-primary)" stroke="#0E0C0A" stroke-width="2"></circle>
+                <circle r="26" fill="transparent"></circle>
+                <text text-anchor="middle" dy="4" fill="#0E0C0A" font-family="var(--font-mono)" font-size="10" font-weight="800">4</text>
+              </g>
+
+              <g class="svg-node" id="node-act-5" tabindex="0" role="button" aria-label="第 5 站：同心禱告" transform="translate(465, 50)">
+                <circle class="node-glow" r="18" fill="var(--color-action-primary)" opacity="0.2"></circle>
+                <circle class="node-core" r="12" fill="var(--color-action-primary)" stroke="#0E0C0A" stroke-width="2"></circle>
+                <circle r="26" fill="transparent"></circle>
+                <text text-anchor="middle" dy="4" fill="#0E0C0A" font-family="var(--font-mono)" font-size="10" font-weight="800">5</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="stage-detail-card" id="stage-detail-card" aria-live="polite">
+            <div class="detail-card-header">
+              <span class="detail-card-badge" id="card-badge">STAGE 01</span>
+              <span class="detail-card-scripture" id="card-scripture">使徒行傳 3:6</span>
+            </div>
+            <h3 class="detail-card-title" id="card-title">美門口的醫治 · 奉主名宣告</h3>
+            <p class="detail-card-body" id="card-body">
+              「金銀我都沒有，只把我所有的給你：奉拿撒勒人耶穌基督的名，叫你起來行走！」
+            </p>
+          </div>
+        </div>
+      </aside>
+
+      <div class="story-stream-col">
+
+        <article class="story-act-card in-view" id="act-1" data-node="node-act-1">
+          <div class="act-header">
+            <span class="act-number">1</span>
+            <h3 class="act-title">美門口的醫治</h3>
+            <span class="act-ref">使徒行傳 3:1-10</span>
+          </div>
+          <p class="act-text">
+            申初禱告時分，Peter 與 John 在美門口遇見生來瘸腿者求賙濟 (3:1-2)。門徒直言沒有金銀，但奉拿撒勒人耶穌基督的名叫他起來行走 (3:6)。那人生來的無力雙腳立刻恢復力氣，走著跳著讚美上帝，全場驚異 (3:8-10)。
+          </p>
+          <div class="act-keynote">
+            不聚焦於零錢施捨，直接宣告至高權能使生命徹底翻轉，並完全歸榮耀給神。
+          </div>
+        </article>
+
+        <article class="story-act-card" id="act-2" data-node="node-act-2">
+          <div class="act-header">
+            <span class="act-number">2</span>
+            <h3 class="act-title">所羅門廊下的講道</h3>
+            <span class="act-ref">使徒行傳 3:11-26</span>
+          </div>
+          <p class="act-text">
+            群眾驚訝圍聚在 Solomon 廊下。Peter 當眾澄清這不是靠個人虔誠或能力 (3:11-12)；百姓雖藉 Pilate 殺害耶穌，上帝卻叫祂從死裡復活。正是因信耶穌的名使此人痊癒，彼得藉此呼籲眾人悔改歸正 (3:13-19)。
+          </p>
+          <div class="act-keynote">
+            拒絕歸功於己，直指十字架與復活的歷史事實，將群眾焦點引向耶穌基督。
+          </div>
+        </article>
+
+        <article class="story-act-card" id="act-3" data-node="node-act-3">
+          <div class="act-header">
+            <span class="act-number">3</span>
+            <h3 class="act-title">公會受審與宣告</h3>
+            <span class="act-ref">使徒行傳 4:1-12</span>
+          </div>
+          <p class="act-text">
+            祭司與不信復活的 Sadducees 惱怒門徒傳講耶穌復活，因而將其收押 (4:1-3)。隔日大祭司 Annas、Caiaphas 質問憑何權柄行事 (4:5-7)；Peter 被聖靈充滿，在公會法庭放膽宣告：除祂以外別無拯救，天下人間沒有賜下別的名我們可以靠著得救 (4:8-12)。
+          </p>
+          <div class="act-keynote">
+            聖靈掌管人心，使平凡小民在至高政治與宗教權力面前毫無畏懼。
+          </div>
+        </article>
+
+        <article class="story-act-card" id="act-4" data-node="node-act-4">
+          <div class="act-header">
+            <span class="act-number">4</span>
+            <h3 class="act-title">恐嚇與釋放</h3>
+            <span class="act-ref">使徒行傳 4:13-22</span>
+          </div>
+          <p class="act-text">
+            官長見門徒原是沒有學問的小民，卻有非凡膽量，且見被治癒者站在身旁而無法反駁 (4:13-14)。官長嚴令恐嚇不得再奉耶穌的名教導人；Peter 與 John 平靜回答：聽從你們還是聽從上帝，你們自己判斷，我們所看見所聽見的不能不說 (4:18-20)。
+          </p>
+          <div class="act-keynote">
+            確立原則：面對世俗威脅與上帝真理衝突時，順從上帝是唯一優先。
+          </div>
+        </article>
+
+        <article class="story-act-card" id="act-5" data-node="node-act-5">
+          <div class="act-header">
+            <span class="act-number">5</span>
+            <h3 class="act-title">同心禱告得膽量</h3>
+            <span class="act-ref">使徒行傳 4:23-31</span>
+          </div>
+          <p class="act-text">
+            獲釋後門徒回到信徒當中，眾人引述 David 詩篇同心合意禱告 (4:23-26)。禱告不求報復仇敵或免除風浪，只求主鑑察恐嚇、賜僕人大有膽量講論真道；禱告完畢聚會之處震動，眾人全被聖靈充滿，放膽傳道 (4:29-31)。
+          </p>
+          <div class="act-keynote">
+            群體同心禱告，不求避開風浪，專注祈求放膽傳道。
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="section-heading-wrap" id="sec-examples">
+      <h2 class="section-heading" id="examples-title">使徒行傳 3-4 章 實踐準則矩陣</h2>
+      <span class="section-subhead">PRACTICAL APPLICATION & ANTI-PATTERNS</span>
+    </div>
+    <p style="font-size: 0.95rem; color: var(--color-text-secondary); margin-top: -1.5rem; margin-bottom: 2rem;">
+      將經文中的勇氣、歸功原則與群體動態轉化為日常具體決策指標：
+    </p>
+
+    <div class="matrix-box" style="margin-bottom: 5rem;">
+      <div class="matrix-col positive">
+        <div class="matrix-col-title">
+          <svg width="18" height="18"><use href="#icon-check"></use></svg>
+          <span>可以這樣做 (Aligned Actions)</span>
+        </div>
+        <ul class="matrix-list">
+          <li class="matrix-item">
+            當團隊把專案成功全歸功於你時，主動說出是夥伴協作與機會促成，不把功勞全攬在自己身上。
+          </li>
+          <li class="matrix-item">
+            在群體討論中遇到壓力時，平靜但堅定地講出事實，不因為怕得罪人而附和明顯錯誤的決定。
+          </li>
+        </ul>
+      </div>
+
+      <div class="matrix-col negative">
+        <div class="matrix-col-title">
+          <svg width="18" height="18" style="color: var(--color-accent-crimson);"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><line x1="15" y1="9" x2="9" y2="15" stroke="currentColor" stroke-width="2"/></svg>
+          <span>避免這樣 (Anti-Patterns)</span>
+        </div>
+        <ul class="matrix-list">
+          <li class="matrix-item">
+            幫助了別人之後，私下或公開到處宣揚自己的善行，期待所有人對你感恩戴德。
+          </li>
+          <li class="matrix-item">
+            遇到反對聲音或利益威脅時，立刻放棄原則妥協，甚至把責任推給別人。
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-heading-wrap">
+      <h2 class="section-heading">延伸深度神學與經文解析</h2>
+      <span class="section-subhead">THEOLOGICAL EXEGESIS & COMPARATIVE SCRIPTURES</span>
+    </div>
+
+    <div class="tool-grid">
+
+      <div class="tool-card" id="sec-nazareth">
+        <h3 class="tool-card-title">「拿撒勒人」的稱呼與意涵探析</h3>
+        <p class="tool-card-desc">
+          Nazareth 是位於以色列北部 Galilee 地區的偏遠山區小鎮，主流眼光中被視為不可能出大人物之處。
+        </p>
+
+        <div class="tab-nav" role="tablist">
+          <button class="tab-btn active" role="tab" data-tab-group="nazareth" data-target-tab="naz-1">1. 地理與身分</button>
+          <button class="tab-btn" role="tab" data-tab-group="nazareth" data-target-tab="naz-2">2. 謙卑與藐視</button>
+          <button class="tab-btn" role="tab" data-tab-group="nazareth" data-target-tab="naz-3">3. 權能的對比</button>
+        </div>
+
+        <div class="tab-pane active" id="naz-1">
+          <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.75;">
+            <strong>地理識別：</strong> 耶穌生於 Bethlehem，長於偏遠小鎮 Nazareth。當時猶太人習慣加註家鄉區分同名者，「拿撒勒人耶穌」是具體身分標籤。
+          </p>
+        </div>
+        <div class="tab-pane" id="naz-2">
+          <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.75;">
+            <strong>謙卑被藐視：</strong> 門徒 Nathaniel 曾說「拿撒勒還能出什麼好的嗎」。拿撒勒象徵出身貧寒、無名小民，在主流社會眼中飽受偏見與輕看。
+          </p>
+        </div>
+        <div class="tab-pane" id="naz-3">
+          <p style="font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.75;">
+            <strong>權能反差：</strong> Peter 宣告「奉拿撒勒人耶穌的名」，刻意把世人藐視的木匠之子，與上帝復活的大能連結，顯明上帝權能遠超世俗階級。
+          </p>
+        </div>
+      </div>
+
+      <div class="tool-card" id="sec-matthew">
+        <h3 class="tool-card-title">馬太福音 22:23-46 宗教領袖辯駁</h3>
+        <p class="tool-card-desc">
+          宗教領袖連環出題設局，耶穌以聖經核心化解刁難，反問彌賽亞本質讓全場靜默。
+        </p>
+
+        <div class="tab-nav" role="tablist">
+          <button class="tab-btn active" role="tab" data-tab-group="matthew" data-target-tab="mat-1">復活難題</button>
+          <button class="tab-btn" role="tab" data-tab-group="matthew" data-target-tab="mat-2">最大的誡命</button>
+          <button class="tab-btn" role="tab" data-tab-group="matthew" data-target-tab="mat-3">基督的身分</button>
+          <button class="tab-btn" role="tab" data-tab-group="matthew" data-target-tab="mat-4">應用實踐</button>
+        </div>
+
+        <div class="tab-pane active" id="mat-1">
+          <p style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.75;">
+            <strong>Sadducees 假想題：</strong> 拿七兄弟娶同房婦人問復活歸誰 (22:23-28)。<br>
+            <strong>耶穌破局：</strong> 直指對方不明白聖經與上帝大能；復活後如同使者不娶不嫁，且上帝宣告是 Abraham、Isaac、Jacob 的上帝，「上帝是活人的上帝，不是死人的上帝」(22:29-32)。
+          </p>
+        </div>
+        <div class="tab-pane" id="mat-2">
+          <p style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.75;">
+            <strong>律法師設陷阱：</strong> 試探哪條誡命最大 (22:34-36)。<br>
+            <strong>耶穌總綱：</strong> 第一是盡心、盡性、盡意愛主上帝；其次是愛人如己。兩大誡命是整部律法與先知的總綱 (22:37-40)。
+          </p>
+        </div>
+        <div class="tab-pane" id="mat-3">
+          <p style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.75;">
+            <strong>反問基督身分：</strong> Pharisees 稱基督是 David 子孫 (22:41-42)。<br>
+            <strong>耶穌引詩篇：</strong> David 受聖靈感動稱基督為「我主」；若 David 稱祂為主，基督豈僅是子孫？辯者啞口無言，再無人敢刁難 (22:43-46)。
+          </p>
+        </div>
+        <div class="tab-pane" id="mat-4">
+          <p style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.75;">
+            <strong>實踐指標：</strong><br>
+            1. <em>可以這樣做：</em> 抓本質看問題，回到根本定義，不用情緒回擊惡意刁難。<br>
+            2. <em>避免這樣：</em> 拿極端罕見的邊界案例推翻大原則；只看單一維度而忽略全貌。
+          </p>
+        </div>
+      </div>
+
+      <div class="tool-card" id="sec-philippians">
+        <h3 class="tool-card-title">腓立比書 2:5-8 基督虛己頌歌</h3>
+        <p class="tool-card-desc">
+          新約著名的「基督頌歌」核心：基督自願放下特權，降卑成為僕人並順服至死。
+        </p>
+
+        <div class="tab-nav" role="tablist">
+          <button class="tab-btn active" role="tab" data-tab-group="philippians" data-target-tab="phil-1">經文與義理</button>
+          <button class="tab-btn" role="tab" data-tab-group="philippians" data-target-tab="phil-2">實踐應用檢視</button>
+        </div>
+
+        <div class="tab-pane active" id="phil-1">
+          <div style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.75; display: flex; flex-direction: column; gap: 0.75rem;">
+            <div>
+              <strong style="color: var(--color-action-primary);">以基督為心：</strong>
+              Paul 勸勉群體生活應具備耶穌基督的心腸與態度 (2:5)。
+            </div>
+            <div>
+              <strong style="color: var(--color-action-primary);">虛己放下特權：</strong>
+              基督本與上帝同等，卻不把同等地位當作緊抓不放的特權，自願倒空自己取了奴僕形像 (2:6-7)。
+            </div>
+            <div>
+              <strong style="color: var(--color-action-primary);">順服降卑至死：</strong>
+              既為人樣便徹底順服，甘願受辱死於十字架 (2:8)。
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane" id="phil-2">
+          <div style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.75; display: flex; flex-direction: column; gap: 0.75rem;">
+            <div style="background: rgba(16, 185, 129, 0.05); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid rgba(16, 185, 129, 0.2);">
+              <strong style="color: var(--color-accent-green);">可以這樣做：</strong><br>
+              1. 身處資深或主導地位時，主動放下身段承擔基層瑣事。<br>
+              2. 面對資源與權力競爭時，優先著眼群體益處，不抓特權不放。
+            </div>
+            <div style="background: rgba(239, 68, 68, 0.05); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid rgba(239, 68, 68, 0.2);">
+              <strong style="color: var(--color-accent-crimson);">避免這樣：</strong><br>
+              1. 倚仗資歷、名銜或能力，要求他人無條件順從服務。<br>
+              2. 僅在有光環或掌聲時配合，需放下身段妥協時便抗拒推諉。
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="section-heading-wrap" id="sec-terms">
+      <h2 class="section-heading" id="terms-title">專有名詞與人名地名考證對照表</h2>
+      <span class="section-subhead">HISTORICAL NOMENCLATURE & ONOMASTICS</span>
+    </div>
+    
+    <div class="term-controls">
+      <div class="search-input-wrap">
+        <svg class="search-icon"><use href="#icon-search"></use></svg>
+        <input type="text" id="term-search" class="search-input" placeholder="即時篩選人名、地名或中文譯名 (如 Peter, 亞那, Nazareth)..." aria-label="專有名詞搜尋輸入框">
+      </div>
+      <div class="term-count" id="term-count-display">共 16 項專名完全對照</div>
+    </div>
+
+      <div class="term-table-wrapper">
+        <table class="term-table" id="term-table">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 25%;">英文原文標記</th>
+              <th scope="col" style="width: 25%;">中文通用譯名</th>
+              <th scope="col" style="width: 50%;">出現經文脈絡與身分說明</th>
+            </tr>
+          </thead>
+          <tbody id="term-tbody">
+            <tr>
+              <td class="term-en">Peter</td>
+              <td>彼得</td>
+              <td>使徒行傳 3:1、3:6、4:8，於美門醫治瘸腿者並於公會宣告天下人間別無拯救。</td>
+            </tr>
+            <tr>
+              <td class="term-en">John</td>
+              <td>約翰</td>
+              <td>使徒行傳 3:1、4:13，與彼得同行上殿禱告，同受公會審問平民門徒。</td>
+            </tr>
+            <tr>
+              <td class="term-en">Solomon</td>
+              <td>所羅門</td>
+              <td>使徒行傳 3:11，聖殿「所羅門廊下」，彼得對驚訝群眾宣告耶穌復活與得救之道。</td>
+            </tr>
+            <tr>
+              <td class="term-en">Pilate</td>
+              <td>彼拉多</td>
+              <td>使徒行傳 3:13，羅馬巡撫，眾人定意定罪而將耶穌交給他殺害。</td>
+            </tr>
+            <tr>
+              <td class="term-en">Sadducees</td>
+              <td>撒都該人</td>
+              <td>使徒行傳 4:1、馬太福音 22:23，猶太貴族祭司黨派，不相信死人復活。</td>
+            </tr>
+            <tr>
+              <td class="term-en">Annas</td>
+              <td>亞那</td>
+              <td>使徒行傳 4:6，前任猶太前大祭司，公會重要審訊權力領袖。</td>
+            </tr>
+            <tr>
+              <td class="term-en">Caiaphas</td>
+              <td>該亞法</td>
+              <td>使徒行傳 4:6，現任猶太大祭司，主持審問彼得與約翰憑何權柄行事。</td>
+            </tr>
+            <tr>
+              <td class="term-en">David</td>
+              <td>大衛</td>
+              <td>使徒行傳 4:25、馬太福音 22:42，以色列君王，詩篇作者，門徒禱告引述其詩篇。</td>
+            </tr>
+            <tr>
+              <td class="term-en">Nazareth</td>
+              <td>拿撒勒</td>
+              <td>使徒行傳 3:6，加利利偏僻山區小鎮，耶穌成長之處，世人眼中的卑微標記。</td>
+            </tr>
+            <tr>
+              <td class="term-en">Galilee</td>
+              <td>加利利</td>
+              <td>以色列北部地區，拿撒勒所在地，遠離耶路撒冷政治與宗教主流核心。</td>
+            </tr>
+            <tr>
+              <td class="term-en">Bethlehem</td>
+              <td>伯利恆</td>
+              <td>猶太南部大衛之城，耶穌降生之處。</td>
+            </tr>
+            <tr>
+              <td class="term-en">Nathaniel</td>
+              <td>拿但業</td>
+              <td>約翰福音門徒，曾言「拿撒勒還能出什麼好的嗎」，顯明當時對該地的蔑視。</td>
+            </tr>
+            <tr>
+              <td class="term-en">Moses</td>
+              <td>摩西</td>
+              <td>馬太福音 22:24，頒布律法之先知，撒都該人引其弟娶嫂條例設局。</td>
+            </tr>
+            <tr>
+              <td class="term-en">Abraham / Isaac / Jacob</td>
+              <td>亞伯拉罕 / 以撒 / 雅各</td>
+              <td>馬太福音 22:32，以色列列祖；耶穌用「我是活人的上帝」反駁撒都該人。</td>
+            </tr>
+            <tr>
+              <td class="term-en">Pharisees</td>
+              <td>法利賽人</td>
+              <td>馬太福音 22:34，嚴守口傳律法宗派，試探耶穌何為最大誡命。</td>
+            </tr>
+            <tr>
+              <td class="term-en">Paul</td>
+              <td>保羅</td>
+              <td>腓立比書 2:5，使徒，書信勸勉眾人應當以基督耶穌的心為心。</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="empty-state" id="term-empty">
+          查無符合「<span id="empty-query"></span>」的專有名詞項目。
+        </div>
+      </div>
+    </div>
+
+    <footer class="source-section" aria-labelledby="sources-title">
+      <div class="section-heading-wrap" style="border-bottom: none; margin-bottom: 0.5rem; padding-bottom: 0;">
+        <h2 class="section-heading" id="sources-title">資料出處與考證來源</h2>
+        <span class="section-subhead">CANONICAL SCRIPTURE & EXEGESIS SOURCES</span>
+      </div>
+      <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">
+        所有文本均嚴格對照定案研讀材料與公開聖經文本（Bible Gateway CCB / NIV），完整呈現可驗證位址：
+      </p>
+
+      <div class="source-grid">
+        <div class="source-item">
+          <span class="source-title">Acts 3 (CCB) · 使徒行傳第三章 當代譯本</span>
+          <a class="source-url" href="https://www.biblegateway.com/passage/?search=Acts+3&version=CCB" target="_blank" rel="noopener noreferrer">https://www.biblegateway.com/passage/?search=Acts+3&version=CCB</a>
+        </div>
+        <div class="source-item">
+          <span class="source-title">Acts 4 (CCB) · 使徒行傳第四章 當代譯本</span>
+          <a class="source-url" href="https://www.biblegateway.com/passage/?search=Acts+4&version=CCB" target="_blank" rel="noopener noreferrer">https://www.biblegateway.com/passage/?search=Acts+4&version=CCB</a>
+        </div>
+        <div class="source-item">
+          <span class="source-title">Acts 3 (NIV) · Acts Chapter 3 New International Version</span>
+          <a class="source-url" href="https://www.biblegateway.com/passage/?search=Acts+3&version=NIV" target="_blank" rel="noopener noreferrer">https://www.biblegateway.com/passage/?search=Acts+3&version=NIV</a>
+        </div>
+        <div class="source-item">
+          <span class="source-title">Acts 4 (NIV) · Acts Chapter 4 New International Version</span>
+          <a class="source-url" href="https://www.biblegateway.com/passage/?search=Acts+4&version=NIV" target="_blank" rel="noopener noreferrer">https://www.biblegateway.com/passage/?search=Acts+4&version=NIV</a>
+        </div>
+        <div class="source-item">
+          <span class="source-title">Matthew 22:23-46 (NIV) · 復活與最大誡命辯駁</span>
+          <a class="source-url" href="https://www.biblegateway.com/passage/?search=Matthew+22%3A23-46&version=NIV" target="_blank" rel="noopener noreferrer">https://www.biblegateway.com/passage/?search=Matthew+22%3A23-46&version=NIV</a>
+        </div>
+        <div class="source-item">
+          <span class="source-title">Philippians 2:5-8 (NIV) · 基督降卑順服頌歌</span>
+          <a class="source-url" href="https://www.biblegateway.com/passage/?search=Philippians+2%3A5-8&version=NIV" target="_blank" rel="noopener noreferrer">https://www.biblegateway.com/passage/?search=Philippians+2%3A5-8&version=NIV</a>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <div class="toast-container" id="toast-container" role="status" aria-live="polite"></div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      var stageData = {
+        'node-act-1': {
+          badge: 'STAGE 01',
+          scripture: '使徒行傳 3:6',
+          title: '美門口的醫治 · 奉主名宣告',
+          summary10s: '初始威脅低 · 門徒膽量初顯',
+          body: '「金銀我都沒有，只把我所有的給你：奉拿撒勒人耶穌基督的名，叫你起來行走！」'
+        },
+        'node-act-2': {
+          badge: 'STAGE 02',
+          scripture: '使徒行傳 3:12, 16',
+          title: '廊下講道 · 拒攬神力功勞',
+          summary10s: '群眾騷動圍觀 · 歸榮耀於復活基督',
+          body: '「為什麼把我們當作靠自己能力行事？正是因著信祂的名，耶穌的名使這人在你們面前完全痊癒了！」'
+        },
+        'node-act-3': {
+          badge: 'STAGE 03',
+          scripture: '使徒行傳 4:10, 12',
+          title: '公會受審 · 別無拯救宣告',
+          summary10s: '當夜收押隔日受審 · 聖靈充滿毫無畏懼',
+          body: '「除祂以外，別無拯救；因為在天下人間，沒有賜下別的名，我們可以靠著得救！」'
+        },
+        'node-act-4': {
+          badge: 'STAGE 04',
+          scripture: '使徒行傳 4:19-20',
+          title: '嚴禁威嚇 · 劃定上帝優先',
+          summary10s: '法庭嚴令封口 · 堅決無法保持沉默',
+          body: '「聽從你們而不聽從上帝，在上帝面前合不合理，你們自己判斷吧！我們所看見、所聽見的，不能不說！」'
+        },
+        'node-act-5': {
+          badge: 'STAGE 05',
+          scripture: '使徒行傳 4:29-31',
+          title: '同心合意 · 禱告震動得力',
+          summary10s: '外部威脅暫退 · 聖靈大能震動全場',
+          body: '「主啊，求祢鑑察他們的恐嚇，賜僕人大有膽量傳講祢的道！……禱告完了，聚會的地方震動，他們都被聖靈充滿，放膽傳道。」'
+        }
+      };
+
+      var activeNodeId = 'node-act-1';
+      var isTourPlaying = false;
+      var tourInterval = null;
+      var nodeKeys = ['node-act-1', 'node-act-2', 'node-act-3', 'node-act-4', 'node-act-5'];
+
+      var hudProgress = document.getElementById('hud-progress');
+      var navPills = document.querySelectorAll('.nav-pill');
+      var svgNodes = document.querySelectorAll('.svg-node');
+      var storyCards = document.querySelectorAll('.story-act-card');
+      var cardBadge = document.getElementById('card-badge');
+      var cardScripture = document.getElementById('card-scripture');
+      var cardTitle = document.getElementById('card-title');
+      var cardBody = document.getElementById('card-body');
+      var stageCard = document.getElementById('stage-detail-card');
+      var btnPlayTour = document.getElementById('btn-play-tour');
+      var playIcon = document.getElementById('play-icon');
+      var playLabel = document.getElementById('play-label');
+      var themeToggle = document.getElementById('theme-toggle');
+      var adhdToggle = document.getElementById('adhd-toggle');
+      var termSearch = document.getElementById('term-search');
+      var termTable = document.getElementById('term-table');
+      var termTbody = document.getElementById('term-tbody');
+      var termEmpty = document.getElementById('term-empty');
+      var emptyQuery = document.getElementById('empty-query');
+      var termCountDisplay = document.getElementById('term-count-display');
+      var toastContainer = document.getElementById('toast-container');
+
+      function showToast(message) {
+        var toast = document.createElement('div');
+        toast.className = 'toast-pill';
+        toast.innerHTML = '<svg width="14" height="14" style="color:var(--color-action-primary)"><use href="#icon-check"></use></svg><span>' + message + '</span>';
+        toastContainer.appendChild(toast);
+        setTimeout(function() { toast.classList.add('show'); }, 10);
+        setTimeout(function() {
+          toast.classList.remove('show');
+          setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
+        }, 2800);
+      }
+
+      function updateDetailCard(nodeId) {
+        var data = stageData[nodeId];
+        if (!data) return;
+        activeNodeId = nodeId;
+
+        svgNodes.forEach(function(node) {
+          if (node.id === nodeId) {
+            node.classList.add('active');
+          } else {
+            node.classList.remove('active');
+          }
+        });
+
+        cardBadge.textContent = data.badge;
+        cardScripture.textContent = data.scripture;
+        cardTitle.textContent = data.title;
+        
+        var isAdhd = document.body.classList.contains('adhd-mode');
+        if (isAdhd) {
+          cardBody.innerHTML = '<div style="color:var(--color-accent-blue);font-weight:700;margin-bottom:0.4rem;">' + data.summary10s + '</div>' + data.body;
+        } else {
+          cardBody.textContent = data.body;
+        }
+
+        stageCard.classList.remove('active-pulse');
+        void stageCard.offsetWidth;
+        stageCard.classList.add('active-pulse');
+      }
+
+      svgNodes.forEach(function(node) {
+        node.addEventListener('click', function() {
+          if (isTourPlaying) stopTour();
+          var id = this.id;
+          updateDetailCard(id);
+          var actNum = id.replace('node-act-', 'act-');
+          var targetCard = document.getElementById(actNum);
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+
+        node.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+          }
+        });
+      });
+
+      function startTour() {
+        isTourPlaying = true;
+        playLabel.textContent = '暫停';
+        playIcon.setAttribute('href', '#icon-pause');
+        showToast('開始單輪巡航導覽 (5 站播完即止)');
+
+        var currentIndex = nodeKeys.indexOf(activeNodeId);
+        tourInterval = setInterval(function() {
+          currentIndex++;
+          if (currentIndex >= nodeKeys.length) {
+            stopTour();
+            showToast('導覽結束');
+            return;
+          }
+          var nextNodeId = nodeKeys[currentIndex];
+          updateDetailCard(nextNodeId);
+          var actNum = nextNodeId.replace('node-act-', 'act-');
+          var targetCard = document.getElementById(actNum);
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 3200);
+      }
+
+      function stopTour() {
+        isTourPlaying = false;
+        if (tourInterval) {
+          clearInterval(tourInterval);
+          tourInterval = null;
+        }
+        playLabel.textContent = '導覽';
+        playIcon.setAttribute('href', '#icon-play');
+      }
+
+      window.addEventListener('wheel', function() {
+        if (isTourPlaying) stopTour();
+      }, { passive: true });
+      window.addEventListener('touchmove', function() {
+        if (isTourPlaying) stopTour();
+      }, { passive: true });
+
+      btnPlayTour.addEventListener('click', function() {
+        if (isTourPlaying) {
+          stopTour();
+        } else {
+          startTour();
+        }
+      });
+
+      var observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -40% 0px',
+        threshold: 0
+      };
+
+      var storyObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            storyCards.forEach(function(c) { c.classList.remove('in-view'); });
+            entry.target.classList.add('in-view');
+            var nodeId = entry.target.getAttribute('data-node');
+            if (nodeId && !isTourPlaying) {
+              updateDetailCard(nodeId);
+            }
+
+            var actId = entry.target.id;
+            navPills.forEach(function(pill) {
+              if (pill.getAttribute('data-target') === actId) {
+                pill.classList.add('active');
+              } else {
+                pill.classList.remove('active');
+              }
+            });
+          }
+        });
+      }, observerOptions);
+
+      var allSectionsToObserve = [
+        document.getElementById('act-1'),
+        document.getElementById('act-2'),
+        document.getElementById('act-3'),
+        document.getElementById('act-4'),
+        document.getElementById('act-5'),
+        document.getElementById('sec-examples'),
+        document.getElementById('sec-nazareth'),
+        document.getElementById('sec-matthew'),
+        document.getElementById('sec-philippians'),
+        document.getElementById('sec-terms')
+      ].filter(Boolean);
+
+      allSectionsToObserve.forEach(function(sec) {
+        storyObserver.observe(sec);
+      });
+
+      window.addEventListener('scroll', function() {
+        var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        hudProgress.style.width = scrolled + '%';
+      }, { passive: true });
+
+      navPills.forEach(function(pill) {
+        pill.addEventListener('click', function() {
+          var targetId = this.getAttribute('data-target');
+          var targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            navPills.forEach(function(p) { p.classList.remove('active'); });
+            this.classList.add('active');
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      var tabBtns = document.querySelectorAll('.tab-btn');
+      tabBtns.forEach(function(btn) {
+        if (btn.classList.contains('active')) {
+          btn.setAttribute('aria-selected', 'true');
+        } else {
+          btn.setAttribute('aria-selected', 'false');
+        }
+
+        btn.addEventListener('click', function() {
+          var group = this.getAttribute('data-tab-group');
+          var targetTabId = this.getAttribute('data-target-tab');
+          var parentCard = this.closest('.tool-card');
+
+          parentCard.querySelectorAll('.tab-btn[data-tab-group="' + group + '"]').forEach(function(b) {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          this.classList.add('active');
+          this.setAttribute('aria-selected', 'true');
+
+          parentCard.querySelectorAll('.tab-pane').forEach(function(p) {
+            p.classList.remove('active');
+          });
+          var targetPane = document.getElementById(targetTabId);
+          if (targetPane) {
+            targetPane.classList.add('active');
+          }
+        });
+
+        btn.addEventListener('keydown', function(e) {
+          var nav = this.closest('.tab-nav');
+          if (!nav) return;
+          var tabs = Array.from(nav.querySelectorAll('.tab-btn'));
+          var idx = tabs.indexOf(this);
+          if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            var nextIdx = (idx + 1) % tabs.length;
+            tabs[nextIdx].focus();
+            tabs[nextIdx].click();
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            var prevIdx = (idx - 1 + tabs.length) % tabs.length;
+            tabs[prevIdx].focus();
+            tabs[prevIdx].click();
+          }
+        });
+      });
+
+      termSearch.addEventListener('input', function() {
+        var q = this.value.trim().toLowerCase();
+        var rows = termTbody.querySelectorAll('tr');
+        var matched = 0;
+
+        rows.forEach(function(row) {
+          var text = row.textContent.toLowerCase();
+          if (text.indexOf(q) !== -1) {
+            row.style.display = '';
+            matched++;
+          } else {
+            row.style.display = 'none';
+          }
+        });
+
+        termCountDisplay.textContent = '符合項目：' + matched + ' / ' + rows.length;
+
+        if (matched === 0) {
+          termTable.style.display = 'none';
+          emptyQuery.textContent = q;
+          termEmpty.style.display = 'block';
+        } else {
+          termTable.style.display = 'table';
+          termEmpty.style.display = 'none';
+        }
+      });
+
+      themeToggle.addEventListener('click', function() {
+        var currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        var nextTheme = (currentTheme === 'dark') ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', nextTheme);
+        themeToggle.innerHTML = (nextTheme === 'dark')
+          ? '<svg width="18" height="18"><use href="#icon-sun"></use></svg>'
+          : '<svg width="18" height="18"><use href="#icon-moon"></use></svg>';
+        showToast('已切換為 ' + (nextTheme === 'dark' ? '深色石室' : '淺色羊皮紙') + ' 主題');
+      });
+
+      adhdToggle.addEventListener('click', function() {
+        var isCurrentlyAdhd = document.body.classList.toggle('adhd-mode');
+        this.classList.toggle('active', isCurrentlyAdhd);
+        updateDetailCard(activeNodeId);
+        if (isCurrentlyAdhd) {
+          showToast('⚡ 已啟動 3分鐘快讀模式');
+          var fastBox = document.getElementById('sec-fast-summary');
+          if (fastBox) {
+            fastBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        } else {
+          showToast('已返回完整研讀模式');
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>
