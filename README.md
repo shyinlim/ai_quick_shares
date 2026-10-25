@@ -1,5 +1,6 @@
 # ai_quick_share
 
+- https://shyinlim.github.io/ai_quick_shares/20261025_194025834_seeking_the_lost_sheep_and_saving_sinners.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20261025_194025834_seeking_the_lost_sheep_and_saving_sinners.html)
 - https://shyinlim.github.io/ai_quick_shares/20261011_201212521_acts-3-4-in-the-name-of-jesus.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20261011_201212521_acts-3-4-in-the-name-of-jesus.html)
 - https://shyinlim.github.io/ai_quick_shares/20261003_214833887_covenant-fire-and-holy-spirit.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20261003_214833887_covenant-fire-and-holy-spirit.html)
 - https://shyinlim.github.io/ai_quick_shares/20260913_213113685_from-resurrection-to-revelation.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20260913_213113685_from-resurrection-to-revelation.html)

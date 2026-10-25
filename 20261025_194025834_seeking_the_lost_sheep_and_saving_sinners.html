@@ -1,0 +1,421 @@
+<title>20261025_192925_Seeking_the_Lost_Sheep_and_Saving_Sinners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+/* Layout: hero 標題＋答案 → 兩段經文並排對照（點段落 ↔ 相關生活應用雙向聯動）→ 生活應用 → 來源 */
+:root {
+  --color-surface-base: #F7EFE6;
+  --color-surface-raised: #EDE1D3;
+  --color-text-primary: #0E232B;
+  --color-text-muted: #4A5F66;
+  --color-border: rgba(14,35,43,0.15);
+  --color-action-primary: #B8431B;
+  --color-action-subtle: rgba(184,67,27,0.12);
+  --color-ok: #047857;
+  --color-warn: #B45309;
+  --font: "JetBrains Mono", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", monospace;
+  --hud: 56px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --scroll-progress: 0;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-surface-base: #091B22;
+    --color-surface-raised: #112A34;
+    --color-text-primary: #F9E6D4;
+    --color-text-muted: #C4B09E;
+    --color-border: rgba(249,230,212,0.14);
+    --color-action-primary: #DF6437;
+    --color-action-subtle: rgba(223,100,55,0.18);
+    --color-ok: #10B981;
+    --color-warn: #F59E0B;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --color-surface-base: #091B22;
+  --color-surface-raised: #112A34;
+  --color-text-primary: #F9E6D4;
+  --color-text-muted: #C4B09E;
+  --color-border: rgba(249,230,212,0.14);
+  --color-action-primary: #DF6437;
+  --color-action-subtle: rgba(223,100,55,0.18);
+  --color-ok: #10B981;
+  --color-warn: #F59E0B;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { background: var(--color-surface-base); color: var(--color-text-primary); font-family: var(--font); font-size: 15px; line-height: 1.8; font-variant-numeric: tabular-nums; }
+::selection { background: var(--color-action-primary); color: var(--color-surface-base); }
+:focus-visible { outline: 2px solid var(--color-action-primary); outline-offset: 2px; }
+html { scrollbar-color: var(--color-action-primary) var(--color-surface-base); scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--color-action-primary); border-radius: 9999px; border: 3px solid var(--color-surface-base); }
+::-webkit-scrollbar-track { background: var(--color-surface-base); }
+main { overflow-x: clip; width: 100%; max-width: 100%; }
+.wrap { max-width: 76rem; margin-inline: auto; padding-inline: 16px; }
+@media (min-width: 640px) { .wrap { padding-inline: 32px; } }
+h1, h2, h3 { font-family: var(--font); text-wrap: balance; letter-spacing: -0.02em; margin: 0; line-height: 1.3; }
+p { margin: 0; }
+.ref { font-size: 0.8125rem; color: var(--color-text-muted); white-space: nowrap; }
+button { font: inherit; color: inherit; }
+.ico { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 20px; border-radius: 8px; border: 0; background: var(--color-action-primary); color: var(--color-surface-base); font-weight: 700; white-space: nowrap; cursor: pointer; transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px -8px var(--color-action-primary); }
+.btn:active { transform: scale(0.98); }
+
+#theme { position: fixed; top: calc(env(safe-area-inset-top, 0px) + 6px); right: 12px; z-index: 30; width: 44px; height: 44px; border-radius: 9999px; border: 1px solid var(--color-border); background: var(--color-surface-raised); display: grid; place-items: center; cursor: pointer; transition: transform .4s var(--ease); }
+#theme:hover { transform: translateY(-2px); }
+#theme:active { transform: scale(0.96); }
+#theme .moon { display: none; }
+:root[data-theme="dark"] #theme .sun { display: none; }
+:root[data-theme="dark"] #theme .moon { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) #theme .sun { display: none; }
+  :root:not([data-theme="light"]) #theme .moon { display: block; }
+}
+
+#hud { position: fixed; top: 0; left: 0; right: 0; z-index: 20; padding-top: env(safe-area-inset-top, 0px); background: color-mix(in srgb, var(--color-surface-base) 85%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); transform: translateY(-100%); transition: transform .5s var(--ease); }
+#hud.show { transform: none; }
+@media (prefers-reduced-transparency: reduce) { #hud { background: var(--color-surface-base); backdrop-filter: none; } }
+.hud-row { height: var(--hud); display: flex; align-items: center; padding: 0 64px 0 16px; }
+.pills { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; min-width: 0; }
+.pills::-webkit-scrollbar { display: none; }
+.pill { flex: none; min-height: 36px; padding: 0 14px; border-radius: 9999px; border: 1px solid var(--color-border); background: transparent; color: var(--color-text-muted); font-size: 0.8125rem; font-weight: 700; white-space: nowrap; cursor: pointer; transition: transform .35s var(--ease), background .35s var(--ease), color .35s var(--ease); }
+.pill:hover { transform: translateY(-2px); color: var(--color-text-primary); border-color: var(--color-action-primary); }
+.pill:active { transform: scale(0.97); }
+.pill.on { background: var(--color-action-primary); border-color: var(--color-action-primary); color: var(--color-surface-base); }
+.bar { height: 2px; background: var(--color-action-primary); transform-origin: left; transform: scaleX(var(--scroll-progress)); }
+
+.hero { padding-block: clamp(5rem, 10vw, 8rem) clamp(3rem, 6vw, 5rem); }
+.hero .wrap { max-width: 64rem; display: grid; gap: 1.25rem; justify-items: start; }
+.hero h1 { font-size: clamp(2.25rem, 4.5vw + 1rem, 4.25rem); font-weight: 900; letter-spacing: -0.03em; }
+.hero h1 .accent { color: var(--color-action-primary); }
+.hero .sub { color: var(--color-text-muted); font-size: 0.875rem; }
+.hero .answer { margin-block: .75rem 1rem; font-weight: 700; font-size: clamp(1.125rem, 1vw + 0.85rem, 1.5rem); line-height: 1.85; max-width: 36em; }
+.hero .answer mark { background: var(--color-action-subtle); color: inherit; text-decoration: underline 2px var(--color-action-primary); text-underline-offset: 5px; padding: 0 .15em; border-radius: 4px; }
+
+.sec { padding-block: clamp(4rem, 8vw, 7.5rem); border-top: 1px solid var(--color-border); }
+.sec h2 { font-size: clamp(1.5rem, 3vw + 0.5rem, 2.5rem); margin-bottom: 1.5rem; }
+
+/* 經文並排對照 */
+.hint { color: var(--color-text-muted); font-size: .8125rem; margin: -0.75rem 0 1.5rem; max-width: 62ch; }
+.hint i { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; vertical-align: middle; margin-inline: 2px 4px; }
+.cols { display: grid; gap: 3rem; }
+@media (min-width: 960px) { .cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; } }
+.col-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding-bottom: .75rem; border-bottom: 2px solid var(--color-text-primary); margin-bottom: .5rem; }
+.col-head h3 { font-size: 1.375rem; font-weight: 800; }
+.stations { list-style: none; margin: 0; padding: 0; display: grid; }
+.st { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 4px 14px; padding: 14px 12px; border-bottom: 1px solid var(--color-border); border-radius: 8px; cursor: pointer; transition: background .2s var(--ease); }
+.st:hover { background: var(--color-action-subtle); }
+.st-k { font-weight: 800; font-size: 1rem; color: var(--color-text-primary); }
+.st-k small { display: block; font-weight: 500; font-size: .75rem; color: var(--color-text-muted); line-height: 1.4; margin-top: 2px; }
+.st p { overflow-wrap: break-word; }
+.st .mark { display: inline-flex; gap: 4px; margin-left: 6px; vertical-align: middle; }
+.st .mark i { width: 7px; height: 7px; border-radius: 9999px; }
+.st.on { background: var(--color-action-subtle); }
+.st.on .st-k { text-decoration: underline 2px var(--color-action-primary); text-underline-offset: 6px; }
+.linked { grid-column: 2; display: grid; gap: 8px; margin-top: 6px; }
+.linked[hidden] { display: none; }
+.lk { padding: 10px 12px; border-radius: 8px; border: 1px solid var(--color-border); background: var(--color-surface-base); font-size: .875rem; animation: fadeUp .45s var(--ease) both; }
+.lk b { font-size: .75rem; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+.lk b::before { content: ""; width: 7px; height: 7px; border-radius: 9999px; }
+.lk b.do::before { background: var(--color-ok); }
+.lk b.dont::before { background: var(--color-warn); }
+.lk .why { display: block; margin-top: 4px; font-size: .75rem; color: var(--color-text-muted); }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.split { margin-top: 10px; display: grid; gap: 6px; font-size: .75rem; color: var(--color-text-muted); max-width: 340px; }
+.split .row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
+.split .half { height: 12px; border-radius: 9999px; background: linear-gradient(90deg, var(--color-action-primary) 50%, var(--color-action-subtle) 50%); }
+.split .four { display: flex; gap: 4px; align-items: center; }
+.split .four i { width: 18px; height: 12px; border-radius: 3px; background: var(--color-action-primary); }
+.split .four i.o { background: transparent; outline: 1px dashed var(--color-text-muted); margin-right: 6px; }
+
+
+.ex-grid { display: grid; gap: 2.5rem; }
+@media (min-width: 900px) { .ex-grid { grid-template-columns: 3fr 2fr; gap: 4rem; } }
+.ex-grid h3 { font-size: 1.125rem; display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+.dotc { width: 10px; height: 10px; border-radius: 9999px; flex: none; }
+.ex-list { list-style: none; margin: 0; padding: 0; display: grid; counter-reset: ex; }
+.ex-list li { counter-increment: ex; display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: 4px 8px; padding: 1rem 8px; border-top: 1px solid var(--color-border); border-radius: 8px; transition: background .35s var(--ease); }
+.ex-list li::before { content: counter(ex) "."; color: var(--color-text-muted); }
+.ex-list li.lit { background: var(--color-action-subtle); }
+.ex-list p { max-width: 62ch; }
+.jumps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.jump { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--color-border); background: transparent; color: var(--color-action-primary); font-size: .8125rem; font-weight: 700; white-space: nowrap; cursor: pointer; transition: transform .35s var(--ease), border-color .35s var(--ease); }
+.jump:hover { transform: translateY(-2px); border-color: var(--color-action-primary); }
+.jump:active { transform: scale(0.98); }
+
+.src-grid { display: grid; gap: 2.5rem; grid-auto-flow: dense; }
+@media (min-width: 900px) { .src-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .src-grid .wide { grid-column: span 2; } }
+.src-grid h3 { font-size: 1rem; margin-bottom: .75rem; }
+.src-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+.src-list a { color: var(--color-text-primary); text-decoration: none; display: grid; gap: 2px; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--color-border); font-size: .875rem; transition: transform .35s var(--ease), border-color .35s var(--ease); }
+.src-list a:hover { transform: translateY(-2px); border-color: var(--color-action-primary); }
+.src-list .url { font-size: .75rem; color: var(--color-action-primary); overflow-wrap: anywhere; }
+.pairs { list-style: none; margin: 0; padding: 0; display: grid; }
+.pairs li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding-block: 10px; border-top: 1px solid var(--color-border); }
+.pairs li:hover { color: var(--color-action-primary); }
+.plain { margin: 0; padding-left: 1.75rem; color: var(--color-text-muted); font-size: .8125rem; display: grid; gap: 4px; }
+.plain li { overflow-wrap: break-word; }
+details summary { min-height: 44px; display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 700; font-size: 1rem; list-style: none; }
+details summary::-webkit-details-marker { display: none; }
+details summary::before { content: "+"; width: 1.25rem; color: var(--color-action-primary); }
+details[open] summary::before { content: "-"; }
+details summary:hover { color: var(--color-action-primary); }
+details .plain { margin-top: .5rem; }
+
+#toast { position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); z-index: 40; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 16px; background: var(--color-surface-raised); border: 1px solid var(--color-border); box-shadow: 0 12px 32px -12px rgba(0,0,0,.35); transform: translateY(150%); opacity: 0; transition: transform .5s var(--ease), opacity .5s var(--ease); max-width: calc(100vw - 32px); }
+#toast.show { transform: none; opacity: 1; }
+#toast b { display: block; font-size: .875rem; }
+#toast span { font-size: .8125rem; color: var(--color-text-muted); }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+<!--
+資料盤點表（定案資料 → 頁面區塊）來源：尋找迷羊與拯救罪人.pdf（3 頁，全讀）
+1. 標題 → Hero H1；章節對照 → Hero 副標＋來源區
+2. 第一段 爬上樹的收稅官 (路加福音 19:1-10) 六段敘述 → #scripture 左欄 L0 到 L5
+3. 第二段 羊圈的門與好牧人 (約翰福音 10:1-18) 七段敘述 → #scripture 右欄 J0 到 J6
+4. 🎯 答案 → Hero 段落
+5. Example (頁面標題為「生活應用」) 可以這樣做 3 條、避免這樣 2 條 → #example，並以共同字詞連到經文段落
+6. 🔎 來源 4 條 URL、原始對話 URL → #sources 經文來源
+7. 📚 詞彙對照 4 條 → #sources 詞彙對照
+8. Sources 11 條標題（原檔無網址）→ #sources 摺疊區「Gemini 附註標題」
+Example 與經文的連結是依共同字詞配對（頁面上標出共同字詞），不是原檔明寫的對應。
+-->
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+</svg>
+
+<button id="theme" type="button" aria-label="切換深淺主題"><svg class="ico sun"><use href="#i-sun"/></svg><svg class="ico moon"><use href="#i-moon"/></svg></button>
+
+<header id="hud" aria-label="章節導覽">
+  <div class="hud-row">
+    <nav class="pills">
+      <button class="pill" type="button" data-go="scripture">經文對照</button>
+      <button class="pill" type="button" data-go="example">生活應用</button>
+      <button class="pill" type="button" data-go="sources">來源</button>
+    </nav>
+  </div>
+  <div class="bar"></div>
+</header>
+
+<main>
+  <section class="hero" id="top">
+    <div class="wrap">
+      <h1>尋找<span class="accent">迷羊</span>與拯救<span class="accent">罪人</span></h1>
+      <p class="sub">路加福音 19:1-10｜約翰福音 10:1-18</p>
+      <p class="answer">這兩段經文都在講耶穌主動尋找並保護迷路的人，就算被別人排擠，他還是<mark>叫得出你的名字</mark>。他來不是要搶走你的東西，而是要帶你走出過去的錯，過更有方向與平安的生活。</p>
+      <button class="btn" type="button" data-go="scripture">開始閱讀<svg class="ico"><use href="#i-down"/></svg></button>
+    </div>
+  </section>
+
+  <section class="sec" id="scripture">
+    <div class="wrap">
+      <h2>經文對照</h2>
+      <p class="hint">點任一段，就會展開跟它有共同字詞的生活應用。<i style="background:var(--color-ok)"></i>綠點表示有「可以這樣做」，<i style="background:var(--color-warn)"></i>橘點表示有「避免這樣」。</p>
+      <div class="cols">
+        <div>
+          <div class="col-head"><h3>爬上樹的收稅官</h3><span class="ref">路加福音 19:1-10</span></div>
+          <ol class="stations" data-col="L"></ol>
+        </div>
+        <div>
+          <div class="col-head"><h3>羊圈的門與好牧人</h3><span class="ref">約翰福音 10:1-18</span></div>
+          <ol class="stations" data-col="J"></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="example">
+    <div class="wrap">
+      <h2>生活應用</h2>
+      <div class="ex-grid">
+        <div>
+          <h3><i class="dotc" style="background:var(--color-ok)"></i>可以這樣做</h3>
+          <ol class="ex-list do" data-ex="do"></ol>
+        </div>
+        <div>
+          <h3><i class="dotc" style="background:var(--color-warn)"></i>避免這樣</h3>
+          <ol class="ex-list dont" data-ex="dont"></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="sources">
+    <div class="wrap">
+      <h2>來源</h2>
+      <div class="src-grid">
+        <div>
+          <h3>章節對照</h3>
+          <ul class="pairs">
+            <li><span>Luke 19:1-10 (NIV)</span><span>路加福音 19:1-10</span></li>
+            <li><span>John 10:1-18 (NIV)</span><span>約翰福音 10:1-18</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>詞彙對照</h3>
+          <ul class="pairs">
+            <li><span>Jericho</span><span>耶利哥</span></li>
+            <li><span>Zacchaeus</span><span>撒該</span></li>
+            <li><span>Abraham</span><span>亞伯拉罕</span></li>
+            <li><span>Pharisees</span><span>法利賽人</span></li>
+          </ul>
+        </div>
+        <div class="wide">
+          <h3>經文來源</h3>
+          <ul class="src-list">
+            <li><a href="https://www.biblegateway.com/passage/?search=Luke+19&amp;version=NIV" target="_blank" rel="noopener">Luke 19:1-10 NIV - Zacchaeus the Tax Collector - Bible Gateway<span class="url">https://www.biblegateway.com/passage/?search=Luke+19&amp;version=NIV</span></a></li>
+            <li><a href="https://www.biblegateway.com/passage/?search=Luke+19&amp;version=CCB" target="_blank" rel="noopener">Luke 19 CCB - Bible Gateway<span class="url">https://www.biblegateway.com/passage/?search=Luke+19&amp;version=CCB</span></a></li>
+            <li><a href="https://www.biblegateway.com/passage/?search=John+10&amp;version=NIV" target="_blank" rel="noopener">John 10:1-18 NKJV;NIV - Jesus the True Shepherd - Bible Gateway<span class="url">https://www.biblegateway.com/passage/?search=John+10&amp;version=NIV</span></a></li>
+            <li><a href="https://www.biblegateway.com/passage/?search=John+10&amp;version=CCB" target="_blank" rel="noopener">John 10 CCB - Bible Gateway<span class="url">https://www.biblegateway.com/passage/?search=John+10&amp;version=CCB</span></a></li>
+            <li><a href="https://gemini.google.com/app/e394d6ee71a0a3af" target="_blank" rel="noopener">原始對話：尋找迷羊與拯救罪人<span class="url">https://gemini.google.com/app/e394d6ee71a0a3af</span></a></li>
+          </ul>
+        </div>
+        <div class="wide">
+          <details>
+          <summary>Gemini 附註標題 (11 條，原檔沒有附網址)</summary>
+          <ol class="plain">
+            <li>John 10:1-10 ESV;NIV - I Am the Good Shepherd - Bible Gateway</li>
+            <li>Luke 19:1-10 CEB - A rich tax collector - Bible Gateway</li>
+            <li>Luke 19:1-10 NIV;ISV - Zacchaeus the Tax Collector - Bible Gateway</li>
+            <li>John 10:1-10 NIV - The Good Shepherd and His Sheep</li>
+            <li>John 10:1-18 ICB - The Shepherd and His Sheep - Bible Gateway</li>
+            <li>John 10:1-18 CSB - The Good Shepherd - “Truly I tell - Bible Gateway</li>
+            <li>Luke 19:1-10 NIV;ESV - Zacchaeus the Tax Collector - Bible Gateway</li>
+            <li>Luke 19:1-10 CSB;NIV - Jesus Visits Zacchaeus - Bible Gateway</li>
+            <li>John 10:1-18 ICB;NIV - The Shepherd and His Sheep - Bible Gateway</li>
+            <li>Luke 19:1-10 NIV;MSG - Zacchaeus the Tax Collector - Bible Gateway</li>
+            <li>Juan 10:1-10 NABRE;NKJV;NIV - Chapter 10 - The Good Shepherd.</li>
+          </ol>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="toast" role="status" aria-live="polite"><svg class="ico"><use href="#i-check"/></svg><div><b data-t></b><span data-d></span></div></div>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 定案資料：兩段經文
+  const ST = {
+    L0: { k: '進城', ref: '路加福音 19:1-2', p: '耶穌進了 Jericho 城準備路過，城裡有個很有錢的收稅官主管叫 Zacchaeus。當時收稅官常幫政權多收錢中飽私囊，大家都很討厭他。' },
+    L1: { k: '爬樹', ref: '路加福音 19:3-4', p: 'Zacchaeus 很想看看耶穌長怎樣，但他個子矮，人又多，根本看不到，就先跑到前面爬上一棵桑樹等耶穌經過。' },
+    L2: { k: '叫名', ref: '路加福音 19:5', p: '耶穌走到樹下，抬頭直接叫他的名字，請他快下來，因為今天要去他家住。' },
+    L3: { k: '抱怨', ref: '路加福音 19:6-7', p: 'Zacchaeus 高興地趕快爬下來接待耶穌，旁邊的人卻在背後抱怨耶穌竟然去住一個壞人家裡。' },
+    L4: { k: '補償', ref: '路加福音 19:8', p: 'Zacchaeus 站出來對主說，他願意把財產分一半給窮人，如果以前騙過誰的錢，就賠對方四倍。', split: true },
+    L5: { k: '救恩', ref: '路加福音 19:9-10', p: '耶穌說，今天救恩進到這家了，因為他也是 Abraham 的後代。救恩就是把人從做錯事的後果中救出來的好消息，而耶穌來，就是要找回並拯救迷失的人。' },
+    J0: { k: '正門', ref: '約翰福音 10:1-2', p: '耶穌對 Pharisees 說，不從正門進羊圈、從別處爬進去的，是小偷和強盜；從門進去的，才是真正的牧羊人。' },
+    J1: { k: '叫名', ref: '約翰福音 10:3-4', p: '看門的會幫他開門，羊也認得他的聲音，他會叫自己每隻羊的名字帶牠們出去，走在前頭領路。' },
+    J2: { k: '陌生人', ref: '約翰福音 10:5-6', p: '羊認不出陌生人的聲音，所以不會跟著走，反而會逃跑。但聽眾聽不懂這個比喻。' },
+    J3: { k: '羊的門', ref: '約翰福音 10:7-9', p: '耶穌再解釋：他自己就是羊的門，從他這裡進去的人會得救，能自由出入、找到草吃。' },
+    J4: { k: '生命', ref: '約翰福音 10:10', p: '小偷來只是為了偷竊、殺害和毀壞，但耶穌來是要讓人得到生命，而且過得很充實。' },
+    J5: { k: '好牧人', ref: '約翰福音 10:11-13', p: '耶穌接著說，他是好牧人，願意為羊捨命。拿薪水的打工牧人不一樣，看到狼來就丟下羊逃跑，因為打工的人不在乎羊。' },
+    J6: { k: '一群', ref: '約翰福音 10:14-18', p: '他認識自己的羊，羊也認識他。他還要把不屬於這個羊圈的羊也帶來，合成一群，歸一個牧人管。他的命是自己甘願交出來，又取回來的。' }
+  };
+  // 定案資料：Example；links＝經文站點與共同字詞
+  const EX = {
+    do: [
+      { p: '算錯錢、發錯脾氣或工作出包時，學 Zacchaeus 不只口頭道歉，主動把少給的補上、把弄亂的收拾好。', links: [['L4', 'Zacchaeus、錢']] },
+      { p: '遇到職場或朋友圈有人被排擠時，不跟著大家在背後說閒話，願意正常跟對方吃飯聊天。', links: [['L3', '在背後']] },
+      { p: '每天被社群媒體和別人的期待吵得心煩時，留十分鐘安靜讀一段經文，分辨哪個聲音是真的為你好。', links: [['J1', '聲音'], ['J2', '聲音']] }
+    ],
+    dont: [
+      { p: '看別人以前做過錯事，就算對方已經改過並補償了，還是貼他標籤、不給他重新開始的機會。', links: [['L5', '錯事']] },
+      { p: '聽信來路不明、只會叫你掏錢或讓你越聽越恐懼的聲音，把自己交給不在乎你死活的人帶路。', links: [['J2', '聲音'], ['J5', '不在乎']] }
+    ]
+  };
+  const exAll = [...EX.do.map((e, i) => ({ ...e, kind: 'do', i })), ...EX.dont.map((e, i) => ({ ...e, kind: 'dont', i }))];
+  const linksOf = id => exAll.flatMap(e => e.links.filter(l => l[0] === id).map(l => ({ e, why: l[1] })));
+
+  // 渲染經文站點
+  const stEls = {};
+  $$('[data-col]').forEach(ol => {
+    Object.keys(ST).filter(id => id[0] === ol.dataset.col).forEach(id => {
+      const s = ST[id], links = linksOf(id);
+      const li = document.createElement('li');
+      li.className = 'st'; li.id = 'st-' + id; li.tabIndex = 0; li.setAttribute('role', 'button'); li.setAttribute('aria-expanded', 'false');
+      const marks = links.length ? `<span class="mark" aria-hidden="true">${links.map(l => `<i style="background:var(--color-${l.e.kind === 'do' ? 'ok' : 'warn'})"></i>`).join('')}</span>` : '';
+      const split = s.split ? `<div class="split" aria-label="財產分一半給窮人，騙過的錢賠四倍"><div class="row"><div class="half"></div><span>一半給窮人</span></div><div class="row"><div class="four"><i class="o"></i><i></i><i></i><i></i><i></i></div><span>賠四倍</span></div></div>` : '';
+      li.innerHTML = `<div class="st-k">${s.k}${marks}<small>${s.ref.replace(/^(路加|約翰)福音 /, '')}</small></div><div><p>${s.p}</p>${split}</div><div class="linked" hidden></div>`;
+      ol.appendChild(li); stEls[id] = li;
+      li.addEventListener('click', () => activate(id));
+      li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(id); } });
+    });
+  });
+
+  // 渲染 Example
+  const exEls = [];
+  exAll.forEach(e => {
+    const li = document.createElement('li');
+    li.innerHTML = `<div><p>${e.p}</p><div class="jumps">${e.links.map(([id]) => `<button class="jump" type="button" data-st="${id}">${ST[id].ref}<svg class="ico"><use href="#i-up"/></svg></button>`).join('')}</div></div>`;
+    $(`[data-ex="${e.kind}"]`).appendChild(li); exEls.push({ e, li });
+  });
+
+  // 聯動：點站點 → 展開相關 Example＋高亮 Example 區對應項；點 Example 的經文鈕 → 跳回站點
+  let active = null;
+  function activate(id, scroll) {
+    if (active === id && !scroll) id = null;
+    Object.entries(stEls).forEach(([k, el]) => {
+      const on = k === id;
+      el.classList.toggle('on', on); el.setAttribute('aria-expanded', on);
+      const box = $('.linked', el);
+      if (on) {
+        const links = linksOf(k);
+        box.innerHTML = links.map(({ e, why }) => `<div class="lk"><b class="${e.kind}">${e.kind === 'do' ? '可以這樣做' : '避免這樣'} ${e.i + 1}</b><div>${e.p}</div><span class="why">共同字詞：${why}</span></div>`).join('') || `<div class="lk"><span class="why">這段沒有直接對應的生活應用。</span></div>`;
+        box.hidden = false;
+      } else box.hidden = true;
+    });
+    exEls.forEach(({ e, li }) => li.classList.toggle('lit', !!id && e.links.some(l => l[0] === id)));
+    active = id;
+    if (scroll && id) { const y = stEls[id].getBoundingClientRect().top + scrollY - 72; scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' }); stEls[id].focus({ preventScroll: true }); }
+  }
+  $$('.jump').forEach(b => b.addEventListener('click', () => activate(b.dataset.st, true)));
+  activate('L4');
+
+  // HUD 顯示、進度條、pill scrollspy
+  const heroEl = $('#top'), hud = $('#hud'), pills = $$('.pill'), root = document.documentElement;
+  let ticking = false, pillLock = null;
+  function onScroll() { ticking = false; root.style.setProperty('--scroll-progress', (scrollY / Math.max(1, root.scrollHeight - innerHeight)).toFixed(4)); hud.classList.toggle('show', scrollY > heroEl.offsetHeight * 0.7); }
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting || (pillLock && pillLock !== e.target.id)) return;
+    pills.forEach(p => p.classList.toggle('on', p.dataset.go === e.target.id));
+    const on = pills.find(p => p.dataset.go === e.target.id); on && on.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  ['top', 'scripture', 'example', 'sources'].forEach(id => io.observe(document.getElementById(id)));
+  $$('[data-go]').forEach(b => b.addEventListener('click', () => {
+    const id = b.dataset.go; pillLock = id; pills.forEach(p => p.classList.toggle('on', p.dataset.go === id));
+    scrollTo({ top: document.getElementById(id).getBoundingClientRect().top + scrollY - 56, behavior: reduce ? 'auto' : 'smooth' });
+    const rel = () => { pillLock = null; }; addEventListener('scrollend', rel, { once: true }); setTimeout(rel, 1300);
+  }));
+
+  // 主題切換＋toast
+  const toast = $('#toast'); let tt;
+  function say(t, d) { $('[data-t]', toast).textContent = t; $('[data-d]', toast).textContent = d; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 3000); }
+  try { const saved = localStorage.getItem('theme'); if (saved) root.dataset.theme = saved; } catch (e) {}
+  $('#theme').addEventListener('click', () => {
+    const cur = root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    say(next === 'dark' ? '深色主題' : '淺色主題', '已套用到整頁');
+  });
+})();
+</script>
