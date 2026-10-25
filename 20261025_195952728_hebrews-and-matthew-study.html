@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>20261025_194610_Hebrews_and_Matthew_Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* 手抄本 Illuminated Manuscript：羊皮紙、青金石、金箔 */
+html[data-theme="dark"] {
+  --color-surface-base: #10142A; --color-surface-raised: #1A1F3A;
+  --color-text-primary: #EDE6D3; --color-text-muted: #A9AEC8;
+  --color-border: rgba(237,230,211,0.12);
+  --color-action-primary: #8FA8F0; --color-action-subtle: rgba(143,168,240,0.16);
+  --color-gilt: #D9B45A; --color-gilt-text: #D9B45A;
+  --color-ok: #10B981; --color-warn: #F59E0B;
+  color-scheme: dark;
+}
+:root, html[data-theme="light"] {
+  --color-surface-base: #F4EEE1; --color-surface-raised: #EAE2D0;
+  --color-text-primary: #1E2340; --color-text-muted: #4E5470;
+  --color-border: rgba(30,35,64,0.14);
+  --color-action-primary: #2B4C9B; --color-action-subtle: rgba(43,76,155,0.10);
+  --color-gilt: #A8801F; --color-gilt-text: #7A5B12;
+  --color-ok: #047857; --color-warn: #B45309;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-color: var(--color-action-primary) var(--color-surface-base); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+::-webkit-scrollbar { width: 10px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--color-surface-base); }
+::-webkit-scrollbar-thumb { background: var(--color-action-primary); border-radius: 9999px; }
+::selection { background: var(--color-action-primary); color: var(--color-surface-base); }
+:focus-visible { outline: 2px solid var(--color-action-primary); outline-offset: 2px; }
+body {
+  margin: 0; background: var(--color-surface-base); color: var(--color-text-primary);
+  font-family: "JetBrains Mono", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", monospace;
+  line-height: 1.75; overflow-wrap: break-word;
+  transition: background .4s cubic-bezier(0.16,1,0.3,1), color .4s cubic-bezier(0.16,1,0.3,1);
+}
+main { overflow-x: hidden; width: 100%; max-width: 100%; }
+a { color: var(--color-action-primary); }
+.tnum, .ref { font-variant-numeric: tabular-nums; }
+.wrap { max-width: 72rem; margin: 0 auto; padding: 0 16px; }
+@media (min-width: 640px) { .wrap { padding: 0 24px; } }
+svg.i { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 8px;
+  border: 1px solid var(--color-border); background: var(--color-surface-raised); color: var(--color-text-primary);
+  font: inherit; font-size: .9rem; white-space: nowrap; cursor: pointer; text-decoration: none;
+  transition: transform .3s cubic-bezier(0.16,1,0.3,1), border-color .3s cubic-bezier(0.16,1,0.3,1);
+}
+.btn:hover { transform: translateY(-2px); border-color: var(--color-action-primary); }
+.btn:active { transform: scale(0.98); }
+.btn.primary { background: var(--color-action-primary); color: var(--color-surface-base); border-color: transparent; font-weight: 600; }
+
+/* theme toggle */
+#theme { position: fixed; top: 12px; right: 12px; z-index: 30; width: 44px; padding: 0; justify-content: center; }
+
+/* hero */
+.hero { min-height: 100dvh; display: flex; align-items: center; padding-top: 6rem; padding-bottom: 4rem;
+  background-image: radial-gradient(color-mix(in srgb, var(--color-gilt) 35%, transparent) 1px, transparent 1px); background-size: 24px 24px; }
+.hero h1 { max-width: 64rem; font-size: clamp(2.25rem, 4.5vw + 1rem, 4.25rem); line-height: 1.25; letter-spacing: -0.03em; margin: 0 0 1.25rem; font-weight: 800; text-wrap: balance; }
+.hero p { color: var(--color-text-muted); margin: 0 0 2rem; font-size: 1.05rem; }
+
+/* sticky nav */
+#nav { position: fixed; top: 0; left: 0; right: 0; z-index: 20; transform: translateY(-100%);
+  transition: transform .45s cubic-bezier(0.32,0.72,0,1);
+  background: color-mix(in srgb, var(--color-surface-base) 82%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); }
+@media (prefers-reduced-transparency: reduce) { #nav { background: var(--color-surface-base); backdrop-filter: none; } }
+#nav.show { transform: translateY(0); }
+#nav ul { display: flex; gap: 8px; list-style: none; margin: 0; padding: 12px 68px 12px 16px; overflow-x: auto; scrollbar-width: none; }
+#nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 9999px; white-space: nowrap;
+  color: var(--color-text-muted); text-decoration: none; font-size: .85rem; border: 1px solid transparent;
+  transition: color .3s cubic-bezier(0.16,1,0.3,1), background .3s cubic-bezier(0.16,1,0.3,1); }
+#nav a:hover { color: var(--color-text-primary); border-color: var(--color-border); }
+#nav a.on { background: var(--color-action-subtle); color: var(--color-action-primary); border-color: var(--color-action-primary); }
+
+/* sections */
+section.chap { padding: clamp(4rem, 8vw, 7.5rem) 0; border-top: 1px solid var(--color-border); scroll-margin-top: 72px; }
+h2 { font-size: clamp(1.5rem, 3vw + 0.5rem, 2.5rem); line-height: 1.25; letter-spacing: -0.02em; margin: 0 0 .75rem; font-weight: 800; }
+.ctx { color: var(--color-text-muted); margin: 0 0 1.5rem; font-size: .9rem; }
+.lead { font-size: clamp(1.1rem, 0.6vw + 1rem, 1.3rem); font-weight: 600; line-height: 1.8; max-width: 62ch; margin: 0 0 clamp(3rem, 6vw, 4.5rem); text-wrap: pretty; }
+h3 { font-size: 1.15rem; margin: 0 0 1rem; line-height: 1.4; }
+
+/* diagram */
+.diagram { margin: 0 0 3.5rem; }
+.tool { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+.tool .name { font-weight: 600; }
+.stage-row { display: grid; gap: 20px; }
+@media (min-width: 1024px) { .stage-row { grid-template-columns: 340px 1fr; align-items: start; } }
+.stage { border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface-raised);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06); padding: 8px; display: flex; justify-content: center; }
+.stage svg { display: block; width: 100%; height: auto; max-height: 55dvh; }
+@supports not (height: 1dvh) { .stage svg { max-height: 55vh; } }
+.seg { fill: none; stroke-width: 3; }
+.seg.main { stroke: var(--color-action-primary); }
+.seg.side { stroke: var(--color-text-muted); stroke-dasharray: 6 6; opacity: .55; }
+.rowline { stroke: var(--color-border); stroke-dasharray: 2 6; }
+.node { cursor: pointer; outline: none; }
+.node .hit { fill: transparent; stroke: transparent; stroke-width: 44px; vector-effect: non-scaling-stroke; }
+.node .dot { fill: var(--color-surface-base); stroke: var(--color-action-primary); stroke-width: 2.5;
+  transform-box: fill-box; transform-origin: center; transition: transform .35s cubic-bezier(0.16,1,0.3,1), fill .35s cubic-bezier(0.16,1,0.3,1); }
+.node.side .dot { stroke: var(--color-text-muted); stroke-dasharray: 3 3; }
+.node.seen .dot { fill: var(--color-action-subtle); }
+.node:hover .dot, .node:focus-visible .dot { transform: scale(1.3); filter: drop-shadow(0 0 6px var(--color-action-primary)); }
+.node.on .dot { fill: var(--color-action-primary); stroke: var(--color-gilt); transform: scale(1.3); }
+.node:focus-visible .dot { stroke-width: 4; }
+.node .pulse { fill: none; stroke: var(--color-gilt); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.node.on .pulse { animation: pulse .9s cubic-bezier(0.16,1,0.3,1) 1; }
+@keyframes pulse { from { opacity: .8; transform: scale(1); } to { opacity: 0; transform: scale(2.6); } }
+.lbl { fill: var(--color-text-primary); font: 600 15px "JetBrains Mono", "Noto Sans TC", monospace; }
+.vref { fill: var(--color-text-muted); font: 12px "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; }
+.node.on .lbl { fill: var(--color-action-primary); }
+.legend text { fill: var(--color-text-muted); font: 11px "JetBrains Mono", "Noto Sans TC", monospace; }
+
+.card { border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface-raised);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06); padding: 20px 22px; min-height: 12rem;
+  transition: opacity .35s cubic-bezier(0.16,1,0.3,1), transform .35s cubic-bezier(0.16,1,0.3,1); }
+@media (min-width: 1024px) { .card { position: sticky; top: 88px; } }
+.card.swap { opacity: 0; transform: translateY(6px); }
+.card .meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: .5rem; font-size: .8rem; color: var(--color-text-muted); }
+.tag { padding: 2px 10px; border-radius: 9999px; border: 1px solid var(--color-border); }
+.tag.main { color: var(--color-action-primary); border-color: var(--color-action-primary); }
+.card p { margin: 0 0 .75rem; max-width: 66ch; }
+.term { margin: 1rem 0 0; padding: 12px 14px; border-radius: 8px; background: color-mix(in srgb, var(--color-gilt) 13%, transparent); font-size: .92rem; }
+.term b { color: var(--color-gilt-text); }
+
+/* do / avoid */
+.cmp { display: grid; gap: 20px; margin-bottom: 2rem; }
+@media (min-width: 768px) { .cmp { grid-template-columns: 1fr 1fr; } }
+.cmp > div { border: 1px solid var(--color-border); border-radius: 16px; padding: 20px 22px; }
+.cmp h3 { display: flex; align-items: center; gap: 8px; }
+.cmp .ok h3 { color: var(--color-ok); } .cmp .no h3 { color: var(--color-warn); }
+.cmp ol { margin: 0; padding-left: 1.25rem; } .cmp li { margin-bottom: .75rem; }
+.refs { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; color: var(--color-text-muted); font-size: .85rem; }
+
+/* glossary */
+.search { display: flex; align-items: center; gap: 8px; max-width: 28rem; min-height: 44px; padding: 0 14px; margin-bottom: 1.5rem;
+  border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-surface-raised); }
+.search input { flex: 1; min-width: 0; border: 0; background: transparent; color: inherit; font: inherit; min-height: 42px; }
+.search input:focus { outline: none; } .search:focus-within { border-color: var(--color-action-primary); }
+.gloss { display: grid; gap: 12px; grid-auto-flow: dense; grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr)); }
+.gloss div { border: 1px solid var(--color-border); border-radius: 16px; padding: 14px 16px; transition: border-color .3s cubic-bezier(0.16,1,0.3,1), transform .3s cubic-bezier(0.16,1,0.3,1); }
+.gloss div:hover { border-color: var(--color-action-primary); transform: translateY(-2px); }
+.gloss b { display: block; } .gloss span { color: var(--color-text-muted); font-size: .85rem; }
+#empty { display: none; color: var(--color-text-muted); padding: 1rem 0; }
+
+/* sources */
+.src h3 { margin-top: 2rem; }
+.src ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.src li { border: 1px solid var(--color-border); border-radius: 16px; padding: 12px 16px; }
+.src code { display: block; color: var(--color-text-muted); font-size: .78rem; word-break: break-all; }
+
+#toast { position: fixed; right: 16px; bottom: 16px; z-index: 40; display: flex; gap: 10px; align-items: center;
+  padding: 12px 16px; border-radius: 16px; background: var(--color-surface-raised); border: 1px solid var(--color-action-primary);
+  opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .3s cubic-bezier(0.16,1,0.3,1), transform .3s cubic-bezier(0.16,1,0.3,1); }
+#toast.show { opacity: 1; transform: translateY(0); }
+</style>
+<!--
+定案資料 → 頁面區塊
+1. 原始標題「希伯來書與馬太福音解析」→ Hero H1
+2. 回應一 (希伯來 10:1-14 + 馬太 28:16-20)：🎯 答案 → #heb-mt28 .lead；Story 前言 → .ctx；舊規矩的極限 / 耶穌的一次完成 → 圖解 heb10 節點 1-5；復活後的山頭交棒 → 圖解 mt28 節點 1-6；獻祭、施洗名詞解釋 → 對應節點資訊卡 .term；可以這樣做 / 避免這樣 → .cmp；章節對照 → .refs；下一步 → .refs 讀整章按鈕；🔎 來源 4 條 → #sources；📚 詞彙 3 條 → #glossary
+3. 回應二 (太 5:17-18)：🎯 答案 → #mt5 .lead；Story 前言 → .ctx；上山教導門徒 / 成全律法的真正目的 / 從表面規定到內心態度 → 圖解 mt5 節點 1-7；律法和先知書、成全、Pharisees 名詞解釋 → .term；可以 / 避免 → .cmp；章節對照、下一步 → .refs；🔎 來源 3 條 → #sources；📚 詞彙 2 條 → #glossary
+4. 回應三 (太 9:9-13)：🎯 答案 → #mt9 .lead；Story 前言 → .ctx；醫治癱子與赦免罪 / 呼召收稅站裡的 Matthew / 醫生是為了病人來的 / 帶出全新的生命方式 → 圖解 mt9 節點 1-7；稅吏、Pharisees 名詞解釋 → .term；可以 / 避免 → .cmp；章節對照、下一步 → .refs；🔎 來源 2 條 → #sources；📚 詞彙 3 條 → #glossary
+未落點：各回應末尾無 URL 的 Sources 標題清單、YouTube 佔位連結 (無可驗證 URL)
+-->
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 4v16M16 4v16"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v16M5 13l7 7 7-7"/></symbol>
+  <symbol id="i-ok" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></symbol>
+  <symbol id="i-no" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2zM4 21V5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+</svg>
+
+<button id="theme" class="btn" type="button" aria-label="切換深淺色"><svg class="i"><use href="#i-sun"/></svg></button>
+
+<nav id="nav" aria-label="章節">
+  <ul>
+    <li><a href="#heb-mt28">希伯來 10・馬太 28</a></li>
+    <li><a href="#mt5">馬太 5</a></li>
+    <li><a href="#mt9">馬太 9</a></li>
+    <li><a href="#glossary">詞彙</a></li>
+    <li><a href="#sources">來源</a></li>
+  </ul>
+</nav>
+
+<main>
+  <header class="hero" id="top">
+    <div class="wrap">
+      <h1>希伯來書與馬太福音解析</h1>
+      <p class="tnum">希伯來書 10・馬太福音 28、5、9</p>
+      <a class="btn primary" href="#heb-mt28"><svg class="i"><use href="#i-down"/></svg>開始閱讀</a>
+    </div>
+  </header>
+
+  <section class="chap" id="heb-mt28">
+    <div class="wrap">
+      <h2 class="tnum">希伯來 10:1-14・馬太 28:16-20</h2>
+      <p class="ctx">這兩段分別是希伯來書第十章與馬太福音第二十八章復活記事的一部分。</p>
+      <p class="lead">這兩段經文分別講耶穌一次解決人類的罪債，以及復活後把傳遞福音的任務交給門徒。這讓基督徒知道自己不用靠重複做宗教儀式來換取原諒，而是帶著耶穌同在的保證去過生活。</p>
+      <div class="diagram" data-track="heb10" data-name="希伯來書 10"></div>
+      <div class="diagram" data-track="mt28" data-name="馬太福音 28"></div>
+      <div class="cmp">
+        <div class="ok"><h3><svg class="i"><use href="#i-ok"/></svg>可以這樣做</h3><ol>
+          <li>做錯事跟人道歉、也跟上帝認錯之後，就放心繼續好好生活，相信耶穌已經一次付清代價，不用每天拿過去的錯折磨自己。</li>
+          <li>心裡對信仰還有疑問或覺得自己不夠好時，還是一樣可以去關心身邊的朋友、分享自己經歷到的溫暖，因為耶穌沒有等門徒完全不懷疑才把任務交給他們。</li></ol></div>
+        <div class="no"><h3><svg class="i"><use href="#i-no"/></svg>避免這樣</h3><ol>
+          <li>以為只要每個禮拜天去教會報到、投錢奉獻，像交保護費一樣做完儀式，平常怎麼對待家人或同事都沒關係。</li>
+          <li>看到身邊朋友還沒信主，就用高高在上的態度強迫對方聽道理，忘記耶穌說的是用生命去教導與陪伴，而不是強迫推銷。</li></ol></div>
+      </div>
+      <div class="refs tnum"><span>Hebrews 10:1-14 (NIV) ｜希伯來書 10:1-14</span><span>Matthew 28:1-20 (NIV) ｜馬太福音 28:1-20</span>
+        <a class="btn" href="https://www.biblegateway.com/passage/?search=Hebrews+10&version=NIV" target="_blank" rel="noopener"><svg class="i"><use href="#i-book"/></svg>讀希伯來書 10 章</a></div>
+    </div>
+  </section>
+
+  <section class="chap" id="mt5">
+    <div class="wrap">
+      <h2 class="tnum">馬太 5:17-18</h2>
+      <p class="ctx">這兩節是馬太福音第五章山上寶訓的一部分。</p>
+      <p class="lead">這段經文講耶穌來不是要廢掉舊約的規定，而是要把律法背後真正的心意完全實現出來。這讓基督徒知道遵守上帝的話不能只做表面功夫，而是要活出愛人與誠實的內在精神。</p>
+      <div class="diagram" data-track="mt5" data-name="馬太福音 5"></div>
+      <div class="cmp">
+        <div class="ok"><h3><svg class="i"><use href="#i-ok"/></svg>可以這樣做</h3><ol>
+          <li>讀聖經規定時去想背後保護人、愛人的心意，例如不只做到不偷東西，還主動在工作與生活上誠實不佔別人便宜。</li>
+          <li>跟家人或同事起衝突時，不要因為自己沒動手或沒飆髒話就覺得沒錯，主動去把心結講開、尋求和好。</li></ol></div>
+        <div class="no"><h3><svg class="i"><use href="#i-no"/></svg>避免這樣</h3><ol>
+          <li>以為信了耶穌有恩典，就可以隨便說謊、傷害人，把上帝教導的道德底線當作不存在。</li>
+          <li>像 Pharisees 一樣拿著規矩到處抓別人的小辮子，自己表面守規矩，心裡卻充滿憤怒與驕傲。</li></ol></div>
+      </div>
+      <div class="refs tnum"><span>Matthew 5:1-24 (NIV) ｜馬太福音 5:1-24</span>
+        <a class="btn" href="https://www.biblegateway.com/passage/?search=Matthew%205&version=NIV" target="_blank" rel="noopener"><svg class="i"><use href="#i-book"/></svg>讀馬太福音 5 章</a></div>
+    </div>
+  </section>
+
+  <section class="chap" id="mt9">
+    <div class="wrap">
+      <h2 class="tnum">馬太 9:9-13</h2>
+      <p class="ctx">這五節是馬太福音第九章耶穌在自己城裡醫病與呼召門徒的故事。</p>
+      <p class="lead">這段經文講耶穌主動接納被社會排斥的稅吏與罪人，並說明上帝在乎的是對人的憐憫，而不是表面的宗教獻祭儀式。這讓基督徒知道自己承認軟弱就能來到耶穌面前得醫治，也學會用憐憫的眼光對待身邊不可愛的人。</p>
+      <div class="diagram" data-track="mt9" data-name="馬太福音 9"></div>
+      <div class="cmp">
+        <div class="ok"><h3><svg class="i"><use href="#i-ok"/></svg>可以這樣做</h3><ol>
+          <li>發現自己做錯事或心裡軟弱時，把耶穌當成醫生，坦白帶著問題去找他，不用假裝自己很完美才敢禱告。</li>
+          <li>在公司或生活圈遇到大家都不喜歡、甚至犯過錯的人，願意跟對方平起平坐吃頓飯、聽對方說話，把憐憫放在道德批判前面。</li></ol></div>
+        <div class="no"><h3><svg class="i"><use href="#i-no"/></svg>避免這樣</h3><ol>
+          <li>覺得自己規矩守得很好、常去教會服務，就看不起那些生活一團亂或剛信主的人，跟他們劃清界線。</li>
+          <li>以為只要照規矩做完宗教儀式就能討上帝喜悅，對身邊正在受苦或需要幫助的人卻冷漠不理。</li></ol></div>
+      </div>
+      <div class="refs tnum"><span>Matthew 9:1-17 (NIV) ｜馬太福音 9:1-17</span>
+        <a class="btn" href="https://www.biblegateway.com/passage/?search=Matthew%209&version=NIV" target="_blank" rel="noopener"><svg class="i"><use href="#i-book"/></svg>讀馬太福音 9 章</a></div>
+    </div>
+  </section>
+
+  <section class="chap" id="glossary">
+    <div class="wrap">
+      <h2>詞彙對照</h2>
+      <label class="search"><svg class="i"><use href="#i-search"/></svg><input id="q" type="search" placeholder="搜尋原文或譯名" aria-label="搜尋詞彙"></label>
+      <div class="gloss" id="gloss"></div>
+      <p id="empty">找不到符合的詞彙</p>
+    </div>
+  </section>
+
+  <section class="chap src" id="sources">
+    <div class="wrap">
+      <h2>來源</h2>
+      <div id="srcList"></div>
+    </div>
+  </section>
+</main>
+
+<div id="toast" role="status" aria-live="polite"><svg class="i"><use href="#i-info"/></svg><span></span></div>
+
+<script>
+// side:true = 前後文 (不在本次提問範圍)；main = 本次經文
+const TRACKS = {
+  heb10: [
+    { lbl: '影子', ref: '希伯來書 10:1', g: '舊規矩的極限', t: ['古時候的律法只是未來美好事物的影子，不是實體。那時候的人每年都要帶著牛和羊去獻祭，但這些重複的儀式永遠沒辦法讓人變得完全。'], term: ['獻祭', '古時候的人做錯事時，把牛羊殺掉獻給上帝，當作認錯與賠償的儀式。'] },
+    { lbl: '年度提醒', ref: '希伯來書 10:2-4', g: '舊規矩的極限', t: ['如果牛羊的血真的能除掉罪，大家心裡不再有罪惡感，就不用每年一直重複做了。這些每年的儀式反而變成年度提醒，讓人一直想起自己有罪，因為公牛和山羊的血根本不可能除罪。'] },
+    { lbl: '預備身體', ref: '希伯來書 10:5-7', g: '耶穌的一次完成', t: ['所以耶穌來到世界的時候跟上帝說，上帝真正想要的不是這些牛羊祭物，而是為耶穌預備了身體，耶穌是來照著上帝的心意去做的。'] },
+    { lbl: '一次獻上', ref: '希伯來書 10:8-10', g: '耶穌的一次完成', t: ['耶穌廢掉了舊的動物獻祭規矩，建立新的方式，用他自己的身體一次獻上，就讓我們永遠被分別出來歸給上帝。'] },
+    { lbl: '坐下', ref: '希伯來書 10:11-14', g: '耶穌的一次完成', t: ['以前的祭司每天都要站著重複做同樣的工作，獻上那些除不掉罪的祭物。但耶穌獻上自己那一次永遠有效的祭之後，就在上帝的右邊坐下了，代表工作徹底完成，讓屬於他的人永遠得以完全。'] }
+  ],
+  mt28: [
+    { lbl: '空墳', ref: '馬太福音 28:1-7', side: true, g: '復活後的山頭交棒', t: ['耶穌死後復活的那天早上，Mary Magdalene 和另一個 Mary 去看墳墓，天使移開石頭告訴她們耶穌已經復活，並請她們通知門徒去 Galilee 見面。'] },
+    { lbl: '路上相遇', ref: '馬太福音 28:8-10', side: true, g: '復活後的山頭交棒', t: ['婦女們在路上遇見復活的耶穌，耶穌也親自請她們轉告門徒去 Galilee。'] },
+    { lbl: '上山', ref: '馬太福音 28:16', g: '復活後的山頭交棒', t: ['十一個門徒照著耶穌吩咐的，去了 Galilee 的那座山。'] },
+    { lbl: '有人懷疑', ref: '馬太福音 28:17', g: '復活後的山頭交棒', t: ['他們看到耶穌就拜他，但現場還是有人心裡懷疑。'] },
+    { lbl: '所有權柄', ref: '馬太福音 28:18', g: '復活後的山頭交棒', t: ['耶穌走過來對這群連心裡還有懷疑的門徒說，天上地下所有的權柄都已經交給他了。'] },
+    { lbl: '交棒', ref: '馬太福音 28:19-20', g: '復活後的山頭交棒', t: ['所以門徒要去使萬民做耶穌的門徒，奉父、子、聖靈的名給他們施洗，教導他們遵守耶穌吩咐的一切，而耶穌會天天跟大家同在，直到世界的末了。'], term: ['施洗', '透過用水的儀式，公開代表一個人決定跟隨耶穌、加入群體。'] }
+  ],
+  mt5: [
+    { lbl: '上山教導', ref: '馬太福音 5:1-12', side: true, g: '上山教導門徒', t: ['耶穌看見一大群人跟著他，就走上山坐下，門徒走到他身邊，他開始教導大家天國子民的生活態度。'] },
+    { lbl: '鹽和光', ref: '馬太福音 5:13-16', side: true, g: '上山教導門徒', t: ['他接著鼓勵門徒要做世上的鹽和光，讓別人看見好行為就讚美天上的父。'] },
+    { lbl: '來成全', ref: '馬太福音 5:17', g: '成全律法的真正目的', t: ['因為耶穌講話很有權柄，常挑戰當時的宗教傳統，有些人可能會誤會他想推翻以前的規矩。耶穌直接澄清，不要以為他是來廢除律法和先知書的，他不是來廢除，而是來成全。'], term: ['律法和先知書', '猶太人當時讀的舊約聖經，代表上帝過去透過 Moses 傳下來的規定與各位先知的教導。'], term2: ['成全', '把律法原本要指向的目標、預言和真正精神完整做出來，而不只是停在字面條文。'] },
+    { lbl: '一筆不廢', ref: '馬太福音 5:18', g: '成全律法的真正目的', t: ['耶穌保證，就算到天地都消失了，律法裡最小的一個字母或一筆一畫都不會廢掉，全部都要實現。'] },
+    { lbl: '最小最大', ref: '馬太福音 5:19', side: true, g: '成全律法的真正目的', t: ['所以誰要是違背最小的一條誡命又教別人這樣做，在天國會被稱為最小的；反過來自己遵守又教人遵守的，會被稱為大的。'] },
+    { lbl: '勝過的義', ref: '馬太福音 5:20', side: true, g: '從表面規定到內心態度', t: ['耶穌接著說，如果大家的義沒有勝過當時的律法教師和 Pharisees，就進不了天國。'], term: ['Pharisees', '當時非常嚴格遵守宗教規條的猶太教派，但常只做外在表面功夫。'] },
+    { lbl: '先去和好', ref: '馬太福音 5:21-24', side: true, g: '從表面規定到內心態度', t: ['為了說明什麼叫真正成全律法，耶穌在後面舉了好幾個例子。以前規矩說不可殺人，但耶穌說連心裡對弟兄亂發脾氣、罵人白痴笨蛋都不行，獻祭前想起跟人有嫌隙就要先去和好。', '這代表上帝在乎的不只是手沒有犯罪，連心裡的態度都要對齊。'] }
+  ],
+  mt9: [
+    { lbl: '醫治癱子', ref: '馬太福音 9:1-8', side: true, g: '醫治癱子與赦免罪', t: ['耶穌坐船回到自己住的城鎮，有人用擔架把一個癱子抬到他面前。耶穌看見他們的信心，就先宣布癱子的罪得到赦免了，引起現場幾個律法教師在心裡批評他褻瀆上帝。', '耶穌為了證明自己在地上有赦罪的權柄，就叫癱子直接站起來拿著擔架回家，癱子真的站起來走了，群眾看到都既敬畏又讚美上帝。'] },
+    { lbl: '跟從我', ref: '馬太福音 9:9', g: '呼召收稅站裡的 Matthew', t: ['耶穌離開那裡往前走，看見一個叫 Matthew 的人坐在收稅站裡，就對他說跟從我，Matthew 立刻站起來跟從了耶穌。'], term: ['稅吏', '當時幫羅馬帝國向自己猶太同胞收稅的人，常多收錢中飽私囊，被猶太人當成賣國賊與罪人。'] },
+    { lbl: '同席', ref: '馬太福音 9:10', g: '呼召收稅站裡的 Matthew', t: ['後來耶穌在 Matthew 家裡吃飯，很多稅吏和被當時社會當成罪人的人也來跟耶穌還有門徒一起坐席。'] },
+    { lbl: '質問', ref: '馬太福音 9:11', g: '醫生是為了病人來的', t: ['Pharisees 看見這一幕，跑去質問耶穌的門徒，問他們的老師為什麼跟稅吏和罪人一起吃飯。'], term: ['Pharisees', '當時嚴格遵守宗教規條的猶太教派，為了保持自己宗教上的潔淨，絕對不跟他們眼中的罪人同桌吃飯。'] },
+    { lbl: '醫生', ref: '馬太福音 9:12', g: '醫生是為了病人來的', t: ['耶穌聽見了就直接回答，健康的人不需要醫生，有病的人才需要。'] },
+    { lbl: '要憐憫', ref: '馬太福音 9:13', g: '醫生是為了病人來的', t: ['耶穌請他們去搞懂聖經上說上帝喜愛憐憫之心、而不是喜愛祭物這句話的意思，因為耶穌來不是要呼召自以為義的人，而是要呼召罪人。'] },
+    { lbl: '新皮囊', ref: '馬太福音 9:14-17', side: true, g: '帶出全新的生命方式', t: ['緊接著 John 的門徒也來問耶穌，為什麼他們和 Pharisees 常常禁食，耶穌的門徒卻不禁食。', '耶穌用新郎還在身邊賓客不用悲傷，以及新布不能補舊衣、新酒要裝在新皮囊的比喻，說明他帶來的是全新的恩典生命，不能硬塞進舊的宗教規條框架裡。'] }
+  ]
+};
+
+const GLOSS = [
+  ['Mary Magdalene', '抹大拉的馬利亞', '馬太 28'], ['Mary', '馬利亞', '馬太 28'], ['Galilee', '加利利', '馬太 28'],
+  ['Moses', '摩西', '馬太 5'], ['Pharisees', '法利賽人', '馬太 5、馬太 9'], ['Matthew', '馬太', '馬太 9'], ['John', '約翰', '馬太 9']
+];
+
+const SOURCES = [
+  ['希伯來 10・馬太 28', [
+    ["Hebrews 10:1-14 NIV - Christ's Sacrifice Once for All - Bible Gateway", 'https://www.biblegateway.com/passage/?search=Hebrews+10&version=NIV'],
+    ['Hebrews 10 CCB - Bible Gateway', 'https://www.biblegateway.com/passage/?search=Hebrews+10&version=CCB'],
+    ['Matthew 28 NIV - Bible Gateway', 'https://www.biblegateway.com/passage/?search=Matthew+28&version=NIV'],
+    ['Matthew 28 CCB - Bible Gateway', 'https://www.biblegateway.com/passage/?search=Matthew+28&version=CCB']]],
+  ['馬太 5', [
+    ['Matthew 5:17-20 NIV - The Fulfillment of the Law - Bible Gateway', 'https://www.biblegateway.com/passage/?search=Matthew%205%3A17-20&version=NIV'],
+    ['Matthew 5 NIV - Introduction to the Sermon on the Mount', 'https://www.biblegateway.com/passage/?search=Matthew%205&version=NIV'],
+    ['馬太福音 5 Chinese Contemporary Bible (Traditional) - Bible Gateway', 'https://www.biblegateway.com/passage/?search=Mateo%205&version=CNVS;CCBT;ERV-ZH;CCB']]],
+  ['馬太 9', [
+    ['Matthew 9 NIV - Jesus Forgives and Heals a Paralyzed - Bible Gateway', 'https://www.biblegateway.com/passage/?search=Matthew%209&version=NIV'],
+    ['Matthew 9 CUVMPT;CCB;ERV-ZH;CCBT - 醫治癱子 - Bible Gateway', 'https://www.biblegateway.com/passage/?search=matthew%209&version=CUVMPT;CCB;ERV-ZH;CCBT']]]
+];
+
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const NS = 'http://www.w3.org/2000/svg';
+
+// toast
+const toastEl = document.getElementById('toast'); let toastT;
+function toast(msg) { toastEl.querySelector('span').textContent = msg; toastEl.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('show'), 3000); }
+
+// 垂直軌跡圖：每個 .diagram 一組 (SVG 舞台 + 常駐資訊卡 + 步進播放器)
+document.querySelectorAll('.diagram').forEach(box => {
+  const beats = TRACKS[box.dataset.track], GAP = 76, TOP = 70, X = 36, W = 300;
+  const H = TOP + (beats.length - 1) * GAP + 40;
+  const hasSide = beats.some(b => b.side), hasMain = beats.some(b => !b.side);
+  box.innerHTML = `<div class="tool"><span class="name">${box.dataset.name}</span>
+    <button class="btn play" type="button" aria-label="播放"><svg class="i"><use href="#i-play"/></svg><span>播放</span></button></div>
+    <div class="stage-row"><div class="stage"><svg viewBox="0 0 ${W} ${H}" role="group" aria-label="${box.dataset.name} 故事軌跡"></svg></div>
+    <article class="card" aria-live="polite"></article></div>`;
+  const svg = box.querySelector('.stage svg'), card = box.querySelector('.card'), btn = box.querySelector('.play');
+  const y = i => TOP + i * GAP;
+  let html = '';
+  // faint context 層：每列虛格線
+  beats.forEach((_, i) => html += `<line class="rowline" x1="0" x2="${W}" y1="${y(i)}" y2="${y(i)}"/>`);
+  // 內嵌圖例
+  html += `<g class="legend" transform="translate(8,14)">`;
+  let lx = 0;
+  if (hasMain) { html += `<line class="seg main" x1="${lx}" x2="${lx + 22}" y1="6" y2="6"/><text x="${lx + 28}" y="10">本次經文</text>`; lx += 110; }
+  if (hasSide) html += `<line class="seg side" x1="${lx}" x2="${lx + 22}" y1="6" y2="6"/><text x="${lx + 28}" y="10">前後文</text>`;
+  html += `</g>`;
+  // 線段：兩端都是本次經文 → 實線，否則虛線
+  for (let i = 0; i < beats.length - 1; i++) {
+    const cls = beats[i].side || beats[i + 1].side ? 'side' : 'main';
+    html += `<line class="seg ${cls}" x1="${X}" x2="${X}" y1="${y(i) + 10}" y2="${y(i + 1) - 10}"/>`;
+  }
+  beats.forEach((b, i) => {
+    html += `<g class="node${b.side ? ' side' : ''}" data-i="${i}" tabindex="0" role="button" aria-label="${b.lbl} ${b.ref}">
+      <rect class="row" x="0" y="${y(i) - GAP / 2 + 4}" width="${W}" height="${GAP - 8}" fill="transparent"/><circle class="hit" cx="${X}" cy="${y(i)}" r="9"/><circle class="pulse" cx="${X}" cy="${y(i)}" r="9"/><circle class="dot" cx="${X}" cy="${y(i)}" r="9"/>
+      <text class="lbl" x="${X + 24}" y="${y(i) - 2}">${b.lbl}</text><text class="vref" x="${X + 24}" y="${y(i) + 16}">${b.ref.replace(/^\S+ /, '')}</text></g>`;
+  });
+  svg.innerHTML = html;
+  const nodes = [...svg.querySelectorAll('.node')];
+
+  let cur = -1, timer = null;
+  // 驅動變數＝cur (目前節點 index)：節點 on/seen 狀態與資訊卡內容
+  function select(i) {
+    cur = i; const b = beats[i];
+    nodes.forEach((n, k) => { n.classList.toggle('on', k === i); n.classList.toggle('seen', k < i); });
+    card.classList.add('swap');
+    setTimeout(() => {
+      const terms = [b.term, b.term2].filter(Boolean).map(([k, v]) => `<p class="term"><b>${esc(k)}</b>：${esc(v)}</p>`).join('');
+      card.innerHTML = `<div class="meta"><span class="ref">${b.ref}</span><span class="tag${b.side ? '' : ' main'}">${b.side ? '前後文' : '本次經文'}</span></div>
+        <h3>${esc(b.g)}</h3>${b.t.map(p => `<p>${esc(p)}</p>`).join('')}${terms}`;
+      card.classList.remove('swap');
+    }, cur === i && card.innerHTML ? 180 : 0);
+  }
+  function stop() { if (!timer) return; clearInterval(timer); timer = null; setBtn(false); }
+  function setBtn(on) { btn.querySelector('use').setAttribute('href', on ? '#i-pause' : '#i-play'); btn.querySelector('span').textContent = on ? '暫停' : '播放'; btn.setAttribute('aria-label', on ? '暫停' : '播放'); }
+  nodes.forEach((n, i) => {
+    n.addEventListener('click', () => { stop(); select(i); });
+    n.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); stop(); select(i); } });
+  });
+  btn.addEventListener('click', () => {
+    if (reduced) { select((cur + 1) % beats.length); return; } // reduced-motion：單步前進
+    if (timer) { stop(); toast(`${box.dataset.name} 已暫停`); return; }
+    if (cur === beats.length - 1) select(0);
+    setBtn(true); toast(`${box.dataset.name} 播放中`);
+    timer = setInterval(() => { if (cur >= beats.length - 1) return stop(); select(cur + 1); }, 2800);
+  });
+  if (reduced) btn.querySelector('span').textContent = '下一步';
+  select(0);
+});
+
+// 詞彙：即時搜尋 + empty state
+const gloss = document.getElementById('gloss'), empty = document.getElementById('empty');
+gloss.innerHTML = GLOSS.map(([en, zh, s]) => `<div data-k="${(en + zh).toLowerCase()}"><b>${en}</b>${zh}<br><span>${s}</span></div>`).join('');
+document.getElementById('q').addEventListener('input', e => {
+  const q = e.target.value.trim().toLowerCase(); let n = 0;
+  gloss.querySelectorAll('div').forEach(d => { const hit = d.dataset.k.includes(q); d.hidden = !hit; n += hit; });
+  empty.style.display = n ? 'none' : 'block';
+});
+
+// 來源：完整 URL 直接顯示
+document.getElementById('srcList').innerHTML = SOURCES.map(([g, list]) => `<h3>${g}</h3><ul>${list.map(([t, u]) =>
+  `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a><code>${esc(u)}</code></li>`).join('')}</ul>`).join('');
+
+// 主題切換
+const root = document.documentElement, themeBtn = document.getElementById('theme');
+function applyTheme(t) { root.dataset.theme = t; themeBtn.querySelector('use').setAttribute('href', t === 'dark' ? '#i-sun' : '#i-moon'); }
+let saved = null; try { saved = localStorage.getItem('theme'); } catch (e) {}
+applyTheme(saved || 'light'); // 預設淺色，切換過才記住
+themeBtn.addEventListener('click', () => {
+  const t = root.dataset.theme === 'dark' ? 'light' : 'dark'; applyTheme(t);
+  try { localStorage.setItem('theme', t); } catch (e) {}
+  toast(t === 'dark' ? '深色模式' : '淺色模式');
+});
+
+// sticky nav：捲離 hero 才出現 + scrollspy
+const nav = document.getElementById('nav'), links = [...nav.querySelectorAll('a')];
+new IntersectionObserver(([e]) => nav.classList.toggle('show', !e.isIntersecting), { threshold: 0.15 }).observe(document.getElementById('top'));
+// scrollspy：取頂端已過視窗 40% 的最後一章；捲到底時亮最後一章 (短章節也點得亮)
+const chaps = [...document.querySelectorAll('section.chap')]; let curId = '', ticking = false;
+function spy() {
+  ticking = false;
+  const atEnd = innerHeight + scrollY >= document.documentElement.scrollHeight - 4;
+  const hit = atEnd ? chaps.at(-1) : chaps.filter(c => c.getBoundingClientRect().top <= innerHeight * 0.4).at(-1);
+  const id = hit ? hit.id : '';
+  if (id === curId) return; curId = id;
+  links.forEach(a => { const on = a.getAttribute('href') === '#' + id; a.classList.toggle('on', on); if (on) a.closest('ul').scrollLeft = a.offsetLeft - 16; });
+}
+addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
+spy();
+</script>
+</body>
+</html>
