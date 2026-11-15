@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>20261115_142949_hebrews-1-study_v4</title>
+<script>
+// 先決定動態模式，避免畫面閃一下。Reduce Motion 或視窗太矮時，不釘住舞台、不隱藏任何內容。
+(function(){var h=document.documentElement,rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+h.classList.add("js");var th="light";try{if(localStorage.getItem("hb-theme")==="dark")th="dark"}catch(e){}h.setAttribute("data-theme",th);if(!rm)h.classList.add("anim");
+window.__setPin=function(){var on=!rm&&innerHeight>=620;h.classList.toggle("pin",on);return on};window.__setPin();})();
+</script>
+<style>
+/* ===== Tokens：量自 apple.com/tw。中性底色，顏色只留給內容圖。 ===== */
+:root{
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro TC","SF Pro Text","SF Pro Display","PingFang TC","Noto Sans TC","Helvetica Neue",Arial,sans-serif;
+  --nav-h:52px; --btn:#0071e3; --btn-hover:#0077ed; --radius:28px;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{color-scheme:dark}
+.sec{
+  --bg:#fff; --text:#1d1d1f; --text2:#636366; --card:#f5f5f7; --sep:rgba(0,0,0,.12);
+  --link:#0066cc; --eyebrow:#bf4800; --segbg:#f5f5f7; --thumb:#fff; --thumb-sh:0 1px 3px rgba(0,0,0,.2);
+  background:var(--bg); color:var(--text);
+}
+.sec.gray{--bg:#f5f5f7; --card:#fff; --segbg:#e8e8ed}
+.sec.dark{--bg:#000; --text:#f5f5f7; --text2:#a1a1a6; --card:#1d1d1f; --sep:rgba(255,255,255,.16);
+  --link:#2997ff; --eyebrow:#ff9f0a; --segbg:#1d1d1f; --thumb:#3a3a3c; --thumb-sh:none}
+:root[data-theme="dark"] .sec{--bg:#000; --text:#f5f5f7; --text2:#a1a1a6; --card:#1d1d1f; --sep:rgba(255,255,255,.16);
+    --link:#2997ff; --eyebrow:#ff9f0a; --segbg:#1d1d1f; --thumb:#3a3a3c; --thumb-sh:none}
+:root[data-theme="dark"] .sec.gray{--bg:#161617; --card:#1d1d1f; --segbg:#2c2c2e; --thumb:#48484a}
+@media (prefers-contrast:more){.sec{--text2:var(--text);--sep:currentColor}}
+
+*{box-sizing:border-box}
+html{font-size:100%;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;font:400 1.0625rem/1.75 var(--font);-webkit-font-smoothing:antialiased;background:#fff}
+:root[data-theme="dark"] body{background:#000}
+h1,h2,h3,h4,p,ol,ul{margin:0}
+ol,ul{padding:0;list-style:none}
+a{color:var(--link)}
+.wrap{width:100%;max-width:67rem;margin:0 auto;padding:0 max(1.375rem,env(safe-area-inset-left))}
+:focus-visible{outline:3px solid var(--link);outline-offset:3px;border-radius:8px}
+.skip{position:absolute;left:1rem;top:-4rem;z-index:100;background:#0071e3;color:#fff;padding:.75rem 1rem;border-radius:12px}
+.skip:focus{top:1rem}
+section[id],header[id]{scroll-margin-top:var(--nav-h)}
+
+/* ===== Type ===== */
+.eyebrow{font-size:.9375rem;font-weight:600;line-height:1.4;color:var(--eyebrow);letter-spacing:.01em}
+h1{font-size:clamp(3rem,1.2rem + 7.6vw,5.5rem);line-height:1.07;font-weight:600;letter-spacing:-.015em}
+h2{font-size:clamp(2rem,1.2rem + 3.2vw,3.5rem);line-height:1.12;font-weight:600;letter-spacing:-.01em}
+h3{font-size:clamp(1.375rem,1.1rem + 1vw,1.75rem);line-height:1.25;font-weight:600}
+.lede{font-size:clamp(1.25rem,1rem + 1vw,1.75rem);line-height:1.5;font-weight:500;color:var(--text2)}
+.small{font-size:.8125rem;line-height:1.6;color:var(--text2)}
+
+/* ===== Buttons / links ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 1.375rem;border-radius:980px;
+  background:var(--btn);color:#fff;text-decoration:none;font-size:1.0625rem;font-weight:400;border:0;cursor:pointer}
+.btn:hover{background:var(--btn-hover)}
+.more{display:inline-flex;align-items:center;min-height:44px;color:var(--link);text-decoration:none;font-size:1.0625rem}
+.more::after{content:"›";margin-left:.35em;font-size:1.25em;line-height:1}
+.more:hover{text-decoration:underline}
+
+/* ===== Local nav：半透明毛玻璃，進入黑色舞台時轉深色 ===== */
+.localnav{position:sticky;top:0;z-index:50;height:var(--nav-h);background:rgba(255,255,255,.8);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid rgba(0,0,0,.1);color:#1d1d1f;--navmuted:#636366}
+.localnav.is-dark{background:rgba(22,22,23,.8);border-bottom-color:rgba(255,255,255,.12);color:#f5f5f7;--navmuted:#a1a1a6}
+:root[data-theme="dark"] .localnav{background:rgba(22,22,23,.8);border-bottom-color:rgba(255,255,255,.12);color:#f5f5f7;--navmuted:#a1a1a6}
+@media (prefers-reduced-transparency:reduce){.localnav{-webkit-backdrop-filter:none;backdrop-filter:none;background:#fff}
+  .localnav.is-dark{background:#161617}
+  :root[data-theme="dark"] .localnav{background:#161617}}
+.localnav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.ln-title{font-size:1.3125rem;font-weight:600;white-space:nowrap}
+.ln-links{display:flex;align-items:center;gap:clamp(.5rem,2vw,1.75rem)}
+.ln-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 .25rem;font-size:.875rem;color:var(--navmuted);text-decoration:none;white-space:nowrap}
+.ln-links a[aria-current="true"]{color:inherit;font-weight:600}
+.ln-links a:hover{color:inherit}
+.ln-links a.btn,.ln-links a.btn:hover{color:#fff}
+.theme{width:44px;height:44px;border:0;border-radius:50%;background:none;color:inherit;display:grid;place-items:center;cursor:pointer;flex:none}
+.theme:hover{background:rgba(127,127,127,.18)}
+.theme svg{width:1.25rem;height:1.25rem;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.theme .i-sun{display:none}
+:root[data-theme="dark"] .theme .i-sun{display:block}
+:root[data-theme="dark"] .theme .i-moon{display:none}
+.localnav .btn{min-height:32px;padding:0 .875rem;font-size:.875rem}
+@media (max-width:52rem){.ln-title{display:none}.ln-links{width:100%;justify-content:space-between}.localnav .btn{display:none}}
+
+/* ===== Hero ===== */
+.hero{text-align:center;padding:clamp(4rem,12vw,8rem) 0 clamp(3rem,6vw,5rem)}
+.hero h1 span{display:block}
+.hero .soft{color:var(--text2)}
+.hero .lede{margin-top:1.5rem}
+.cta{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;justify-content:center;align-items:center;margin-top:2rem}
+.tiles{display:grid;gap:1rem;margin-top:clamp(3rem,7vw,5rem);text-align:left}
+@media (min-width:56rem){.tiles{grid-template-columns:repeat(3,1fr)}}
+.tile{position:relative;display:flex;flex-direction:column;min-height:27rem;padding:2rem 1.75rem;border-radius:var(--radius);overflow:hidden;text-decoration:none;isolation:isolate}
+.tile .eyebrow{color:inherit;opacity:.8}
+.tile h3{margin-top:.5rem;font-size:1.875rem;line-height:1.2}
+.tile p{margin-top:.5rem;font-size:1.0625rem;line-height:1.6}
+.tile .more{margin-top:auto;color:inherit;font-weight:600;z-index:2}
+.tile .art{position:absolute;inset:auto 0 0 0;height:55%;z-index:-1}
+@media (prefers-reduced-motion:no-preference){.tile{transition:transform .35s cubic-bezier(.2,.7,.2,1)}.tile:hover{transform:scale(1.02)}}
+.t-heb{background:radial-gradient(120% 70% at 50% 100%,#3b3118 0%,#0b0b0c 62%);color:#f5f5f7;outline:1px solid rgba(255,255,255,.14);outline-offset:-1px}
+.t-heb .art::before{content:"";position:absolute;left:50%;top:6%;width:9rem;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(circle,#fff 0%,#fff3d1 28%,#f7d58b 52%,rgba(247,213,139,0) 72%)}
+.t-heb .art::after{content:"";position:absolute;left:18%;right:18%;bottom:38%;height:.6rem;
+  background:radial-gradient(circle,#d2d2d7 0 .3rem,transparent .32rem) 0 0/20% 100% repeat-x}
+.t-chr{background:linear-gradient(160deg,#fbe3a8 0%,#f0a23a 100%);color:#1d1d1f}
+.t-chr .art::before{content:"";position:absolute;left:1.75rem;right:1.75rem;bottom:5.2rem;height:3.5rem;
+  background:linear-gradient(#fff,#fff) 0 0/18% 100% no-repeat,linear-gradient(#fff,#fff) 20.5% 0/18% 100% no-repeat,linear-gradient(#fff,#fff) 41% 0/18% 100% no-repeat,linear-gradient(#fff,#fff) 61.5% 0/18% 100% no-repeat,linear-gradient(#fff,#fff) 82% 0/18% 100% no-repeat;opacity:.55;border-radius:14px;-webkit-mask:linear-gradient(#000,#000);}
+.t-psa{background:linear-gradient(160deg,#ffc79e 0%,#ff6a7a 100%);color:#1d1d1f}
+.t-psa .art::before{content:"";position:absolute;left:50%;bottom:-6rem;width:20rem;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(circle,#fff6e5 0%,#ffd7a8 40%,rgba(255,215,168,0) 70%);opacity:.9}
+
+/* ===== 總覽句：逐字亮起 ===== */
+.statement{padding:clamp(6rem,16vw,12rem) 0}
+.statement p{max-width:60rem;margin:0 auto;font-size:clamp(2rem,1rem + 4vw,3.75rem);line-height:1.3;font-weight:600;letter-spacing:-.01em}
+.anim .statement .ch{opacity:.2;transition:opacity .25s}
+.anim .statement .ch.on{opacity:1}
+
+/* ===== Section scaffolding ===== */
+.block{padding:clamp(3rem,8vw,6rem) 0 0}
+.block:last-child{padding-bottom:clamp(4rem,10vw,8rem)}
+.block>h3{margin-bottom:1.5rem}
+.head{padding-top:clamp(4rem,10vw,8rem)}
+.head h2{margin-top:.5rem;max-width:44rem}
+.rv{}
+.anim .rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.anim .rv.in{opacity:1;transform:none}
+
+.facts{display:grid;gap:1rem;margin-top:2.5rem}
+@media (min-width:56rem){.facts{grid-template-columns:repeat(3,1fr)}}
+.fact{background:var(--card);border-radius:var(--radius);padding:1.75rem}
+.fact dt{font-size:.8125rem;font-weight:600;color:var(--text2);letter-spacing:.02em}
+.fact dd{margin:.5rem 0 0;font-size:1.3125rem;line-height:1.55;font-weight:600}
+
+/* ===== Hebrews 舞台：靜態是預設，釘住只在 .pin 下啟用 ===== */
+.hs{--a0:1;--a1:1;--a2:1}
+.hs-sticky{padding:clamp(4rem,9vw,7rem) 0 1rem}
+.hs-grid{display:grid;gap:2.5rem;align-items:center;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+.hs .head{padding-top:0}
+.steps{display:grid;gap:2rem;margin-top:2rem}
+.cap .eyebrow{margin-bottom:.5rem}
+.cap h3{font-size:clamp(1.5rem,1.1rem + 1.4vw,2rem);line-height:1.25}
+.cap p{margin-top:.75rem;color:var(--text2);font-size:1.0625rem}
+.dots{display:none}
+.scene{--sy:calc(46% - 32% * var(--a1));--ss:calc(.72 + .28 * var(--a0) + .16 * var(--a2));--so:calc(.15 + .85 * var(--a0));
+  position:relative;width:min(100%,32rem);aspect-ratio:1;margin-inline:auto;overflow:hidden;border-radius:var(--radius);
+  background:#0b0b0d;outline:1px solid rgba(255,255,255,.12);outline-offset:-1px}
+.scene .earth{position:absolute;left:50%;top:86%;width:150%;aspect-ratio:1;border-radius:50%;
+  transform:translateX(-50%) scale(calc(1 - .1 * var(--a2)));opacity:calc(1 - .72 * var(--a2));filter:grayscale(var(--a2));
+  background:radial-gradient(circle at 50% 6%,#8cc0ff 0%,#3568aa 10%,#14315a 34%,#060d1a 68%)}
+.scene .halo{position:absolute;left:50%;top:var(--sy);width:95%;aspect-ratio:1;border-radius:50%;opacity:var(--so);
+  transform:translate(-50%,-50%) scale(calc(.9 + .35 * var(--a2)));background:radial-gradient(circle,rgba(247,213,139,.30) 0%,rgba(247,213,139,0) 62%)}
+.scene .sun{position:absolute;left:50%;top:var(--sy);width:25%;aspect-ratio:1;border-radius:50%;opacity:var(--so);
+  transform:translate(-50%,-50%) scale(var(--ss));background:radial-gradient(circle,#fff 0%,#fff6dc 30%,#f7d58b 56%,rgba(247,213,139,0) 72%)}
+.scene .sun::before{content:"";position:absolute;inset:-150%;border-radius:50%;
+  background:repeating-conic-gradient(from 0deg,rgba(247,213,139,0) 0 7deg,rgba(247,213,139,.16) 7deg 9deg);
+  -webkit-mask:radial-gradient(circle,#000 18%,transparent 62%);mask:radial-gradient(circle,#000 18%,transparent 62%)}
+@media (prefers-reduced-motion:no-preference){.scene .sun::before{animation:spin 90s linear infinite}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.scene .angels{position:absolute;left:14%;right:14%;top:64%;display:flex;justify-content:space-between;align-items:flex-start}
+.scene .angels i{display:block;width:clamp(12px,3.8%,20px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#c7c7cc 70%);
+  opacity:var(--a1);transform:translateY(calc((1 - var(--a1)) * 30px))}
+.scene .angels i:nth-child(1),.scene .angels i:nth-child(5){margin-top:1.1rem}
+.scene .angels i:nth-child(2),.scene .angels i:nth-child(4){margin-top:.4rem}
+.scene .lbl{position:absolute;font-size:.8125rem;font-weight:600;letter-spacing:.06em;color:#f5f5f7}
+.scene .l-son{left:calc(50% + 15%);top:var(--sy);transform:translateY(-50%);opacity:var(--a1)}
+.scene .l-ang{left:50%;top:79%;transform:translateX(-50%);opacity:var(--a1)}
+.scene .l-earth{left:50%;bottom:4%;transform:translateX(-50%);opacity:.9}
+
+@media (max-width:56rem){.hs-grid{grid-template-columns:1fr;gap:1.5rem}.scene{order:-1;width:min(100%,26rem)}}
+
+.pin .hs{height:380vh;height:380svh}
+.pin .hs-sticky{position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));height:calc(100svh - var(--nav-h));padding:0;display:flex;align-items:center}
+.pin .steps{margin-top:1.5rem;gap:0}
+.pin .cap{grid-area:1/1;opacity:0;transform:translateY(14px);transition:opacity .45s,transform .45s;pointer-events:none}
+.pin .cap.on{opacity:1;transform:none;pointer-events:auto}
+.pin .dots{display:flex;gap:.5rem;margin-top:1.25rem}
+.dots i{display:block;width:.5rem;height:.5rem;border-radius:.25rem;background:var(--text2);opacity:.5;transition:width .3s,opacity .3s}
+.dots i.on{width:1.75rem;opacity:1;background:var(--text)}
+@media (max-width:56rem){
+  .pin .hs-sticky .head h2{font-size:1.75rem}
+  .pin .scene{width:min(86vw,38svh)}
+  .pin .cap h3{font-size:1.3125rem}.pin .cap p{font-size:.9375rem;line-height:1.65;margin-top:.5rem}
+  .pin .steps{margin-top:.75rem}.pin .hs .eyebrow{font-size:.8125rem}
+  .pin .hs-grid{gap:1rem}
+}
+
+/* ===== Segmented control：Apple 風格滑動選取 ===== */
+.seg{display:none;position:relative;grid-template-columns:repeat(var(--n,2),1fr);background:var(--segbg);border-radius:980px;padding:4px;max-width:100%}
+.js .seg{display:inline-grid}
+.seg::before{content:"";position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px) / var(--n,2));border-radius:980px;
+  background:var(--thumb);box-shadow:var(--thumb-sh);transform:translateX(calc(var(--i,0) * 100%))}
+@media (prefers-reduced-motion:no-preference){.seg::before{transition:transform .32s cubic-bezier(.2,.7,.2,1)}}
+.seg button{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:44px;padding:0 1.25rem;
+  border:0;background:none;color:var(--text2);font:inherit;font-size:1rem;font-weight:600;border-radius:980px;cursor:pointer;white-space:nowrap}
+.seg button[aria-selected="true"]{color:var(--text)}
+.seg svg{width:1.125rem;height:1.125rem;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.panel{margin-top:1.5rem}
+.panel>h4{font-size:1.0625rem;font-weight:600;margin-bottom:1rem}
+.js .panel>h4{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.card{background:var(--card);border-radius:var(--radius)}
+.rows{padding:.5rem 1.75rem}
+.rows li{display:grid;gap:.25rem;padding:1.25rem 0}
+.rows li+li{border-top:1px solid var(--sep)}
+.rows .k{font-size:.8125rem;font-weight:600;color:var(--text2);letter-spacing:.02em}
+.rows .v{font-size:clamp(1.25rem,1.05rem + .8vw,1.625rem);line-height:1.5;font-weight:600}
+.rows .v small{font-size:.8125rem;font-weight:500;color:var(--text2);margin-left:.4rem;white-space:nowrap}
+@media (min-width:44rem){.rows li{grid-template-columns:7rem 1fr;gap:1.5rem;align-items:baseline}}
+.compare .son-card{background:linear-gradient(160deg,#fff4d6 0%,#f7d58b 100%);color:#1d1d1f}
+.compare .son-card .k,.compare .son-card .v small{color:#515154}
+.compare .son-card .rows li+li{border-color:rgba(0,0,0,.14)}
+
+.dodont ol{counter-reset:n;padding:.5rem 1.75rem}
+.dodont li{counter-increment:n;position:relative;padding:1.25rem 0 1.25rem 2.5rem;font-size:1.0625rem;line-height:1.75}
+.dodont li+li{border-top:1px solid var(--sep)}
+.dodont li::before{content:counter(n);position:absolute;left:0;top:1.3rem;width:1.5rem;height:1.5rem;border-radius:50%;
+  background:var(--text);color:var(--bg);font-size:.8125rem;font-weight:600;line-height:1.5rem;text-align:center}
+
+/* ===== Accordion ===== */
+.row-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+.row-head h3{margin:0}
+.link-btn{background:none;border:0;padding:0 .25rem;min-height:44px;font:inherit;font-size:1rem;color:var(--link);cursor:pointer}
+.link-btn:hover{text-decoration:underline}
+.acc{border-top:1px solid var(--sep)}
+.acc details{border-bottom:1px solid var(--sep)}
+.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:1rem;min-height:4rem;padding:.5rem 0}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary .t{flex:1;font-size:clamp(1.1875rem,1rem + .6vw,1.5rem);font-weight:600;line-height:1.35}
+.acc summary .r{font-size:.875rem;color:var(--text2);white-space:nowrap}
+.acc summary::after{content:"";width:.875rem;height:.875rem;flex:none;
+  background:linear-gradient(currentColor,currentColor) center/100% 2px no-repeat,linear-gradient(currentColor,currentColor) center/2px 100% no-repeat;color:var(--text2)}
+.acc details[open] summary::after{background:linear-gradient(currentColor,currentColor) center/100% 2px no-repeat}
+.acc ul{display:grid;gap:.875rem;padding:.25rem 0 1.75rem}
+.acc li{position:relative;padding-left:1.25rem}
+.acc li::before{content:"";position:absolute;left:0;top:.8em;width:.375rem;height:.375rem;border-radius:50%;background:var(--text2)}
+.acc li .v{font-size:.8125rem;color:var(--text2);white-space:nowrap;margin-left:.35rem}
+
+.refs ul{display:grid;gap:.25rem;margin-top:.5rem}
+.refs summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-size:1rem;font-weight:600}
+.refs li,.refs a{font-size:1rem}
+.refs a{display:inline-flex;min-height:36px;align-items:center}
+
+/* ===== Chronicles：橫向 rail + 託管開關 ===== */
+.rail-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+.rail-head h3{margin:0}
+.rail-btns{display:none;gap:.75rem}
+.js .rail-btns{display:flex}
+.circ{width:2.5rem;height:2.5rem;border-radius:50%;border:0;background:var(--segbg);color:var(--text);cursor:pointer;display:grid;place-items:center}
+.circ svg{width:1.125rem;height:1.125rem;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.circ:disabled{opacity:.35;cursor:default}
+.rail{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:.25rem;scroll-padding-left:0}
+.rail::-webkit-scrollbar{display:none}
+.wcard{flex:0 0 min(78vw,17.5rem);height:23rem;scroll-snap-align:start;border-radius:var(--radius);padding:1.75rem;display:flex;flex-direction:column;justify-content:space-between;color:#1d1d1f}
+.wcard .r{font-size:.875rem;font-weight:600;opacity:.8}
+.wcard b{display:block;font-size:3.5rem;line-height:1.1;font-weight:600;letter-spacing:-.01em}
+.wcard span{display:block;margin-top:.5rem;font-size:1.1875rem;font-weight:600}
+.wcard:nth-child(1){background:linear-gradient(160deg,#fbe3a8,#f3b24a)}
+.wcard:nth-child(2){background:linear-gradient(160deg,#fcd98a,#ee9d3a)}
+.wcard:nth-child(3){background:linear-gradient(160deg,#fff0c2,#f7c65a)}
+.wcard:nth-child(4){background:linear-gradient(160deg,#f9cf9b,#e9843b)}
+.wcard:nth-child(5){background:linear-gradient(160deg,#f5c4a0,#dc6f32)}
+
+.flip{padding:1.75rem}
+.flip-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem 2rem}
+.flip-top p{color:var(--text2);margin-top:.25rem}
+.sw{display:inline-flex;align-items:center;gap:.875rem;font-weight:600}
+.sw button{position:relative;width:3.25rem;height:2rem;border-radius:1rem;border:0;background:#8e8e93;cursor:pointer;flex:none}
+.sw button::after{content:"";position:absolute;top:.125rem;left:.125rem;width:1.75rem;height:1.75rem;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.3)}
+@media (prefers-reduced-motion:no-preference){.sw button,.sw button::after{transition:background .25s,transform .25s}}
+.sw button[aria-checked="true"]{background:#248a3d}
+.sw button[aria-checked="true"]::after{transform:translateX(1.25rem)}
+.flip-cards{display:grid;gap:1rem;margin-top:1.5rem}
+@media (min-width:44rem){.flip-cards{grid-template-columns:repeat(3,1fr)}}
+.fc{border-radius:22px;padding:1.5rem;min-height:11rem;display:flex;flex-direction:column;justify-content:space-between;background:var(--bg);color:var(--text)}
+@media (prefers-reduced-motion:no-preference){.fc{transition:background .5s,color .5s}}
+.fc .who{font-size:.875rem;font-weight:600;color:var(--text2)}
+.fc b{font-size:2.5rem;line-height:1.1;font-weight:600}
+.fc small{display:block;font-size:1rem;color:var(--text2);margin-top:.25rem}
+.flip.on .fc{background:linear-gradient(160deg,#fbe3a8,#f0a23a);color:#1d1d1f}
+.flip.on .fc .who,.flip.on .fc small{color:#3a3a3c}
+.flip-note{margin-top:1.25rem;font-size:1.0625rem;font-weight:600}
+
+/* ===== Psalm：時間滑桿 ===== */
+.time{padding:clamp(1.5rem,4vw,2.5rem)}
+.time .big{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1.25rem}
+.time output{font-size:clamp(3.5rem,2rem + 7vw,6rem);line-height:1;font-weight:600;letter-spacing:-.02em}
+.time .says{font-size:1.1875rem;font-weight:600;color:var(--text2);min-height:2em}
+.bars{display:grid;gap:1.25rem;margin-top:2rem}
+.bar .lab{display:flex;justify-content:space-between;gap:1rem;font-size:.9375rem;font-weight:600;margin-bottom:.5rem}
+.bar .lab span:last-child{color:var(--text2);font-weight:500}
+.track{position:relative;height:1.25rem;border-radius:.625rem;background:var(--segbg);outline:1px solid var(--sep);outline-offset:-1px}
+.fill{height:100%;border-radius:.625rem;background:linear-gradient(90deg,#e85d04,#c9184a)}
+.fill.god{width:100%}
+.fill.man{width:calc(var(--yr,80) / 10 * 1%);min-width:.625rem}
+@media (prefers-reduced-motion:no-preference){.fill.man{transition:width .12s ease-out}}
+.tick{position:absolute;left:8%;top:-.4rem;bottom:-.4rem;width:2px;background:var(--text)}
+.mark{position:relative;height:1.5rem;font-size:.8125rem;color:var(--text2);margin-top:.25rem}
+.mark span{position:absolute;left:calc(8% + .5rem);top:0;white-space:nowrap}
+.ctl{margin-top:2rem}
+.ctl input[type=range]{width:100%;height:2.75rem;margin:0;accent-color:#c9184a}
+.presets{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.75rem}
+.chip{min-height:44px;padding:0 1.125rem;border-radius:980px;border:1px solid var(--sep);background:transparent;color:var(--text);font:inherit;font-size:1rem;font-weight:600;cursor:pointer}
+.chip:hover{background:var(--segbg)}
+.chip[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+
+footer.sec{padding:4rem 0 6rem}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到內容</a>
+
+<nav class="localnav" id="nav" aria-label="章節">
+  <div class="wrap">
+    <span class="ln-title">經文整理</span>
+    <div class="ln-links">
+      <a href="#top" aria-current="true">總覽</a>
+      <a href="#heb">希伯來書</a>
+      <a href="#chr">歷代志上</a>
+      <a href="#psa">詩篇</a>
+      <button class="theme" id="theme" type="button" aria-label="切換為暗色" title="切換亮暗">
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
+      </button>
+      <a class="btn" href="#heb">開始閱讀</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============ 總覽 ============ -->
+<header class="sec hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow">三段經文整理</p>
+    <h1><span>祂高過一切。</span><span class="soft">也不會改變。</span></h1>
+    <p class="lede">希伯來書 1、歷代志上 29、詩篇 90。</p>
+    <div class="cta">
+      <a class="btn" href="#heb">開始閱讀</a>
+      <a class="more" href="#thread">三段如何連起來</a>
+    </div>
+    <ul class="tiles">
+      <li><a class="tile t-heb rv" href="#heb">
+        <span class="eyebrow">希伯來書 1:1–14</span>
+        <h3>祂高過天使</h3>
+        <p>直接跟隨耶穌，不把重心放在靈界體驗。</p>
+        <span class="more">了解更多</span><span class="art" aria-hidden="true"></span></a></li>
+      <li><a class="tile t-chr rv" href="#chr">
+        <span class="eyebrow">歷代志上 29:10–13</span>
+        <h3>一切都是祂的</h3>
+        <p>金錢、能力與成就，是神託付我們管理的禮物。</p>
+        <span class="more">了解更多</span><span class="art" aria-hidden="true"></span></a></li>
+      <li><a class="tile t-psa rv" href="#psa">
+        <span class="eyebrow">詩篇 90:1–3</span>
+        <h3>祂是永不搬走的居所</h3>
+        <p>安全感在神，不在房子、存款或壽命。</p>
+        <span class="more">了解更多</span><span class="art" aria-hidden="true"></span></a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="sec statement" id="thread" aria-label="三段共同的主題">
+  <div class="wrap"><p id="statement">三段經文，指向同一件事。神至高，也永恆。我們是受託管理、短暫寄居的人。</p></div>
+</section>
+
+<!-- ============ 希伯來書 ============ -->
+<section class="sec gray" id="heb" aria-labelledby="h-heb">
+  <div class="hs" id="hs">
+    <div class="hs-sticky">
+      <div class="wrap hs-grid">
+        <div class="caps">
+          <div class="head">
+            <p class="eyebrow">希伯來書 1:1–14</p>
+            <h2 id="h-heb">耶穌的地位遠高於天使</h2>
+          </div>
+          <ol class="steps" id="steps">
+            <li class="cap on">
+              <p class="eyebrow">1:1–4　上帝親自發聲</p>
+              <h3>過去透過先知，如今透過兒子。</h3>
+              <p>這位兒子承受萬有、創造宇宙，是上帝榮耀的光輝與本體的真像。他用大能的話語托住萬有，洗淨人的罪，坐在至尊者的右邊。</p>
+            </li>
+            <li class="cap">
+              <p class="eyebrow">1:5–8　兒子與僕人的差別</p>
+              <h3>天使是僕人，他是兒子。</h3>
+              <p>上帝從沒對任何天使說「你是我的兒子」。祂帶長子進入世界時，命令所有天使都拜他。天使像風和火焰聽命行事，兒子的寶座永永遠遠。</p>
+            </li>
+            <li class="cap">
+              <p class="eyebrow">1:9–14　永不改變的創造主</p>
+              <h3>天地會老，唯有他不變。</h3>
+              <p>起初是他立了大地根基、造了諸天。天地像舊衣服一樣變老捲起，他永遠不變。天使全是服役的靈，奉差遣去服事將承受救恩的人。</p>
+            </li>
+          </ol>
+          <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+        </div>
+        <div class="scene" role="img" aria-label="示意圖：上方的光是兒子，下方的小點是天使，底部的星球是天地。天地逐漸老去，兒子的光不變。">
+          <div class="earth"></div>
+          <div class="halo"></div>
+          <div class="sun"></div>
+          <span class="lbl l-son">兒子</span>
+          <div class="angels"><i></i><i></i><i></i><i></i><i></i></div>
+          <span class="lbl l-ang">天使</span>
+          <span class="lbl l-earth">天地</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <dl class="facts">
+      <div class="fact rv"><dt>寫給誰</dt><dd>在猶太傳統裡猶豫要不要走回頭路的信徒。</dd></div>
+      <div class="fact rv"><dt>重點</dt><dd>用舊約經文證明，耶穌的地位遠高於天使。</dd></div>
+      <div class="fact rv"><dt>所以呢</dt><dd>不追逐神祕的靈界體驗，直接跟隨最清楚表達上帝心意的耶穌。</dd></div>
+    </dl>
+
+    <div class="block compare rv">
+      <h3>兒子與天使</h3>
+      <div class="seg" role="tablist" aria-label="比較對象">
+        <button role="tab" id="cmp-t0" aria-selected="true" aria-controls="cmp-p0">兒子</button>
+        <button role="tab" id="cmp-t1" aria-selected="false" aria-controls="cmp-p1">天使</button>
+      </div>
+      <div class="panel card son-card" role="tabpanel" id="cmp-p0" aria-labelledby="cmp-t0">
+        <h4>兒子</h4>
+        <ul class="rows">
+          <li><span class="k">身分</span><span class="v">上帝的兒子、長子<small>1:5–6</small></span></li>
+          <li><span class="k">位置</span><span class="v">坐在天上至尊者的右邊<small>1:3, 1:13</small></span></li>
+          <li><span class="k">敬拜</span><span class="v">所有天使都要拜他<small>1:6</small></span></li>
+          <li><span class="k">國度</span><span class="v">寶座永永遠遠，用公義掌管<small>1:8</small></span></li>
+        </ul>
+      </div>
+      <div class="panel card" role="tabpanel" id="cmp-p1" aria-labelledby="cmp-t1">
+        <h4>天使</h4>
+        <ul class="rows">
+          <li><span class="k">身分</span><span class="v">像風和火焰、聽命行事的僕役<small>1:7</small></span></li>
+          <li><span class="k">位置</span><span class="v">服役的靈，奉差遣服事將承受救恩的人<small>1:14</small></span></li>
+          <li><span class="k">敬拜</span><span class="v">奉命去拜兒子<small>1:6</small></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block rv">
+      <div class="row-head"><h3>經文脈絡</h3><button class="link-btn" data-toggle-all hidden>全部展開</button></div>
+      <div class="acc">
+        <details><summary><span class="t">上帝親自發聲</span><span class="r">1:1–4</span></summary>
+          <ul>
+            <li>過去，上帝透過先知 (替上帝傳話的人) 在不同時代用各種方式對祖先說話。<span class="v">1:1</span></li>
+            <li>如今在末世，上帝直接透過祂的兒子向我們發聲。<span class="v">1:2</span></li>
+            <li>這位兒子承受萬有、創造宇宙，是上帝榮耀的光輝與本體的真像。<span class="v">1:2–3</span></li>
+            <li>他用大能的話語托住萬有，洗淨人的罪後，坐在天上至尊者的右邊。<span class="v">1:3</span></li>
+            <li>他得到的名分遠比天使尊貴。<span class="v">1:4</span></li>
+          </ul></details>
+        <details><summary><span class="t">兒子與僕人的差別</span><span class="r">1:5–8</span></summary>
+          <ul>
+            <li>上帝從沒對任何天使說「你是我的兒子，我今日生了你」。<span class="v">1:5</span></li>
+            <li>上帝也沒說「我要作他的父，他要作我的子」。<span class="v">1:5</span></li>
+            <li>上帝帶長子進入世界時，命令所有天使都要拜他。<span class="v">1:6</span></li>
+            <li>談到天使：他們像風和火焰一樣聽命行事。<span class="v">1:7</span></li>
+            <li>談到兒子：他的寶座永永遠遠，用公義掌管國度。<span class="v">1:8</span></li>
+          </ul></details>
+        <details><summary><span class="t">永不改變的創造主</span><span class="r">1:9–14</span></summary>
+          <ul>
+            <li>他喜愛公義、恨惡罪惡，所以上帝用喜樂的油膏抹他，讓他高過所有同伴。<span class="v">1:9</span></li>
+            <li>起初是他立了大地根基，親手造了諸天。<span class="v">1:10</span></li>
+            <li>天地都會像舊衣服一樣變老捲起，唯有他永遠不變。<span class="v">1:10–12</span></li>
+            <li>上帝從未對天使說「你坐在我的右邊，等我使你的仇敵作你的腳凳」。<span class="v">1:13</span></li>
+            <li>天使全是服役的靈，奉差遣去服事將承受救恩的人。<span class="v">1:14</span></li>
+          </ul></details>
+      </div>
+    </div>
+
+    <div class="block dodont rv">
+      <h3>帶進生活</h3>
+      <div class="seg" role="tablist" aria-label="帶進生活">
+        <button role="tab" id="heb-d-t0" aria-selected="true" aria-controls="heb-d-p0"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.7 2.7L16 9.5"/></svg>可以這樣做</button>
+        <button role="tab" id="heb-d-t1" aria-selected="false" aria-controls="heb-d-p1"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg>避免這樣</button>
+      </div>
+      <div class="panel card" role="tabpanel" id="heb-d-p0" aria-labelledby="heb-d-t0">
+        <h4>可以這樣做</h4>
+        <ol>
+          <li>遇到生命難題，先從耶穌在福音書裡說過的話與做法找方向。追尋特殊感應或天使傳話放在其次。</li>
+          <li>親友質疑信仰或勸你放棄時，回想耶穌在創造與救贖上的至高地位，不輕易退回舊習慣。</li>
+          <li>讀舊約感到陌生或零散時，把耶穌當作理解整本聖經的最終拼圖與核心人物。</li>
+        </ol>
+      </div>
+      <div class="panel card" role="tabpanel" id="heb-d-p1" aria-labelledby="heb-d-t1">
+        <h4>避免這樣</h4>
+        <ol>
+          <li>過度迷戀天使、預言或超自然奇事，把天使當成祈求保佑的對象，甚至高過對耶穌的認識。</li>
+          <li>覺得做好傳統宗教儀式就夠了，忽略耶穌已洗淨我們的罪、帶我們直接親近上帝。</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="block refs rv">
+      <details><summary>對照經文</summary>
+        <ul>
+          <li>Hebrews 1:1–14 (NIV)｜希伯來書 1:1–14</li>
+          <li><a href="https://www.biblegateway.com/passage/?search=Hebrews+1%3A1-14&amp;version=NIV" target="_blank" rel="noopener">Hebrews 1:1–14 (NIV) · BibleGateway</a></li>
+          <li><a href="https://www.biblegateway.com/passage/?search=Hebrews+1%3A1-14&amp;version=CCB" target="_blank" rel="noopener">希伯來書 1:1–14 (CCB) · BibleGateway</a></li>
+        </ul></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 歷代志上 ============ -->
+<section class="sec" id="chr" aria-labelledby="h-chr">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">歷代志上 29:10–13</p>
+      <h2 id="h-chr">一切都是神的，我們只是管理</h2>
+    </div>
+    <dl class="facts">
+      <div class="fact rv"><dt>誰在說</dt><dd>年老的大衛，在交棒前、帶領全國為建殿捐獻之後，公開向神獻上的感恩禱告。</dd></div>
+      <div class="fact rv"><dt>重點</dt><dd>財富與尊榮都從神而來，神掌管一切。</dd></div>
+      <div class="fact rv"><dt>所以呢</dt><dd>手上的金錢、能力與成就，是神暫時交給我們管理的禮物。</dd></div>
+    </dl>
+
+    <div class="block rv">
+      <div class="rail-head">
+        <h3 id="words-h">屬於神的五樣</h3>
+        <div class="rail-btns">
+          <button class="circ" id="rail-prev" aria-label="上一張" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+          <button class="circ" id="rail-next" aria-label="下一張"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <ul class="rail" id="rail" role="list" aria-labelledby="words-h">
+        <li class="wcard"><span class="r">歷代志上 29:11</span><div><b>偉大</b><span>屬於神</span></div></li>
+        <li class="wcard"><span class="r">歷代志上 29:11</span><div><b>能力</b><span>屬於神</span></div></li>
+        <li class="wcard"><span class="r">歷代志上 29:11</span><div><b>榮耀</b><span>屬於神</span></div></li>
+        <li class="wcard"><span class="r">歷代志上 29:11</span><div><b>尊貴</b><span>屬於神</span></div></li>
+        <li class="wcard"><span class="r">歷代志上 29:11</span><div><b>威嚴</b><span>屬於神</span></div></li>
+      </ul>
+      <p class="small" style="margin-top:1rem">天上地下萬物是神的，國度也是神的。</p>
+    </div>
+
+    <div class="block rv">
+      <div class="card flip" id="flip">
+        <div class="flip-top">
+          <div><h3>換個角度看</h3><p>人的財富與尊榮都從神而來。<span class="small">歷代志上 29:12, 14</span></p></div>
+          <div class="sw"><span id="sw-l">託管視角：關</span><button role="switch" aria-checked="false" aria-labelledby="sw-l" id="sw"></button></div>
+        </div>
+        <div class="flip-cards">
+          <div class="fc"><span class="who">我的</span><div><b>金錢</b><small>靠自己掙來的</small></div></div>
+          <div class="fc"><span class="who">我的</span><div><b>能力</b><small>靠自己練出來的</small></div></div>
+          <div class="fc"><span class="who">我的</span><div><b>成就</b><small>靠自己拿到的</small></div></div>
+        </div>
+        <p class="flip-note" id="flip-note" aria-live="polite">打開開關，換個角度看這三樣。</p>
+      </div>
+    </div>
+
+    <div class="block rv">
+      <div class="row-head"><h3>經文脈絡</h3><button class="link-btn" data-toggle-all hidden>全部展開</button></div>
+      <div class="acc">
+        <details><summary><span class="t">交棒與建殿募款</span><span class="r">29:1–9</span></summary>
+          <ul>
+            <li>大衛告訴百姓，神揀選了年輕沒經驗的所羅門接手建造聖殿。<span class="v">29:1</span></li>
+            <li>大衛先捐出多年積蓄的金銀、寶石與建材，再邀請領袖和百姓樂意奉獻。<span class="v">29:2–5</span></li>
+            <li>族長與官長紛紛響應，捐出大筆金銀銅鐵和寶石，全國因誠心奉獻而歡喜。<span class="v">29:6–9</span></li>
+          </ul></details>
+        <details><summary><span class="t">公開向神禱告</span><span class="r">29:10–13</span></summary>
+          <ul>
+            <li>大衛在全體百姓面前讚美神，稱頌先祖以色列的上帝從亙古到永遠都配得讚美。<span class="v">29:10</span></li>
+            <li>偉大、能力、榮耀、尊貴與威嚴全屬於神；天上地下萬物是神的，國度也是神的。<span class="v">29:11</span></li>
+            <li>人的財富與尊榮都從神而來，神掌管一切，能使人強大、賜人力量。<span class="v">29:12</span></li>
+            <li>他帶領大家向神獻上感謝，讚美神榮耀的名。<span class="v">29:13</span></li>
+          </ul></details>
+        <details><summary><span class="t">把領受的還給神</span><span class="r">29:14–23</span></summary>
+          <ul>
+            <li>大衛謙卑承認，他們不過是把從神手裡領受的東西還給神。<span class="v">29:14</span></li>
+            <li>他們在世上只是短暫寄居的過客。<span class="v">29:15</span></li>
+            <li>百姓當天在神面前歡喜吃喝，正式立所羅門為王，由他接續王位。<span class="v">29:21–23</span></li>
+          </ul></details>
+      </div>
+    </div>
+
+    <div class="block dodont rv">
+      <h3>帶進生活</h3>
+      <div class="seg" role="tablist" aria-label="帶進生活">
+        <button role="tab" id="chr-d-t0" aria-selected="true" aria-controls="chr-d-p0"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.7 2.7L16 9.5"/></svg>可以這樣做</button>
+        <button role="tab" id="chr-d-t1" aria-selected="false" aria-controls="chr-d-p1"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg>避免這樣</button>
+      </div>
+      <div class="panel card" role="tabpanel" id="chr-d-p0" aria-labelledby="chr-d-t0">
+        <h4>可以這樣做</h4>
+        <ol>
+          <li>拿到薪水、獎金或完成大專案時，先停下來感謝神給你健康、機會與才能，不只覺得全靠自己。</li>
+          <li>面對教會需求、公益捐款或親友急難時，甘心樂意分享一部分資源，因為這些本來就是神託付我們保管的。</li>
+          <li>在職場或家庭有權力做決定時，提醒自己只是替神管理的人，不拿地位或金錢壓迫別人。</li>
+        </ol>
+      </div>
+      <div class="panel card" role="tabpanel" id="chr-d-p1" aria-labelledby="chr-d-t1">
+        <h4>避免這樣</h4>
+        <ol>
+          <li>把銀行存款或職場頭銜當成人生唯一的靠山，一遇到市場波動或職位變動就極度恐慌。</li>
+          <li>捐款或幫忙別人後充滿優越感，覺得自己在施捨，甚至要求別人照你的意思回報。</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="block refs rv">
+      <details><summary>對照經文</summary>
+        <ul>
+          <li>1 Chronicles 29:1–23 (NIV)｜歷代志上 29:1–23</li>
+          <li><a href="https://www.biblegateway.com/passage/?search=1+Chronicles+29%3A10-13&amp;version=NIV" target="_blank" rel="noopener">1 Chronicles 29:10–13 (NIV) · BibleGateway</a></li>
+          <li><a href="https://www.biblegateway.com/passage/?search=%E6%AD%B7%E4%BB%A3%E5%BF%97%E4%B8%8A+29%3A10-13&amp;version=CCB" target="_blank" rel="noopener">歷代志上 29:10–13 (CCB) · BibleGateway</a></li>
+        </ul></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 詩篇 ============ -->
+<section class="sec gray" id="psa" aria-labelledby="h-psa">
+  <div class="wrap">
+    <div class="head rv">
+      <p class="eyebrow">詩篇 90:1–3</p>
+      <h2 id="h-psa">神是人真正的居所</h2>
+    </div>
+    <dl class="facts">
+      <div class="fact rv"><dt>寫給誰</dt><dd>在曠野漂流四十年、沒有固定家園的以色列人。</dd></div>
+      <div class="fact rv"><dt>重點</dt><dd>這是整本詩篇最古老的一篇禱告，摩西對神說：世世代代，你一直是我們的居所。</dd></div>
+      <div class="fact rv"><dt>所以呢</dt><dd>真正的安全感不在房子、存款或壽命長短，在那位從亙古到永遠不變的神本身。</dd></div>
+    </dl>
+
+    <div class="block rv">
+      <h3>神的時間與人的時間</h3>
+      <div class="card time" id="time">
+        <div class="big">
+          <output id="yr-out" for="yr">80 年</output>
+          <p class="says" id="yr-read" aria-live="polite">大約是人的一生。</p>
+        </div>
+        <div class="bars">
+          <div class="bar">
+            <div class="lab"><span>神的一天</span><span>一千年，像剛過去的昨天 (90:4)</span></div>
+            <div class="track"><div class="fill god"></div></div>
+          </div>
+          <div class="bar">
+            <div class="lab"><span>你拉的年數</span><span>像早晨發芽、晚上枯乾的草 (90:5–10)</span></div>
+            <div class="track"><div class="fill man"></div><div class="tick"></div></div>
+            <div class="mark" aria-hidden="true"><span>人一生約 80 年</span></div>
+          </div>
+        </div>
+        <div class="ctl">
+          <label for="yr" class="small">拖動看看，範圍 1 到 1000 年</label>
+          <input id="yr" type="range" min="1" max="1000" step="1" value="80" aria-describedby="yr-read">
+          <div class="presets">
+            <button class="chip" type="button" data-yr="80" aria-pressed="true">人的一生 · 80 年</button>
+            <button class="chip" type="button" data-yr="1000" aria-pressed="false">神的一天 · 1000 年</button>
+          </div>
+        </div>
+        <p class="small" style="margin-top:1.5rem">比例示意，非經文原句。</p>
+      </div>
+    </div>
+
+    <div class="block rv">
+      <div class="row-head"><h3>經文脈絡</h3><button class="link-btn" data-toggle-all hidden>全部展開</button></div>
+      <div class="acc">
+        <details><summary><span class="t">曠野的處境</span><span class="r">民數記 14:32–34</span></summary>
+          <ul>
+            <li>以色列人因不信而受罰，在曠野漂流。</li>
+            <li>老一輩接連在沙漠離世，大家每天面對帳篷遷徙與死亡的無常。</li>
+          </ul></details>
+        <details><summary><span class="t">神是居所，也是永恆</span><span class="r">90:1–3</span></summary>
+          <ul>
+            <li>年老的摩西禱告第一句：主啊，世世代代，你一直是我們真正的居所。<span class="v">90:1</span></li>
+            <li>沒有固定的房子或土地，住在神裡面就是最安穩的家。</li>
+            <li>群山未生、大地和世界未造以前，從亙古到永遠，神就是神。<span class="v">90:2</span></li>
+            <li>與永恆的神相比，人很脆弱：神一句話，人就回到塵土。<span class="v">90:3</span></li>
+          </ul></details>
+        <details><summary><span class="t">人生短暫，仍然求智慧</span><span class="r">90:4–17</span></summary>
+          <ul>
+            <li>在神眼裡，一千年像剛過去的昨天，又像夜間巡邏的短短幾小時。<span class="v">90:4</span></li>
+            <li>人一生不過七、八十年，像早晨發芽、晚上就乾枯的草。<span class="v">90:5–10</span></li>
+            <li>摩西沒有絕望，反而求神教導他們數算自己的日子，好得智慧。<span class="v">90:12</span></li>
+            <li>他求神回轉憐憫，讓他們每天早晨飽嘗不變的慈愛，並堅固他們手所做的工。<span class="v">90:13–17</span></li>
+          </ul></details>
+      </div>
+    </div>
+
+    <div class="block dodont rv">
+      <h3>帶進生活</h3>
+      <div class="seg" role="tablist" aria-label="帶進生活">
+        <button role="tab" id="psa-d-t0" aria-selected="true" aria-controls="psa-d-p0"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.7 2.7L16 9.5"/></svg>可以這樣做</button>
+        <button role="tab" id="psa-d-t1" aria-selected="false" aria-controls="psa-d-p1"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg>避免這樣</button>
+      </div>
+      <div class="panel card" role="tabpanel" id="psa-d-p0" aria-labelledby="psa-d-t0">
+        <h4>可以這樣做</h4>
+        <ol>
+          <li>搬家、換工作、離鄉背井或人生階段大變動時，禱告提醒自己：神才是不會搬走、不會倒塌的居所。</li>
+          <li>焦慮、時間不夠用或害怕變老時，列出今天最值得投入的一兩件事，像摩西一樣數算日子。</li>
+          <li>每天出門工作或上課前，花一分鐘禱告，求神賜平安並堅固你今天手邊的任務。</li>
+        </ol>
+      </div>
+      <div class="panel card" role="tabpanel" id="psa-d-p1" aria-labelledby="psa-d-t1">
+        <h4>避免這樣</h4>
+        <ol>
+          <li>以為買到房子、存夠退休金或把計畫排滿，就能掌控人生，忽略人本身非常有限。</li>
+          <li>因為人生短暫又多變，就乾脆躺平，不去認真經營眼前的關係與工作。</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="block refs rv">
+      <details><summary>對照經文</summary>
+        <ul>
+          <li>Psalm 90:1–17 (NIV)｜詩篇 90:1–17</li>
+          <li>Numbers 14:32–34 (NIV)｜民數記 14:32–34</li>
+          <li><a href="https://www.biblegateway.com/passage/?search=Psalm+90%3A1-3&amp;version=NIV" target="_blank" rel="noopener">Psalm 90:1–3 (NIV) · BibleGateway</a></li>
+          <li><a href="https://www.biblegateway.com/passage/?search=Psalm+90%3A1-3&amp;version=CCB" target="_blank" rel="noopener">詩篇 90:1–3 (CCB) · BibleGateway</a></li>
+        </ul></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="sec">
+  <div class="wrap"><p class="small">內容整理自你提供的 PDF「希伯來書第一章解析」。解經與應用文字沿用原文。三段共同主題、比例示意圖、「換個角度看」的三個項目，由整理者依原文歸納。</p></div>
+</footer>
+
+<script>
+(function(){
+var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var H=document.documentElement, clamp=function(v,a,b){return Math.min(b===undefined?1:b,Math.max(a===undefined?0:a,v))};
+var anim=H.classList.contains("anim");
+
+/* --- 亮暗切換：預設 light，選擇存在 localStorage --- */
+var tbtn=document.getElementById("theme");
+function themeLabel(){tbtn.setAttribute("aria-label",H.getAttribute("data-theme")==="dark"?"切換為亮色":"切換為暗色")}
+tbtn.addEventListener("click",function(){var t=H.getAttribute("data-theme")==="dark"?"light":"dark";H.setAttribute("data-theme",t);
+  try{localStorage.setItem("hb-theme",t)}catch(e){}themeLabel()});
+themeLabel();
+
+/* --- Segmented control：點擊與 ← → 鍵都可切換 --- */
+$$(".seg").forEach(function(seg){
+  var tabs=$$('[role="tab"]',seg); seg.style.setProperty("--n",tabs.length);
+  function sel(i){tabs.forEach(function(t,j){var on=i===j;t.setAttribute("aria-selected",on);t.tabIndex=on?0:-1;
+    document.getElementById(t.getAttribute("aria-controls")).hidden=!on});seg.style.setProperty("--i",i)}
+  tabs.forEach(function(t,i){
+    t.addEventListener("click",function(){sel(i)});
+    t.addEventListener("keydown",function(e){
+      if(e.key==="ArrowRight"||e.key==="ArrowLeft"){var j=(i+(e.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length;sel(j);tabs[j].focus();e.preventDefault()}
+      if(e.key==="Home"){sel(0);tabs[0].focus();e.preventDefault()}
+      if(e.key==="End"){sel(tabs.length-1);tabs[tabs.length-1].focus();e.preventDefault()}
+    });
+  });
+  sel(0);
+});
+
+/* --- 經文脈絡：全部展開 / 收合 --- */
+$$("[data-toggle-all]").forEach(function(btn){
+  btn.hidden=false;
+  var ds=$$("details",btn.closest(".block"));
+  function sync(){var all=ds.every(function(d){return d.open});btn.textContent=all?"全部收合":"全部展開"}
+  btn.addEventListener("click",function(){var all=ds.every(function(d){return d.open});ds.forEach(function(d){d.open=!all});sync()});
+  ds.forEach(function(d){d.addEventListener("toggle",sync)});
+});
+
+/* --- 歷代志 rail：上一張 / 下一張，兩端停用 --- */
+var rail=$("#rail"),prev=$("#rail-prev"),next=$("#rail-next");
+function railState(){prev.disabled=rail.scrollLeft<=2;next.disabled=rail.scrollLeft+rail.clientWidth>=rail.scrollWidth-2;
+  if(rail.scrollWidth>rail.clientWidth+2){rail.tabIndex=0;rail.setAttribute("aria-label","屬於神的五樣，可左右捲動")}else{rail.removeAttribute("tabindex");$(".rail-btns").style.display="none"}}
+function railBy(d){var c=rail.firstElementChild;rail.scrollBy({left:d*(c.offsetWidth+16),behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})}
+prev.addEventListener("click",function(){railBy(-1)});next.addEventListener("click",function(){railBy(1)});
+rail.addEventListener("scroll",railState,{passive:true});addEventListener("resize",railState);railState();
+
+/* --- 歷代志：託管視角開關 --- */
+var sw=$("#sw"),flip=$("#flip"),swl=$("#sw-l"),note=$("#flip-note");
+var mine=["靠自己掙來的","靠自己練出來的","靠自己拿到的"],trust=["神暫時交給我管理","神託付我使用","神給的機會與才能"];
+sw.addEventListener("click",function(){
+  var on=sw.getAttribute("aria-checked")!=="true";sw.setAttribute("aria-checked",on);flip.classList.toggle("on",on);
+  swl.textContent="託管視角："+(on?"開":"關");
+  $$(".fc",flip).forEach(function(c,i){$(".who",c).textContent=on?"神託付的":"我的";$("small",c).textContent=on?trust[i]:mine[i]});
+  note.textContent=on?"都不是靠自己掙來的，是神暫時交給我們管理的禮物。":"打開開關，換個角度看這三樣。";
+});
+
+/* --- 詩篇：年數滑桿 --- */
+var yr=$("#yr"),tm=$("#time"),yo=$("#yr-out"),yd=$("#yr-read");
+function say(n){tm.style.setProperty("--yr",n);yo.textContent=n+" 年";
+  yd.textContent=n===1000?"在神眼裡，只像剛過去的昨天。":n>90?"已經超過人的一生。":n>=70?"大約是人的一生。":"還在人的一生之內。";
+  $$(".chip").forEach(function(c){c.setAttribute("aria-pressed",String(+c.dataset.yr===n))})}
+yr.addEventListener("input",function(){say(+yr.value)});
+$$(".chip").forEach(function(c){c.addEventListener("click",function(){yr.value=c.dataset.yr;say(+yr.value)})});
+
+/* --- 統一的 scroll 處理：nav 目前位置、nav 深淺、舞台、逐字亮起 --- */
+var nav=$("#nav"),links={},ids=["top","heb","chr","psa"];
+$$(".ln-links a[href^='#']").forEach(function(a){links[a.getAttribute("href").slice(1)]=a});
+var heb=$("#heb"),hs=$("#hs"),sticky=$(".hs-sticky"),caps=$$(".cap"),dots=$$("#dots i");
+var chars=[];(function(){var p=$("#statement"),t=p.textContent;p.textContent="";
+  t.split("").forEach(function(c){var s=document.createElement("span");s.className="ch";s.textContent=c;p.appendChild(s);chars.push(s)})})();
+var stmt=$("#statement"),pend=false;
+
+function frame(){
+  pend=false;var vh=innerHeight,navH=nav.offsetHeight;
+  // 目前位置
+  var cur="top";ids.forEach(function(k){if(document.getElementById(k).getBoundingClientRect().top<=navH+vh*.35)cur=k});
+  ids.forEach(function(k){links[k].setAttribute("aria-current",k===cur?"true":"false")});
+  // nav 進入黑色區塊時轉深色
+  
+  // 舞台
+  if(H.classList.contains("pin")){
+    var r=hs.getBoundingClientRect(),total=hs.offsetHeight-sticky.offsetHeight,p=clamp((navH-r.top)/Math.max(1,total));
+    hs.style.setProperty("--a0",clamp(p/.12).toFixed(3));
+    hs.style.setProperty("--a1",clamp((p-.25)/.25).toFixed(3));
+    hs.style.setProperty("--a2",clamp((p-.6)/.3).toFixed(3));
+    var step=p<.33?0:p<.66?1:2;
+    caps.forEach(function(c,i){c.classList.toggle("on",i===step)});dots.forEach(function(d,i){d.classList.toggle("on",i===step)});
+  }
+  // 逐字亮起
+  if(anim){var sr=stmt.getBoundingClientRect(),q=clamp((vh*.85-sr.top)/(sr.height+vh*.3));
+    var n=Math.round(q*chars.length*1.08);chars.forEach(function(s,i){s.classList.toggle("on",i<n)})}
+}
+function sched(){if(!pend){pend=true;requestAnimationFrame(frame)}}
+addEventListener("scroll",sched,{passive:true});
+addEventListener("resize",function(){
+  var on=window.__setPin();
+  if(!on){["--a0","--a1","--a2"].forEach(function(v){hs.style.removeProperty(v)});caps.forEach(function(c){c.classList.remove("on")});}
+  sched();
+});
+frame();
+
+/* --- 進場淡入 --- */
+if(anim&&"IntersectionObserver" in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12,rootMargin:"0px 0px -6% 0px"});
+  $$(".rv").forEach(function(el){io.observe(el)});
+}else{$$(".rv").forEach(function(el){el.classList.add("in")})}
+})();
+</script>
+</body>
+</html>
