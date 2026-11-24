@@ -1,5 +1,6 @@
 # ai_quick_share
 
+- https://shyinlim.github.io/ai_quick_shares/20261125_001152159_isaiah_ch1_interactive.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20261125_001152159_isaiah_ch1_interactive.html)
 - https://shyinlim.github.io/ai_quick_shares/20261115_143617965_hebrews-1-study-v4.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20261115_143617965_hebrews-1-study-v4.html)
 - https://shyinlim.github.io/ai_quick_shares/20261109_223123523_matthew21-hebrews1.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20261109_223123523_matthew21-hebrews1.html)
 - https://shyinlim.github.io/ai_quick_shares/20261025_195952728_hebrews-and-matthew-study.html | [html](https://github.com/shyinlim/ai_quick_shares/blob/master/20261025_195952728_hebrews-and-matthew-study.html)

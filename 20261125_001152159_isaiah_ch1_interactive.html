@@ -1,0 +1,1852 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>20261124_230557_isaiah_ch1_interactive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* P1 曜石琥珀 (Obsidian & Amber) 策展色票 + 語意狀態色 */
+    :root,
+    html[data-theme="dark"] {
+      --color-surface-base: #0C0A09;
+      --color-surface-raised: #181412;
+      --color-text-primary: #F5F2EB;
+      --color-text-muted: #B8AEA2;
+      --color-border: rgba(245, 242, 235, 0.10);
+      --color-action-primary: #D97706;
+      --color-action-subtle: rgba(217, 119, 6, 0.16);
+      --color-ok: #10B981;
+      --color-warn: #F59E0B;
+      --color-danger: #EF4444;
+      --color-bezel-highlight: rgba(255, 255, 255, 0.06);
+      --color-hud-bg: rgba(12, 10, 9, 0.84);
+      --color-stage-glow: rgba(217, 119, 6, 0.16);
+      --color-stage-warn: rgba(239, 68, 68, 0.15);
+      --color-stage-clean: rgba(245, 242, 235, 0.14);
+    }
+
+    html[data-theme="light"] {
+      --color-surface-base: #FAF7F2;
+      --color-surface-raised: #F1ECE3;
+      --color-text-primary: #1C1714;
+      --color-text-muted: #61564C;
+      --color-border: rgba(28, 23, 20, 0.12);
+      --color-action-primary: #B45309;
+      --color-action-subtle: rgba(180, 83, 9, 0.12);
+      --color-ok: #047857;
+      --color-warn: #B45309;
+      --color-danger: #B91C1C;
+      --color-bezel-highlight: rgba(255, 255, 255, 0.65);
+      --color-hud-bg: rgba(250, 247, 242, 0.88);
+      --color-stage-glow: rgba(180, 83, 9, 0.12);
+      --color-stage-warn: rgba(185, 28, 28, 0.10);
+      --color-stage-clean: rgba(4, 120, 87, 0.10);
+    }
+
+    :root {
+      --font-sans-stack: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      --font-mono-stack: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+      --radius-container: 16px;
+      --radius-control: 8px;
+      --radius-pill: 9999px;
+      --hud-height: 64px;
+      --scroll-progress: 0;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: auto;
+      background-color: var(--color-surface-base);
+      color: var(--color-text-primary);
+      font-family: var(--font-sans-stack);
+      -webkit-font-smoothing: antialiased;
+      scrollbar-color: var(--color-action-primary) var(--color-surface-base);
+      scrollbar-width: thin;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--color-surface-base);
+      color: var(--color-text-primary);
+      font-family: var(--font-sans-stack);
+      font-size: 1rem;
+      line-height: 1.75;
+      transition: background-color 0.35s var(--ease-fluid), color 0.35s var(--ease-fluid);
+    }
+
+    ::selection {
+      background: var(--color-action-primary);
+      color: var(--color-surface-base);
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--color-surface-base);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-border);
+      border-radius: var(--radius-pill);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-action-primary);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--color-action-primary);
+      outline-offset: 2px;
+    }
+
+    .tabular {
+      font-variant-numeric: tabular-nums;
+    }
+
+    main {
+      overflow-x: clip;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 72rem;
+      margin-inline: auto;
+      padding-inline: clamp(1rem, 4vw, 2.5rem);
+    }
+
+    /* Double-Bezel 卡片規範 */
+    .bezel-card {
+      background-color: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      box-shadow: inset 0 1px 0 var(--color-bezel-highlight);
+      border-radius: var(--radius-container);
+    }
+
+    /* 頂部 HUD: 唯一全頁跳轉列，僅此處使用 backdrop-filter */
+    .hud {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: var(--hud-height);
+      background-color: var(--color-hud-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--color-border);
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s var(--ease-fluid), opacity 0.35s var(--ease-fluid);
+    }
+
+    .hud.is-visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @media (prefers-reduced-transparency: reduce) {
+      .hud {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background-color: var(--color-surface-base);
+      }
+    }
+
+    .hud-progress-track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: var(--color-border);
+      overflow: hidden;
+    }
+
+    .hud-progress-fill {
+      height: 100%;
+      width: 100%;
+      background: var(--color-action-primary);
+      transform-origin: left center;
+      /* 驅動變數：--scroll-progress (由 rAF 計算故事捲動進度 0~1) */
+      transform: scaleX(var(--scroll-progress));
+    }
+
+    .hud-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .hud-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      max-width: 100%;
+      padding-block: 0.25rem;
+    }
+    .hud-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hud-pill {
+      appearance: none;
+      background: transparent;
+      color: var(--color-text-muted);
+      border: 1px solid transparent;
+      border-radius: var(--radius-pill);
+      padding: 0.35rem 0.75rem;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: inherit;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: color 0.25s var(--ease-fluid), background-color 0.25s var(--ease-fluid), border-color 0.25s var(--ease-fluid), transform 0.2s var(--ease-fluid);
+    }
+
+    .hud-pill:hover {
+      color: var(--color-text-primary);
+      background-color: var(--color-action-subtle);
+      transform: translateY(-1px);
+    }
+
+    .hud-pill:active {
+      transform: scale(0.98);
+    }
+
+    .hud-pill.is-active {
+      color: var(--color-text-primary);
+      background-color: var(--color-action-subtle);
+      border-color: var(--color-action-primary);
+    }
+
+    .hud-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .icon-btn {
+      appearance: none;
+      background: var(--color-surface-raised);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-control);
+      min-width: 44px;
+      min-height: 44px;
+      padding: 0 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      font-family: inherit;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: border-color 0.25s var(--ease-fluid), transform 0.2s var(--ease-fluid), background-color 0.25s var(--ease-fluid);
+    }
+
+    .icon-btn:hover {
+      border-color: var(--color-action-primary);
+      transform: translateY(-2px);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.98);
+    }
+
+    .svg-icon {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.65;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* Hero 區：min-h-[82dvh]、≤3 項文字元素、H1 max-w-5xl ≤2 行 */
+    .hero {
+      min-height: clamp(520px, 82dvh, 740px);
+      padding-top: clamp(3rem, 6vh, 4.5rem);
+      padding-bottom: clamp(2.5rem, 6vh, 4rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      border-bottom: 1px solid var(--color-border);
+      overflow: hidden;
+    }
+
+    .hero-aura {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 75% 28%, var(--color-stage-glow) 0%, transparent 52%),
+        radial-gradient(circle at 22% 72%, var(--color-stage-warn) 0%, transparent 48%);
+      opacity: 0.9;
+    }
+
+    .hero-topbar {
+      position: absolute;
+      top: 1rem;
+      right: clamp(1rem, 4vw, 2.5rem);
+      z-index: 5;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 64rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.25rem, 4.5vw + 1rem, 4.25rem);
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+      margin: 0 0 1.25rem 0;
+      padding-bottom: 0.25rem;
+      max-width: 64rem;
+    }
+
+    .hero-accent {
+      color: var(--color-action-primary);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 1.5vw + 0.5rem, 1.35rem);
+      line-height: 1.75;
+      color: var(--color-text-muted);
+      max-width: 60ch;
+      margin: 0 0 2.25rem 0;
+    }
+
+    .primary-cta {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 44px;
+      padding: 0.75rem 1.4rem;
+      border-radius: var(--radius-control);
+      border: 1px solid var(--color-action-primary);
+      background-color: var(--color-action-primary);
+      color: var(--color-surface-base);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: transform 0.25s var(--ease-fluid), box-shadow 0.25s var(--ease-fluid);
+    }
+
+    .primary-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--color-action-subtle);
+    }
+
+    .primary-cta:active {
+      transform: scale(0.98);
+    }
+
+    /* Scrollytelling 2D 做法 a: 基底為靜態展開版，JS 依條件加上 .pin */
+    .story-section {
+      padding-block: clamp(2.25rem, 4.5vw, 3.75rem);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .section-header {
+      margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 3vw + 0.5rem, 2.5rem);
+      line-height: 1.28;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      margin: 0 0 0.75rem 0;
+    }
+
+    .section-lead {
+      color: var(--color-text-muted);
+      max-width: 65ch;
+      margin: 0;
+    }
+
+    .stage-wrapper {
+      position: relative;
+    }
+
+    .sticky-stage {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      padding: 1rem 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .stage-wrapper.pin .sticky-stage {
+      position: sticky;
+      top: calc(var(--hud-height) + 8px);
+      height: calc(100dvh - var(--hud-height) - 16px);
+      height: calc(100vh - var(--hud-height) - 16px);
+      padding: 0.5rem 0;
+    }
+
+    /* 舞台工具列 */
+    .stage-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex: 0 0 auto;
+    }
+
+    .stage-status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .stage-status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: var(--radius-pill);
+      background-color: var(--color-action-primary);
+      transition: background-color 0.35s var(--ease-fluid);
+    }
+
+    .switch-btn {
+      appearance: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 44px;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-control);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface-raised);
+      color: var(--color-text-primary);
+      font-family: inherit;
+      font-size: 0.8125rem;
+      cursor: pointer;
+      transition: border-color 0.25s var(--ease-fluid), transform 0.2s var(--ease-fluid);
+    }
+
+    .switch-btn:hover {
+      border-color: var(--color-action-primary);
+      transform: translateY(-1px);
+    }
+
+    .switch-btn:active {
+      transform: scale(0.98);
+    }
+
+    .switch-track {
+      width: 34px;
+      height: 18px;
+      border-radius: var(--radius-pill);
+      background: var(--color-border);
+      position: relative;
+      transition: background-color 0.25s var(--ease-fluid);
+    }
+
+    .switch-btn[aria-checked="true"] .switch-track {
+      background: var(--color-action-primary);
+    }
+
+    .switch-thumb {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--color-surface-base);
+      transition: transform 0.25s var(--ease-fluid);
+    }
+
+    .switch-btn[aria-checked="true"] .switch-thumb {
+      transform: translateX(16px);
+    }
+
+    /* 主視覺畫布 */
+    .stage-canvas-box {
+      position: relative;
+      flex: 1 1 auto;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0.75rem;
+      transition: background-color 0.45s var(--ease-fluid);
+    }
+
+    .stage-aura {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.4s var(--ease-fluid);
+      /* 驅動變數：--aura-color、--aura-x 與 --aura-y 由 activeStation 狀態驅動 */
+      background: radial-gradient(circle at var(--aura-x, 12%) var(--aura-y, 35%), var(--aura-color, var(--color-stage-glow)) 0%, transparent 62%);
+    }
+
+    .stage-aura.is-off {
+      opacity: 0;
+    }
+
+    .story-svg {
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+      display: block;
+      position: relative;
+      z-index: 2;
+      overflow: visible;
+    }
+
+    .svg-node {
+      cursor: pointer;
+    }
+
+    .svg-node-hit {
+      fill: transparent;
+      stroke: transparent;
+      stroke-width: 44px;
+      vector-effect: non-scaling-stroke;
+      cursor: pointer;
+    }
+
+    .svg-node-core {
+      transition: transform 0.35s var(--ease-fluid), fill 0.35s var(--ease-fluid);
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .svg-node:hover .svg-node-core,
+    .svg-node.is-active .svg-node-core {
+      transform: scale(1.22);
+    }
+
+    .svg-node-pulse {
+      fill: none;
+      stroke: var(--color-action-primary);
+      stroke-width: 2;
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    /* 持續動效 1/2：目前站點脈衝圈，驅動變數＝activeStation */
+    .svg-node.is-active .svg-node-pulse {
+      animation: nodePulse 2.4s var(--ease-fluid) infinite;
+    }
+
+    .svg-node.is-jump-pulse .svg-node-pulse {
+      animation: jumpPulse 0.75s var(--ease-fluid) 1;
+    }
+
+    @keyframes nodePulse {
+      0% { transform: scale(1); opacity: 0.75; }
+      100% { transform: scale(2.15); opacity: 0; }
+    }
+
+    @keyframes jumpPulse {
+      0% { transform: scale(1); opacity: 0.95; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
+
+    .svg-node-label {
+      fill: var(--color-text-muted);
+      font-family: var(--font-sans-stack);
+      font-size: 13px;
+      font-weight: 500;
+      text-anchor: middle;
+      pointer-events: none;
+      transition: fill 0.3s var(--ease-fluid);
+    }
+
+    .svg-node:not(.is-active) .svg-node-core {
+      fill: var(--color-border);
+    }
+
+    .svg-node.is-active .svg-node-label {
+      fill: var(--color-text-primary);
+      font-weight: 700;
+    }
+
+    .svg-legend-text {
+      fill: var(--color-text-muted);
+      font-family: var(--font-sans-stack);
+      font-size: 12px;
+    }
+
+    /* 抽象光場與經文關鍵字動態排版舞台 */
+    .stage-editorial {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding: 0.75rem 1rem 0.25rem;
+    }
+
+    .editorial-kicker {
+      font-family: var(--font-mono-stack);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-action-primary);
+      transition: color 0.35s var(--ease-fluid);
+    }
+
+    .editorial-headline {
+      margin: 0;
+      font-size: clamp(1.65rem, 3.2vw + 0.5rem, 2.75rem);
+      line-height: 1.25;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-align: center;
+      color: var(--color-text-primary);
+      transition: opacity 0.25s var(--ease-fluid), transform 0.35s var(--ease-fluid);
+    }
+
+    .editorial-pair {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem 1.5rem;
+      width: 100%;
+      max-width: 40rem;
+      padding: 0.85rem 1.15rem;
+      border-radius: var(--radius-control);
+      border: 1px solid var(--color-border);
+      background-color: var(--color-surface-base);
+    }
+
+    @media (max-width: 560px) {
+      .editorial-pair {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+    }
+
+    .editorial-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .editorial-col-label {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+    }
+
+    .editorial-col-val {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .story-svg {
+      width: 100%;
+      max-width: 42rem;
+      height: 64px;
+      display: block;
+      overflow: visible;
+    }
+
+    /* 站點 dot 列 */
+    .station-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex: 0 0 auto;
+    }
+
+    .station-dot-btn {
+      appearance: none;
+      background: transparent;
+      border: none;
+      min-width: 44px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      border-radius: var(--radius-pill);
+      transition: transform 0.2s var(--ease-fluid);
+    }
+
+    .station-dot-btn:hover {
+      transform: scale(1.15);
+    }
+
+    .station-dot-btn:active {
+      transform: scale(0.95);
+    }
+
+    .station-dot-visual {
+      width: 10px;
+      height: 10px;
+      border-radius: var(--radius-pill);
+      background-color: var(--color-border);
+      transition: width 0.3s var(--ease-fluid), background-color 0.3s var(--ease-fluid);
+    }
+
+    .station-dot-btn[aria-current="step"] .station-dot-visual {
+      width: 26px;
+      background-color: var(--color-action-primary);
+    }
+
+    /* 站點文字區（舞台內底部，禁 overlay） */
+    .station-cards {
+      display: grid;
+      gap: 1rem;
+      flex: 0 0 auto;
+    }
+
+    .stage-wrapper.pin .station-cards {
+      display: block;
+      max-height: 38%;
+      overflow-y: auto;
+    }
+
+    .station-card {
+      padding: 1.15rem 1.35rem;
+      transition: opacity 0.3s var(--ease-fluid), transform 0.3s var(--ease-fluid);
+    }
+
+    .stage-wrapper.pin .station-card {
+      display: none;
+    }
+
+    .stage-wrapper.pin .station-card.is-active {
+      display: block;
+      animation: cardFade 0.35s var(--ease-fluid);
+    }
+
+    @keyframes cardFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .station-card-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .station-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 0;
+      color: var(--color-text-primary);
+    }
+
+    .station-card-ref {
+      font-size: 0.8125rem;
+      color: var(--color-action-primary);
+      font-weight: 500;
+    }
+
+    .station-card-status {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      margin: 0 0 0.5rem 0;
+    }
+
+    .station-card-body {
+      margin: 0 0 0.75rem 0;
+      max-width: 68ch;
+      overflow-wrap: break-word;
+    }
+
+    .station-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-chip {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      background: var(--color-surface-base);
+    }
+
+    /* Trigger Track: 只在 .pin 啟用時產生捲動距離 */
+    .trigger-track {
+      display: none;
+    }
+
+    .stage-wrapper.pin .trigger-track {
+      display: block;
+      position: relative;
+      z-index: 1;
+      margin-top: calc(-1 * (100dvh - var(--hud-height) - 16px));
+      pointer-events: none;
+    }
+
+    .trigger-step {
+      height: 85vh;
+    }
+
+    .trigger-step:last-child {
+      height: 105vh;
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --hud-height: 54px;
+      }
+      .stage-wrapper.pin .station-cards {
+        max-height: 52%;
+      }
+      .stage-canvas-box {
+        max-height: 44dvh;
+        min-height: 190px;
+      }
+      .trigger-step {
+        height: 55vh;
+      }
+      .hud-actions .btn-label {
+        display: none;
+      }
+    }
+
+    /* 生活情境對照區 (Example) */
+    .practice-section {
+      padding-block: clamp(2.75rem, 5vw, 4.5rem);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .tablist {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      padding: 0.3rem;
+      border-radius: var(--radius-control);
+      background-color: var(--color-surface-raised);
+      border: 1px solid var(--color-border);
+      margin-bottom: 1.75rem;
+    }
+
+    .tab-btn {
+      appearance: none;
+      background: transparent;
+      color: var(--color-text-muted);
+      border: none;
+      border-radius: 6px;
+      min-height: 44px;
+      padding: 0.4rem 1rem;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background-color 0.25s var(--ease-fluid), color 0.25s var(--ease-fluid), transform 0.2s var(--ease-fluid);
+    }
+
+    .tab-btn:hover {
+      color: var(--color-text-primary);
+    }
+
+    .tab-btn:active {
+      transform: scale(0.98);
+    }
+
+    .tab-btn[aria-selected="true"] {
+      background-color: var(--color-action-primary);
+      color: var(--color-surface-base);
+      font-weight: 700;
+    }
+
+    .practice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-flow: dense;
+      gap: 1.25rem;
+    }
+
+    @media (max-width: 720px) {
+      .practice-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .practice-card {
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: transform 0.25s var(--ease-fluid), border-color 0.25s var(--ease-fluid);
+    }
+
+    .practice-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-action-primary);
+    }
+
+    .practice-card.is-hidden {
+      display: none;
+    }
+
+    .practice-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      width: fit-content;
+    }
+
+    .practice-badge.is-do {
+      color: var(--color-ok);
+    }
+
+    .practice-badge.is-avoid {
+      color: var(--color-danger);
+    }
+
+    .practice-text {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    /* 詞彙對照區 */
+    .glossary-section {
+      padding-block: clamp(2.75rem, 5vw, 4.5rem);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .glossary-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1 1 260px;
+      max-width: 420px;
+    }
+
+    .search-input {
+      width: 100%;
+      min-height: 44px;
+      padding: 0.6rem 1rem 0.6rem 2.6rem;
+      border-radius: var(--radius-control);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface-raised);
+      color: var(--color-text-primary);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      transition: border-color 0.25s var(--ease-fluid);
+    }
+
+    .search-input:focus {
+      border-color: var(--color-action-primary);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-text-muted);
+      pointer-events: none;
+    }
+
+    .glossary-count {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-auto-flow: dense;
+      gap: 0.85rem;
+    }
+
+    @media (max-width: 900px) {
+      .glossary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .glossary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .glossary-item {
+      padding: 1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      transition: border-color 0.25s var(--ease-fluid), transform 0.2s var(--ease-fluid);
+    }
+
+    .glossary-item:hover {
+      border-color: var(--color-action-primary);
+      transform: translateY(-2px);
+    }
+
+    .glossary-en {
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+
+    .glossary-zh {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .empty-state {
+      padding: 2rem;
+      text-align: center;
+      color: var(--color-text-muted);
+      display: none;
+    }
+
+    .empty-state.is-visible {
+      display: block;
+    }
+
+    /* 來源頁尾 */
+    .sources-footer {
+      padding-block: clamp(3rem, 6vw, 5rem);
+    }
+
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-flow: dense;
+      gap: 1rem;
+    }
+
+    @media (max-width: 720px) {
+      .sources-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .source-card {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.25s var(--ease-fluid), transform 0.2s var(--ease-fluid);
+    }
+
+    .source-card:hover {
+      border-color: var(--color-action-primary);
+      transform: translateY(-2px);
+    }
+
+    .source-card:active {
+      transform: scale(0.98);
+    }
+
+    .source-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+
+    .source-url {
+      font-size: 0.8125rem;
+      color: var(--color-action-primary);
+      overflow-wrap: anywhere;
+    }
+
+    /* Toast 狀態通知 */
+    .toast {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      z-index: 60;
+      max-width: 22rem;
+      padding: 0.85rem 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: opacity 0.28s var(--ease-fluid), transform 0.28s var(--ease-fluid);
+    }
+
+    .toast.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .svg-node.is-active .svg-node-pulse,
+      .svg-node.is-jump-pulse .svg-node-pulse {
+        animation: none !important;
+        opacity: 0 !important;
+      }
+    }
+  </style>
+
+  <!--
+  定案資料 → 頁面區塊盤點表
+  1. 核心定論 (🎯 答案)：上帝對子民的心痛告白、不是發脾氣、光有宗教儀式沒用、心意與行動轉向公平善良 → Hero 主標、副標與第一段導引
+  2. Story 站 1 (歷史背景，以賽亞書 1:1)：Uzziah、Jotham、Ahaz、Hezekiah；Amoz 的兒子 Isaiah；Judah 與 Jerusalem 的異象 → 舞台站點 1「見證」
+  3. Story 站 2 (父子對比，以賽亞書 1:2-3)：天地當證人、養大孩子卻背叛、牛認得主人、驢子記得飼料槽、Israel 不認識不明白 → 舞台站點 2「養育」
+  4. Story 站 3 (傷痕累累，以賽亞書 1:4-8)：充滿罪惡背對聖潔的神、一再反抗挨打、頭滿傷痕心都病了、城市燒毀、Jerusalem 像孤單看守棚 → 舞台站點 3「傷痕」
+  5. Story 站 4 (表面儀式，以賽亞書 1:11-15)：照常去聖殿獻祭守節期禱告、上帝厭煩表面功夫、手沾滿欺壓人的血 → 舞台站點 4「儀式」
+  6. Story 站 5 (回頭洗淨，以賽亞書 1:16-19)：停下惡行學習行善、幫助受欺壓者與孤兒寡婦、願意回頭聽從、深紅色的罪洗成白雪與羊毛 → 舞台站點 5「洗淨」
+  7. Example (可以這樣做 1-2 / 避免這樣 1-2) → 生活情境對照區 tablist + 互動卡片
+  8. 🔎 來源 (Isaiah 1:1-20 NIV & 以賽亞書 1:1-20 CCB 完整 URL) → 頁尾來源區
+  9. 📚 詞彙對照 (Judah, Uzziah, Jotham, Ahaz, Hezekiah, Amoz, Isaiah, Jerusalem, Israel 共 9 筆) → 詞彙搜尋對照區
+  -->
+</head>
+<body>
+  <!-- Inline SVG Symbol 定義（全頁共用細線條圖示） -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="icon-sun" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"></path>
+      </symbol>
+      <symbol id="icon-moon" viewBox="0 0 24 24">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path>
+      </symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="M21 21l-4.35-4.35"></path>
+      </symbol>
+      <symbol id="icon-arrow-down" viewBox="0 0 24 24">
+        <path d="M12 5v14m0 0l-6-6m6 6l6-6"></path>
+      </symbol>
+      <symbol id="icon-external" viewBox="0 0 24 24">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <path d="M15 3h6v6"></path>
+        <path d="M10 14L21 3"></path>
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="M20 6L9 17l-5-5"></path>
+      </symbol>
+      <symbol id="icon-x" viewBox="0 0 24 24">
+        <path d="M18 6L6 18M6 6l12 12"></path>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- 頂部 HUD：捲離 Hero 後出現 -->
+  <header class="hud" id="hud" aria-label="章節導覽列">
+    <div class="container hud-inner">
+      <nav class="hud-nav" aria-label="故事五幕導覽">
+        <button type="button" class="hud-pill is-active" data-jump-station="0">見證</button>
+        <button type="button" class="hud-pill" data-jump-station="1">養育</button>
+        <button type="button" class="hud-pill" data-jump-station="2">傷痕</button>
+        <button type="button" class="hud-pill" data-jump-station="3">儀式</button>
+        <button type="button" class="hud-pill" data-jump-station="4">洗淨</button>
+        <button type="button" class="hud-pill" data-jump-anchor="practice">實踐對照</button>
+        <button type="button" class="hud-pill" data-jump-anchor="glossary">詞彙</button>
+      </nav>
+      <div class="hud-actions">
+        <button type="button" class="icon-btn" id="hudThemeBtn" aria-label="切換深淺主題">
+          <svg class="svg-icon" aria-hidden="true"><use href="#icon-sun"></use></svg>
+          <span class="btn-label">主題</span>
+        </button>
+      </div>
+    </div>
+    <div class="hud-progress-track" aria-hidden="true">
+      <div class="hud-progress-fill"></div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero 區：核心定論 -->
+    <section class="hero" id="hero">
+      <div class="hero-aura" aria-hidden="true"></div>
+      <div class="hero-topbar">
+        <button type="button" class="icon-btn" id="heroThemeBtn" aria-label="切換深淺主題">
+          <svg class="svg-icon" aria-hidden="true"><use href="#icon-sun"></use></svg>
+          <span class="btn-label">切換主題</span>
+        </button>
+      </div>
+      <div class="container hero-content">
+        <h1 class="hero-title">父親的心痛告白：<span class="hero-accent">心意轉向公平與善良</span></h1>
+        <p class="hero-subtitle">重點不在發脾氣，而是指出光有宗教儀式沒用。拉拔長大的孩子背叛自己、受傷卻不肯回頭。</p>
+        <a href="#story" class="primary-cta" id="startBtn">
+          <span>走進法庭控訴</span>
+          <svg class="svg-icon" aria-hidden="true"><use href="#icon-arrow-down"></use></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Scrollytelling 2D 舞台區：Story 5 幕 -->
+    <section class="story-section" id="story" aria-label="以賽亞書一章情景敘事">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">審判與挽回的法庭控訴</h2>
+        </div>
+
+        <div class="stage-wrapper" id="stageWrapper">
+          <div class="sticky-stage" id="stickyStage">
+            <!-- 工具列 -->
+            <div class="stage-toolbar">
+              <div class="stage-status-chip">
+                <span class="stage-status-dot" id="stageStatusDot" aria-hidden="true"></span>
+                <span id="stageStatusText" class="tabular">1 / 5：見證</span>
+              </div>
+              <button type="button" class="switch-btn" id="auraSwitch" role="switch" aria-checked="true">
+                <span>光影場</span>
+                <span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span>
+                <span id="auraSwitchLabel">開</span>
+              </button>
+            </div>
+
+            <!-- 抽象光場與經文關鍵字動態排版舞台 -->
+            <div class="bezel-card stage-canvas-box" id="stageCanvasBox">
+              <div class="stage-aura" id="stageAura" aria-hidden="true"></div>
+
+              <div class="stage-editorial">
+                <h3 class="editorial-headline" id="editorialHeadline">天地為證：父親開口呼喚</h3>
+                <div class="editorial-pair">
+                  <div class="editorial-col">
+                    <span class="editorial-col-val" id="editorialGod">差遣先知宣告異象，盼望回頭</span>
+                  </div>
+                  <div class="editorial-col">
+                    <span class="editorial-col-val" id="editorialPeople">站在歷史現場，尚未覺察危機</span>
+                  </div>
+                </div>
+
+                <!-- 單一精簡進度軌（取代重複的 dot 列） -->
+                <svg class="story-svg is-act-0" id="storySvg" viewBox="0 0 680 64" role="group" aria-label="以賽亞書一章五幕進度軌">
+                  <defs>
+                    <linearGradient id="mainLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="var(--color-action-primary)" />
+                      <stop offset="50%" stop-color="var(--color-danger)" />
+                      <stop offset="100%" stop-color="var(--color-ok)" />
+                    </linearGradient>
+                  </defs>
+
+                  <path id="mainTrackBg" d="M 60 22 L 620 22" fill="none" stroke="var(--color-border)" stroke-width="3" stroke-linecap="round" />
+                  <path id="mainTrackActive" d="M 60 22 L 620 22" fill="none" stroke="url(#mainLineGrad)" stroke-width="3.5" stroke-linecap="round" />
+                  <circle id="flowDot" cx="60" cy="22" r="5" fill="var(--color-text-primary)" />
+
+                  <g class="svg-node is-active" data-station="0" tabindex="0" role="button" aria-label="站點 1：見證">
+                    <circle class="svg-node-pulse" cx="60" cy="22" r="10" />
+                    <circle class="svg-node-core" cx="60" cy="22" r="8" fill="var(--color-action-primary)" />
+                    <circle class="svg-node-hit" cx="60" cy="22" r="10" />
+                    <text class="svg-node-label" x="60" y="50">見證</text>
+                  </g>
+
+                  <g class="svg-node" data-station="1" tabindex="0" role="button" aria-label="站點 2：養育">
+                    <circle class="svg-node-pulse" cx="200" cy="22" r="10" />
+                    <circle class="svg-node-core" cx="200" cy="22" r="8" fill="var(--color-action-primary)" />
+                    <circle class="svg-node-hit" cx="200" cy="22" r="10" />
+                    <text class="svg-node-label" x="200" y="50">養育</text>
+                  </g>
+
+                  <g class="svg-node" data-station="2" tabindex="0" role="button" aria-label="站點 3：傷痕">
+                    <circle class="svg-node-pulse" cx="340" cy="22" r="10" />
+                    <circle class="svg-node-core" cx="340" cy="22" r="8" fill="var(--color-danger)" />
+                    <circle class="svg-node-hit" cx="340" cy="22" r="10" />
+                    <text class="svg-node-label" x="340" y="50">傷痕</text>
+                  </g>
+
+                  <g class="svg-node" data-station="3" tabindex="0" role="button" aria-label="站點 4：儀式">
+                    <circle class="svg-node-pulse" cx="480" cy="22" r="10" />
+                    <circle class="svg-node-core" cx="480" cy="22" r="8" fill="var(--color-warn)" />
+                    <circle class="svg-node-hit" cx="480" cy="22" r="10" />
+                    <text class="svg-node-label" x="480" y="50">儀式</text>
+                  </g>
+
+                  <g class="svg-node" data-station="4" tabindex="0" role="button" aria-label="站點 5：洗淨">
+                    <circle class="svg-node-pulse" cx="620" cy="22" r="10" />
+                    <circle class="svg-node-core" cx="620" cy="22" r="8" fill="var(--color-ok)" />
+                    <circle class="svg-node-hit" cx="620" cy="22" r="10" />
+                    <text class="svg-node-label" x="620" y="50">洗淨</text>
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <!-- 站點文字區（單一專屬容器，無 overlay） -->
+            <div class="station-cards" id="stationCards">
+              <article class="bezel-card station-card is-active" data-card-station="0">
+                <div class="station-card-head">
+                  <h3 class="station-card-title">時代背景與異象開端</h3>
+                  <span class="station-card-ref">以賽亞書 1:1</span>
+                </div>
+                <p class="station-card-status">審判與挽回的法庭控訴由此展開</p>
+                <p class="station-card-body">在 Uzziah、Jotham、Ahaz 和 Hezekiah 幾位君王執政期間，Amoz 的兒子 Isaiah 看見了關於 Judah 和 Jerusalem 的異象。</p>
+                <div class="station-tags">
+                  <span class="tag-chip">Judah</span>
+                  <span class="tag-chip">Jerusalem</span>
+                  <span class="tag-chip">Isaiah</span>
+                </div>
+              </article>
+
+              <article class="bezel-card station-card" data-card-station="1">
+                <div class="station-card-head">
+                  <h3 class="station-card-title">天地見證父親的痛心</h3>
+                  <span class="station-card-ref">以賽亞書 1:2-3</span>
+                </div>
+                <p class="station-card-status">連牲畜都認得主人，百姓卻不明白神的心意</p>
+                <p class="station-card-body">上帝把天地叫來當證人，說自己辛辛苦苦把孩子養大，孩子卻反過來背叛他。連牛都認得主人、驢子都記得主人的飼料槽，Israel 的百姓卻完全不認識、也不明白神的心意。</p>
+                <div class="station-tags">
+                  <span class="tag-chip">天地為證</span>
+                  <span class="tag-chip">Israel</span>
+                </div>
+              </article>
+
+              <article class="bezel-card station-card" data-card-station="2">
+                <div class="station-card-head">
+                  <h3 class="station-card-title">遍體鱗傷卻仍不肯停下</h3>
+                  <span class="station-card-ref">以賽亞書 1:4-8</span>
+                </div>
+                <p class="station-card-status">一再反抗挨打，孤城被圍仍轉身背對</p>
+                <p class="station-card-body">這個國家充滿罪惡，百姓離棄了上帝，轉身背對那位聖潔的神。他們一再反抗、一再挨打，整個頭已經滿是傷痕、整顆心都病了，卻還是不肯停下來。整個國家從頭到腳沒有一處完好，城市被燒毀，只剩 Jerusalem 像孤單的看守棚一樣被圍困。</p>
+                <div class="station-tags">
+                  <span class="tag-chip">滿是傷痕</span>
+                  <span class="tag-chip">Jerusalem 看守棚</span>
+                </div>
+              </article>
+
+              <article class="bezel-card station-card" data-card-station="3">
+                <div class="station-card-head">
+                  <h3 class="station-card-title">手沾鮮血的表面獻祭</h3>
+                  <span class="station-card-ref">以賽亞書 1:11-15</span>
+                </div>
+                <p class="station-card-status">照常去聖殿獻祭禱告，神卻直言已經厭煩</p>
+                <p class="station-card-body">百姓依然照常去聖殿獻祭、守節期和禱告，但上帝直言他已經厭煩這些表面功夫，因為他們的手沾滿欺壓人的血。</p>
+                <div class="station-tags">
+                  <span class="tag-chip">聖殿獻祭</span>
+                  <span class="tag-chip">守節期禱告</span>
+                </div>
+              </article>
+
+              <article class="bezel-card station-card" data-card-station="4">
+                <div class="station-card-head">
+                  <h3 class="station-card-title">停下惡行與洗淨的承諾</h3>
+                  <span class="station-card-ref">以賽亞書 1:16-19</span>
+                </div>
+                <p class="station-card-status">願意回頭聽從，深紅色的罪也能洗成白雪</p>
+                <p class="station-card-body">在控訴的最後，上帝沒有直接放棄他們，反而呼喚他們停下惡行、學習行善、幫助受欺壓的人和孤兒寡婦。神承諾只要他們願意回頭聽從，就算罪像深紅色一樣洗不掉，他也能把他們洗得像白雪和羊毛一樣乾淨。</p>
+                <div class="station-tags">
+                  <span class="tag-chip">學習行善</span>
+                  <span class="tag-chip">白雪與羊毛</span>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <!-- 捲動觸發軌道（不顯示內容，只在 .pin 啟用時撐出捲動高度） -->
+          <div class="trigger-track" aria-hidden="true">
+            <div class="trigger-step" data-step="0"></div>
+            <div class="trigger-step" data-step="1"></div>
+            <div class="trigger-step" data-step="2"></div>
+            <div class="trigger-step" data-step="3"></div>
+            <div class="trigger-step" data-step="4"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 生活實踐對照區 (Example) -->
+    <section class="practice-section" id="practice" aria-label="生活情景對照">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">日常情景對照</h2>
+        </div>
+
+        <div class="tablist" role="tablist" aria-label="篩選實踐範例">
+          <button type="button" class="tab-btn" role="tab" aria-selected="true" data-filter="all" tabindex="0">全部對照</button>
+          <button type="button" class="tab-btn" role="tab" aria-selected="false" data-filter="do" tabindex="-1">可以這樣做</button>
+          <button type="button" class="tab-btn" role="tab" aria-selected="false" data-filter="avoid" tabindex="-1">避免這樣</button>
+        </div>
+
+        <div class="practice-grid" id="practiceGrid">
+          <article class="bezel-card practice-card" data-kind="do">
+            <span class="practice-badge is-do">
+              <svg class="svg-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+              <span>可以這樣做</span>
+            </span>
+            <p class="practice-text">犯錯或關係卡住時，先誠實承認問題、停下傷害別人的行為，再談修復關係。</p>
+          </article>
+
+          <article class="bezel-card practice-card" data-kind="avoid">
+            <span class="practice-badge is-avoid">
+              <svg class="svg-icon" aria-hidden="true"><use href="#icon-x"></use></svg>
+              <span>避免這樣</span>
+            </span>
+            <p class="practice-text">一邊在生活裡欺壓或冷落身邊的人，一邊以為靠做禮拜、禱告就能抵銷一切。</p>
+          </article>
+
+          <article class="bezel-card practice-card" data-kind="do">
+            <span class="practice-badge is-do">
+              <svg class="svg-icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+              <span>可以這樣做</span>
+            </span>
+            <p class="practice-text">信仰生活不只停留在聚會或儀式，在工作和家庭裡真實地公平待人、照顧弱勢。</p>
+          </article>
+
+          <article class="bezel-card practice-card" data-kind="avoid">
+            <span class="practice-badge is-avoid">
+              <svg class="svg-icon" aria-hidden="true"><use href="#icon-x"></use></svg>
+              <span>避免這樣</span>
+            </span>
+            <p class="practice-text">明明已經一再受傷撞牆，卻因為面子或固執，繼續用同一套錯誤方式硬撐。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 專有名詞詞彙對照區 -->
+    <section class="glossary-section" id="glossary" aria-label="專有名詞對照">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">詞彙對照</h2>
+        </div>
+
+        <div class="glossary-controls">
+          <div class="search-box">
+            <svg class="svg-icon search-icon" aria-hidden="true"><use href="#icon-search"></use></svg>
+            <input type="search" class="search-input" id="glossarySearch" placeholder="搜尋原文或中文譯名" aria-label="搜尋詞彙對照" />
+          </div>
+          <output class="glossary-count tabular" id="glossaryCount" aria-live="polite">顯示 9 / 9 筆</output>
+        </div>
+
+        <div class="glossary-grid" id="glossaryGrid">
+          <div class="bezel-card glossary-item" data-term="judah 猶大"><span class="glossary-en">Judah</span><span class="glossary-zh">猶大</span></div>
+          <div class="bezel-card glossary-item" data-term="uzziah 烏西雅"><span class="glossary-en">Uzziah</span><span class="glossary-zh">烏西雅</span></div>
+          <div class="bezel-card glossary-item" data-term="jotham 約坦"><span class="glossary-en">Jotham</span><span class="glossary-zh">約坦</span></div>
+          <div class="bezel-card glossary-item" data-term="ahaz 亞哈斯"><span class="glossary-en">Ahaz</span><span class="glossary-zh">亞哈斯</span></div>
+          <div class="bezel-card glossary-item" data-term="hezekiah 希西家 希西迦 ccb"><span class="glossary-en">Hezekiah</span><span class="glossary-zh">希西家 (CCB 譯希西迦)</span></div>
+          <div class="bezel-card glossary-item" data-term="amoz 亞摩斯"><span class="glossary-en">Amoz</span><span class="glossary-zh">亞摩斯</span></div>
+          <div class="bezel-card glossary-item" data-term="isaiah 以賽亞"><span class="glossary-en">Isaiah</span><span class="glossary-zh">以賽亞</span></div>
+          <div class="bezel-card glossary-item" data-term="jerusalem 耶路撒冷"><span class="glossary-en">Jerusalem</span><span class="glossary-zh">耶路撒冷</span></div>
+          <div class="bezel-card glossary-item" data-term="israel 以色列"><span class="glossary-en">Israel</span><span class="glossary-zh">以色列</span></div>
+        </div>
+
+        <div class="bezel-card empty-state" id="glossaryEmpty">找不到符合的詞彙，請清除或更換關鍵字。</div>
+      </div>
+    </section>
+
+    <!-- 來源頁尾 -->
+    <footer class="sources-footer" id="sources" aria-label="經文來源">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">經文來源</h2>
+        </div>
+        <div class="sources-grid">
+          <a class="bezel-card source-card" href="https://www.biblegateway.com/passage/?search=Isaiah+1&version=NIV" target="_blank" rel="noopener noreferrer">
+            <span class="source-title">
+              <span>Isaiah 1:1-20 (NIV)</span>
+              <svg class="svg-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+            </span>
+            <span class="source-url">https://www.biblegateway.com/passage/?search=Isaiah+1&version=NIV</span>
+          </a>
+          <a class="bezel-card source-card" href="https://www.biblegateway.com/passage/?search=Isaiah+1&version=CCB" target="_blank" rel="noopener noreferrer">
+            <span class="source-title">
+              <span>以賽亞書 1:1-20 (CCB)</span>
+              <svg class="svg-icon" aria-hidden="true"><use href="#icon-external"></use></svg>
+            </span>
+            <span class="source-url">https://www.biblegateway.com/passage/?search=Isaiah+1&version=CCB</span>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <div class="bezel-card toast" id="toast" role="status" aria-live="polite">
+    <span id="toastText"></span>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const hud = document.getElementById('hud');
+      const hero = document.getElementById('hero');
+      const stageWrapper = document.getElementById('stageWrapper');
+      const stageAura = document.getElementById('stageAura');
+      const stageStatusDot = document.getElementById('stageStatusDot');
+      const stageStatusText = document.getElementById('stageStatusText');
+      const auraSwitch = document.getElementById('auraSwitch');
+      const auraSwitchLabel = document.getElementById('auraSwitchLabel');
+      const storySvg = document.getElementById('storySvg');
+      const editorialKicker = document.getElementById('editorialKicker');
+      const editorialHeadline = document.getElementById('editorialHeadline');
+      const editorialGod = document.getElementById('editorialGod');
+      const editorialPeople = document.getElementById('editorialPeople');
+      const mainTrackActive = document.getElementById('mainTrackActive');
+      const flowDot = document.getElementById('flowDot');
+      const hudPills = Array.from(document.querySelectorAll('[data-jump-station]'));
+      const svgNodes = Array.from(document.querySelectorAll('.svg-node'));
+      const stationCards = Array.from(document.querySelectorAll('.station-card'));
+      const triggerSteps = Array.from(document.querySelectorAll('.trigger-step'));
+      const toastEl = document.getElementById('toast');
+      const toastText = document.getElementById('toastText');
+
+      // 驅動變數：storyStations[activeIdx] 對應 5 幕情景光影與經文動態排版
+      const stationsMeta = [
+        {
+          label: '見證',
+          kicker: 'ACT 01 / 以賽亞書 1:1',
+          headline: '天地為證：父親開口呼喚',
+          god: '差遣先知宣告異象，盼望回頭',
+          people: '站在歷史現場，尚未覺察危機',
+          x: '20%', y: '35%', color: 'var(--color-stage-glow)', dot: 'var(--color-action-primary)'
+        },
+        {
+          label: '養育',
+          kicker: 'ACT 02 / 以賽亞書 1:2-3',
+          headline: '拉拔長大，孩子卻轉身背叛',
+          god: '像父親養育兒女，盼望被認識',
+          people: '牛驢認得主人，Israel 卻不明白',
+          x: '38%', y: '40%', color: 'var(--color-stage-glow)', dot: 'var(--color-action-primary)'
+        },
+        {
+          label: '傷痕',
+          kicker: 'ACT 03 / 以賽亞書 1:4-8',
+          headline: '滿頭傷痕，孤城被圍仍不回頭',
+          god: '不忍看見從頭到腳沒有一處完好',
+          people: '一再反抗挨打，背對聖潔的神',
+          x: '55%', y: '50%', color: 'var(--color-stage-warn)', dot: 'var(--color-danger)'
+        },
+        {
+          label: '儀式',
+          kicker: 'ACT 04 / 以賽亞書 1:11-15',
+          headline: '照常獻祭，雙手卻沾欺壓的血',
+          god: '直言厭煩表面功夫，轉臉不看禱告',
+          people: '以為去聖殿守節期就能交代過去',
+          x: '72%', y: '48%', color: 'var(--color-stage-warn)', dot: 'var(--color-warn)'
+        },
+        {
+          label: '洗淨',
+          kicker: 'ACT 05 / 以賽亞書 1:16-19',
+          headline: '深紅的罪，神能洗成白雪與羊毛',
+          god: '停下惡行學習行善，就重新接納',
+          people: '願意回頭聽從，修復破碎的關係',
+          x: '86%', y: '35%', color: 'var(--color-stage-clean)', dot: 'var(--color-ok)'
+        }
+      ];
+
+      let activeStation = 0;
+      let isJumping = false;
+      let jumpTimer = null;
+      let toastTimer = null;
+
+      function showToast(msg) {
+        toastText.textContent = msg;
+        toastEl.classList.add('is-visible');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toastEl.classList.remove('is-visible');
+        }, 2800);
+      }
+
+      // 主題初始化與雙按鈕同步（預設淺色模式，仍可手動切換深色）
+      let currentTheme = 'light';
+      applyTheme(currentTheme, false);
+
+      function applyTheme(theme, notify) {
+        currentTheme = theme;
+        root.setAttribute('data-theme', theme);
+        const iconHref = theme === 'dark' ? '#icon-sun' : '#icon-moon';
+        document.querySelectorAll('#hudThemeBtn use, #heroThemeBtn use').forEach((u) => {
+          u.setAttribute('href', iconHref);
+        });
+        if (notify) {
+          showToast(theme === 'dark' ? '已切換為深色模式' : '已切換為淺色模式');
+        }
+      }
+
+      document.getElementById('hudThemeBtn').addEventListener('click', () => {
+        applyTheme(currentTheme === 'dark' ? 'light' : 'dark', true);
+      });
+      document.getElementById('heroThemeBtn').addEventListener('click', () => {
+        applyTheme(currentTheme === 'dark' ? 'light' : 'dark', true);
+      });
+
+      // 光影場開關 (與捲動進度正交)
+      auraSwitch.addEventListener('click', () => {
+        const next = auraSwitch.getAttribute('aria-checked') !== 'true';
+        auraSwitch.setAttribute('aria-checked', String(next));
+        auraSwitchLabel.textContent = next ? '開' : '關';
+        stageAura.classList.toggle('is-off', !next);
+        showToast(next ? '光影場已開啟' : '光影場已關閉');
+      });
+
+      // 判定是否啟用 .pin 捲動舞台（reduced-motion 或高度 < 620px 維持靜態展開）
+      const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      function updatePinState() {
+        const canPin = !reduceMotionQuery.matches && window.innerHeight >= 620;
+        stageWrapper.classList.toggle('pin', canPin);
+      }
+      updatePinState();
+      window.addEventListener('resize', updatePinState);
+      if (reduceMotionQuery.addEventListener) {
+        reduceMotionQuery.addEventListener('change', updatePinState);
+      }
+
+      // Hero 離場顯示 HUD
+      const heroObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            hud.classList.toggle('is-visible', !entry.isIntersecting);
+          });
+        },
+        { threshold: 0.08 }
+      );
+      heroObserver.observe(hero);
+
+      // 套用站點狀態
+      function setActiveStation(idx, withPulse) {
+        if (idx < 0 || idx >= stationsMeta.length) return;
+        activeStation = idx;
+        const meta = stationsMeta[idx];
+
+        stageStatusText.textContent = `${idx + 1} / ${stationsMeta.length}：${meta.label}`;
+        stageStatusDot.style.backgroundColor = meta.dot;
+        stageAura.style.setProperty('--aura-x', meta.x);
+        stageAura.style.setProperty('--aura-y', meta.y);
+        stageAura.style.setProperty('--aura-color', meta.color);
+        storySvg.setAttribute('class', `story-svg is-act-${idx}`);
+        editorialHeadline.textContent = meta.headline;
+        editorialGod.textContent = meta.god;
+        editorialPeople.textContent = meta.people;
+
+        hudPills.forEach((p) => {
+          const match = Number(p.getAttribute('data-jump-station')) === idx;
+          p.classList.toggle('is-active', match);
+        });
+
+        svgNodes.forEach((node) => {
+          const nodeIdx = Number(node.getAttribute('data-station'));
+          const isMatch = nodeIdx === idx;
+          node.classList.toggle('is-active', isMatch);
+          if (isMatch && withPulse && !reduceMotionQuery.matches) {
+            node.classList.remove('is-jump-pulse');
+            void node.offsetWidth;
+            node.classList.add('is-jump-pulse');
+          }
+        });
+
+        stationCards.forEach((card) => {
+          const match = Number(card.getAttribute('data-card-station')) === idx;
+          card.classList.toggle('is-active', match);
+        });
+      }
+
+      // 跳轉到指定站點（換算 trigger-step 捲動位置，並在跳轉期間鎖定 scrollspy）
+      function jumpToStation(idx) {
+        setActiveStation(idx, true);
+        if (!stageWrapper.classList.contains('pin')) {
+          const card = stationCards[idx];
+          if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+        const targetStep = triggerSteps[idx];
+        if (!targetStep) return;
+        isJumping = true;
+        clearTimeout(jumpTimer);
+
+        const hudH = hud.getBoundingClientRect().height || 64;
+        const rect = targetStep.getBoundingClientRect();
+        const targetY = window.scrollY + rect.top - hudH - 12;
+        window.scrollTo({ top: targetY, behavior: reduceMotionQuery.matches ? 'auto' : 'smooth' });
+
+        jumpTimer = setTimeout(() => {
+          isJumping = false;
+        }, 700);
+      }
+
+      // 綁定 HUD、Dot、SVG 節點互動（滑鼠 + 鍵盤 Enter/Space）
+      hudPills.forEach((pill) => {
+        pill.addEventListener('click', () => {
+          jumpToStation(Number(pill.getAttribute('data-jump-station')));
+        });
+      });
+
+      document.querySelectorAll('[data-jump-anchor]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = document.getElementById(btn.getAttribute('data-jump-anchor'));
+          if (target) target.scrollIntoView({ behavior: reduceMotionQuery.matches ? 'auto' : 'smooth' });
+        });
+      });
+
+      svgNodes.forEach((node) => {
+        const idx = Number(node.getAttribute('data-station'));
+        node.addEventListener('click', () => jumpToStation(idx));
+        node.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            jumpToStation(idx);
+          }
+        });
+      });
+
+      // IntersectionObserver 偵測目前觸發站點
+      const stepObserver = new IntersectionObserver(
+        (entries) => {
+          if (isJumping || !stageWrapper.classList.contains('pin')) return;
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const idx = Number(entry.target.getAttribute('data-step'));
+              setActiveStation(idx, false);
+            }
+          });
+        },
+        { rootMargin: '-35% 0px -45% 0px', threshold: 0.01 }
+      );
+      triggerSteps.forEach((step) => stepObserver.observe(step));
+
+      // rAF 驅動 --scroll-progress 與 SVG 路徑進度
+      const pathTotalLen = mainTrackActive.getTotalLength();
+      mainTrackActive.style.strokeDasharray = String(pathTotalLen);
+      mainTrackActive.style.strokeDashoffset = String(pathTotalLen);
+
+      let ticking = false;
+      function updateScrollProgress() {
+        ticking = false;
+        let progress = 0;
+        if (stageWrapper.classList.contains('pin')) {
+          const rect = stageWrapper.getBoundingClientRect();
+          const scrollable = stageWrapper.offsetHeight - window.innerHeight;
+          if (scrollable > 0) {
+            progress = Math.min(1, Math.max(0, -rect.top / scrollable));
+          }
+        } else {
+          progress = (activeStation + 1) / stationsMeta.length;
+        }
+        root.style.setProperty('--scroll-progress', progress.toFixed(4));
+
+        // 驅動 SVG 主線繪製與 flowDot 位置
+        const drawLen = pathTotalLen * progress;
+        mainTrackActive.style.strokeDashoffset = String(Math.max(0, pathTotalLen - drawLen));
+        const pt = mainTrackActive.getPointAtLength(drawLen);
+        flowDot.setAttribute('cx', pt.x.toFixed(1));
+        flowDot.setAttribute('cy', pt.y.toFixed(1));
+      }
+
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(updateScrollProgress);
+          }
+        },
+        { passive: true }
+      );
+      updateScrollProgress();
+
+      // 生活實踐對照 Tabs (含鍵盤 ArrowLeft / ArrowRight / Home / End)
+      const tabBtns = Array.from(document.querySelectorAll('[role="tab"]'));
+      const practiceCards = Array.from(document.querySelectorAll('.practice-card'));
+
+      function selectTab(tab) {
+        const filter = tab.getAttribute('data-filter');
+        tabBtns.forEach((btn) => {
+          const active = btn === tab;
+          btn.setAttribute('aria-selected', String(active));
+          btn.setAttribute('tabindex', active ? '0' : '-1');
+        });
+        practiceCards.forEach((card) => {
+          const kind = card.getAttribute('data-kind');
+          const show = filter === 'all' || filter === kind;
+          card.classList.toggle('is-hidden', !show);
+        });
+      }
+
+      tabBtns.forEach((btn, idx) => {
+        btn.addEventListener('click', () => selectTab(btn));
+        btn.addEventListener('keydown', (e) => {
+          let nextIdx = idx;
+          if (e.key === 'ArrowRight') nextIdx = (idx + 1) % tabBtns.length;
+          else if (e.key === 'ArrowLeft') nextIdx = (idx - 1 + tabBtns.length) % tabBtns.length;
+          else if (e.key === 'Home') nextIdx = 0;
+          else if (e.key === 'End') nextIdx = tabBtns.length - 1;
+          else return;
+          e.preventDefault();
+          tabBtns[nextIdx].focus();
+          selectTab(tabBtns[nextIdx]);
+        });
+      });
+
+      // 詞彙對照搜尋
+      const glossarySearch = document.getElementById('glossarySearch');
+      const glossaryItems = Array.from(document.querySelectorAll('.glossary-item'));
+      const glossaryCount = document.getElementById('glossaryCount');
+      const glossaryEmpty = document.getElementById('glossaryEmpty');
+
+      glossarySearch.addEventListener('input', () => {
+        const q = glossarySearch.value.trim().toLowerCase();
+        let visible = 0;
+        glossaryItems.forEach((item) => {
+          const match = !q || item.getAttribute('data-term').includes(q);
+          item.style.display = match ? '' : 'none';
+          if (match) visible += 1;
+        });
+        glossaryCount.textContent = `顯示 ${visible} / ${glossaryItems.length} 筆`;
+        glossaryEmpty.classList.toggle('is-visible', visible === 0);
+      });
+    })();
+  </script>
+</body>
+</html>
